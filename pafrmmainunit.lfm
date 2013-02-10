@@ -1,0 +1,70 @@
+object FormPlusAlphaMain: TFormPlusAlphaMain
+  Left = 140
+  Height = 307
+  Top = 375
+  Width = 605
+  Caption = 'PlusAlpha'
+  ClientHeight = 307
+  ClientWidth = 605
+  LCLVersion = '1.1'
+  object leTrnNo: TLabeledEdit
+    Left = 16
+    Height = 24
+    Top = 32
+    Width = 80
+    EditLabel.AnchorSideLeft.Control = leTrnNo
+    EditLabel.AnchorSideRight.Control = leTrnNo
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = leTrnNo
+    EditLabel.Left = 16
+    EditLabel.Height = 20
+    EditLabel.Top = 9
+    EditLabel.Width = 80
+    EditLabel.Caption = 'leTrnNo'
+    EditLabel.ParentColor = False
+    Enabled = False
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object leHdrMemo: TLabeledEdit
+    Left = 120
+    Height = 24
+    Top = 32
+    Width = 312
+    EditLabel.AnchorSideLeft.Control = leHdrMemo
+    EditLabel.AnchorSideRight.Control = leHdrMemo
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = leHdrMemo
+    EditLabel.Left = 120
+    EditLabel.Height = 20
+    EditLabel.Top = 9
+    EditLabel.Width = 312
+    EditLabel.Caption = 'leHdrMemo'
+    EditLabel.ParentColor = False
+    TabOrder = 1
+  end
+  object bbHdrUpdate: TBitBtn
+    Left = 16
+    Height = 30
+    Top = 64
+    Width = 75
+    Caption = 'bbHdrUpdate'
+    OnClick = bbHdrUpdateClick
+    TabOrder = 2
+  end
+  object cbPosted: TCheckBox
+    Left = 460
+    Height = 18
+    Top = 33
+    Width = 77
+    Caption = 'cbPosted'
+    TabOrder = 3
+  end
+  object StringGrid1: TStringGrid
+    Left = 16
+    Height = 164
+    Top = 112
+    Width = 560
+    TabOrder = 4
+  end
+end
