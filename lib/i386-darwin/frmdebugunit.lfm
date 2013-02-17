@@ -1,0 +1,36 @@
+object frmDebug: TfrmDebug
+  Left = 262
+  Height = 155
+  Top = 247
+  Width = 263
+  Caption = 'Plus Alpha - Debug Options'
+  ClientHeight = 155
+  ClientWidth = 263
+  LCLVersion = '1.1'
+  object leTranNo: TLabeledEdit
+    Left = 133
+    Height = 24
+    Top = 42
+    Width = 80
+    EditLabel.AnchorSideLeft.Control = leTranNo
+    EditLabel.AnchorSideRight.Control = leTranNo
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = leTranNo
+    EditLabel.Left = 133
+    EditLabel.Height = 20
+    EditLabel.Top = 19
+    EditLabel.Width = 80
+    EditLabel.Caption = 'leTranNo'
+    EditLabel.ParentColor = False
+    TabOrder = 0
+  end
+  object bbTransNo: TBitBtn
+    Left = 40
+    Height = 30
+    Top = 40
+    Width = 75
+    Caption = 'bbTransNo'
+    OnClick = bbTransNoClick
+    TabOrder = 1
+  end
+end

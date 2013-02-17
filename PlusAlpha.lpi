@@ -29,12 +29,18 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="1">
+    <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="SQLDBLaz"/>
       </Item1>
+      <Item2>
+        <PackageName Value="SDFLaz"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="7">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -44,6 +50,7 @@
         <Filename Value="pafrmmainunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormPlusAlphaMain"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="paFrmMainUnit"/>
       </Unit1>
@@ -52,6 +59,32 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="padm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DataModule1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="padm"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="ledger.sdf"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="frmtransactionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmTransaction"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frmTransactionUnit"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="frmdebugunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmDebug"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frmDebugUnit"/>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

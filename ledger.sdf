@@ -1,0 +1,13 @@
+AcctNo,Bal,CurrKey,AccountType,Text
+0,0,JPY,A,Petty Cash
+1,0,JPY,A,Mitsubishi Tokyo UFJ Bank
+2,0,JPY,A,Japan Post Bank
+3,0,JPY,A,Rakuten Bank
+4,0,JPY,L,Marui Card
+5,0,JPY,L,American Express
+6,0,USD,L,Student Loan
+7,0,JPY,Q,Equity
+8,0,JPY,X,Rent Expense
+9,0,JPY,X,Food Expense
+10,0,JPY,X,Internet Expense
+11,0,JPY,I,Salary Income

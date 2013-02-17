@@ -1,0 +1,27 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 150
+  HorizontalOffset = 252
+  VerticalOffset = 166
+  Width = 150
+  object SdfDataSet1: TSdfDataSet
+    FileMustExist = True
+    ReadOnly = False
+    FileName = 'ledger.sdf'
+    FieldDefs = <>
+    AllowMultiLine = False
+    Delimiter = ','
+    FirstLineAsSchema = True
+    left = 56
+    top = 20
+  end
+  object SQLite3Connection1: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    KeepConnection = False
+    LogEvents = []
+    Options = []
+    left = 56
+    top = 88
+  end
+end

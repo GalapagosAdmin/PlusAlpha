@@ -6,19 +6,21 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls, Grids, libpa;
+  Buttons, StdCtrls, Grids, EditBtn, libpa;
 
 type
 
   { TFormPlusAlphaMain }
 
   TFormPlusAlphaMain = class(TForm)
-    bbHdrUpdate: TBitBtn;
-    cbPosted: TCheckBox;
-    leHdrMemo: TLabeledEdit;
-    leTrnNo: TLabeledEdit;
-    StringGrid1: TStringGrid;
+    bbNewTran: TBitBtn;
+    bbDebug: TBitBtn;
+    procedure bbDebugClick(Sender: TObject);
     procedure bbHdrUpdateClick(Sender: TObject);
+    procedure bbNewTranClick(Sender: TObject);
+  //  procedure bbSaveClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { private declarations }
   public
@@ -30,23 +32,36 @@ var
 
 implementation
 
+uses
+  frmTransactionUnit, frmDebugUnit;
+
 {$R *.lfm}
 
 { TFormPlusAlphaMain }
 
 procedure TFormPlusAlphaMain.bbHdrUpdateClick(Sender: TObject);
 begin
-  // Update Object
-  JournalHeader.HdrMemo := leHdrMemo.Text;
-  JournalHeader.HdrPosted:=cbPosted.Checked;
-  // Retrieve Updates back
-  With JournalHeader do
-    begin
-      leHdrMemo.Text:= HdrMemo;
-      leTrnNo.Text:=IntToStr(HdrTransNo);
-      cbPosted.Checked := HdrPosted;
-    end;
 end;
+
+procedure TFormPlusAlphaMain.bbDebugClick(Sender: TObject);
+begin
+  frmDebug.Show;
+end;
+
+procedure TFormPlusAlphaMain.bbNewTranClick(Sender: TObject);
+begin
+  frmTransaction.show;
+end;
+
+
+procedure TFormPlusAlphaMain.FormCreate(Sender: TObject);
+begin
+
+end;
+
+procedure TFormPlusAlphaMain.FormShow(Sender: TObject);
+ begin
+ end;
 
 end.
 

@@ -3,24 +3,25 @@
   <ProjectSession>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="3">
+    <Units Count="8">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PlusAlpha"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="323"/>
       </Unit0>
       <Unit1>
         <Filename Value="pafrmmainunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormPlusAlphaMain"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="paFrmMainUnit"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="26"/>
-        <CursorPos X="15" Y="32"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="40"/>
+        <CursorPos X="14" Y="60"/>
+        <UsageCount Value="323"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -29,13 +30,76 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="117"/>
-        <CursorPos X="51" Y="128"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="379"/>
+        <CursorPos X="54" Y="393"/>
+        <UsageCount Value="323"/>
         <Loaded Value="True"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="padm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DataModule1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="padm"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="8"/>
+        <CursorPos X="10" Y="26"/>
+        <UsageCount Value="323"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="ledger.sdf"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="54" Y="1"/>
+        <UsageCount Value="323"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="/Developer/lazarus/lcl/include/customcheckbox.inc"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="63"/>
+        <CursorPos X="1" Y="74"/>
+        <UsageCount Value="156"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="frmtransactionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmTransaction"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frmTransactionUnit"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="49"/>
+        <CursorPos X="4" Y="54"/>
+        <UsageCount Value="301"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="frmdebugunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmDebug"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frmDebugUnit"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="17"/>
+        <CursorPos X="3" Y="39"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit7>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
@@ -43,123 +107,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="libpa.pas"/>
-        <Caret Line="38" Column="21" TopLine="13"/>
+        <Caret Line="138" Column="15" TopLine="115"/>
       </Position1>
       <Position2>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="41" Column="50" TopLine="18"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="151" Column="21" TopLine="128"/>
       </Position2>
       <Position3>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="26" Column="21" TopLine="19"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="152" Column="30" TopLine="129"/>
       </Position3>
       <Position4>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="36" Column="55" TopLine="1"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="154" Column="60" TopLine="131"/>
       </Position4>
       <Position5>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="46" Column="21" TopLine="21"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="166" Column="59" TopLine="143"/>
       </Position5>
       <Position6>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="40" Column="20" TopLine="25"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="182" Column="21" TopLine="159"/>
       </Position6>
       <Position7>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="39" Column="33" TopLine="25"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="185" Column="30" TopLine="162"/>
       </Position7>
       <Position8>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="40" Column="12" TopLine="25"/>
+        <Filename Value="libpa.pas"/>
+        <Caret Line="188" Column="58" TopLine="165"/>
       </Position8>
       <Position9>
         <Filename Value="libpa.pas"/>
-        <Caret Line="41" Column="22" TopLine="25"/>
+        <Caret Line="226" Column="14" TopLine="203"/>
       </Position9>
       <Position10>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="59" Column="25" TopLine="3"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="47" Column="1" TopLine="14"/>
       </Position10>
       <Position11>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="92" Column="6" TopLine="69"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="78" Column="45" TopLine="52"/>
       </Position11>
       <Position12>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="86" Column="3" TopLine="67"/>
       </Position12>
       <Position13>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="101" Column="1" TopLine="75"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="70" Column="57" TopLine="52"/>
       </Position13>
       <Position14>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="59" Column="46" TopLine="50"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="75" Column="30" TopLine="63"/>
       </Position14>
       <Position15>
         <Filename Value="libpa.pas"/>
-        <Caret Line="69" Column="6" TopLine="52"/>
+        <Caret Line="231" Column="27" TopLine="222"/>
       </Position15>
       <Position16>
         <Filename Value="libpa.pas"/>
-        <Caret Line="66" Column="2" TopLine="47"/>
+        <Caret Line="166" Column="2" TopLine="145"/>
       </Position16>
       <Position17>
         <Filename Value="libpa.pas"/>
-        <Caret Line="116" Column="59" TopLine="96"/>
+        <Caret Line="152" Column="24" TopLine="138"/>
       </Position17>
       <Position18>
         <Filename Value="libpa.pas"/>
-        <Caret Line="66" Column="5" TopLine="46"/>
+        <Caret Line="165" Column="16" TopLine="149"/>
       </Position18>
       <Position19>
         <Filename Value="libpa.pas"/>
-        <Caret Line="116" Column="33" TopLine="101"/>
+        <Caret Line="231" Column="8" TopLine="227"/>
       </Position19>
       <Position20>
         <Filename Value="libpa.pas"/>
-        <Caret Line="70" Column="5" TopLine="55"/>
+        <Caret Line="382" Column="18" TopLine="368"/>
       </Position20>
       <Position21>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="116" Column="13" TopLine="105"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="75" Column="30" TopLine="63"/>
       </Position21>
       <Position22>
         <Filename Value="libpa.pas"/>
-        <Caret Line="119" Column="6" TopLine="103"/>
+        <Caret Line="23" Column="54" TopLine="17"/>
       </Position22>
       <Position23>
         <Filename Value="libpa.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="162" Column="54" TopLine="148"/>
       </Position23>
       <Position24>
         <Filename Value="libpa.pas"/>
-        <Caret Line="128" Column="1" TopLine="106"/>
+        <Caret Line="406" Column="1" TopLine="379"/>
       </Position24>
       <Position25>
         <Filename Value="libpa.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="162" Column="54" TopLine="148"/>
       </Position25>
       <Position26>
         <Filename Value="libpa.pas"/>
-        <Caret Line="128" Column="1" TopLine="106"/>
+        <Caret Line="394" Column="42" TopLine="380"/>
       </Position26>
       <Position27>
         <Filename Value="libpa.pas"/>
-        <Caret Line="101" Column="33" TopLine="101"/>
+        <Caret Line="15" Column="18" TopLine="1"/>
       </Position27>
       <Position28>
         <Filename Value="libpa.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="393" Column="65" TopLine="1"/>
       </Position28>
       <Position29>
         <Filename Value="libpa.pas"/>
-        <Caret Line="62" Column="29" TopLine="51"/>
+        <Caret Line="10" Column="49" TopLine="1"/>
       </Position29>
       <Position30>
         <Filename Value="libpa.pas"/>
-        <Caret Line="71" Column="28" TopLine="60"/>
+        <Caret Line="123" Column="53" TopLine="109"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
