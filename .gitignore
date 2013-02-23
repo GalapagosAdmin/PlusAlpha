@@ -4,3 +4,7 @@
 PlusAlpha
 lib/
 lib/i386-darwin/
+
+lib/i386-darwin/pafrmmainunit.lfm
+
+lib/i386-darwin/frmtransactionunit.lfm
