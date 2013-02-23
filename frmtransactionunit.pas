@@ -6,28 +6,42 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls;
+  Buttons, StdCtrls, Calendar, EditBtn;
 
 type
 
   { TfrmTransaction }
 
   TfrmTransaction = class(TForm)
-    ebAcctNo1: TComboBox;
-    bbHdrUpdate: TBitBtn;
+    deHeaderEffDate: TDateEdit;
     bbSave: TBitBtn;
     cbPosted: TCheckBox;
+    ebAcctNo1: TComboBox;
     ebAcctNo2: TComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    lblDate: TLabel;
     leAmt1: TLabeledEdit;
     leAmt2: TLabeledEdit;
     leHdrMemo: TLabeledEdit;
     leMemo1: TLabeledEdit;
     leMemo2: TLabeledEdit;
     leTrnNo: TLabeledEdit;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    rbCr1: TRadioButton;
+    rbCr2: TRadioButton;
+    rbDr1: TRadioButton;
+    rbDr2: TRadioButton;
     stDetail: TStaticText;
+    procedure bbHdrUpdateClick(Sender: TObject);
     procedure bbSaveClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure leTrnNoChange(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
   private
     { private declarations }
   public
@@ -44,47 +58,90 @@ uses libpa;
 { TfrmTransaction }
 
 procedure TfrmTransaction.FormShow(Sender: TObject);
+  begin
+    ebAcctNo1.Items := AccountList.AccountStringList;
+    ebAcctNo2.Items := AccountList.AccountStringList;
+    leTrnNo.Text := IntToStr(CompleteJournalEntry.HighWaterMark+1);
+  end;
+
+procedure TfrmTransaction.leTrnNoChange(Sender: TObject);
 begin
-  ebAcctNo1.Items := AccountList.AccountStringList;
-  ebAcctNo2.Items := AccountList.AccountStringList;
 end;
+
+procedure TfrmTransaction.Panel1Click(Sender: TObject);
+  begin
+
+  end;
 
 procedure TfrmTransaction.bbSaveClick(Sender: TObject);
 begin
-   With CompleteJournalEntry do
+  With CompleteJournalEntry do
   begin
   // Update Object
-  _JournalHeader.HdrMemo := leHdrMemo.Text;
-  _JournalHeader.HdrTransNo:= StrToInt(leTrnNo.Text);
-//  _JournalHeader.HdrPosted := cbPosted.Checked;
+  With _JournalHeader do
+    begin
+      HdrMemo := leHdrMemo.Text;
+      HdrTransNo:= StrToInt(leTrnNo.Text);
+      EffDate := deHeaderEffDate.Date;
+      _JournalHeader.HdrPosted := cbPosted.Checked;
   // Retrieve Updates back
+    end;
 
+  with _JournalDetailEntries[0] do
+    begin
+      TransNo := StrToInt(LeTrnNo.Text);
+      AcctNo :=  ActToInt(ebAcctNo1.Text);
+      TransRow := 0;
+      Text := lememo1.Text;
+      Amount := StrtoInt(leAmt1.Text);
+      Case rbDr1.Checked of
+        True:  DrCr:=Dr;
+        False: DrCr:=Cr;
+      end;
+    end;
 
-  CompleteJournalEntry._JournalDetailEntries[0].TransNo:=StrToInt(LeTrnNo.Text);
-  CompleteJournalEntry._JournalDetailEntries[0].AcctNo:= ActToInt(ebAcctNo1.Text);
-  CompleteJournalEntry._JournalDetailEntries[0].TransRow:=0;
-  CompleteJournalEntry._JournalDetailEntries[0].Text:=lememo1.Text;
-  CompleteJournalEntry._JournalDetailEntries[0].Amount:=StrtoInt(leAmt1.Text);
+  with _JournalDetailEntries[1] do
+    begin
+      TransNo:=StrToInt(LeTrnNo.Text);
+      AcctNo:=ActToInt(ebAcctNo2.Text);
+      TransRow:=1;
+      Text:=lememo2.Text;
+      Amount:= StrToInt(leAmt2.Text);
+      Case rbDr2.Checked of
+        True:DrCr:=Dr;
+        False:DrCr:=Cr;
+      end;
+    end;
 
-  CompleteJournalEntry._JournalDetailEntries[1].TransNo:=StrToInt(LeTrnNo.Text);
-  CompleteJournalEntry._JournalDetailEntries[1].AcctNo:=ActToInt(ebAcctNo2.Text);
-  CompleteJournalEntry._JournalDetailEntries[1].TransRow:=1;
-  CompleteJournalEntry._JournalDetailEntries[1].Text:=lememo2.Text;
-  CompleteJournalEntry._JournalDetailEntries[1].Amount:= StrToInt(leAmt2.Text);
+  If not IsBalanced then
+     begin
+       ShowMessage('Transaction is not balanced.');
+       exit;
+     end;
+   If not Validate then
+     begin
+       ShowMessage('Transaction is not valid.');
+       exit;
+     end;
 
-  If CompleteJournalEntry.Insert then
+  If Insert then
    ShowMessage('Transaction Inserted')
   else
    ShowMessage('Error Inserting Transaction.');
 
   leTrnNo.Text:= IntToStr(CompleteJournalEntry.TransNo);
-  end;
-end;
+  end;  // of WITH
+end;  // of Procedure
 
-procedure TfrmTransaction.FormCreate(Sender: TObject);
+procedure TfrmTransaction.bbHdrUpdateClick(Sender: TObject);
 begin
 
 end;
+
+Procedure TfrmTransaction.FormCreate(Sender: TObject);
+  begin
+
+  end;
 
 
 

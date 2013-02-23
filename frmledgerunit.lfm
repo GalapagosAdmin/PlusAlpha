@@ -1,0 +1,132 @@
+object frmLedger: TfrmLedger
+  Left = 241
+  Height = 317
+  Top = 350
+  Width = 477
+  Align = alLeft
+  Caption = 'Plus Alpha - Ledger'
+  ClientHeight = 317
+  ClientWidth = 477
+  OnShow = FormShow
+  LCLVersion = '1.1'
+  object tvAccountList: TTreeView
+    Left = 0
+    Height = 317
+    Top = 0
+    Width = 177
+    Align = alLeft
+    DefaultItemHeight = 22
+    TabOrder = 0
+    OnClick = tvAccountListClick
+    Items.Data = {
+      F9FFFFFF020001000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF020000000000
+      000001080000004163636F756E7473FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF01
+      00000000000000010D00000042616E6B204163636F756E7473FFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFF000000000000000000100000004D697473756269736869
+      2047696E6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000010F
+      000000437265646974204163636F756E7473FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF000000000000000000050000004D61727569
+    }
+  end
+  object Splitter1: TSplitter
+    Left = 177
+    Height = 317
+    Top = 0
+    Width = 5
+  end
+  object GroupBox1: TGroupBox
+    Left = 182
+    Height = 317
+    Top = 0
+    Width = 295
+    Align = alClient
+    Caption = 'Account Details'
+    ClientHeight = 295
+    ClientWidth = 287
+    TabOrder = 2
+    object leAcctNo: TLabeledEdit
+      Left = 94
+      Height = 24
+      Top = 6
+      Width = 56
+      EditLabel.AnchorSideTop.Control = leAcctNo
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = leAcctNo
+      EditLabel.AnchorSideBottom.Control = leAcctNo
+      EditLabel.AnchorSideBottom.Side = asrBottom
+      EditLabel.Left = 8
+      EditLabel.Height = 20
+      EditLabel.Top = 8
+      EditLabel.Width = 83
+      EditLabel.Caption = 'Account No.:'
+      EditLabel.ParentColor = False
+      EditLabel.Layout = tlBottom
+      LabelPosition = lpLeft
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object leAcctBal: TLabeledEdit
+      Left = 94
+      Height = 22
+      Top = 34
+      Width = 56
+      EditLabel.AnchorSideTop.Control = leAcctBal
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = leAcctBal
+      EditLabel.AnchorSideBottom.Control = leAcctBal
+      EditLabel.AnchorSideBottom.Side = asrBottom
+      EditLabel.Left = 37
+      EditLabel.Height = 20
+      EditLabel.Top = 35
+      EditLabel.Width = 54
+      EditLabel.Caption = 'Balance:'
+      EditLabel.ParentColor = False
+      EditLabel.Layout = tlBottom
+      LabelPosition = lpLeft
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object cbAcctCurr: TComboBox
+      Left = 158
+      Height = 23
+      Top = 34
+      Width = 64
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 2
+    end
+    object rbAcctBalDr: TRadioButton
+      Left = 102
+      Height = 18
+      Top = 67
+      Width = 54
+      Caption = 'Debit'
+      TabOrder = 3
+    end
+    object rbAcctBalCr: TRadioButton
+      Left = 163
+      Height = 18
+      Top = 67
+      Width = 59
+      Caption = 'Credit'
+      TabOrder = 4
+    end
+    object cbAccType: TComboBox
+      Left = 118
+      Height = 23
+      Top = 101
+      Width = 116
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 5
+    end
+    object lblAccType: TLabel
+      Left = 14
+      Height = 20
+      Top = 104
+      Width = 89
+      Caption = 'Account Type'
+      ParentColor = False
+    end
+  end
+end

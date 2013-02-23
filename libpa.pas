@@ -13,6 +13,7 @@ Type
   TAcctType = (atAsset, atLiability, atEquity, atExpense, atIncome, atRevenue, atPlaceholder);
   TUTF8String=UTF8String;
   Tstr8=String[8];
+  TInteger=integer;
 
  TJournalHeader = class(TObject)
    private
@@ -34,7 +35,10 @@ Type
        Property HdrTransNo:Integer read _TransNo write _TransNo;
        Property HdrPosted:Boolean read _Posted write _Posted;
        Property CurrCode:TCurrCode read _CurrCode write _CurrCode;
+       Property EffDate:TDate read _EffDate write _EffDate;
+       Property Posted:Boolean read _Posted write _Posted;
        Function Insert:Boolean;
+       Function Validate:Boolean;
  end;  // of TJournalHeader
 
 
@@ -63,7 +67,8 @@ Type
     Property Currency:TCurrCode read _currency write _currency;
     Property TransRow:Integer read _TransRow write _TransRow;
     Property Text:TUTF8String read _Text write _Text;
-    function insert:boolean;
+    Function Insert:boolean;
+    Function Validate:Boolean;
 
  end;
 
@@ -85,39 +90,62 @@ Type
      Procedure TransNoSet(TransNo:Integer);
      Function GetHighWaterMark:Integer;
    Public
-    _JournalHeader : TJournalHeader;
-    _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
+     _JournalHeader : TJournalHeader;
+     _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
      Constructor Create; //overload;
      Property Rows:Integer Read _Rows;
      Property TransNo:Integer read _TransNo write TransNoSet;
      Function IsBalanced:Boolean;
      Function Insert:Boolean;
      Property HighWaterMark:Integer read GetHighWaterMark;
+     Function Validate:Boolean;
 
  end;
 
-  TAccount = Class(TObject)
-    _AcctNo:Integer; // Internal Account No.
+  TLedgerAccount = Class(TObject)   // Ledger Account
+    private
+    _AcctNo:TInteger; // Internal Account No.
     _Text:TUTF8String; // Account Description
     _AcctType:TAcctType;
     _currency:TCurrCode;  // Currency Code
     _bal:Integer; // Ledger balance
-    _drcr:Tdrcr; // debit/credit indicator
+    _drcr:Tdrcr; // debit/credit indicator for current balance
     _dirty:boolean; // Indicates if synch to db is required
-
+    _AccTypeDB:Char; // Account Type Code for the database
+    _AccStDB:Char; // Account Subtype Code for the database
+    _TextKey:TInteger; // Text key used for i18n of text
+    _TransNo:TInteger; // Latest Transaction number posted to this ledger account
+    _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
+    public
+      Property AcctNo:TInteger read _AcctNo;
+      Property Text:TUTF8String read _Text;
+      Property Balance:TInteger read _bal;
+      Property Currency:TCurrCode read _Currency;
+      Property DrCr:Tdrcr read _drcr;
+      Property AccountType:Char read _AccTypeDB;
+      Property AccountSubType:Char read _AccSTDB;
   end;
 
+
+  // Entire general ledger
   TAccountList = Class(TObject)
     private
-      _AccountList : Array of TAccount;
+      _AccountList : Array of TLedgerAccount;
+      _CurrentAccount:integer; // used for enumerating
     public
      Constructor Create; //overload;
      Procedure AddAccount(const AcctNo:Integer; Currency:TCurrCode;
                                    AccountType:TAcctType; AcctText:TUTF8String;
-                                   DrBal:Integer; CrBal:Integer);
+                                   DrBal:Integer; CrBal:Integer; AccType:TUTF8String);
      Function AccountStringList:TStringList;
+     Function GetFirstAccount:TLedgerAccount;
+     Function GetNextAccount:TLedgerAccount;
+     Function EOF:Boolean;
   end;
 
+  TPAUtility = Class(TObject)
+  //  Class Function Display
+  end;
 
   Function ActToInt(AccountText:TUTF8String):Integer;
   Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
@@ -144,6 +172,13 @@ implementation
 
     end;
 
+  Function TJournalHeader.Validate:boolean;
+    begin
+      Result := true;
+      If length(_memo) = 0 then
+        Result := False;
+    end;
+
   Function TJournalHeader.Insert:boolean;
    var
      SQLQuery1:TSQLQuery;
@@ -156,12 +191,13 @@ implementation
      SQLQuery1 := TSQLQuery.Create(nil);
      SQLQuery1.Transaction := SQLTransaction1;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNALHDR" ('
-         + '"TRANSNO", "MEMO", "ENT_DATE") '
-         + 'values ( :TransNo, :Memo, :entdate )';
+         + '"TRANSNO", "MEMO", "EFF_DATE", "ENT_DATE") '
+         + 'values ( :TransNo, :Memo, :effdate, :entdate )';
 
      SqlQuery1.ParamByName('TransNo').AsInteger := _TransNo;
      SqlQuery1.ParamByName('Memo').AsString := _Memo;
      SqlQuery1.ParamByName('entdate').AsString := DateTimetoYYYYMMDD(now);
+     SqlQuery1.ParamByName('effdate').AsString := DateTimetoYYYYMMDD(_EffDate);
 
      SQLQuery1.ExecSQL;
      SQLQuery1.Close;
@@ -179,6 +215,7 @@ implementation
   Constructor TJournalDetailEntry.Create;
     begin
       _Currency := 'JPY';
+      self.AcctNo := -1;
     end;
 
   Function TJournalDetailEntry.insert:boolean;
@@ -214,6 +251,10 @@ implementation
 
    end;
 
+  Function TJournalDetailEntry.validate:boolean;
+    begin
+      Result := (Self.AcctNo <> -1);
+    end;
 
  Constructor TCompleteJournalEntry.Create;
    begin
@@ -226,6 +267,26 @@ implementation
       _JournalDetailEntries[0] := _JournalDetailEntry1;
       _JournalDetailEntries[1] := _JournalDetailEntry2;
    end;
+
+  Function TCompleteJournalEntry.Validate:boolean;
+    var
+      i:integer;
+    begin
+      result := _JournalHeader.Validate;
+      If result then result := self.IsBalanced;
+      If result then
+        for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
+          begin
+             if not _JournalDetailEntries[i].Validate then
+               begin
+                 result := false;
+                 exit;
+               end;
+          end;
+
+      // Then loop through the detail records and validate them one by one
+      // if anything fails, then the entire result fails
+    end;
 
  Function TCompleteJournalEntry.Insert:boolean;
    var
@@ -297,13 +358,14 @@ implementation
 
    end;
 
+ // Adds an account existing in the database to the in-memory list
  Procedure TAccountList.AddAccount(const AcctNo:Integer; Currency:TCurrCode;
                                            AccountType:TAcctType; AcctText:TUTF8String;
-                                           DrBal, CrBal:Integer);
+                                           DrBal, CrBal:Integer; AccType:TUTF8String);
    var
-     TmpAcct:TAccount;
+     TmpAcct:TLedgerAccount;
    begin
-     TmpAcct := TAccount.Create;
+     TmpAcct := TLedgerAccount.Create;
      // Add entry to the in-memory array
      SetLength(_AccountLIst, Length(_AccountList)+1);
 
@@ -322,11 +384,29 @@ implementation
         TmpAcct._bal := CrBal;
         TmpAcct._DRCR := Cr;
       end;
-
+    tmpAcct._AccType := AccType[1];
    //  _AccountList[0] := TmpAcct;
     _AccountList[High(_AccountList)] := TmpAcct;
 
    end;
+
+ Function TAccountLIst.GetFirstAccount:TLedgerAccount;
+   begin
+      _CurrentAccount := Low(_AccountList);
+      Result := _AccountList[_CurrentAccount];
+   end;
+
+ Function TAccountLIst.GetNextAccount:TLedgerAccount;
+   begin
+      Inc(_CurrentAccount);
+      Result := _AccountList[_CurrentAccount];
+   end;
+
+ Function TAccountLIst.EOF:Boolean;
+   begin
+      Result := (_CurrentAccount = High(_AccountList));
+   end;
+
 
  Constructor TAccountList.Create();
    var
@@ -340,14 +420,8 @@ implementation
 
 
    SQLQuery1 := TSQLQuery.Create(nil);
-//   SQLTransaction1 := TSQLTransaction.Create(nil);
-//   SQLite3Connection1 := TSQLite3Connection.Create(nil);
-
-//   SQLite3Connection1.DatabaseName :=  '/Users/shiruba/develop/plusalpha/plusalpha.sqlite';
-//   SQLite3Connection1.Connected := True;
-//   SQLTransaction1.DataBase := SQLite3Connection1;
    SQLQuery1.Transaction := SQLTransaction1;
-   SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text from ledger';
+   SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd from ledger';
    SQLQuery1.open;
    While not SQLQuery1.EOF do
     begin
@@ -356,7 +430,8 @@ implementation
                  FieldByName('CurrKey').AsString,
                  atAsset, FieldByName('Text').AsString,
                  FieldByName('DrBal').AsInteger,
-                 FieldByName('CrBal').AsInteger
+                 FieldByName('CrBal').AsInteger,
+                 FieldByName('AccTypeCd').AsString
                  );
       SQLQuery1.Next;
     end;
@@ -398,7 +473,7 @@ implementation
 initialization
 
   SQLite3Connection1 := TSQLite3Connection.Create(nil);
-  SQLite3Connection1.DatabaseName :=  'plusalpha/plusalpha.sqlite';
+  SQLite3Connection1.DatabaseName :=  '/Users/shiruba/Develop/plusalpha/plusalpha.sqlite';
   SQLite3Connection1.Connected := True;
   SQLTransaction1 := TSQLTransaction.Create(nil);
   SQLTransaction1.DataBase := SQLite3Connection1;

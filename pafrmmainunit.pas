@@ -15,9 +15,11 @@ type
   TFormPlusAlphaMain = class(TForm)
     bbNewTran: TBitBtn;
     bbDebug: TBitBtn;
+    bbLedger: TBitBtn;
     procedure bbDebugClick(Sender: TObject);
     procedure bbHdrUpdateClick(Sender: TObject);
     procedure bbNewTranClick(Sender: TObject);
+    procedure bbLedgerClick(Sender: TObject);
   //  procedure bbSaveClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -33,7 +35,7 @@ var
 implementation
 
 uses
-  frmTransactionUnit, frmDebugUnit;
+  frmTransactionUnit, frmledgerunit, frmDebugUnit;
 
 {$R *.lfm}
 
@@ -51,6 +53,11 @@ end;
 procedure TFormPlusAlphaMain.bbNewTranClick(Sender: TObject);
 begin
   frmTransaction.show;
+end;
+
+procedure TFormPlusAlphaMain.bbLedgerClick(Sender: TObject);
+begin
+  frmLedger.Show;
 end;
 
 

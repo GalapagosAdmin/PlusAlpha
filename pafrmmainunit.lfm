@@ -1,7 +1,7 @@
 object FormPlusAlphaMain: TFormPlusAlphaMain
-  Left = 220
+  Left = 417
   Height = 137
-  Top = 480
+  Top = 511
   Width = 150
   Caption = 'PlusAlpha'
   ClientHeight = 137
@@ -21,10 +21,19 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
   object bbDebug: TBitBtn
     Left = 8
     Height = 30
-    Top = 52
+    Top = 96
     Width = 127
     Caption = 'Debug Options'
     OnClick = bbDebugClick
     TabOrder = 1
+  end
+  object bbLedger: TBitBtn
+    Left = 8
+    Height = 30
+    Top = 48
+    Width = 127
+    Caption = 'Account Ledger'
+    OnClick = bbLedgerClick
+    TabOrder = 2
   end
 end
