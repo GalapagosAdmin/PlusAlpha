@@ -2,3 +2,5 @@
 *.ppu
 *.bak
 PlusAlpha
+lib/
+lib/i386-darwin/
