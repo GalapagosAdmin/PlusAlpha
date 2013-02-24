@@ -37,7 +37,7 @@ var
 implementation
 
  uses
-   libpa;
+   libpa, paLedger;
 
 {$R *.lfm}
 

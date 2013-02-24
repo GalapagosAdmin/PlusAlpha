@@ -40,7 +40,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="10">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -91,9 +91,20 @@
         <Filename Value="frmledgerunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmLedger"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmLedgerUnit"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="paledger.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paLedger"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="padatabase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paDatabase"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

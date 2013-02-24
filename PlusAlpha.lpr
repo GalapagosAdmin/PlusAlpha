@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, paFrmMainUnit, libpa, padm, sdflaz, frmTransactionUnit, frmDebugUnit,
-  frmLedgerUnit
+  frmLedgerUnit, paLedger, paDatabase
   { you can add units after this };
 
 {$R *.res}

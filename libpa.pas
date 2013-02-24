@@ -5,7 +5,7 @@ unit libpa;
 interface
 
 uses
-  Classes, SysUtils, sqldb, sqlite3conn;
+  Classes, SysUtils, sqldb;
 
 Type
   TCurrCode=String[3];
@@ -52,7 +52,7 @@ Type
      _currency:TCurrCode;  // Currency Code
      _drcr:Tdrcr;          // Debit/Credit Indicator
      _acctno:Integer;      // Account no. (Internal)
-     _bal:Integer;         // Ledger Balance
+//     _bal:Integer;         // Ledger Balance
      _dirty:boolean;       // Needs Database synch
      _Text:TUTF8String;
    public
@@ -102,47 +102,6 @@ Type
 
  end;
 
-  TLedgerAccount = Class(TObject)   // Ledger Account
-    private
-    _AcctNo:TInteger; // Internal Account No.
-    _Text:TUTF8String; // Account Description
-    _AcctType:TAcctType;
-    _currency:TCurrCode;  // Currency Code
-    _bal:Integer; // Ledger balance
-    _drcr:Tdrcr; // debit/credit indicator for current balance
-    _dirty:boolean; // Indicates if synch to db is required
-    _AccTypeDB:Char; // Account Type Code for the database
-    _AccStDB:Char; // Account Subtype Code for the database
-    _TextKey:TInteger; // Text key used for i18n of text
-    _TransNo:TInteger; // Latest Transaction number posted to this ledger account
-    _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
-    public
-      Property AcctNo:TInteger read _AcctNo;
-      Property Text:TUTF8String read _Text;
-      Property Balance:TInteger read _bal;
-      Property Currency:TCurrCode read _Currency;
-      Property DrCr:Tdrcr read _drcr;
-      Property AccountType:Char read _AccTypeDB;
-      Property AccountSubType:Char read _AccSTDB;
-  end;
-
-
-  // Entire general ledger
-  TAccountList = Class(TObject)
-    private
-      _AccountList : Array of TLedgerAccount;
-      _CurrentAccount:integer; // used for enumerating
-    public
-     Constructor Create; //overload;
-     Procedure AddAccount(const AcctNo:Integer; Currency:TCurrCode;
-                                   AccountType:TAcctType; AcctText:TUTF8String;
-                                   DrBal:Integer; CrBal:Integer; AccType:TUTF8String);
-     Function AccountStringList:TStringList;
-     Function GetFirstAccount:TLedgerAccount;
-     Function GetNextAccount:TLedgerAccount;
-     Function EOF:Boolean;
-  end;
-
   TPAUtility = Class(TObject)
   //  Class Function Display
   end;
@@ -151,17 +110,12 @@ Type
   Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
 
 var
-  JournalHeader:TJournalHeader;
+ // JournalHeader:TJournalHeader;
   CompleteJournalEntry:TCompleteJournalEntry;
-  AccountList:TAccountList;
 
 implementation
 
- uses sdfdata, db;
-
- var
-        SQLite3Connection1:TSQLite3Connection;
-        SQLTransaction1:TSQLTransaction;
+ uses sdfdata, db, paLedger, paDatabase;
 
 
   Constructor TJournalHeader.Create;
@@ -268,6 +222,13 @@ implementation
       _JournalDetailEntries[1] := _JournalDetailEntry2;
    end;
 
+
+ Function TCompleteJournalEntry.GetHighWaterMark:Integer;
+  begin
+   self.UpdateHighWaterMark;
+   result := _TransHighWaterMark;
+  end;
+
   Function TCompleteJournalEntry.Validate:boolean;
     var
       i:integer;
@@ -291,6 +252,7 @@ implementation
  Function TCompleteJournalEntry.Insert:boolean;
    var
      i:integer;
+     tmpAcct:TLedgerAccount;
    begin
      // Assume Failure
       Result := False;
@@ -302,9 +264,22 @@ implementation
          begin
           // Insert the journal Entry Rows
            for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
-             _JournalDetailEntries[i].insert;
-          SQLTransaction1.commit;
-          Result := True;
+             Begin
+               _JournalDetailEntries[i].insert;
+               // Update Ledger
+               tmpAcct := AccountList.GetAccountNo(_JournalDetailEntries[i].AcctNo);
+               if assigned(tmpAcct) then
+                 begin
+                   // Update the balance
+                   // FIXME ignoring dr/cr for the moment for testing updates
+                   tmpAcct.Balance:=tmpAcct.Balance + _JournalDetailEntries[i]._amount;
+                   tmpAcct.Synch;
+                 end;
+             end;
+
+           // Tidy Up
+           SQLTransaction1.commit;
+           Result := True;
          end;
    end;
 
@@ -358,102 +333,6 @@ implementation
 
    end;
 
- // Adds an account existing in the database to the in-memory list
- Procedure TAccountList.AddAccount(const AcctNo:Integer; Currency:TCurrCode;
-                                           AccountType:TAcctType; AcctText:TUTF8String;
-                                           DrBal, CrBal:Integer; AccType:TUTF8String);
-   var
-     TmpAcct:TLedgerAccount;
-   begin
-     TmpAcct := TLedgerAccount.Create;
-     // Add entry to the in-memory array
-     SetLength(_AccountLIst, Length(_AccountList)+1);
-
-     TmpAcct._AcctNo := AcctNo;
-     TmpAcct._currency := Currency;
-     TmpAcct._AcctType := AccountType;
-     TmpAcct._Text := AcctText;
-     // Convert the DR/CR balances to a single balance and DrCr indicator
-     If DrBal > 0 then
-       begin
-        TmpAcct._bal := DrBal;
-        TmpAcct._DRCR := Dr;
-       end
-     else
-      begin
-        TmpAcct._bal := CrBal;
-        TmpAcct._DRCR := Cr;
-      end;
-    tmpAcct._AccType := AccType[1];
-   //  _AccountList[0] := TmpAcct;
-    _AccountList[High(_AccountList)] := TmpAcct;
-
-   end;
-
- Function TAccountLIst.GetFirstAccount:TLedgerAccount;
-   begin
-      _CurrentAccount := Low(_AccountList);
-      Result := _AccountList[_CurrentAccount];
-   end;
-
- Function TAccountLIst.GetNextAccount:TLedgerAccount;
-   begin
-      Inc(_CurrentAccount);
-      Result := _AccountList[_CurrentAccount];
-   end;
-
- Function TAccountLIst.EOF:Boolean;
-   begin
-      Result := (_CurrentAccount = High(_AccountList));
-   end;
-
-
- Constructor TAccountList.Create();
-   var
-//     FDataset: TSdfDataset;
-     i:integer;
-     SQLQuery1:TSQLQuery;
-//     SQLTransaction1:TSQLTransaction;
-//     SQLite3Connection1:TSQLite3Connection;
-     TmpStr : TUTF8String;
-   begin
-
-
-   SQLQuery1 := TSQLQuery.Create(nil);
-   SQLQuery1.Transaction := SQLTransaction1;
-   SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd from ledger';
-   SQLQuery1.open;
-   While not SQLQuery1.EOF do
-    begin
-      With SQLQuery1 do
-      AddAccount(StrToInt(FieldByName('AcctNo').AsString),
-                 FieldByName('CurrKey').AsString,
-                 atAsset, FieldByName('Text').AsString,
-                 FieldByName('DrBal').AsInteger,
-                 FieldByName('CrBal').AsInteger,
-                 FieldByName('AccTypeCd').AsString
-                 );
-      SQLQuery1.Next;
-    end;
-   SQLQuery1.Close;
-   SQLQuery1.Destroy;
-
-   end;
-
- Function TAccountList.AccountStringList:TStringList;
-   var
-     i:Integer;
-   begin
-     Result := TStringList.Create;
-     for i := low(_AccountList) to high(_AccountList) do
-       Result.Append(IntToStr(_AccountList[i]._AcctNo) + ' - ' + _AccountList[i]._Text);
-   end;
-
- Function TCompleteJournalEntry.GetHighWaterMark:Integer;
-  begin
-   self.UpdateHighWaterMark;
-   result := _TransHighWaterMark;
-  end;
 
  Function ActToInt(AccountText:TUTF8String):Integer;
    begin
@@ -472,16 +351,10 @@ implementation
 
 initialization
 
-  SQLite3Connection1 := TSQLite3Connection.Create(nil);
-  SQLite3Connection1.DatabaseName :=  '/Users/shiruba/Develop/plusalpha/plusalpha.sqlite';
-  SQLite3Connection1.Connected := True;
-  SQLTransaction1 := TSQLTransaction.Create(nil);
-  SQLTransaction1.DataBase := SQLite3Connection1;
 
 
-  JournalHeader := TJournalHeader.Create;
+ // JournalHeader := TJournalHeader.Create;
   CompleteJournalEntry := TCompleteJournalEntry.Create;
-  AccountList := TAccountList.Create;
 
 
 end.

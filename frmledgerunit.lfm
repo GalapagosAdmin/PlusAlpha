@@ -1,7 +1,7 @@
 object frmLedger: TfrmLedger
-  Left = 241
+  Left = 452
   Height = 317
-  Top = 350
+  Top = 223
   Width = 477
   Align = alLeft
   Caption = 'Plus Alpha - Ledger'
@@ -46,7 +46,7 @@ object frmLedger: TfrmLedger
     TabOrder = 2
     object leAcctNo: TLabeledEdit
       Left = 94
-      Height = 24
+      Height = 22
       Top = 6
       Width = 56
       EditLabel.AnchorSideTop.Control = leAcctNo
@@ -56,7 +56,7 @@ object frmLedger: TfrmLedger
       EditLabel.AnchorSideBottom.Side = asrBottom
       EditLabel.Left = 8
       EditLabel.Height = 20
-      EditLabel.Top = 8
+      EditLabel.Top = 7
       EditLabel.Width = 83
       EditLabel.Caption = 'Account No.:'
       EditLabel.ParentColor = False
@@ -88,7 +88,7 @@ object frmLedger: TfrmLedger
     end
     object cbAcctCurr: TComboBox
       Left = 158
-      Height = 23
+      Height = 20
       Top = 34
       Width = 64
       ItemHeight = 0
@@ -113,7 +113,7 @@ object frmLedger: TfrmLedger
     end
     object cbAccType: TComboBox
       Left = 118
-      Height = 23
+      Height = 20
       Top = 101
       Width = 116
       ItemHeight = 0
