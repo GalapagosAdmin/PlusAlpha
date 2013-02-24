@@ -1,10 +1,10 @@
 object frmTransaction: TfrmTransaction
   Left = 165
-  Height = 327
+  Height = 322
   Top = 81
   Width = 638
   Caption = 'Plus Alpha - New Transaction'
-  ClientHeight = 327
+  ClientHeight = 322
   ClientWidth = 638
   OnCreate = FormCreate
   OnShow = FormShow
