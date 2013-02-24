@@ -78,8 +78,8 @@ Type
      _TransNo:Integer;     // Transaction number - Matches with header
      _Rows:Integer; // Number of Line Items
      // Two entries for testing
-     _JournalDetailEntry1 : TJournalDetailEntry;
-     _JournalDetailEntry2 : TJournalDetailEntry;
+  //   _JournalDetailEntry1 : TJournalDetailEntry;
+  //   _JournalDetailEntry2 : TJournalDetailEntry;
      // Use Dynamic Array or collection later
 //     _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
      _TotalDr:Integer;
@@ -121,7 +121,7 @@ implementation
   Constructor TJournalHeader.Create;
     begin
       inherited;
-      _TransNo := 0;
+      _TransNo := -1;
       // other stuff goes here.
 
     end;
@@ -139,7 +139,7 @@ implementation
      TmpStr : TUTF8String;
    begin
      // validations
-     If self._TransNo = 0 then exit(false);
+     If self._TransNo < 0 then exit(false);
      if self._Memo = '' then exit(False);
 
      SQLQuery1 := TSQLQuery.Create(nil);
@@ -233,15 +233,19 @@ implementation
     end;
 
  Constructor TCompleteJournalEntry.Create;
+   var
+     i:integer;
    begin
       _JournalHeader := TJournalHeader.Create;
-      _Rows := 2; // Static for now
-      // This can be made dynamic to support more than 2 entries
+      _Rows := length(_JournalDetailEntries); // Static for now
+      for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+         _JournalDetailEntries[i] := TJournalDetailEntry.Create
+    (*  // This can be made dynamic to support more than 2 entries
       _JournalDetailEntry1 := TJournalDetailEntry.Create;
       _JournalDetailEntry2 := TJournalDetailEntry.Create;
       // Enable array access now for external use
       _JournalDetailEntries[0] := _JournalDetailEntry1;
-      _JournalDetailEntries[1] := _JournalDetailEntry2;
+      _JournalDetailEntries[1] := _JournalDetailEntry2;   *)
    end;
 
 
@@ -343,13 +347,19 @@ implementation
    end;
 
  Procedure TCompleteJournalEntry.TransNoSet(TransNo:Integer);
+   var
+     i:integer;
    begin
      // Update our own internal status
      _TransNo := TransNo;
      // Update our children to be in synch
      _JournalHeader._TransNo:=_TransNo;
+     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+       _JournalDetailEntries[i]._TransNo := _TransNo;
+     (*
      _JournalDetailEntry1._TransNo:=_TransNo;
      _JournalDetailEntry2._TransNo:=_TransNo;
+     *)
    end;
 
  Function TCompleteJournalEntry.IsBalanced:boolean;
@@ -376,7 +386,7 @@ implementation
 
    end;
 
-
+ // converts account display text back to integer
  Function ActToInt(AccountText:TUTF8String):Integer;
    begin
     Result := StrToInt(Trim(copy(AccountText,1,2)));
