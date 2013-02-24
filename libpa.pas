@@ -145,13 +145,14 @@ implementation
      SQLQuery1 := TSQLQuery.Create(nil);
      SQLQuery1.Transaction := SQLTransaction1;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNALHDR" ('
-         + '"TRANSNO", "MEMO", "EFF_DATE", "ENT_DATE") '
-         + 'values ( :TransNo, :Memo, :effdate, :entdate )';
+         + '"TRANSNO", "MEMO", "EFF_DATE", "ENT_DATE", POSTED) '
+         + 'values ( :TransNo, :Memo, :effdate, :entdate, :posted )';
 
      SqlQuery1.ParamByName('TransNo').AsInteger := _TransNo;
      SqlQuery1.ParamByName('Memo').AsString := _Memo;
      SqlQuery1.ParamByName('entdate').AsString := DateTimetoYYYYMMDD(now);
      SqlQuery1.ParamByName('effdate').AsString := DateTimetoYYYYMMDD(_EffDate);
+     SqlQuery1.ParamByName('posted').AsInteger := Ord(_Posted);
 
      SQLQuery1.ExecSQL;
      SQLQuery1.Close;
