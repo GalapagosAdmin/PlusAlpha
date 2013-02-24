@@ -306,7 +306,10 @@ implementation
                    calc.clear;
                    calc.AddEntry(tmpAcct.Balance, tmpAcct.DrCr);
                    with _JournalDetailEntries[i] do
-                     calc.AddEntry(_amount, _drcr);
+                     begin
+                       tmpAcct.TransNo := TransNo;
+                       calc.AddEntry(_amount, _drcr);
+                     end;
                    // FIXME ignoring dr/cr for the moment for testing updates
                    tmpAcct.Balance := Calc.Balance;
                    tmpAcct.DrCr := calc.DrCr;

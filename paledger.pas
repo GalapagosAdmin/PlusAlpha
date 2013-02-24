@@ -27,6 +27,7 @@ uses
       _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
       Procedure SetBal(NewBalance:TInteger);
       Procedure SetDrCr(NewDrCr:TDrCr);
+      Procedure SetTransNo(NewTransNo:TInteger);
       Function Insert:Boolean;
       Function Update:Boolean;
       Function _DrBal:Integer;   // converts to the db format for now
@@ -40,6 +41,7 @@ uses
       Property DrCr:Tdrcr read _drcr write SetDrCr;
       Property AccountType:Char read _AccTypeDB;
       Property AccountSubType:Char read _AccSTDB;
+      Property TransNo:TInteger read _TransNo write SetTransNo;
       Function Load(AccountNo:TInteger):boolean;
       Function Synch:boolean;
   end;
@@ -167,6 +169,13 @@ Procedure TLedgerAccount.SetDrCr(NewDrCr:TDrCr);
     _Dirty := True;
   end;
 
+
+Procedure TLedgerAccount.SetTransNo(NewTransNo:TInteger);
+  begin
+    _TransNo := NewTransNo;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
 
 Function TLedgerAccount.Insert:boolean;
   var
