@@ -258,6 +258,8 @@ implementation
       result := _JournalHeader.Validate;
       If result then result := self.IsBalanced;
       If result then
+        // Then loop through the detail records and validate them one by one
+        // if anything fails, then the entire result fails
         for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
           begin
              if not _JournalDetailEntries[i].Validate then
@@ -267,10 +269,11 @@ implementation
                end;
           end;
 
-      // Then loop through the detail records and validate them one by one
-      // if anything fails, then the entire result fails
     end;
 
+ // This is called directly by the GUI now, but the design will be changed to
+ // match the ledger object.  (i.e. the object will decide whether to perform
+ // an insert or update at the database level).
  Function TCompleteJournalEntry.Insert:boolean;
    var
      i:integer;
@@ -314,18 +317,28 @@ implementation
    end;
 
  Procedure TCompleteJournalEntry.UpdateDrCr;
+   var
+     i:integer;
    begin
      _TotalDr := 0;
      _TotalCr := 0;
+     // This code works as-is, but should be changed to use TDrCrCalculator.
+     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+       If _JournalDetailEntries[i]._drcr = Dr then
+         _TotalDr := _TotalDr + _JournalDetailEntries[i]._amount
+       else
+         _TotalCr := _TotalCr + _JournalDetailEntries[i]._amount;
+
+(*
+  // Change this into a loop when we want to support more than 2 detail entries
      If _JournalDetailEntry1._drcr = Dr then
        _TotalDr := _TotalDr + _JournalDetailEntry1._amount
      else
        _TotalCr := _TotalCr + _JournalDetailEntry1._amount;
-    // Change this into a loop when we want to support more than 2 detail entries
       If _JournalDetailEntry2._drcr = Dr then
        _TotalDr := _TotalDr + _JournalDetailEntry2._amount
      else
-       _TotalCr := _TotalCr + _JournalDetailEntry2._amount
+       _TotalCr := _TotalCr + _JournalDetailEntry2._amount  *)
 
    end;
 
