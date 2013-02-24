@@ -50,8 +50,11 @@ uses
     private
       _AccountList : Array of TLedgerAccount;
       _CurrentAccount:integer; // used for enumerating
+      _HighWaterMark:Integer;  // Highest numbered account in the database
+      Procedure UpdateHighWaterMark;
     public
      Constructor Create; //overload;
+     // loads an existing ledger account from the database into a new object
      Procedure AddAccount(const AcctNo:Integer);
      Function AccountStringList:TStringList;
      Function GetFirstAccount:TLedgerAccount;
@@ -361,6 +364,24 @@ Function TAccountList.AccountStringList:TStringList;
     Result := TStringList.Create;
     for i := low(_AccountList) to high(_AccountList) do
       Result.Append(IntToStr(_AccountList[i]._AcctNo) + ' - ' + _AccountList[i]._Text);
+  end;
+
+Procedure TAccountList.UpdateHighWaterMark;
+  var
+   SQLQuery1:TSQLQuery;
+  begin
+    SQLQuery1 := TSQLQuery.Create(nil);
+    SQLQuery1.Transaction := SQLTransaction1;
+
+  //Journal Header should always be inserted first, so it's safer to take that
+  // number
+  SQLQuery1.SQL.Text := 'select max(acctno) as hwm from ledger';
+  SQLQuery1.open;
+  If not SQLQuery1.EOF then
+    _HighWaterMark := SqlQuery1.FieldByName('hwm').AsInteger;
+  SQLQuery1.Close;
+  SQLQuery1.Destroy;
+
   end;
 
 
