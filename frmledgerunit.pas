@@ -24,6 +24,7 @@ type
     Splitter1: TSplitter;
     tvAccountList: TTreeView;
     procedure FormShow(Sender: TObject);
+    procedure leAcctNoChange(Sender: TObject);
     procedure tvAccountListClick(Sender: TObject);
   private
     { private declarations }
@@ -70,7 +71,12 @@ begin
   end;
   // Populate the Account Type Popup
   // This should really be read from the DB via an object in LibPa, but for now...
-  cbAccType.Items.CommaText:='C, P, A, L';
+  cbAccType.Items.CommaText:='C, P, A, L, E, I';
+
+end;
+
+procedure TfrmLedger.leAcctNoChange(Sender: TObject);
+begin
 
 end;
 

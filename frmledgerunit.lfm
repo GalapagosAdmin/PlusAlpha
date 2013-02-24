@@ -1,7 +1,7 @@
 object frmLedger: TfrmLedger
-  Left = 51
+  Left = 179
   Height = 317
-  Top = 309
+  Top = 372
   Width = 477
   Align = alLeft
   Caption = 'Plus Alpha - Ledger'
@@ -64,6 +64,7 @@ object frmLedger: TfrmLedger
       LabelPosition = lpLeft
       ReadOnly = True
       TabOrder = 0
+      OnChange = leAcctNoChange
     end
     object leAcctBal: TLabeledEdit
       Left = 94

@@ -176,29 +176,51 @@ implementation
    var
      SQLQuery1:TSQLQuery;
      TmpStr : TUTF8String;
+     DrAmt, CrAmt:Integer;
    begin
+
+     Case self.DrCr of
+      Dr:begin
+           DrAmt := self.Amount;
+           CrAmt := 0;
+         end;
+      Cr:Begin
+           CrAmt := self.Amount;
+           DrAmt := 0;
+         end;
+     end;
+
      SQLQuery1 := TSQLQuery.Create(nil);
      SQLQuery1.Transaction := SQLTransaction1;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNAL" ('
          + '"TRANSNO", "CRTRNSTSCD", "CRCURRKEY", "DRAMT", "KATASA", "TRANSROW",'
          + '"TRNSKBNCD", "TEXT", "TEXTKEY", "CRAMT", "DRCURRKEY", "DRTRNSTSCD", '
-         + ' "DRACCTCD", "CRACCTCD") '
+         + ' "DRACCTCD", "CRACCTCD", ENT_DATE) '
          + 'values ( :TransNo, :CrTrnStsCd, :CrCurrKey, :DrAmt, :Katasa, :TransRow, '
-         + ':TrnsKbnCd, :Text, :TextKey, :CrAmt, :DrCurrKey, :DrTrnStsCd, 0, 0)';
+         + ':TrnsKbnCd, :Text, :TextKey, :CrAmt, :DrCurrKey, :DrTrnStsCd, :DrAcctCd, '
+         + ' :CrAcctCd, :Ent_Date)';
 
      SqlQuery1.ParamByName('TransNo').AsInteger:=_TransNo;
      SqlQuery1.ParamByName('CrTrnStsCd').AsString:='X';
      SqlQuery1.ParamByName('CrCurrKey').AsString:=_Currency;
-     SqlQuery1.ParamByName('DrAmt').AsInteger:=_Amount;
+     SqlQuery1.ParamByName('DrAmt').AsInteger:=DrAmt;
      SqlQuery1.ParamByName('Katasa').AsString:='H';
      SqlQuery1.ParamByName('TransRow').AsInteger:=_TransRow;
 
      SqlQuery1.ParamByName('TrnsKbnCd').AsString:='X';
      SqlQuery1.ParamByName('Text').AsString:=_Text;
      SqlQuery1.ParamByName('TextKey').AsInteger:=0;
-     SqlQuery1.ParamByName('CrAmt').AsInteger:=_Amount;
-     SqlQuery1.ParamByName('DrCurrKey').AsString:=_Currency;
+     SqlQuery1.ParamByName('CrAmt').AsInteger:=CrAmt;
+     SqlQuery1.ParamByName('DrCurrKey').AsString:=Currency;
      SqlQuery1.ParamByName('DrTrnStsCd').AsString:='X';
+
+     // We only store one line item per row in the journal detail table,
+     // which means we actually need only one field.  For now, we will store
+     // the account number in both the CR and CR fields.
+     SqlQuery1.ParamByName('DrAcctCd').AsInteger:=self.AcctNo;
+     SqlQuery1.ParamByName('CrAcctCd').AsInteger:=self.AcctNo;
+
+     SqlQuery1.ParamByName('Ent_Date').AsString:=DateTimeToYYYYMMDD(now);
 
      SQLQuery1.ExecSQL;
      SQLQuery1.Close;

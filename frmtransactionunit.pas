@@ -125,12 +125,26 @@ begin
      end;
 
   If Insert then
-   ShowMessage('Transaction Inserted')
+    begin
+     ShowMessage('Transaction Inserted');
+     // re-init everything
+     LeTrnNo.Clear;
+     LeHdrMemo.Clear;
+     deHEaderEffDate.Date := now;
+     cbPosted.Checked := False;
+     ebAcctNo1.Clear;
+     leMemo1.Clear;
+     leAmt1.Clear;
+     ebAcctNo2.Clear;
+     leMemo2.Clear;
+     leAmt2.Clear;
+   end
   else
    ShowMessage('Error Inserting Transaction.');
 
   leTrnNo.Text:= IntToStr(CompleteJournalEntry.TransNo);
   end;  // of WITH
+
 end;  // of Procedure
 
 procedure TfrmTransaction.bbHdrUpdateClick(Sender: TObject);

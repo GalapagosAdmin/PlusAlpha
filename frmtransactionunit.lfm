@@ -1,7 +1,7 @@
 object frmTransaction: TfrmTransaction
-  Left = -5
+  Left = 165
   Height = 327
-  Top = 142
+  Top = 81
   Width = 638
   Caption = 'Plus Alpha - New Transaction'
   ClientHeight = 327
