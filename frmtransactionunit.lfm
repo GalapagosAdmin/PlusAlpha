@@ -1,7 +1,7 @@
 object frmTransaction: TfrmTransaction
-  Left = 384
+  Left = -5
   Height = 327
-  Top = 353
+  Top = 142
   Width = 638
   Caption = 'Plus Alpha - New Transaction'
   ClientHeight = 327
@@ -187,9 +187,9 @@ object frmTransaction: TfrmTransaction
     Left = 5
     Height = 58
     Top = 200
-    Width = 618
+    Width = 616
     ClientHeight = 58
-    ClientWidth = 618
+    ClientWidth = 616
     TabOrder = 7
     object ebAcctNo2: TComboBox
       Left = 8

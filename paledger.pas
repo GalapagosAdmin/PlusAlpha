@@ -26,6 +26,7 @@ uses
       _TransNo:TInteger; // Latest Transaction number posted to this ledger account
       _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
       Procedure SetBal(NewBalance:TInteger);
+      Procedure SetDrCr(NewDrCr:TDrCr);
       Function Insert:Boolean;
       Function Update:Boolean;
       Function _DrBal:Integer;   // converts to the db format for now
@@ -34,9 +35,9 @@ uses
       constructor create;
       Property AcctNo:TInteger read _AcctNo;
       Property Text:TUTF8String read _Text;
-      Property Balance:TInteger read _bal write  SetBal;
+      Property Balance:TInteger read _bal write SetBal;
       Property Currency:TCurrCode read _Currency;
-      Property DrCr:Tdrcr read _drcr;
+      Property DrCr:Tdrcr read _drcr write SetDrCr;
       Property AccountType:Char read _AccTypeDB;
       Property AccountSubType:Char read _AccSTDB;
       Function Load(AccountNo:TInteger):boolean;
@@ -155,6 +156,14 @@ Procedure TLedgerAccount.SetBal(NewBalance:Integer);
     // We need up update the DB now, so set _dirty to true;
     _Dirty := True;
   end;
+
+Procedure TLedgerAccount.SetDrCr(NewDrCr:TDrCr);
+  begin
+    _DrCr := NewDrCr;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
+
 
 Function TLedgerAccount.Insert:boolean;
   var

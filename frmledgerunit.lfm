@@ -1,7 +1,7 @@
 object frmLedger: TfrmLedger
-  Left = 452
+  Left = 51
   Height = 317
-  Top = 223
+  Top = 309
   Width = 477
   Align = alLeft
   Caption = 'Plus Alpha - Ledger'

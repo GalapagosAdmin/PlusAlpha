@@ -115,7 +115,7 @@ var
 
 implementation
 
- uses sdfdata, db, paLedger, paDatabase;
+ uses sdfdata, db, paLedger, paDatabase, paCalculator;
 
 
   Constructor TJournalHeader.Create;
@@ -253,7 +253,9 @@ implementation
    var
      i:integer;
      tmpAcct:TLedgerAccount;
+     Calc:TDrCrCalculator;
    begin
+     Calc := TDrCrCalculator.Create;
      // Assume Failure
       Result := False;
       // Set up the transaction entry number
@@ -271,8 +273,13 @@ implementation
                if assigned(tmpAcct) then
                  begin
                    // Update the balance
+                   calc.clear;
+                   calc.AddEntry(tmpAcct.Balance, tmpAcct.DrCr);
+                   with _JournalDetailEntries[i] do
+                     calc.AddEntry(_amount, _drcr);
                    // FIXME ignoring dr/cr for the moment for testing updates
-                   tmpAcct.Balance:=tmpAcct.Balance + _JournalDetailEntries[i]._amount;
+                   tmpAcct.Balance := Calc.Balance;
+                   tmpAcct.DrCr := calc.DrCr;
                    tmpAcct.Synch;
                  end;
              end;
@@ -281,6 +288,7 @@ implementation
            SQLTransaction1.commit;
            Result := True;
          end;
+      Calc.Destroy;
    end;
 
  Procedure TCompleteJournalEntry.UpdateDrCr;
