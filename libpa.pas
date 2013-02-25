@@ -47,24 +47,25 @@ Type
    private
    //var
      _TransNo:Integer;     // Transaction number - Matches with header
-     _TransRow:Integer;    // Entry number for this Transaction number
+     _TransRow:Integer;    // Entry number for this Transaction number (line item)
      _amount:Integer;      // Amount, without decimal point
-     _currency:TCurrCode;  // Currency Code
+     _currency:TCurrCode;  // Currency Code - Should match account being used
      _drcr:Tdrcr;          // Debit/Credit Indicator
      _acctno:Integer;      // Account no. (Internal)
 //     _bal:Integer;         // Ledger Balance
      _dirty:boolean;       // Needs Database synch
      _Text:TUTF8String;
+     Procedure SetAcctNo(AcctNo:Integer);
    public
     Constructor Create; //overload;
 //       Destructor Destroy; override;
 //     Procedure Commit;
 //     Procedure Revert;
     Property TransNo:Integer read _TransNo write _TransNo;
-    Property AcctNo:Integer read _acctno write _acctno;
+    Property AcctNo:Integer read _acctno write SetAcctNo;
     Property Amount:Integer read _amount write _amount;
     Property DrCr:Tdrcr read _drcr write _drcr;
-    Property Currency:TCurrCode read _currency write _currency;
+    Property Currency:TCurrCode read _currency;// write _currency;
     Property TransRow:Integer read _TransRow write _TransRow;
     Property Text:TUTF8String read _Text write _Text;
     Function Insert:boolean;
@@ -165,12 +166,29 @@ implementation
     begin
       // write out to database
       //insert into "main"."JOURNALHDR" ( "MEMO", "TRANSNO") values ( 'test entry 6', 6)
+      // NoOp because we don't want a database commit here
     end;
 
   Constructor TJournalDetailEntry.Create;
     begin
-      _Currency := 'JPY';
-      self.AcctNo := -1;
+      _Currency := 'XXX';
+      self._AcctNo := -1;
+      _Dirty := False;
+    end;
+
+  Procedure TJournalDetailEntry.SetAcctNo(AcctNo:Integer);
+    var
+      tmpAcct:TLedgerAccount;
+    begin
+      // Make sure we set the line item currency to the currency of the account
+      // used.
+      tmpAcct := AccountList.GetAccountNo(AcctNo);
+      if Assigned(tmpAcct) then
+        _Currency := tmpAcct.Currency
+      else
+        _Currency := 'XXX';
+      _AcctNo := AcctNo;
+      _Dirty := True;
     end;
 
   Function TJournalDetailEntry.insert:boolean;
@@ -191,6 +209,7 @@ implementation
          end;
      end;
 
+     try
      SQLQuery1 := TSQLQuery.Create(nil);
      SQLQuery1.Transaction := SQLTransaction1;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNAL" ('
@@ -225,7 +244,9 @@ implementation
 
      SQLQuery1.ExecSQL;
      SQLQuery1.Close;
-
+     finally
+     SQLQuery1.Destroy; // or else memory leak
+     end; // of TRY..FINALLY
    end;
 
   Function TJournalDetailEntry.validate:boolean;
