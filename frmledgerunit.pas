@@ -82,7 +82,7 @@ end;
 
 procedure TfrmLedger.tvAccountListClick(Sender: TObject);
 begin
-  with TLedgerAccount(tvAccountList.Selected.Data) do
+  with tvAccountList.Selected.Data as TLedgerAccount do
     begin
       leAcctNo.Text := IntToStr(AcctNo);
       leAcctBal.Text := IntToStr(Balance);

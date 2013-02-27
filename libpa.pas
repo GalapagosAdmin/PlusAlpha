@@ -182,6 +182,7 @@ implementation
     begin
       // Make sure we set the line item currency to the currency of the account
       // used.
+      if AcctNo < 0 then exit;
       tmpAcct := AccountList.GetAccountNo(AcctNo);
       if Assigned(tmpAcct) then
         _Currency := tmpAcct.Currency
@@ -325,13 +326,12 @@ implementation
                  begin
                    // Update the balance
                    calc.clear;
-                   calc.AddEntry(tmpAcct.Balance, tmpAcct.DrCr);
+                   calc.AddEntry(tmpAcct.Balance, tmpAcct.DrCr, tmpAcct.Currency);
                    with _JournalDetailEntries[i] do
                      begin
                        tmpAcct.TransNo := TransNo;
-                       calc.AddEntry(_amount, _drcr);
+                       calc.AddEntry(_amount, _drcr, _currency);
                      end;
-                   // FIXME ignoring dr/cr for the moment for testing updates
                    tmpAcct.Balance := Calc.Balance;
                    tmpAcct.DrCr := calc.DrCr;
                    tmpAcct.Synch;

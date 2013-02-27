@@ -14,7 +14,7 @@ interface
                          // +:dr, -:Cr
      public
        Procedure clear;
-       Procedure AddEntry(amt:integer; DrCr:TDrCr);
+       Procedure AddEntry(amt:integer; DrCr:TDrCr; Curr:TCurrCode);
        Function Balance:Integer;
        Function DrCr:TDrCr;
    end;
@@ -28,7 +28,7 @@ implementation
       _flatBal := 0;
     end;
 
-  Procedure TDrCrCalculator.AddEntry(amt:integer; DrCr:TDrCr);
+  Procedure TDrCrCalculator.AddEntry(amt:integer; DrCr:TDrCr; Curr:TCurrCode);
     var
       FlatAmt:Integer;
     begin
