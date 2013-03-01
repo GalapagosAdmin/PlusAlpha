@@ -5,7 +5,7 @@ unit paLedger;
 interface
 
 uses
-  Classes, SysUtils, libpa;
+  Classes, SysUtils, libpa, comctrls;
 
 
   type
@@ -53,6 +53,7 @@ uses
       _AccountList : Array of TLedgerAccount;
       _CurrentAccount:integer; // used for enumerating
       _HighWaterMark:Integer;  // Highest numbered account in the database
+      Tree:TTreeNodes;
       Procedure UpdateHighWaterMark;
     public
      Constructor Create; //overload;
@@ -62,7 +63,6 @@ uses
      Function GetFirstAccount:TLedgerAccount;
      Function GetNextAccount:TLedgerAccount;
      Function GetAccountNo(AccountNo:TInteger):TLedgerAccount;
-
      Function EOF:Boolean;
   end;
 
@@ -348,8 +348,9 @@ Constructor TAccountList.Create();
 //     SQLTransaction1:TSQLTransaction;
 //     SQLite3Connection1:TSQLite3Connection;
     TmpStr : TUTF8String;
+//    tmpAccount:TLedgerAccount;
   begin
-
+//    Tree := TTreeNodes.Create(nil); // create account tree
 //  for i := 0 to 24 do
 
   // Update the account list.
@@ -367,7 +368,9 @@ Constructor TAccountList.Create();
    end;
   SQLQuery1.Close;
   SQLQuery1.Destroy;
-
+  // update the tree
+//   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
+//   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
 
 Function TAccountList.AccountStringList:TStringList;

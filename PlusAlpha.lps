@@ -3,12 +3,12 @@
   <ProjectSession>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="15">
+    <Units Count="16">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PlusAlpha"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="16"/>
@@ -34,9 +34,9 @@
         <Filename Value="libpa.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="318"/>
+        <TopLine Value="226"/>
         <CursorPos X="1" Y="333"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
@@ -48,7 +48,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="padm"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="8"/>
         <CursorPos X="10" Y="26"/>
@@ -59,7 +59,7 @@
       <Unit4>
         <Filename Value="ledger.sdf"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="54" Y="1"/>
@@ -76,8 +76,8 @@
         <UnitName Value="frmTransactionUnit"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="21"/>
-        <CursorPos X="51" Y="107"/>
+        <TopLine Value="36"/>
+        <CursorPos X="33" Y="65"/>
         <UsageCount Value="301"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -103,10 +103,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmLedgerUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="75"/>
-        <CursorPos X="6" Y="89"/>
+        <TopLine Value="77"/>
+        <CursorPos X="63" Y="105"/>
         <UsageCount Value="251"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -115,10 +116,10 @@
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="356"/>
-        <CursorPos X="16" Y="379"/>
+        <TopLine Value="338"/>
+        <CursorPos X="1" Y="370"/>
         <UsageCount Value="221"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -126,7 +127,7 @@
         <Filename Value="padatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paDatabase"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="9" Y="13"/>
@@ -137,17 +138,16 @@
         <Filename Value="pacalculator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paCalculator"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="32"/>
-        <CursorPos X="1" Y="47"/>
+        <TopLine Value="1"/>
+        <CursorPos X="105" Y="19"/>
         <UsageCount Value="220"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="/Developer/lazarus/lcl/include/customcheckbox.inc"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="63"/>
         <CursorPos X="1" Y="74"/>
@@ -157,7 +157,7 @@
       <Unit12>
         <Filename Value="/Developer/lazarus/packager/registration/lazaruspackageintf.pas"/>
         <UnitName Value="LazarusPackageIntf"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="82"/>
         <CursorPos X="1" Y="103"/>
@@ -167,7 +167,7 @@
       <Unit13>
         <Filename Value="/Developer/lazarus/components/sdf/registersdf.pas"/>
         <UnitName Value="RegisterSDF"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="17"/>
         <CursorPos X="1" Y="41"/>
@@ -176,137 +176,146 @@
       </Unit13>
       <Unit14>
         <Filename Value="/Developer/lazarus/components/sdf/registersdf.lrs"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="16"/>
         <CursorPos X="1" Y="31"/>
         <UsageCount Value="110"/>
         <Loaded Value="True"/>
       </Unit14>
+      <Unit15>
+        <Filename Value="/Developer/lazarus/lcl/include/treeview.inc"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1589"/>
+        <CursorPos X="1" Y="1603"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit15>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="368" Column="29" TopLine="349"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="372" Column="1" TopLine="358"/>
       </Position1>
       <Position2>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="327" Column="21" TopLine="315"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="373" Column="1" TopLine="358"/>
       </Position2>
       <Position3>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="331" Column="1" TopLine="315"/>
+        <Filename Value="/Developer/lazarus/lcl/include/treeview.inc"/>
+        <Caret Line="68" Column="1" TopLine="54"/>
       </Position3>
       <Position4>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="334" Column="1" TopLine="315"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="94" Column="69" TopLine="72"/>
       </Position4>
       <Position5>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="335" Column="1" TopLine="315"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="374" Column="1" TopLine="360"/>
       </Position5>
       <Position6>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="45" Column="1" TopLine="22"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="370" Column="1" TopLine="338"/>
       </Position6>
       <Position7>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="331" Column="1" TopLine="315"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="94" Column="69" TopLine="60"/>
       </Position7>
       <Position8>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="334" Column="1" TopLine="325"/>
+        <Filename Value="/Developer/lazarus/lcl/include/treeview.inc"/>
+        <Caret Line="1603" Column="1" TopLine="1589"/>
       </Position8>
       <Position9>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="335" Column="1" TopLine="325"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="76" Column="1" TopLine="60"/>
       </Position9>
       <Position10>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="45" Column="1" TopLine="22"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="79" Column="1" TopLine="64"/>
       </Position10>
       <Position11>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="331" Column="1" TopLine="325"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="80" Column="1" TopLine="64"/>
       </Position11>
       <Position12>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="334" Column="1" TopLine="325"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="81" Column="1" TopLine="64"/>
       </Position12>
       <Position13>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="335" Column="1" TopLine="325"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="83" Column="1" TopLine="64"/>
       </Position13>
       <Position14>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="45" Column="1" TopLine="13"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="85" Column="1" TopLine="64"/>
       </Position14>
       <Position15>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="331" Column="1" TopLine="325"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="89" Column="1" TopLine="66"/>
       </Position15>
       <Position16>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="313" Column="38" TopLine="299"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="91" Column="1" TopLine="68"/>
       </Position16>
       <Position17>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="332" Column="1" TopLine="318"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="93" Column="1" TopLine="70"/>
       </Position17>
       <Position18>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="333" Column="1" TopLine="318"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="96" Column="1" TopLine="73"/>
       </Position18>
       <Position19>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="30" Column="1" TopLine="13"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="98" Column="1" TopLine="75"/>
       </Position19>
       <Position20>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="31" Column="1" TopLine="13"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="91" Column="1" TopLine="75"/>
       </Position20>
       <Position21>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="32" Column="1" TopLine="13"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="93" Column="1" TopLine="75"/>
       </Position21>
       <Position22>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="335" Column="1" TopLine="318"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="94" Column="1" TopLine="75"/>
       </Position22>
       <Position23>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="336" Column="1" TopLine="318"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="95" Column="1" TopLine="71"/>
       </Position23>
       <Position24>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="46" Column="1" TopLine="32"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="124" Column="56" TopLine="108"/>
       </Position24>
       <Position25>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="47" Column="1" TopLine="32"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="125" Column="1" TopLine="108"/>
       </Position25>
       <Position26>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="49" Column="1" TopLine="32"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="79" Column="26" TopLine="59"/>
       </Position26>
       <Position27>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="339" Column="1" TopLine="318"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="125" Column="40" TopLine="108"/>
       </Position27>
       <Position28>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="30" Column="1" TopLine="16"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="126" Column="53" TopLine="114"/>
       </Position28>
       <Position29>
-        <Filename Value="libpa.pas"/>
-        <Caret Line="333" Column="1" TopLine="318"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="98" Column="83" TopLine="84"/>
       </Position29>
       <Position30>
-        <Filename Value="pacalculator.pas"/>
-        <Caret Line="46" Column="1" TopLine="32"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="85" Column="9" TopLine="59"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

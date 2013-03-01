@@ -54,6 +54,11 @@ procedure TfrmLedger.FormShow(Sender: TObject);
   i:integer;
   tmpAcct:TLedgerAccount;
   lookup:array of TStruct; // index for quick lookups.
+  AssetRoot:TTreeNode;
+  LiabilityRoot:TTreeNode;
+  IncomeRoot:TTreeNode;
+  ExpenseRoot:TTreeNode;
+  EquityRoot:TTreeNode;
 
   procedure update_Lookup(Acct:TTreeNode);
     begin
@@ -66,32 +71,41 @@ procedure TfrmLedger.FormShow(Sender: TObject);
         end;
     end;
 
+  procedure AddToTree(tmpAcct:TLedgerAccount);
+    begin
+       With tmpAcct do
+       case AccountType of
+          'A' : tvAccountList.Items.AddChildObject(AssetRoot, text, tmpAcct) ;
+          'L' : tvAccountList.Items.AddChildObject(LiabilityRoot, text, tmpAcct) ;
+          'I' : tvAccountList.Items.AddChildObject(IncomeRoot, text, tmpAcct) ;
+          'E' : tvAccountList.Items.AddChildObject(ExpenseRoot, text, tmpAcct) ;
+          'C' : tvAccountList.Items.AddChildObject(EquityRoot, text, tmpAcct) ;
+          'P':; // leave placeholder accounts out for now
+          else
+          tvAccountList.Items.AddObject(nil, Text, tmpAcct)
+        end;  // of case
+    end;
+
 begin
   // Populate the account tree
   try
+
   tvAccountList.BeginUpdate;
   tvAccountList.Items.Clear;
-  tmpAcct := AccountList.GetFirstAccount;
-  With tmpAcct do
-    with tvAccountList.Items.AddObject(nil, Text, tmpAcct) do
-      begin
-        tag := tmpAcct.AcctNo;
-    //    update_Lookup(tmpAcct);
-      end;
-                              //   AccountLIst.GetFirstAccount);
-  While not AccountList.EOF do
+  with tvAccountLIst do
     begin
-      tmpAcct := AccountList.GetNextAccount;
-      With tmpAcct do
-        with tvAccountList.Items.AddObject(nil, Text, tmpAcct) do
-          begin
-            tag := AcctNo;
-   //         update_Lookup(tmpAcct);
-          end;
-                                  //   AccountLIst.GetNextAccount);
+      AssetRoot := items.Add(nil, 'Assets');
+      LiabilityRoot := items.Add(nil, 'Liabilities');
+      IncomeRoot := items.Add(nil, 'Income');
+      ExpenseRoot := items.Add(nil, 'Expense');
+      EquityRoot := items.Add(nil, 'Equity');
     end;
 
-  // make the tree into a ... tree
+  // technically, if there were no accounts, this could fail...
+  // but then I suppose it should fail if we have no accounts.
+  AddToTree(AccountList.GetFirstAccount);
+  While not AccountList.EOF do
+        AddToTree(AccountList.GetNextAccount);
 
   finally
     tvAccountList.EndUpdate;
@@ -109,6 +123,11 @@ end;
 
 procedure TfrmLedger.tvAccountListClick(Sender: TObject);
 begin
+  // make sure something is actually selected
+  if not assigned(tvAccountList.Selected) then exit;
+  // if this is a placeholder text only item, don't try to access it
+  if not assigned(tvAccountList.Selected.Data) then exit;
+  // if it is a useful object, update the display panel
   with TObject(tvAccountList.Selected.Data) as TLedgerAccount do
     begin
       leAcctNo.Text := IntToStr(AcctNo);
