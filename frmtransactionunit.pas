@@ -62,6 +62,7 @@ procedure TfrmTransaction.FormShow(Sender: TObject);
     ebAcctNo1.Items := AccountList.AccountStringList;
     ebAcctNo2.Items := AccountList.AccountStringList;
     leTrnNo.Text := IntToStr(CompleteJournalEntry.HighWaterMark+1);
+    deHEaderEffDate.Date := now;
   end;
 
 procedure TfrmTransaction.leTrnNoChange(Sender: TObject);
@@ -143,6 +144,7 @@ begin
    ShowMessage('Error Inserting Transaction.');
 
   leTrnNo.Text:= IntToStr(CompleteJournalEntry.TransNo);
+  self.Close;
   end;  // of WITH
 
 end;  // of Procedure

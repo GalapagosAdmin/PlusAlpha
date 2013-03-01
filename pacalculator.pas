@@ -8,11 +8,14 @@ interface
   Classes, SysUtils, libpa;
 
  type
+   // Single Currency DrCr Calculator
    TDrCrCalculator  = class (Tobject)
      private
        _flatBal:Integer; // flat single number balance
                          // +:dr, -:Cr
+       _Curr:TCurrCode; // Holds the currency we are using.
      public
+       Constructor Create(Currency:TCurrCode);
        Procedure clear;
        Procedure AddEntry(amt:integer; DrCr:TDrCr; Curr:TCurrCode);
        Function Balance:Integer;
@@ -23,6 +26,12 @@ interface
 
 implementation
 
+  constructor TDrCrCalculator.Create(Currency:TCurrCode);
+    begin
+      _flatbal := 0;
+      _Curr := Currency;
+    end;
+
   procedure TDrCrCalculator.clear;
     begin
       _flatBal := 0;
@@ -32,6 +41,9 @@ implementation
     var
       FlatAmt:Integer;
     begin
+      // This object can only handle one kind of currency,
+      // if they try to add other types, get angry
+      if Curr <> _Curr then abort;
       FlatAmt := amt;
       If DrCr = Cr then
         FlatAmt := FlatAmt * -1;

@@ -45,9 +45,26 @@ implementation
 { TfrmLedger }
 
 procedure TfrmLedger.FormShow(Sender: TObject);
-var
+ Type
+   TStruct=record
+ //       AcctNo:Integer;
+     AccountObject:TTreeNode;
+   end;
+ var
   i:integer;
   tmpAcct:TLedgerAccount;
+  lookup:array of TStruct; // index for quick lookups.
+
+  procedure update_Lookup(Acct:TTreeNode);
+    begin
+      With TObject(Acct.Data) as TLedgerAccount do
+        begin
+          if length(lookup) < AcctNo then
+           SetLength(lookup, AcctNo); // -1
+          with lookup[acctno] do
+            AccountObject := acct;
+        end;
+    end;
 
 begin
   // Populate the account tree
@@ -57,15 +74,25 @@ begin
   tmpAcct := AccountList.GetFirstAccount;
   With tmpAcct do
     with tvAccountList.Items.AddObject(nil, Text, tmpAcct) do
-      tag := tmpAcct.AcctNo;
+      begin
+        tag := tmpAcct.AcctNo;
+    //    update_Lookup(tmpAcct);
+      end;
                               //   AccountLIst.GetFirstAccount);
   While not AccountList.EOF do
     begin
       tmpAcct := AccountList.GetNextAccount;
       With tmpAcct do
-        tvAccountList.Items.AddObject(nil, Text, tmpAcct);
+        with tvAccountList.Items.AddObject(nil, Text, tmpAcct) do
+          begin
+            tag := AcctNo;
+   //         update_Lookup(tmpAcct);
+          end;
                                   //   AccountLIst.GetNextAccount);
     end;
+
+  // make the tree into a ... tree
+
   finally
     tvAccountList.EndUpdate;
   end;
@@ -82,7 +109,7 @@ end;
 
 procedure TfrmLedger.tvAccountListClick(Sender: TObject);
 begin
-  with tvAccountList.Selected.Data as TLedgerAccount do
+  with TObject(tvAccountList.Selected.Data) as TLedgerAccount do
     begin
       leAcctNo.Text := IntToStr(AcctNo);
       leAcctBal.Text := IntToStr(Balance);

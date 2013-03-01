@@ -280,21 +280,22 @@ implementation
 
   Function TCompleteJournalEntry.Validate:boolean;
     var
-      i:integer;
+//      i:integer;
+      JE:TJournalDetailEntry;
     begin
+      // first, validate the header itself
       result := _JournalHeader.Validate;
+      // then, check to see if this transaction is balanced
       If result then result := self.IsBalanced;
+      // next, if we are still balanced,
       If result then
-        // Then loop through the detail records and validate them one by one
+        // loop through the detail records and validate them one by one
         // if anything fails, then the entire result fails
-        for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
-          begin
-             if not _JournalDetailEntries[i].Validate then
-               begin
-                 result := false;
-                 exit;
-               end;
-          end;
+//        for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
+        for JE in _JournalDetailEntries do
+//             if not _JournalDetailEntries[i].Validate then
+            if not je.Validate then
+               exit(False);
 
     end;
 
@@ -306,8 +307,10 @@ implementation
      i:integer;
      tmpAcct:TLedgerAccount;
      Calc:TDrCrCalculator;
+     JE:TJournalDetailEntry;
    begin
-     Calc := TDrCrCalculator.Create;
+     assert(not assigned(calc));
+     calc := nil; // don't trust this
      // Assume Failure
       Result := False;
       // Set up the transaction entry number
@@ -317,17 +320,21 @@ implementation
       If _JournalHeader.Insert then
          begin
           // Insert the journal Entry Rows
-           for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
+//           for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
+           for je in _JournalDetailEntries do
              Begin
-               _JournalDetailEntries[i].insert;
+               je.insert;
                // Update Ledger
-               tmpAcct := AccountList.GetAccountNo(_JournalDetailEntries[i].AcctNo);
+               tmpAcct := AccountList.GetAccountNo(je.AcctNo);
                if assigned(tmpAcct) then
                  begin
+                   // Create the calculator if this is our first time through.
+                   if not assigned(calc) then
+                      Calc := TDrCrCalculator.Create(je._currency);
                    // Update the balance
                    calc.clear;
                    calc.AddEntry(tmpAcct.Balance, tmpAcct.DrCr, tmpAcct.Currency);
-                   with _JournalDetailEntries[i] do
+                   with je do
                      begin
                        tmpAcct.TransNo := TransNo;
                        calc.AddEntry(_amount, _drcr, _currency);
@@ -348,49 +355,41 @@ implementation
  Procedure TCompleteJournalEntry.UpdateDrCr;
    var
      i:integer;
+     je:TJournalDetailEntry;
    begin
      _TotalDr := 0;
      _TotalCr := 0;
      // This code works as-is, but should be changed to use TDrCrCalculator.
-     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
-       If _JournalDetailEntries[i]._drcr = Dr then
-         _TotalDr := _TotalDr + _JournalDetailEntries[i]._amount
-       else
-         _TotalCr := _TotalCr + _JournalDetailEntries[i]._amount;
-
-(*
-  // Change this into a loop when we want to support more than 2 detail entries
-     If _JournalDetailEntry1._drcr = Dr then
-       _TotalDr := _TotalDr + _JournalDetailEntry1._amount
-     else
-       _TotalCr := _TotalCr + _JournalDetailEntry1._amount;
-      If _JournalDetailEntry2._drcr = Dr then
-       _TotalDr := _TotalDr + _JournalDetailEntry2._amount
-     else
-       _TotalCr := _TotalCr + _JournalDetailEntry2._amount  *)
+//     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+       for je in _JournalDetailEntries do
+//       If _JournalDetailEntries[i]._drcr = Dr then
+         with je do case _DrCr of
+           Dr:inc(_TotalDr, _Amount);//_TotalDr := _TotalDr + _amount
+           Cr:inc(_TotalCr, _Amount);//_TotalCr := _TotalCr + _amount;
+         end;
 
    end;
 
  Procedure TCompleteJournalEntry.TransNoSet(TransNo:Integer);
    var
-     i:integer;
+   //  i:integer;
+     je:TJournalDetailEntry;
    begin
      // Update our own internal status
      _TransNo := TransNo;
      // Update our children to be in synch
      _JournalHeader._TransNo:=_TransNo;
-     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
-       _JournalDetailEntries[i]._TransNo := _TransNo;
-     (*
-     _JournalDetailEntry1._TransNo:=_TransNo;
-     _JournalDetailEntry2._TransNo:=_TransNo;
-     *)
+//     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+       for je in _JournalDetailEntries do
+         je._TransNo := self._TransNo;
+//        _JournalDetailEntries[i]._TransNo := _TransNo;
+
    end;
 
  Function TCompleteJournalEntry.IsBalanced:boolean;
    begin
      UpdateDrCr;
-     Result := _TotalDR = _TotalCr;
+     Result := (_TotalDr = _TotalCr);
    end;
 
  Procedure TCompleteJournalEntry.UpdateHighWaterMark;
@@ -398,28 +397,30 @@ implementation
     SQLQuery1:TSQLQuery;
    begin
      SQLQuery1 := TSQLQuery.Create(nil);
-     SQLQuery1.Transaction := SQLTransaction1;
 
    //Journal Header should always be inserted first, so it's safer to take that
    // number
-   SQLQuery1.SQL.Text := 'select max(transno) as hwm from journalhdr';
-   SQLQuery1.open;
-   If not SQLQuery1.EOF then
-     _TransHighWaterMark := SqlQuery1.FieldByName('hwm').AsInteger;
-   SQLQuery1.Close;
-   SQLQuery1.Destroy;
-
+   With SQLQuery1 do
+     begin
+       Transaction := SQLTransaction1;
+       SQL.Text := 'select max(transno) as hwm from journalhdr';
+       Open;
+       If not EOF then
+         _TransHighWaterMark := FieldByName('hwm').AsInteger;
+       Close;
+       Destroy;
+     end;
    end;
 
  // converts account display text back to integer
  Function ActToInt(AccountText:TUTF8String):Integer;
+   var
+    p:integer;
    begin
-    Result := StrToInt(Trim(copy(AccountText,1,2)));
-    //Works in the following two cases.  If the account number hits 3 digits,
-    // We'll have to search for the dash.
-    // 12
-    // 1 - Account
-    // 10 - Account
+    p := pos('-', AccountText);
+    if p < 2 then exit(-1);
+    Dec(p, 1);
+    Result := StrToInt(Trim(copy(AccountText,1,p)));
    end;
 
    Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;

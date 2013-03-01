@@ -75,7 +75,9 @@ uses
 
 implementation
 
-uses db, sqldb, paDatabase;
+uses
+  //db,
+  sqldb, paDatabase;
 
 Constructor TLedgerAccount.Create;
   begin
@@ -322,15 +324,17 @@ Function TAccountLIst.EOF:Boolean;
 // Gets the account you want from the array based on account number
 Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
   var
-    i:TInteger;
+//    i:TInteger;
+    ThisAccount:TLedgerAccount;
   begin
     Result := nil;
     // Not very efficient, but then we shouldn't really have more than 100 or
     // so accounts
-    for i := Low(_AccountList) to high(_AccountList) do
-        if _AccountList[i].AcctNo = AccountNo then
+//    for i := Low(_AccountList) to high(_AccountList) do
+      for ThisAccount in _AccountLIst do
+        if ThisAccount.AcctNo = AccountNo then
           begin
-            Result := _AccountList[i];
+            Result := ThisAccount;
             exit;
           end;
 
@@ -369,10 +373,13 @@ Constructor TAccountList.Create();
 Function TAccountList.AccountStringList:TStringList;
   var
     i:Integer;
+    Acct:TLedgerAccount;
   begin
     Result := TStringList.Create;
-    for i := low(_AccountList) to high(_AccountList) do
-      Result.Append(IntToStr(_AccountList[i]._AcctNo) + ' - ' + _AccountList[i]._Text);
+ //   for i := low(_AccountList) to high(_AccountList) do
+    for Acct in _AccountList do
+      //     Result.Append(IntToStr(_AccountList[i]._AcctNo) + ' - ' + _AccountList[i]._Text);
+       Result.Append(IntToStr(Acct._AcctNo) + ' - ' + Acct._Text);
   end;
 
 Procedure TAccountList.UpdateHighWaterMark;
