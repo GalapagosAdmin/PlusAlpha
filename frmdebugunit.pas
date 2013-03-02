@@ -28,7 +28,7 @@ var
 implementation
 
 uses
-  libpa;
+  libpa, paJournal;
 
 {$R *.lfm}
 

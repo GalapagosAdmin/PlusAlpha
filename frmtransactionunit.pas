@@ -53,7 +53,7 @@ var
 
 implementation
 
-uses libpa, paLedger;
+uses libpa, paLedger, paJournal;
 
 { TfrmTransaction }
 
