@@ -32,8 +32,8 @@ uses
       Function Update:Boolean;
       Function _DrBal:Integer;   // converts to the db format for now
       Function _CrBal:Integer;   // converts to the db format for now
-    public
-      constructor create;
+    Public
+      Constructor create;
       Property AcctNo:TInteger read _AcctNo;
       Property Text:TUTF8String read _Text;
       Property Balance:TInteger read _bal write SetBal;

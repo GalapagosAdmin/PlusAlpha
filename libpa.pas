@@ -1,5 +1,5 @@
 unit libpa;
-
+// Contains common items to be used by various parts of PLusAlpha
 {$mode objfpc}{$H+}
 
 interface
@@ -27,7 +27,22 @@ Type
 
 implementation
 
-
+// Converts input string into an output string using mask
+  Function translate(const instring, Mask:UTF8String):UTF8String;
+    var
+     p:integer;
+     c:char;
+    begin
+     Result := '';
+     for c in instring do
+       begin
+         p := pos(mask, c);
+         if p > 0 then
+           result := Result + copy(mask, p, 1)
+         else
+           result := Result + c;
+       end;
+    end;
 
  // converts account display text back to integer
  Function ActToInt(AccountText:TUTF8String):Integer;

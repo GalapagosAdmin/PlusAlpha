@@ -23,9 +23,11 @@ type
     rbAcctBalCr: TRadioButton;
     Splitter1: TSplitter;
     tvAccountList: TTreeView;
+    procedure cbAcctCurrChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure leAcctNoChange(Sender: TObject);
     procedure tvAccountListClick(Sender: TObject);
+    procedure tvAccountListSelectionChanged(Sender: TObject);
   private
     { private declarations }
   public
@@ -116,6 +118,11 @@ begin
 
 end;
 
+procedure TfrmLedger.cbAcctCurrChange(Sender: TObject);
+begin
+
+end;
+
 procedure TfrmLedger.leAcctNoChange(Sender: TObject);
 begin
 
@@ -132,6 +139,7 @@ begin
     begin
       leAcctNo.Text := IntToStr(AcctNo);
       leAcctBal.Text := IntToStr(Balance);
+ //     cbAcctCurr.Items.Add(Currency);
       cbAcctCurr.Text := Currency;
       Case DrCr of
         Dr: rbAcctBalDr.Checked := True;
@@ -140,6 +148,11 @@ begin
       cbAccType.Text := AccountType;
     end;
 end;  // of Procedure
+
+procedure TfrmLedger.tvAccountListSelectionChanged(Sender: TObject);
+begin
+
+end;
 
 end.
 

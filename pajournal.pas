@@ -48,8 +48,12 @@ type
      _acctno:Integer;      // Account no. (Internal)
 //     _bal:Integer;         // Ledger Balance
      _dirty:boolean;       // Needs Database synch
+     _new:boolean;    // specifies that this entry has not yet been written to the database
      _Text:TUTF8String;
      Procedure SetAcctNo(AcctNo:Integer);
+      // performs a database update if the record already existed.
+     Function Update:Boolean;
+     Function Insert:boolean;
    public
     Constructor Create; //overload;
 //       Destructor Destroy; override;
@@ -62,9 +66,8 @@ type
     Property Currency:TCurrCode read _currency;// write _currency;
     Property TransRow:Integer read _TransRow write _TransRow;
     Property Text:TUTF8String read _Text write _Text;
-    Function Insert:boolean;
     Function Validate:Boolean;
-
+    Function Synch:boolean;
  end;
 
 // Class for holding the complete transaction, header and detail.
@@ -161,7 +164,15 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
     begin
       _Currency := 'XXX';
       self._AcctNo := -1;
-      _Dirty := False;
+// New should be set to false when after loading a record from the database so
+// that the existing record can be updated inserting a new record.
+      _new := True;
+// Dirty should normally be set to false on load or creation, and then
+// set to dirty if anything is changed.  Since the properties are only set to
+// directly update variables for now, dirty has to be set to true all the time.
+      _Dirty := True;
+//      _Dirty := False;
+
     end;
 
   Procedure TJournalDetailEntry.SetAcctNo(AcctNo:Integer);
@@ -178,6 +189,74 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
         _Currency := 'XXX';
       _AcctNo := AcctNo;
       _Dirty := True;
+    end;
+
+  Function TJournalDetailEntry.Update:boolean;
+  var
+      SQLQuery1:TSQLQuery;
+      TmpStr : TUTF8String;
+      DrAmt, CrAmt:Integer;
+    begin
+
+      Case self.DrCr of
+       Dr:begin
+            DrAmt := self.Amount;
+            CrAmt := 0;
+          end;
+       Cr:Begin
+            CrAmt := self.Amount;
+            DrAmt := 0;
+          end;
+      end;
+
+      With SQLQuery1 Do
+      try
+      SQLQuery1 := TSQLQuery.Create(nil);
+      Transaction := SQLTransaction1;
+      SQL.Text := 'update "main"."JOURNAL" '
+          + 'set  "CRTRNSTSCD"=:CrTrnStsCd, '
+          + ' "CRCURRKEY"=:CrCurrKey, '
+          + '"DRAMT"=:DrAmt,'
+          + '"KATASA"=:Katasa,'
+          + '"TRNSKBNCD"=:TrnsKbnCd, '
+          + '"TEXT"=:Text,'
+          + '"TEXTKEY"=:TextKey,'
+          + '"CRAMT"=:CrAmt, '
+          + '"DRCURRKEY"=:DrCurrKey, '
+          + '"DRTRNSTSCD"=:DrTrnStsCd, '
+          + ' "DRACCTCD"=:DrAcctCd,'
+          + '"CRACCTCD"=:CrAcctCd, '
+          + 'ENT_DATE=:Ent_Date '
+          + 'WHERE transno = :transno'
+          + 'AND "TRANSROW"= :TransRow';
+
+      ParamByName('TransNo').AsInteger:=_TransNo;
+      ParamByName('CrTrnStsCd').AsString:='X';
+      ParamByName('CrCurrKey').AsString:=_Currency;
+      ParamByName('DrAmt').AsInteger:=DrAmt;
+      ParamByName('Katasa').AsString:='H';
+      ParamByName('TransRow').AsInteger:=_TransRow;
+
+      ParamByName('TrnsKbnCd').AsString:='X';
+      ParamByName('Text').AsString:=_Text;
+      ParamByName('TextKey').AsInteger:=0;
+      ParamByName('CrAmt').AsInteger:=CrAmt;
+      ParamByName('DrCurrKey').AsString:=Currency;
+      ParamByName('DrTrnStsCd').AsString:='X';
+
+      // We only store one line item per row in the journal detail table,
+      // which means we actually need only one field.  For now, we will store
+      // the account number in both the CR and CR fields.
+      ParamByName('DrAcctCd').AsInteger:=self.AcctNo;
+      ParamByName('CrAcctCd').AsInteger:=self.AcctNo;
+
+      ParamByName('Ent_Date').AsString:=DateTimeToYYYYMMDD(now);
+
+      ExecSQL;
+      Close;
+      finally
+        Destroy; // or else memory leak
+      end; // of TRY..FINALLY
     end;
 
   Function TJournalDetailEntry.insert:boolean;
@@ -236,6 +315,16 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
      finally
      SQLQuery1.Destroy; // or else memory leak
      end; // of TRY..FINALLY
+   end;
+
+  Function TJournalDetailEntry.Synch:Boolean;
+   begin
+     if not _dirty then
+       begin
+          Result := true;
+          exit;
+       end;
+     if _new then result := self.insert else result := self.update;
    end;
 
   Function TJournalDetailEntry.validate:boolean;
