@@ -18,10 +18,10 @@ uses
   private
       _AcctNo:TInteger; // Internal Account No.
       _Text:TUTF8String; // Account Description
-      _AcctType:TAcctType;
+      _AcctType:TAcctType; // Account Type (Pascal Enumerated)
       _currency:TCurrCode;  // Currency Code
-      _AccTypeDB:Char; // Account Type Code for the database
-      _AccStDB:Char; // Account Subtype Code for the database
+      _AccTypeDB:Char; // Account Type Code for the database (Char1)
+      _AccStDB:Char; // Account Subtype Code for the database (Char1)
       _TextKey:TInteger; // Text key used for i18n of text
       _TransNo:TInteger; // Latest Transaction number posted to this ledger account
       _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
@@ -39,7 +39,7 @@ uses
       Property Balance:TInteger read _bal write SetBal;
       Property Currency:TCurrCode read _Currency;
       Property DrCr:Tdrcr read _drcr write SetDrCr;
-      Property AccountType:Char read _AccTypeDB;
+      Property AccountType:TAcctType read _AcctType;
       Property AccountSubType:Char read _AccSTDB;
       Property TransNo:TInteger read _TransNo write SetTransNo;
       Function Load(AccountNo:TInteger):boolean;
@@ -132,6 +132,8 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
          self._AcctNo := StrToInt(FieldByName('AcctNo').AsString);
          self._currency := FieldByName('CurrKey').AsString;
          self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
+         // Pascal representation
+         self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
          self._Text := FieldByName('Text').AsString;
          DrBal :=  FieldByName('DrBal').AsInteger;
          CrBal :=  FieldByName('CrBal').AsInteger;

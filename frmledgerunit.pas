@@ -77,12 +77,12 @@ procedure TfrmLedger.FormShow(Sender: TObject);
     begin
        With tmpAcct do
        case AccountType of
-          'A' : tvAccountList.Items.AddChildObject(AssetRoot, text, tmpAcct) ;
-          'L' : tvAccountList.Items.AddChildObject(LiabilityRoot, text, tmpAcct) ;
-          'I' : tvAccountList.Items.AddChildObject(IncomeRoot, text, tmpAcct) ;
-          'E' : tvAccountList.Items.AddChildObject(ExpenseRoot, text, tmpAcct) ;
-          'C' : tvAccountList.Items.AddChildObject(EquityRoot, text, tmpAcct) ;
-          'P':; // leave placeholder accounts out for now
+          atAsset: tvAccountList.Items.AddChildObject(AssetRoot, text, tmpAcct) ;
+          atLiability: tvAccountList.Items.AddChildObject(LiabilityRoot, text, tmpAcct) ;
+          atIncome: tvAccountList.Items.AddChildObject(IncomeRoot, text, tmpAcct) ;
+          atExpense: tvAccountList.Items.AddChildObject(ExpenseRoot, text, tmpAcct) ;
+          atEquity: tvAccountList.Items.AddChildObject(EquityRoot, text, tmpAcct) ;
+          atPlaceholder:; // leave placeholder accounts out for now
           else
           tvAccountList.Items.AddObject(nil, Text, tmpAcct)
         end;  // of case
@@ -145,7 +145,7 @@ begin
         Dr: rbAcctBalDr.Checked := True;
         Cr: rbAcctBalCr.Checked := True;
       end;
-      cbAccType.Text := AccountType;
+      cbAccType.Text := ABAP_Translate(IntToStr(Ord(AccountType)), AcctTransMapRev);
     end;
 end;  // of Procedure
 
