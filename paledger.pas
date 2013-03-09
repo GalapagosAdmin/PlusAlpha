@@ -11,23 +11,25 @@ uses
   type
   TLedgerAccount = Class(TObject)   // Ledger Account
   protected
-   _bal:Integer; // Ledger balance
-   _drcr:Tdrcr; // debit/credit indicator for current balance
-   _dirty:boolean; // Indicates if synch to db is required
-   _new:boolean;    // specifies that this entry has not yet been written to the database
+      _bal:Integer; // Ledger balance
+      _drcr:Tdrcr; // debit/credit indicator for current balance
+      _dirty:boolean; // Indicates if synch to db is required
+      _new:boolean;    // specifies that this entry has not yet been written to the database
+      _AccTypeDB:Char; // Account Type Code for the database (Char1)
   private
       _AcctNo:TInteger; // Internal Account No.
       _Text:TUTF8String; // Account Description
       _AcctType:TAcctType; // Account Type (Pascal Enumerated)
       _currency:TCurrCode;  // Currency Code
-      _AccTypeDB:Char; // Account Type Code for the database (Char1)
       _AccStDB:Char; // Account Subtype Code for the database (Char1)
       _TextKey:TInteger; // Text key used for i18n of text
       _TransNo:TInteger; // Latest Transaction number posted to this ledger account
       _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
+      _Guid:TGuid;  // Globally Unique Identifier for this account.  Used for DB merges.
       Procedure SetBal(NewBalance:TInteger);
       Procedure SetDrCr(NewDrCr:TDrCr);
       Procedure SetTransNo(NewTransNo:TInteger);
+      Procedure SetText(NewText:TUTF8String);
       Function Insert:Boolean;
       Function Update:Boolean;
       Function _DrBal:Integer;   // converts to the db format for now
@@ -35,7 +37,7 @@ uses
     Public
       Constructor create;
       Property AcctNo:TInteger read _AcctNo;
-      Property Text:TUTF8String read _Text;
+      Property Text:TUTF8String read _Text write SetText;
       Property Balance:TInteger read _bal write SetBal;
       Property Currency:TCurrCode read _Currency;
       Property DrCr:Tdrcr read _drcr write SetDrCr;
@@ -44,6 +46,7 @@ uses
       Property TransNo:TInteger read _TransNo write SetTransNo;
       Function Load(AccountNo:TInteger):boolean;
       Function Synch:boolean;
+      Procedure Commit;
   end;
 
 
@@ -154,9 +157,16 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
        self._bal := CrBal;
        self._DRCR := Cr;
      end;
-     // We just loaded the data, do it's clean.
+     // We just loaded the data, so it's clean.
     _Dirty := False;
     _New := False;
+  end;
+
+Procedure TLedgerAccount.SetText(NewText:TUTF8String);
+  begin
+    _Text := NewText;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
   end;
 
 Procedure TLedgerAccount.SetBal(NewBalance:Integer);
@@ -226,6 +236,11 @@ Function TLedgerAccount.Insert:boolean;
     SQLQuery1.Destroy;
 
  end;
+
+Procedure TLedgerAccount.commit;
+  begin
+    SQLTransaction1.Commit;
+  end;
 
 // Update existing account
 Function TLedgerAccount.update:boolean;

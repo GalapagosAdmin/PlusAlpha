@@ -1,12 +1,12 @@
 object frmLedger: TfrmLedger
-  Left = 16
+  Left = 308
   Height = 317
-  Top = 369
-  Width = 477
+  Top = 366
+  Width = 536
   Align = alLeft
   Caption = 'Plus Alpha - Ledger'
   ClientHeight = 317
-  ClientWidth = 477
+  ClientWidth = 536
   OnShow = FormShow
   LCLVersion = '1.1'
   object tvAccountList: TTreeView
@@ -39,11 +39,11 @@ object frmLedger: TfrmLedger
     Left = 182
     Height = 317
     Top = 0
-    Width = 295
+    Width = 354
     Align = alClient
     Caption = 'Account Details'
     ClientHeight = 295
-    ClientWidth = 287
+    ClientWidth = 346
     TabOrder = 2
     object leAcctNo: TLabeledEdit
       Left = 94
@@ -136,6 +136,22 @@ object frmLedger: TfrmLedger
       Width = 89
       Caption = 'Account Type'
       ParentColor = False
+    end
+    object bbSynch: TBitBtn
+      Left = 6
+      Height = 30
+      Top = 262
+      Width = 75
+      Caption = 'Apply'
+      OnClick = bbSynchClick
+      TabOrder = 6
+    end
+    object ebAccountTitle: TEdit
+      Left = 158
+      Height = 24
+      Top = 6
+      Width = 184
+      TabOrder = 7
     end
   end
 end

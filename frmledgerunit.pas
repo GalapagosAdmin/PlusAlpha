@@ -6,15 +6,17 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ExtCtrls, StdCtrls;
+  ExtCtrls, StdCtrls, Buttons;
 
 type
 
   { TfrmLedger }
 
   TfrmLedger = class(TForm)
+    bbSynch: TBitBtn;
     cbAcctCurr: TComboBox;
     cbAccType: TComboBox;
+    ebAccountTitle: TEdit;
     GroupBox1: TGroupBox;
     lblAccType: TLabel;
     leAcctNo: TLabeledEdit;
@@ -23,6 +25,7 @@ type
     rbAcctBalCr: TRadioButton;
     Splitter1: TSplitter;
     tvAccountList: TTreeView;
+    procedure bbSynchClick(Sender: TObject);
     procedure cbAcctCurrChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure leAcctNoChange(Sender: TObject);
@@ -45,6 +48,9 @@ implementation
 {$R *.lfm}
 
 { TfrmLedger }
+
+var
+  CurrentAccount:TLedgerAccount;
 
 procedure TfrmLedger.FormShow(Sender: TObject);
  Type
@@ -123,6 +129,18 @@ begin
 
 end;
 
+procedure TfrmLedger.bbSynchClick(Sender: TObject);
+begin
+  //ebAccountTitle.Text:=Text;
+  If not Assigned(CurrentAccount) then exit;
+  With CurrentAccount do
+    begin
+      Text := ebAccountTitle.Text;
+      Synch;
+      Commit;
+    end;
+end;
+
 procedure TfrmLedger.leAcctNoChange(Sender: TObject);
 begin
 
@@ -135,7 +153,8 @@ begin
   // if this is a placeholder text only item, don't try to access it
   if not assigned(tvAccountList.Selected.Data) then exit;
   // if it is a useful object, update the display panel
-  with TObject(tvAccountList.Selected.Data) as TLedgerAccount do
+  CurrentAccount := TObject(tvAccountList.Selected.Data) as TLedgerAccount;
+  with CurrentAccount do
     begin
       leAcctNo.Text := IntToStr(AcctNo);
       leAcctBal.Text := IntToStr(Balance);
@@ -145,6 +164,7 @@ begin
         Dr: rbAcctBalDr.Checked := True;
         Cr: rbAcctBalCr.Checked := True;
       end;
+      ebAccountTitle.Text:=Text;
       cbAccType.Text := ABAP_Translate(IntToStr(Ord(AccountType)), AcctTransMapRev);
     end;
 end;  // of Procedure
