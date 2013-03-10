@@ -103,10 +103,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmLedgerUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="129"/>
-        <CursorPos X="13" Y="140"/>
+        <TopLine Value="24"/>
+        <CursorPos X="3" Y="35"/>
         <UsageCount Value="251"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -115,11 +116,10 @@
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="39"/>
-        <CursorPos X="24" Y="49"/>
+        <TopLine Value="346"/>
+        <CursorPos X="53" Y="355"/>
         <UsageCount Value="221"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -153,7 +153,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="63"/>
         <CursorPos X="37" Y="155"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="146"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
@@ -199,7 +199,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1276"/>
         <CursorPos X="1" Y="1603"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="57"/>
       </Unit16>
     </Units>
     <General>
@@ -208,123 +208,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="paledger.pas"/>
-        <Caret Line="41" Column="55" TopLine="22"/>
+        <Caret Line="271" Column="1" TopLine="253"/>
       </Position1>
       <Position2>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="138" Column="12" TopLine="127"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="272" Column="1" TopLine="253"/>
       </Position2>
       <Position3>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="139" Column="1" TopLine="127"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="274" Column="1" TopLine="255"/>
       </Position3>
       <Position4>
         <Filename Value="paledger.pas"/>
-        <Caret Line="296" Column="1" TopLine="285"/>
+        <Caret Line="275" Column="1" TopLine="256"/>
       </Position4>
       <Position5>
         <Filename Value="paledger.pas"/>
-        <Caret Line="301" Column="1" TopLine="285"/>
+        <Caret Line="276" Column="1" TopLine="257"/>
       </Position5>
       <Position6>
         <Filename Value="paledger.pas"/>
-        <Caret Line="244" Column="1" TopLine="233"/>
+        <Caret Line="277" Column="1" TopLine="258"/>
       </Position6>
       <Position7>
         <Filename Value="paledger.pas"/>
-        <Caret Line="246" Column="1" TopLine="233"/>
+        <Caret Line="279" Column="1" TopLine="260"/>
       </Position7>
       <Position8>
         <Filename Value="paledger.pas"/>
-        <Caret Line="247" Column="1" TopLine="233"/>
+        <Caret Line="285" Column="1" TopLine="274"/>
       </Position8>
       <Position9>
         <Filename Value="paledger.pas"/>
-        <Caret Line="249" Column="1" TopLine="233"/>
+        <Caret Line="286" Column="1" TopLine="274"/>
       </Position9>
       <Position10>
         <Filename Value="paledger.pas"/>
-        <Caret Line="250" Column="1" TopLine="233"/>
+        <Caret Line="287" Column="1" TopLine="274"/>
       </Position10>
       <Position11>
         <Filename Value="paledger.pas"/>
-        <Caret Line="251" Column="1" TopLine="233"/>
+        <Caret Line="288" Column="1" TopLine="274"/>
       </Position11>
       <Position12>
         <Filename Value="paledger.pas"/>
-        <Caret Line="264" Column="1" TopLine="253"/>
+        <Caret Line="290" Column="1" TopLine="274"/>
       </Position12>
       <Position13>
         <Filename Value="paledger.pas"/>
-        <Caret Line="266" Column="1" TopLine="253"/>
+        <Caret Line="302" Column="1" TopLine="291"/>
       </Position13>
       <Position14>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="267" Column="1" TopLine="253"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="140" Column="14" TopLine="127"/>
       </Position14>
       <Position15>
         <Filename Value="paledger.pas"/>
-        <Caret Line="268" Column="1" TopLine="253"/>
+        <Caret Line="65" Column="23" TopLine="52"/>
       </Position15>
       <Position16>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="270" Column="1" TopLine="253"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="140" Column="13" TopLine="129"/>
       </Position16>
       <Position17>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="271" Column="1" TopLine="253"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="142" Column="1" TopLine="157"/>
       </Position17>
       <Position18>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="272" Column="1" TopLine="253"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="150" Column="4" TopLine="79"/>
       </Position18>
       <Position19>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="274" Column="1" TopLine="255"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="74" Column="1" TopLine="56"/>
       </Position19>
       <Position20>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="275" Column="1" TopLine="256"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="128" Column="7" TopLine="106"/>
       </Position20>
       <Position21>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="276" Column="1" TopLine="257"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="191" Column="20" TopLine="182"/>
       </Position21>
       <Position22>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="277" Column="1" TopLine="258"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="154" Column="22" TopLine="163"/>
       </Position22>
       <Position23>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="279" Column="1" TopLine="260"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="132" Column="1" TopLine="128"/>
       </Position23>
       <Position24>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="285" Column="1" TopLine="274"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="185" Column="1" TopLine="174"/>
       </Position24>
       <Position25>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="286" Column="1" TopLine="274"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="187" Column="1" TopLine="176"/>
       </Position25>
       <Position26>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="287" Column="1" TopLine="274"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="189" Column="1" TopLine="178"/>
       </Position26>
       <Position27>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="288" Column="1" TopLine="274"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="191" Column="1" TopLine="180"/>
       </Position27>
       <Position28>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="290" Column="1" TopLine="274"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="193" Column="1" TopLine="179"/>
       </Position28>
       <Position29>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="302" Column="1" TopLine="291"/>
+        <Filename Value="frmledgerunit.pas"/>
+        <Caret Line="180" Column="1" TopLine="161"/>
       </Position29>
       <Position30>
         <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="140" Column="14" TopLine="127"/>
+        <Caret Line="32" Column="4" TopLine="21"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

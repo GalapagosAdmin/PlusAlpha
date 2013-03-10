@@ -58,8 +58,11 @@ uses
       _HighWaterMark:Integer;  // Highest numbered account in the database
       Tree:TTreeNodes;
       Procedure UpdateHighWaterMark;
+      Procedure Load; // Loads the accuont list / Accounts from the DB
+      Procedure Clear;
     public
      Constructor Create; //overload;
+     Procedure ReLoad;
      // loads an existing ledger account from the database into a new object
      Procedure AddAccount(const AcctNo:Integer);
      Function AccountStringList:TStringList;
@@ -105,7 +108,6 @@ Function TLedgerAccount._CrBal:Integer;
        Dr: Result := 0;
      end;
    end;
-
 
 Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
   var
@@ -338,6 +340,23 @@ Function TAccountLIst.EOF:Boolean;
      Result := (_CurrentAccount = High(_AccountList));
   end;
 
+// clears the accounts without saving any changes to the database
+Procedure TAccountList.Clear;
+  var
+    ThisAccount:TLedgerAccount;
+  begin
+    for ThisAccount in _AccountList do
+        ThisAccount.Free;
+    SetLength(_AccountList, 0);
+  end;
+
+Procedure TAccountList.ReLoad;
+  begin
+    // Clearly this is not the most efficient way...
+    Clear;
+    Load;
+  end;
+
 // Gets the account you want from the array based on account number
 Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
   var
@@ -357,13 +376,11 @@ Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
 
   end;
 
-Constructor TAccountList.Create();
+Procedure TAccountList.Load; // Loads the account listing from the database
   var
 //     FDataset: TSdfDataset;
     i:integer;
     SQLQuery1:TSQLQuery;
-//     SQLTransaction1:TSQLTransaction;
-//     SQLite3Connection1:TSQLite3Connection;
     TmpStr : TUTF8String;
 //    tmpAccount:TLedgerAccount;
   begin
@@ -373,19 +390,22 @@ Constructor TAccountList.Create();
   // Update the account list.
   // This should really be moved to a separate refresh procedure to allow
   // updates after loading.
-  SQLQuery1 := TSQLQuery.Create(nil);
-  SQLQuery1.Transaction := SQLTransaction1;
-  SQLQuery1.SQL.Text := 'select AcctNo from ledger';
-  SQLQuery1.open;
-  While not SQLQuery1.EOF do
-   begin
-     With SQLQuery1 do
-       AddAccount(FieldByName('AcctNo').AsInteger);
-     SQLQuery1.Next;
-   end;
-  SQLQuery1.Close;
-  SQLQuery1.Destroy;
-  // update the tree
+  try
+    SQLQuery1 := TSQLQuery.Create(nil);
+    SQLQuery1.Transaction := SQLTransaction1;
+    SQLQuery1.SQL.Text := 'select AcctNo from ledger';
+    SQLQuery1.open;
+    While not SQLQuery1.EOF do
+     begin
+       With SQLQuery1 do
+         AddAccount(FieldByName('AcctNo').AsInteger);
+       SQLQuery1.Next;
+     end;
+  finally
+    SQLQuery1.Close;
+    SQLQuery1.Destroy;
+  end; // of TRY..FINALLY
+// update the tree
 //   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
 //   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
@@ -420,6 +440,11 @@ Procedure TAccountList.UpdateHighWaterMark;
 
   end;
 
+
+Constructor TAccountList.Create();
+  begin
+    Load;
+  end;
 
 initialization
   AccountList := TAccountList.Create;

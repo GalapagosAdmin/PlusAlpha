@@ -7,7 +7,7 @@ object frmLedger: TfrmLedger
   Caption = 'Plus Alpha - Ledger'
   ClientHeight = 317
   ClientWidth = 536
-  OnShow = FormShow
+  OnShow = acTreeRefreshExecute
   LCLVersion = '1.1'
   object tvAccountList: TTreeView
     Left = 0
@@ -100,7 +100,6 @@ object frmLedger: TfrmLedger
         'EUR'
         'CNY'
       )
-      OnChange = cbAcctCurrChange
       Style = csDropDownList
       TabOrder = 2
     end
@@ -152,6 +151,14 @@ object frmLedger: TfrmLedger
       Top = 6
       Width = 184
       TabOrder = 7
+    end
+  end
+  object alFrmLedger: TActionList
+    left = 36
+    top = 124
+    object acTreeRefresh: TAction
+      Caption = 'acTreeRefresh'
+      OnExecute = acTreeRefreshExecute
     end
   end
 end

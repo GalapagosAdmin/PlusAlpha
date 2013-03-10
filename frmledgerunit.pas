@@ -6,13 +6,15 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ExtCtrls, StdCtrls, Buttons;
+  ExtCtrls, StdCtrls, Buttons, ActnList;
 
 type
 
   { TfrmLedger }
 
   TfrmLedger = class(TForm)
+    acTreeRefresh: TAction;
+    alFrmLedger: TActionList;
     bbSynch: TBitBtn;
     cbAcctCurr: TComboBox;
     cbAccType: TComboBox;
@@ -25,12 +27,12 @@ type
     rbAcctBalCr: TRadioButton;
     Splitter1: TSplitter;
     tvAccountList: TTreeView;
+    procedure acTreeRefreshExecute(Sender: TObject);
     procedure bbSynchClick(Sender: TObject);
-    procedure cbAcctCurrChange(Sender: TObject);
-    procedure FormShow(Sender: TObject);
+ //   procedure FormShow(Sender: TObject);
     procedure leAcctNoChange(Sender: TObject);
     procedure tvAccountListClick(Sender: TObject);
-    procedure tvAccountListSelectionChanged(Sender: TObject);
+//    procedure tvAccountListSelectionChanged(Sender: TObject);
   private
     { private declarations }
   public
@@ -52,82 +54,85 @@ implementation
 var
   CurrentAccount:TLedgerAccount;
 
-procedure TfrmLedger.FormShow(Sender: TObject);
- Type
-   TStruct=record
- //       AcctNo:Integer;
-     AccountObject:TTreeNode;
-   end;
- var
-  i:integer;
-  tmpAcct:TLedgerAccount;
-  lookup:array of TStruct; // index for quick lookups.
-  AssetRoot:TTreeNode;
-  LiabilityRoot:TTreeNode;
-  IncomeRoot:TTreeNode;
-  ExpenseRoot:TTreeNode;
-  EquityRoot:TTreeNode;
-
-  procedure update_Lookup(Acct:TTreeNode);
-    begin
-      With TObject(Acct.Data) as TLedgerAccount do
-        begin
-          if length(lookup) < AcctNo then
-           SetLength(lookup, AcctNo); // -1
-          with lookup[acctno] do
-            AccountObject := acct;
-        end;
-    end;
-
-  procedure AddToTree(tmpAcct:TLedgerAccount);
-    begin
-       With tmpAcct do
-       case AccountType of
-          atAsset: tvAccountList.Items.AddChildObject(AssetRoot, text, tmpAcct) ;
-          atLiability: tvAccountList.Items.AddChildObject(LiabilityRoot, text, tmpAcct) ;
-          atIncome: tvAccountList.Items.AddChildObject(IncomeRoot, text, tmpAcct) ;
-          atExpense: tvAccountList.Items.AddChildObject(ExpenseRoot, text, tmpAcct) ;
-          atEquity: tvAccountList.Items.AddChildObject(EquityRoot, text, tmpAcct) ;
-          atPlaceholder:; // leave placeholder accounts out for now
-          else
-          tvAccountList.Items.AddObject(nil, Text, tmpAcct)
-        end;  // of case
-    end;
-
-begin
-  // Populate the account tree
-  try
-
-  tvAccountList.BeginUpdate;
-  tvAccountList.Items.Clear;
-  with tvAccountLIst do
-    begin
-      AssetRoot := items.Add(nil, 'Assets');
-      LiabilityRoot := items.Add(nil, 'Liabilities');
-      IncomeRoot := items.Add(nil, 'Income');
-      ExpenseRoot := items.Add(nil, 'Expense');
-      EquityRoot := items.Add(nil, 'Equity');
-    end;
-
-  // technically, if there were no accounts, this could fail...
-  // but then I suppose it should fail if we have no accounts.
-  AddToTree(AccountList.GetFirstAccount);
-  While not AccountList.EOF do
-        AddToTree(AccountList.GetNextAccount);
-
-  finally
-    tvAccountList.EndUpdate;
+procedure TfrmLedger.acTreeRefreshExecute(Sender: TObject);
+Type
+  TStruct=record
+//       AcctNo:Integer;
+    AccountObject:TTreeNode;
   end;
-  // Populate the Account Type Popup
-  // This should really be read from the DB via an object in LibPa, but for now...
-  cbAccType.Items.CommaText:='C, P, A, L, E, I';
+var
+ i:integer;
+ tmpAcct:TLedgerAccount;
+ lookup:array of TStruct; // index for quick lookups.
+ AssetRoot:TTreeNode;
+ LiabilityRoot:TTreeNode;
+ IncomeRoot:TTreeNode;
+ ExpenseRoot:TTreeNode;
+ EquityRoot:TTreeNode;
 
-end;
+ procedure update_Lookup(Acct:TTreeNode);
+   begin
+     With TObject(Acct.Data) as TLedgerAccount do
+       begin
+         if length(lookup) < AcctNo then
+          SetLength(lookup, AcctNo); // -1
+         with lookup[acctno] do
+           AccountObject := acct;
+       end;
+   end;
 
-procedure TfrmLedger.cbAcctCurrChange(Sender: TObject);
+ procedure AddToTree(tmpAcct:TLedgerAccount);
+   begin
+      With tmpAcct do
+      case AccountType of
+         atAsset: tvAccountList.Items.AddChildObject(AssetRoot, text, tmpAcct) ;
+         atLiability: tvAccountList.Items.AddChildObject(LiabilityRoot, text, tmpAcct) ;
+         atIncome: tvAccountList.Items.AddChildObject(IncomeRoot, text, tmpAcct) ;
+         atExpense: tvAccountList.Items.AddChildObject(ExpenseRoot, text, tmpAcct) ;
+         atEquity: tvAccountList.Items.AddChildObject(EquityRoot, text, tmpAcct) ;
+         atPlaceholder:; // leave placeholder accounts out for now
+         else
+         tvAccountList.Items.AddObject(nil, Text, tmpAcct)
+       end;  // of case
+   end;
+
 begin
+ // Populate the account tree
+ try
+
+ tvAccountList.BeginUpdate;
+ tvAccountList.Items.Clear;
+ with tvAccountLIst do
+   begin
+     AssetRoot := items.Add(nil, 'Assets');
+     LiabilityRoot := items.Add(nil, 'Liabilities');
+     IncomeRoot := items.Add(nil, 'Income');
+     ExpenseRoot := items.Add(nil, 'Expense');
+     EquityRoot := items.Add(nil, 'Equity');
+   end;
+
+ // technically, if there were no accounts, this could fail...
+ // but then I suppose it should fail if we have no accounts.
+ AddToTree(AccountList.GetFirstAccount);
+ While not AccountList.EOF do
+       AddToTree(AccountList.GetNextAccount);
+
+ finally
+   tvAccountList.EndUpdate;
+ end;
+ // Populate the Account Type Popup
+ // This should really be read from the DB via an object in LibPa, but for now...
+ cbAccType.Items.CommaText:='C, P, A, L, E, I';
 
 end;
+
+
+
+
+
+
+
+
 
 procedure TfrmLedger.bbSynchClick(Sender: TObject);
 begin
@@ -139,6 +144,8 @@ begin
       Synch;
       Commit;
     end;
+   // Update GUI tree
+   acTreeRefresh.Execute;
 end;
 
 procedure TfrmLedger.leAcctNoChange(Sender: TObject);
@@ -169,10 +176,7 @@ begin
     end;
 end;  // of Procedure
 
-procedure TfrmLedger.tvAccountListSelectionChanged(Sender: TObject);
-begin
 
-end;
 
 end.
 
