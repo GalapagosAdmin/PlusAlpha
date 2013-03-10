@@ -45,6 +45,7 @@ uses
       Property AccountSubType:Char read _AccSTDB;
       Property TransNo:TInteger read _TransNo write SetTransNo;
       Function Load(AccountNo:TInteger):boolean;
+      Property ExtAcctNo:TInteger read _ExtRefNo;
       Function Synch:boolean;
       Procedure Commit;
   end;
@@ -119,7 +120,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
   begin
   SQLQuery1 := TSQLQuery.Create(nil);
   SQLQuery1.Transaction := SQLTransaction1;
-  SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd '
+  SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
   + ' from ledger where AcctNo = :acctno';
 //   + ' from ledger where rowid = :rowid';
   test := assigned(SQLTransaction1);
@@ -137,6 +138,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
          self._AcctNo := StrToInt(FieldByName('AcctNo').AsString);
          self._currency := FieldByName('CurrKey').AsString;
          self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
+         self._AccStDB := FieldByName('AccSTCd').AsString[1];
          // Pascal representation
          self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
          self._Text := FieldByName('Text').AsString;

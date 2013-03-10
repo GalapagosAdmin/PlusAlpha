@@ -18,19 +18,29 @@ type
     bbSynch: TBitBtn;
     cbAcctCurr: TComboBox;
     cbAccType: TComboBox;
+    cbAccSubType: TComboBox;
     ebAccountTitle: TEdit;
     GroupBox1: TGroupBox;
+    leExtAcctNo: TLabeledEdit;
     lblAccType: TLabel;
+    lblAccType1: TLabel;
     leAcctNo: TLabeledEdit;
     leAcctBal: TLabeledEdit;
+    mmWelcomeText: TMemo;
+    Notebook1: TNotebook;
+    Page1: TPage;
+    Page2: TPage;
     rbAcctBalDr: TRadioButton;
     rbAcctBalCr: TRadioButton;
     Splitter1: TSplitter;
     tvAccountList: TTreeView;
     procedure acTreeRefreshExecute(Sender: TObject);
     procedure bbSynchClick(Sender: TObject);
+    procedure lblAccType1Click(Sender: TObject);
  //   procedure FormShow(Sender: TObject);
     procedure leAcctNoChange(Sender: TObject);
+    procedure Page1BeforeShow(ASender: TObject; ANewPage: TPage;
+      ANewIndex: Integer);
     procedure tvAccountListClick(Sender: TObject);
 //    procedure tvAccountListSelectionChanged(Sender: TObject);
   private
@@ -127,13 +137,6 @@ begin
 end;
 
 
-
-
-
-
-
-
-
 procedure TfrmLedger.bbSynchClick(Sender: TObject);
 begin
   //ebAccountTitle.Text:=Text;
@@ -148,13 +151,25 @@ begin
    acTreeRefresh.Execute;
 end;
 
+procedure TfrmLedger.lblAccType1Click(Sender: TObject);
+begin
+
+end;
+
 procedure TfrmLedger.leAcctNoChange(Sender: TObject);
+begin
+
+end;
+
+procedure TfrmLedger.Page1BeforeShow(ASender: TObject; ANewPage: TPage;
+  ANewIndex: Integer);
 begin
 
 end;
 
 procedure TfrmLedger.tvAccountListClick(Sender: TObject);
 begin
+  Notebook1.PageIndex:=0;
   // make sure something is actually selected
   if not assigned(tvAccountList.Selected) then exit;
   // if this is a placeholder text only item, don't try to access it
@@ -172,7 +187,16 @@ begin
         Cr: rbAcctBalCr.Checked := True;
       end;
       ebAccountTitle.Text:=Text;
+      leExtAcctNo.Text:=IntToStr(ExtAcctNo);
+      // Set Account Type dropdown text
       cbAccType.Text := ABAP_Translate(IntToStr(Ord(AccountType)), AcctTransMapRev);
+      // Add subtype to dropdown if needed
+      if cbAccSubType.Items.IndexOf(AccountSubType) < 0 then
+        cbAccSubType.AddItem(AccountSubType,nil);
+      // Set subtype dropdown text
+      self.cbAccSubType.Text:=AccountSubType;
+      Notebook1.PageIndex:=1;
+
     end;
 end;  // of Procedure
 
