@@ -1,0 +1,216 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Galapagos Administrator <shiruba@galapagossoftware.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: tformplusalphamain.bbdebug.caption
+msgid "Debug Options"
+msgstr ""
+
+#: tformplusalphamain.bbledger.caption
+msgid "Account Ledger"
+msgstr ""
+
+#: tformplusalphamain.bbnewtran.caption
+msgid "New Transaction"
+msgstr ""
+
+#: tformplusalphamain.caption
+msgid "PlusAlpha"
+msgstr ""
+
+#: tfrmdebug.bbtextcode.caption
+msgid "bbTextCode"
+msgstr ""
+
+#: tfrmdebug.bbtransno.caption
+msgid "bbTransNo"
+msgstr ""
+
+#: tfrmdebug.caption
+msgid "Plus Alpha - Debug Options"
+msgstr ""
+
+#: tfrmdebug.letextcd.editlabel.caption
+msgid "leTextCd"
+msgstr ""
+
+#: tfrmdebug.letranno.editlabel.caption
+msgid "leTranNo"
+msgstr ""
+
+#: tfrmledger.actreerefresh.caption
+msgid "acTreeRefresh"
+msgstr ""
+
+#: tfrmledger.bbsynch.caption
+msgid "Apply"
+msgstr "使用"
+
+#: tfrmledger.caption
+msgid "Plus Alpha - Ledger"
+msgstr "プラスα-総勘定元帳"
+
+#: tfrmledger.groupbox1.caption
+msgid "Account Details"
+msgstr ""
+
+#: tfrmledger.lblacctype.caption
+msgid "Account Type"
+msgstr ""
+
+#: tfrmledger.lblacctype1.caption
+msgid "Account SubType"
+msgstr ""
+
+#: tfrmledger.leacctbal.editlabel.caption
+msgid "Balance:"
+msgstr "残高："
+
+#: tfrmledger.leacctno.editlabel.caption
+msgid "Account No.:"
+msgstr "口座番号："
+
+#: tfrmledger.leextacctno.editlabel.caption
+msgid "External Account No."
+msgstr "外部口座番号"
+
+#: tfrmledger.rbacctbalcr.caption
+msgid "Credit"
+msgstr "貸方"
+
+#: tfrmledger.rbacctbaldr.caption
+msgid "Debit"
+msgstr "借方"
+
+#: tfrmtransaction.bbsave.caption
+msgid "Save"
+msgstr "保存"
+
+#: tfrmtransaction.caption
+msgid "Plus Alpha - New Transaction"
+msgstr "プラスα-新規取引"
+
+#: tfrmtransaction.cbposted.caption
+msgid "Cleared"
+msgstr ""
+
+#: tfrmtransaction.deheadereffdate.cancelcaption
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: tfrmtransaction.deheadereffdate.okcaption
+msgid "OK"
+msgstr "OK"
+
+#: tfrmtransaction.label1.caption
+msgctxt "tfrmtransaction.label1.caption"
+msgid "Dr"
+msgstr "借方"
+
+#: tfrmtransaction.label2.caption
+msgctxt "tfrmtransaction.label2.caption"
+msgid "Cr"
+msgstr "貸方"
+
+#: tfrmtransaction.label3.caption
+msgctxt "TFRMTRANSACTION.LABEL3.CAPTION"
+msgid "Dr"
+msgstr "借方"
+
+#: tfrmtransaction.label4.caption
+msgctxt "TFRMTRANSACTION.LABEL4.CAPTION"
+msgid "Cr"
+msgstr "貸方"
+
+#: tfrmtransaction.label5.caption
+msgctxt "TFRMTRANSACTION.LABEL5.CAPTION"
+msgid "Dr"
+msgstr "借方"
+
+#: tfrmtransaction.label6.caption
+msgctxt "TFRMTRANSACTION.LABEL6.CAPTION"
+msgid "Cr"
+msgstr "貸方"
+
+#: tfrmtransaction.label7.caption
+msgctxt "TFRMTRANSACTION.LABEL7.CAPTION"
+msgid "Dr"
+msgstr "借方"
+
+#: tfrmtransaction.label8.caption
+msgctxt "TFRMTRANSACTION.LABEL8.CAPTION"
+msgid "Cr"
+msgstr "貸方"
+
+#: tfrmtransaction.lbldate.caption
+msgid "Effective Date:"
+msgstr "有効日付："
+
+#: tfrmtransaction.leamt1.editlabel.caption
+msgctxt "tfrmtransaction.leamt1.editlabel.caption"
+msgid "Amount"
+msgstr "金額"
+
+#: tfrmtransaction.leamt2.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEAMT2.EDITLABEL.CAPTION"
+msgid "Amount"
+msgstr "金額"
+
+#: tfrmtransaction.leamt3.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEAMT3.EDITLABEL.CAPTION"
+msgid "Amount"
+msgstr "金額"
+
+#: tfrmtransaction.leamt4.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEAMT4.EDITLABEL.CAPTION"
+msgid "Amount"
+msgstr "金額"
+
+#: tfrmtransaction.lehdrmemo.editlabel.caption
+msgid "Memo"
+msgstr "備考"
+
+#: tfrmtransaction.lememo1.editlabel.caption
+msgctxt "tfrmtransaction.lememo1.editlabel.caption"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo2.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEMEMO2.EDITLABEL.CAPTION"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo3.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEMEMO3.EDITLABEL.CAPTION"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo4.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEMEMO4.EDITLABEL.CAPTION"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.letrnno.editlabel.caption
+msgid "Trans. No."
+msgstr "取引番号"
+
+#: tfrmtransaction.letrnno.text
+msgid "0"
+msgstr ""
+
+#: tfrmtransaction.stdetail.caption
+msgid " Transaction Details"
+msgstr "取引明細"
+
+#: tfrmtransaction.stdetail1.caption
+msgid " Transaction Header"
+msgstr "取引ヘッダー"
+

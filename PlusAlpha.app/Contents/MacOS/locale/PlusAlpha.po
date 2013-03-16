@@ -1,0 +1,171 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tfrmledger.actreerefresh.caption
+msgid "acTreeRefresh"
+msgstr ""
+
+#: tfrmledger.bbsynch.caption
+msgid "Apply"
+msgstr ""
+
+#: tfrmledger.caption
+msgid "Plus Alpha - Ledger"
+msgstr ""
+
+#: tfrmledger.groupbox1.caption
+msgid "Account Details"
+msgstr ""
+
+#: tfrmledger.lblacctype.caption
+msgid "Account Type"
+msgstr ""
+
+#: tfrmledger.lblacctype1.caption
+msgid "Account SubType"
+msgstr ""
+
+#: tfrmledger.leacctbal.editlabel.caption
+msgid "Balance:"
+msgstr ""
+
+#: tfrmledger.leacctno.editlabel.caption
+msgid "Account No.:"
+msgstr ""
+
+#: tfrmledger.leextacctno.editlabel.caption
+msgid "External Account No."
+msgstr ""
+
+#: tfrmledger.rbacctbalcr.caption
+msgid "Credit"
+msgstr ""
+
+#: tfrmledger.rbacctbaldr.caption
+msgid "Debit"
+msgstr ""
+
+#: tfrmtransaction.bbsave.caption
+msgid "Save"
+msgstr ""
+
+#: tfrmtransaction.caption
+msgid "Plus Alpha - New Transaction"
+msgstr ""
+
+#: tfrmtransaction.cbposted.caption
+msgid "Cleared"
+msgstr ""
+
+#: tfrmtransaction.deheadereffdate.cancelcaption
+msgid "Cancel"
+msgstr ""
+
+#: tfrmtransaction.deheadereffdate.okcaption
+msgid "OK"
+msgstr ""
+
+#: tfrmtransaction.label1.caption
+msgctxt "tfrmtransaction.label1.caption"
+msgid "Dr"
+msgstr ""
+
+#: tfrmtransaction.label2.caption
+msgctxt "tfrmtransaction.label2.caption"
+msgid "Cr"
+msgstr ""
+
+#: tfrmtransaction.label3.caption
+msgctxt "TFRMTRANSACTION.LABEL3.CAPTION"
+msgid "Dr"
+msgstr ""
+
+#: tfrmtransaction.label4.caption
+msgctxt "TFRMTRANSACTION.LABEL4.CAPTION"
+msgid "Cr"
+msgstr ""
+
+#: tfrmtransaction.label5.caption
+msgctxt "TFRMTRANSACTION.LABEL5.CAPTION"
+msgid "Dr"
+msgstr ""
+
+#: tfrmtransaction.label6.caption
+msgctxt "TFRMTRANSACTION.LABEL6.CAPTION"
+msgid "Cr"
+msgstr ""
+
+#: tfrmtransaction.label7.caption
+msgctxt "TFRMTRANSACTION.LABEL7.CAPTION"
+msgid "Dr"
+msgstr ""
+
+#: tfrmtransaction.label8.caption
+msgctxt "TFRMTRANSACTION.LABEL8.CAPTION"
+msgid "Cr"
+msgstr ""
+
+#: tfrmtransaction.lbldate.caption
+msgid "Effective Date:"
+msgstr ""
+
+#: tfrmtransaction.leamt1.editlabel.caption
+msgctxt "tfrmtransaction.leamt1.editlabel.caption"
+msgid "Amount"
+msgstr ""
+
+#: tfrmtransaction.leamt2.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEAMT2.EDITLABEL.CAPTION"
+msgid "Amount"
+msgstr ""
+
+#: tfrmtransaction.leamt3.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEAMT3.EDITLABEL.CAPTION"
+msgid "Amount"
+msgstr ""
+
+#: tfrmtransaction.leamt4.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEAMT4.EDITLABEL.CAPTION"
+msgid "Amount"
+msgstr ""
+
+#: tfrmtransaction.lehdrmemo.editlabel.caption
+msgid "Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo1.editlabel.caption
+msgctxt "tfrmtransaction.lememo1.editlabel.caption"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo2.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEMEMO2.EDITLABEL.CAPTION"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo3.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEMEMO3.EDITLABEL.CAPTION"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.lememo4.editlabel.caption
+msgctxt "TFRMTRANSACTION.LEMEMO4.EDITLABEL.CAPTION"
+msgid "Line Item Memo"
+msgstr ""
+
+#: tfrmtransaction.letrnno.editlabel.caption
+msgid "Trans. No."
+msgstr ""
+
+#: tfrmtransaction.letrnno.text
+msgid "0"
+msgstr ""
+
+#: tfrmtransaction.stdetail.caption
+msgid " Transaction Details"
+msgstr ""
+
+#: tfrmtransaction.stdetail1.caption
+msgid " Transaction Header"
+msgstr ""
+
