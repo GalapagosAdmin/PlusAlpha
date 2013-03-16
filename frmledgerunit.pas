@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ExtCtrls, StdCtrls, Buttons, ActnList;
+  ExtCtrls, StdCtrls, Buttons, ActnList, defaulttranslator;
 
 type
 

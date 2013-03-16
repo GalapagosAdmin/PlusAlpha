@@ -8,6 +8,7 @@ uses
   Classes, SysUtils;
 
 Type
+  TLangCode=String[2];
   TCurrCode=String[3];
   TDrCr = (Dr, Cr);
   TAcctType = (atAsset:=0, atLiability:=1, atEquity:=2, atExpense:=3,

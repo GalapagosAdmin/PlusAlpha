@@ -1,11 +1,11 @@
 object frmTransaction: TfrmTransaction
-  Left = 114
-  Height = 443
-  Top = 194
-  Width = 638
+  Left = 90
+  Height = 444
+  Top = 218
+  Width = 634
   Caption = 'Plus Alpha - New Transaction'
-  ClientHeight = 443
-  ClientWidth = 638
+  ClientHeight = 444
+  ClientWidth = 634
   OnCreate = FormCreate
   OnShow = FormShow
   LCLVersion = '1.1'

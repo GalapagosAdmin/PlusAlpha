@@ -14,7 +14,10 @@ type
 
   TfrmDebug = class(TForm)
     bbTransNo: TBitBtn;
+    bbTextCode: TBitBtn;
+    leTextCd: TLabeledEdit;
     leTranNo: TLabeledEdit;
+    procedure bbTextCodeClick(Sender: TObject);
     procedure bbTransNoClick(Sender: TObject);
   private
     { private declarations }
@@ -28,7 +31,7 @@ var
 implementation
 
 uses
-  libpa, paJournal;
+  libpa, paJournal, paText;
 
 {$R *.lfm}
 
@@ -39,6 +42,11 @@ procedure TfrmDebug.bbTransNoClick(Sender: TObject);
   //  leTranNo.Text := IntToStr(CompleteJournalEntry.HighWaterMark);
     leTranNo.Text:=IntToStr(CompleteJournalEntry.HighWaterMark);
   end;
+
+procedure TfrmDebug.bbTextCodeClick(Sender: TObject);
+begin
+  ShowMessage(DBText.GetText(StrToInt(leTextCd.Text)));
+end;
 
 end.
 

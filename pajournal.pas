@@ -224,7 +224,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
           + '"CRAMT"=:CrAmt, '
           + '"DRCURRKEY"=:DrCurrKey, '
           + '"DRTRNSTSCD"=:DrTrnStsCd, '
-          + ' "DRACCTCD"=:DrAcctCd,'
+          + '"DRACCTCD"=:DrAcctCd,'
           + '"CRACCTCD"=:CrAcctCd, '
           + 'ENT_DATE=:Ent_Date '
           + 'WHERE transno = :transno'

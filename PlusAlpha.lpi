@@ -11,7 +11,8 @@
       <Icon Value="0"/>
     </General>
     <i18n>
-      <EnableI18N LFM="False"/>
+      <EnableI18N Value="True"/>
+      <OutDir Value="i18n"/>
     </i18n>
     <VersionInfo>
       <StringTable ProductVersion=""/>
@@ -40,7 +41,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="12">
+    <Units Count="13">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -115,6 +116,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="paJournal"/>
       </Unit11>
+      <Unit12>
+        <Filename Value="patext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paText"/>
+      </Unit12>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

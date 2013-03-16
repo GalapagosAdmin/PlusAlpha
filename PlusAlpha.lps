@@ -3,12 +3,12 @@
   <ProjectSession>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="17">
+    <Units Count="26">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PlusAlpha"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="16"/>
@@ -22,10 +22,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="paFrmMainUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="25"/>
-        <CursorPos X="38" Y="38"/>
+        <TopLine Value="22"/>
+        <CursorPos X="69" Y="38"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -34,10 +35,10 @@
         <Filename Value="libpa.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="11"/>
-        <CursorPos X="20" Y="29"/>
+        <TopLine Value="19"/>
+        <CursorPos X="23" Y="11"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -48,7 +49,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="padm"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="8"/>
         <CursorPos X="10" Y="26"/>
@@ -59,7 +60,7 @@
       <Unit4>
         <Filename Value="ledger.sdf"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="54" Y="1"/>
@@ -76,8 +77,8 @@
         <UnitName Value="frmTransactionUnit"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="52"/>
-        <CursorPos X="32" Y="73"/>
+        <TopLine Value="166"/>
+        <CursorPos X="7" Y="183"/>
         <UsageCount Value="301"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -91,8 +92,8 @@
         <UnitName Value="frmDebugUnit"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="12"/>
-        <CursorPos X="12" Y="31"/>
+        <TopLine Value="30"/>
+        <CursorPos X="21" Y="48"/>
         <UsageCount Value="245"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -105,20 +106,19 @@
         <UnitName Value="frmLedgerUnit"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="98"/>
-        <CursorPos X="8" Y="138"/>
+        <TopLine Value="1"/>
+        <CursorPos X="62" Y="4"/>
         <UsageCount Value="251"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="122"/>
-        <CursorPos X="45" Y="141"/>
+        <TopLine Value="111"/>
+        <CursorPos X="1" Y="128"/>
         <UsageCount Value="221"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -126,11 +126,10 @@
         <Filename Value="padatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paDatabase"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="22"/>
-        <CursorPos X="33" Y="28"/>
+        <TopLine Value="1"/>
+        <CursorPos X="71" Y="21"/>
         <UsageCount Value="221"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -138,7 +137,7 @@
         <Filename Value="pacalculator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paCalculator"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="105" Y="19"/>
@@ -149,10 +148,10 @@
         <Filename Value="pajournal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paJournal"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="63"/>
-        <CursorPos X="37" Y="155"/>
+        <TopLine Value="4"/>
+        <CursorPos X="1" Y="25"/>
         <UsageCount Value="365"/>
         <Loaded Value="True"/>
       </Unit11>
@@ -161,7 +160,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="63"/>
         <CursorPos X="1" Y="74"/>
-        <UsageCount Value="135"/>
+        <UsageCount Value="134"/>
       </Unit12>
       <Unit13>
         <Filename Value="/Developer/lazarus/packager/registration/lazaruspackageintf.pas"/>
@@ -169,7 +168,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="82"/>
         <CursorPos X="1" Y="103"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="88"/>
       </Unit13>
       <Unit14>
         <Filename Value="/Developer/lazarus/components/sdf/registersdf.pas"/>
@@ -177,148 +176,234 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="41"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="88"/>
       </Unit14>
       <Unit15>
         <Filename Value="/Developer/lazarus/components/sdf/registersdf.lrs"/>
         <WindowIndex Value="0"/>
         <TopLine Value="16"/>
         <CursorPos X="1" Y="31"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="88"/>
       </Unit15>
       <Unit16>
         <Filename Value="/Developer/lazarus/lcl/include/treeview.inc"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1276"/>
         <CursorPos X="1" Y="1603"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="34"/>
       </Unit16>
+      <Unit17>
+        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.pas"/>
+        <UnitName Value="FileUtil"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="244"/>
+        <CursorPos X="90" Y="115"/>
+        <UsageCount Value="9"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="311"/>
+        <CursorPos X="35" Y="152"/>
+        <UsageCount Value="9"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/sysutils/osutilsh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="43"/>
+        <CursorPos X="18" Y="43"/>
+        <UsageCount Value="9"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/unix/sysutils.pp"/>
+        <UnitName Value="sysutils"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1375"/>
+        <CursorPos X="10" Y="1294"/>
+        <UsageCount Value="9"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="/usr/local/share/fpcsrc/packages/univint/src/MacOSAll.pas"/>
+        <UnitName Value="MacOSAll"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2017"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="9"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="patext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paText"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="10" Y="16"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <UnitName Value="DefaultTranslator"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="415"/>
+        <CursorPos X="1" Y="429"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="/Developer/lazarus/lcl/lclproc.pas"/>
+        <UnitName Value="LCLProc"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2926"/>
+        <CursorPos X="1" Y="2937"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="3033"/>
+        <CursorPos X="1" Y="3034"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit25>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="180" Column="1" TopLine="161"/>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <Caret Line="2988" Column="1" TopLine="2973"/>
       </Position1>
       <Position2>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="32" Column="4" TopLine="21"/>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <Caret Line="2989" Column="1" TopLine="2973"/>
       </Position2>
       <Position3>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="35" Column="3" TopLine="24"/>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <Caret Line="2990" Column="1" TopLine="2973"/>
       </Position3>
       <Position4>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="37" Column="3" TopLine="24"/>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <Caret Line="2991" Column="1" TopLine="2973"/>
       </Position4>
       <Position5>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="155" Column="3" TopLine="153"/>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <Caret Line="3034" Column="1" TopLine="3021"/>
       </Position5>
       <Position6>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="156" Column="3" TopLine="154"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="427" Column="1" TopLine="416"/>
       </Position6>
       <Position7>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="157" Column="3" TopLine="155"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="429" Column="1" TopLine="416"/>
       </Position7>
       <Position8>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="48" Column="19" TopLine="39"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="430" Column="1" TopLine="416"/>
       </Position8>
       <Position9>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="24" Column="21" TopLine="17"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="192" Column="1" TopLine="181"/>
       </Position9>
       <Position10>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="188" Column="41" TopLine="169"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="193" Column="1" TopLine="181"/>
       </Position10>
       <Position11>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="189" Column="41" TopLine="170"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="195" Column="1" TopLine="181"/>
       </Position11>
       <Position12>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="190" Column="41" TopLine="171"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="196" Column="1" TopLine="181"/>
       </Position12>
       <Position13>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="189" Column="41" TopLine="170"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="202" Column="1" TopLine="183"/>
       </Position13>
       <Position14>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="188" Column="41" TopLine="169"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="203" Column="1" TopLine="184"/>
       </Position14>
       <Position15>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="189" Column="41" TopLine="170"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="205" Column="1" TopLine="186"/>
       </Position15>
       <Position16>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="188" Column="41" TopLine="169"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="206" Column="1" TopLine="187"/>
       </Position16>
       <Position17>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="189" Column="41" TopLine="170"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="192" Column="4" TopLine="189"/>
       </Position17>
       <Position18>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="190" Column="41" TopLine="171"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="85" Column="35" TopLine="79"/>
       </Position18>
       <Position19>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="191" Column="41" TopLine="172"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="136" Column="1" TopLine="125"/>
       </Position19>
       <Position20>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="204" Column="29" TopLine="188"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="90" Column="1" TopLine="79"/>
       </Position20>
       <Position21>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="173" Column="3" TopLine="170"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="492" Column="14" TopLine="475"/>
       </Position21>
       <Position22>
         <Filename Value="frmtransactionunit.pas"/>
-        <Caret Line="56" Column="32" TopLine="38"/>
+        <Caret Line="185" Column="1" TopLine="166"/>
       </Position22>
       <Position23>
-        <Filename Value="frmtransactionunit.pas"/>
-        <Caret Line="64" Column="32" TopLine="45"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="426" Column="1" TopLine="415"/>
       </Position23>
       <Position24>
-        <Filename Value="frmtransactionunit.pas"/>
-        <Caret Line="72" Column="32" TopLine="52"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="427" Column="1" TopLine="415"/>
       </Position24>
       <Position25>
-        <Filename Value="padatabase.pas"/>
-        <Caret Line="29" Column="4" TopLine="13"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="429" Column="1" TopLine="415"/>
       </Position25>
       <Position26>
-        <Filename Value="padatabase.pas"/>
-        <Caret Line="24" Column="37" TopLine="13"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="184" Column="13" TopLine="166"/>
       </Position26>
       <Position27>
-        <Filename Value="padatabase.pas"/>
-        <Caret Line="20" Column="12" TopLine="14"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="185" Column="1" TopLine="166"/>
       </Position27>
       <Position28>
-        <Filename Value="padatabase.pas"/>
-        <Caret Line="29" Column="14" TopLine="14"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="426" Column="1" TopLine="415"/>
       </Position28>
       <Position29>
-        <Filename Value="padatabase.pas"/>
-        <Caret Line="26" Column="1" TopLine="14"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="427" Column="1" TopLine="415"/>
       </Position29>
       <Position30>
-        <Filename Value="padatabase.pas"/>
-        <Caret Line="38" Column="67" TopLine="18"/>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <Caret Line="429" Column="1" TopLine="415"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
+  <Debugging>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="Lang"/>
+      </Item1>
+    </Watches>
+  </Debugging>
   <EditorMacros Count="0"/>
 </CONFIG>

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls, Calendar, EditBtn;
+  Buttons, StdCtrls, Calendar, EditBtn, defaulttranslator;
 
 type
 
@@ -180,5 +180,9 @@ Procedure TfrmTransaction.FormCreate(Sender: TObject);
 
 {$R *.lfm}
 
+initialization
+{$IFDEF DARWIN}
+//SetDefaultLang(GetEnvironmentVariable('LANG'));
+{$ENDIF}
 end.
 

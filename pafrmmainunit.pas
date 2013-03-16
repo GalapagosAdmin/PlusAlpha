@@ -35,7 +35,7 @@ var
 implementation
 
 uses
-  frmTransactionUnit, frmledgerunit, frmDebugUnit;
+  frmTransactionUnit, frmledgerunit, frmDebugUnit, defaulttranslator;
 
 {$R *.lfm}
 

@@ -25,6 +25,7 @@ initialization
   DatabaseName := 'plusalpha.sqlite';
   SQLite3Connection1 := TSQLite3Connection.Create(nil);
   // The following returns ~/.config/PlusAlpha/ on OS X
+  // Global = False means a per-user config directory
   DatabaseDir := GetAppConfigDirUTF8(False);
   CompleteDBPath := DatabaseDir + DatabaseName;
   SQLite3Connection1.DatabaseName := CompleteDBPath;

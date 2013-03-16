@@ -1,11 +1,11 @@
 object FormPlusAlphaMain: TFormPlusAlphaMain
-  Left = 417
-  Height = 137
-  Top = 511
-  Width = 150
+  Left = 423
+  Height = 135
+  Top = 510
+  Width = 149
   Caption = 'PlusAlpha'
-  ClientHeight = 137
-  ClientWidth = 150
+  ClientHeight = 135
+  ClientWidth = 149
   OnCreate = FormCreate
   OnShow = FormShow
   LCLVersion = '1.1'

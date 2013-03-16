@@ -1,7 +1,7 @@
 object frmLedger: TfrmLedger
-  Left = 331
+  Left = 298
   Height = 317
-  Top = 355
+  Top = 248
   Width = 541
   Align = alLeft
   Caption = 'Plus Alpha - Ledger'
@@ -40,7 +40,7 @@ object frmLedger: TfrmLedger
     Height = 317
     Top = 0
     Width = 359
-    PageIndex = 1
+    PageIndex = 0
     Align = alClient
     TabOrder = 2
     TabStop = True
@@ -221,8 +221,8 @@ object frmLedger: TfrmLedger
     end
   end
   object alFrmLedger: TActionList
-    left = 36
-    top = 124
+    left = 16
+    top = 224
     object acTreeRefresh: TAction
       Caption = 'acTreeRefresh'
       OnExecute = acTreeRefreshExecute
