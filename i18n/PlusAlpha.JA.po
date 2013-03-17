@@ -10,6 +10,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
 
+#: frmtransactionlistunit.hdramt
+msgctxt "frmtransactionlistunit.hdramt"
+msgid "Amount"
+msgstr "金額"
+
+#: frmtransactionlistunit.hdrtext
+msgid "Text"
+msgstr ""
+
+#: frmtransactionlistunit.hdrtransno
+msgid "TransNo"
+msgstr ""
+
+#: frmtransactionlistunit.hdrtransrow
+msgid "TransRow"
+msgstr ""
+
 #: frmtransactionunit.errtransnotbal
 msgid "Transaction is not balanced."
 msgstr "取引はバランスになっていないです。"
@@ -247,3 +264,4 @@ msgstr "取引ヘッダー"
 msgctxt "tfrmtransactionlist.caption"
 msgid "Transaction List"
 msgstr "取引検索"
+

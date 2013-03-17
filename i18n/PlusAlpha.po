@@ -1,6 +1,23 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: frmtransactionlistunit.hdramt
+msgctxt "frmtransactionlistunit.hdramt"
+msgid "Amount"
+msgstr ""
+
+#: frmtransactionlistunit.hdrtext
+msgid "Text"
+msgstr ""
+
+#: frmtransactionlistunit.hdrtransno
+msgid "TransNo"
+msgstr ""
+
+#: frmtransactionlistunit.hdrtransrow
+msgid "TransRow"
+msgstr ""
+
 #: frmtransactionunit.errtransnotbal
 msgid "Transaction is not balanced."
 msgstr ""

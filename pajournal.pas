@@ -35,8 +35,6 @@ type
        Function Validate:Boolean;
  end;  // of TJournalHeader
 
-
-
  TJournalDetailEntry = class(TObject)
    private
    //var
@@ -52,6 +50,7 @@ type
      _Text:TUTF8String;
      Procedure SetAcctNo(AcctNo:Integer);
       // performs a database update if the record already existed.
+     Procedure Select;
      Function Update:Boolean;
      Function Insert:boolean;
    public
@@ -68,6 +67,7 @@ type
     Property Text:TUTF8String read _Text write _Text;
     Function Validate:Boolean;
     Function Synch:boolean;
+    Procedure Load(const TN:Integer; const TR:Integer);
  end;
 
 // Class for holding the complete transaction, header and detail.
@@ -123,6 +123,58 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       Result := true;
       If length(_memo) = 0 then
         Result := False;
+    end;
+
+  Procedure TJournalDetailEntry.Select;
+    var
+       SQLQuery1:TSQLQuery;
+      begin
+        SQLQuery1 := TSQLQuery.Create(nil);
+
+      //Journal Header should always be inserted first, so it's safer to take that
+      // number
+      With SQLQuery1 do
+        begin
+          Transaction := SQLTransaction1;
+          SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD FROM JOURNAL '
+            + 'WHERE TRANSNO = :TransNo '
+            + 'AND TRANSROW = :TransRow';
+          ParamByName('TransNo').AsInteger := self._TransNo;
+          ParamByName('TransRow').AsInteger := self._TransRow;
+
+          Open;
+          If not EOF then
+            begin
+             Self._Text := FieldByName('TEXT').AsString;
+             If FieldByName('DrAmt').AsInteger > 0 then
+               begin
+                 self._drcr:=Dr;
+                 self._amount:=FieldByName('DrAmt').AsInteger;
+               end
+             else
+               begin
+                 self._drcr:=Cr;
+                 self._amount:=FieldByName('CrAmt').AsInteger;
+               end;
+               // work around some SQLite bugginess
+  //           self._acctno := FieldByName('DrAcctCd').AsInteger;
+            self._acctno := StrToInt(FieldByName('DrAcctCd').AsString);
+             self._currency :=FieldByName('DrCurrKey').AsString;
+            end
+          else
+           Raise Exception.Create ('!');
+          Close;
+          Destroy;
+        end;
+        _new := False;
+        _Dirty := False;
+      end;
+
+  Procedure TJournalDetailEntry.Load(const TN:Integer; const TR:Integer);
+    begin
+      self._TransNo := TN;
+      self._TransRow := TR;
+      Select;
     end;
 
   Function TJournalHeader.Insert:boolean;
