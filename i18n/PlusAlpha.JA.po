@@ -64,7 +64,7 @@ msgstr ""
 
 #: tfrmledger.lblacctype.caption
 msgid "Account Type"
-msgstr ""
+msgstr "口座種類"
 
 #: tfrmledger.lblacctype1.caption
 msgid "Account SubType"
@@ -100,7 +100,7 @@ msgstr "プラスα-新規取引"
 
 #: tfrmtransaction.cbposted.caption
 msgid "Cleared"
-msgstr ""
+msgstr "確定済"
 
 #: tfrmtransaction.deheadereffdate.cancelcaption
 msgid "Cancel"
@@ -213,4 +213,3 @@ msgstr "取引明細"
 #: tfrmtransaction.stdetail1.caption
 msgid " Transaction Header"
 msgstr "取引ヘッダー"
-

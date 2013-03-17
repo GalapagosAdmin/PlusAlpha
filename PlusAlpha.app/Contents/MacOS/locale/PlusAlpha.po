@@ -1,6 +1,42 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: tformplusalphamain.bbdebug.caption
+msgid "Debug Options"
+msgstr ""
+
+#: tformplusalphamain.bbledger.caption
+msgid "Account Ledger"
+msgstr ""
+
+#: tformplusalphamain.bbnewtran.caption
+msgid "New Transaction"
+msgstr ""
+
+#: tformplusalphamain.caption
+msgid "PlusAlpha"
+msgstr ""
+
+#: tfrmdebug.bbtextcode.caption
+msgid "bbTextCode"
+msgstr ""
+
+#: tfrmdebug.bbtransno.caption
+msgid "bbTransNo"
+msgstr ""
+
+#: tfrmdebug.caption
+msgid "Plus Alpha - Debug Options"
+msgstr ""
+
+#: tfrmdebug.letextcd.editlabel.caption
+msgid "leTextCd"
+msgstr ""
+
+#: tfrmdebug.letranno.editlabel.caption
+msgid "leTranNo"
+msgstr ""
+
 #: tfrmledger.actreerefresh.caption
 msgid "acTreeRefresh"
 msgstr ""
