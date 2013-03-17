@@ -55,7 +55,7 @@ var
 implementation
 
  uses
-   libpa, paLedger;
+   libpa, paLedger, paText;
 
 {$R *.lfm}
 
@@ -114,11 +114,16 @@ begin
  tvAccountList.Items.Clear;
  with tvAccountLIst do
    begin
-     AssetRoot := items.Add(nil, 'Assets');
-     LiabilityRoot := items.Add(nil, 'Liabilities');
-     IncomeRoot := items.Add(nil, 'Income');
-     ExpenseRoot := items.Add(nil, 'Expense');
-     EquityRoot := items.Add(nil, 'Equity');
+//     AssetRoot := items.Add(nil, 'Assets');
+     AssetRoot := items.Add(nil, DBText.GetText(3));
+     //     LiabilityRoot := items.Add(nil, 'Liabilities');
+     LiabilityRoot := items.Add(nil, DBText.GetText(4));
+//     IncomeRoot := items.Add(nil, 'Income');
+     IncomeRoot := items.Add(nil, DBText.GetText(7));
+//     ExpenseRoot := items.Add(nil, 'Expense');
+     ExpenseRoot := items.Add(nil, DBText.GetText(6));
+     //     EquityRoot := items.Add(nil, 'Equity');
+     EquityRoot := items.Add(nil, DBText.GetText(5));
    end;
 
  // technically, if there were no accounts, this could fail...

@@ -72,6 +72,12 @@ implementation
 
 uses libpa, paLedger, paJournal;
 
+ResourceString
+  MSGTRANSINSERTED = 'Transaction Inserted';
+  ERRTRANSNOTINSERT = 'Error Inserting Transaction.';
+  ERRTRANSNOTVALID = 'Transaction is not valid.';
+  ERRTRANSNOTBAL = 'Transaction is not balanced.';
+
 { TfrmTransaction }
 
 procedure TfrmTransaction.FormShow(Sender: TObject);
@@ -133,18 +139,18 @@ begin
 
   If not IsBalanced then
      begin
-       ShowMessage('Transaction is not balanced.');
+       ShowMessage(ERRTRANSNOTBAL);
        exit;
      end;
    If not Validate then
      begin
-       ShowMessage('Transaction is not valid.');
+       ShowMessage(ERRTRANSNOTVALID);
        exit;
      end;
 
   If Insert then
     begin
-     ShowMessage('Transaction Inserted');
+     ShowMessage(MsgTransInserted);
      // re-init everything
      LeTrnNo.Clear;
      LeHdrMemo.Clear;
@@ -158,7 +164,7 @@ begin
      leAmt2.Clear;
    end
   else
-   ShowMessage('Error Inserting Transaction.');
+   ShowMessage(ERRTRANSNOTINSERT);
 
   leTrnNo.Text:= IntToStr(CompleteJournalEntry.TransNo);
   self.Close;
@@ -181,8 +187,6 @@ Procedure TfrmTransaction.FormCreate(Sender: TObject);
 {$R *.lfm}
 
 initialization
-{$IFDEF DARWIN}
-//SetDefaultLang(GetEnvironmentVariable('LANG'));
-{$ENDIF}
+
 end.
 

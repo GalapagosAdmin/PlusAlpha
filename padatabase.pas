@@ -20,6 +20,9 @@ implementation
 uses
   FileUtil;
 
+ResourceString
+  ERRDBNOTFOUND = 'Database not found at: ';
+
 initialization
 
   DatabaseName := 'plusalpha.sqlite';
@@ -34,7 +37,7 @@ initialization
     SQLTransaction1 := TSQLTransaction.Create(nil);
     SQLTransaction1.DataBase := SQLite3Connection1;
   except
-    raise Exception.Create('Database not found at: ' + CompleteDBPath);
+    raise Exception.Create(ERRDBNOTFOUND+ CompleteDBPath);
   end;
 
 end.

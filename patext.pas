@@ -19,6 +19,7 @@ interface
    Private
      _TextCD : Integer;
      _LangCD : TLangCode;
+     _LangCode_Fallback:TLangCode;
      _Text : UTF8String;
      Function Select:Boolean;
      Function Insert:Boolean;
@@ -36,11 +37,23 @@ interface
 
 implementation
 
-  uses paDatabase, sqldb;
+  uses paDatabase, sqldb, LazUTF8;
+  ResourceString
+    ErrCantReadText='Error: Unable to load requested text item.';
 
  Constructor TText.create;
+  Function GetShortLanguageID:TLangCode;
+    var
+      tmp:String;
+    begin
+      LazGetShortLanguageID(tmp);
+      Result := UpperCase(copy(tmp,1,2));
+    end;
+
    begin
-     _LangCd := 'EN';
+     _LangCode_Fallback := 'EN';
+//     _LangCd := GetEnvironmentVariable('LANG');
+     _LangCD := GetShortLanguageID;
      _TextCd := 0;
      inherited create;
    end;
@@ -62,7 +75,18 @@ implementation
 
       Open;
       If not EOF then
-        _Text := FieldByName('text').AsString;
+        _Text := FieldByName('text').AsString
+      else
+        begin
+          // backup plan - Try with Fallback language
+         ParamByName('LangCD').AsString := _LangCode_Fallback;
+         if SQLQuery1.Active then SQLQuery1.close;
+         Open;
+         If not EOF then
+           _Text := FieldByName('text').AsString
+         else
+           raise exception.Create(ErrCantReadText);
+        end;
       Close;
       Destroy;
     end;
@@ -79,6 +103,7 @@ implementation
 
  Function TText.GetText(TextCd:Integer):UTF8String;
    begin
+     _Text := '';
      _TextCd := TextCd;
      select;
      Result := _Text

@@ -10,45 +10,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
 
+#: frmtransactionunit.errtransnotbal
+msgid "Transaction is not balanced."
+msgstr "取引はバランスになっていないです。"
+
+#: frmtransactionunit.errtransnotinsert
+msgid "Error Inserting Transaction."
+msgstr "取引保存中にエラーが発生しました。"
+
+#: frmtransactionunit.errtransnotvalid
+msgid "Transaction is not valid."
+msgstr "取引は無効です。"
+
+#: frmtransactionunit.msgtransinserted
+msgid "Transaction Inserted"
+msgstr "取引保存しました。"
+
+#: padatabase.errdbnotfound
+msgid "Database not found at: "
+msgstr "データベースは読み込めない："
+
+#: patext.errcantreadtext
+msgid "Error: Unable to load requested text item."
+msgstr "エラー：テキストは読み込めない。"
+
 #: tformplusalphamain.bbdebug.caption
 msgid "Debug Options"
-msgstr ""
+msgstr "ディバッグ機能"
 
 #: tformplusalphamain.bbledger.caption
 msgid "Account Ledger"
-msgstr ""
+msgstr "口座一覧"
 
 #: tformplusalphamain.bbnewtran.caption
 msgid "New Transaction"
-msgstr ""
+msgstr "新規取引"
 
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
-msgstr ""
+msgstr "プラスα"
 
 #: tfrmdebug.bbtextcode.caption
 msgid "bbTextCode"
-msgstr ""
+msgstr "テキストコード"
 
 #: tfrmdebug.bbtransno.caption
 msgid "bbTransNo"
-msgstr ""
+msgstr "取引番号"
 
 #: tfrmdebug.caption
 msgid "Plus Alpha - Debug Options"
-msgstr ""
+msgstr "プラスα-デバッグ昨日"
 
 #: tfrmdebug.letextcd.editlabel.caption
 msgid "leTextCd"
-msgstr ""
+msgstr "テキストコード"
 
 #: tfrmdebug.letranno.editlabel.caption
 msgid "leTranNo"
-msgstr ""
+msgstr "取引番号"
 
 #: tfrmledger.actreerefresh.caption
 msgid "acTreeRefresh"
-msgstr ""
+msgstr "ツリー更新"
 
 #: tfrmledger.bbsynch.caption
 msgid "Apply"
@@ -60,7 +84,7 @@ msgstr "プラスα-総勘定元帳"
 
 #: tfrmledger.groupbox1.caption
 msgid "Account Details"
-msgstr ""
+msgstr "口座明細"
 
 #: tfrmledger.lblacctype.caption
 msgid "Account Type"
@@ -68,7 +92,7 @@ msgstr "口座種類"
 
 #: tfrmledger.lblacctype1.caption
 msgid "Account SubType"
-msgstr ""
+msgstr "口座種類：小"
 
 #: tfrmledger.leacctbal.editlabel.caption
 msgid "Balance:"
@@ -181,22 +205,22 @@ msgstr "備考"
 #: tfrmtransaction.lememo1.editlabel.caption
 msgctxt "tfrmtransaction.lememo1.editlabel.caption"
 msgid "Line Item Memo"
-msgstr ""
+msgstr "項目備考"
 
 #: tfrmtransaction.lememo2.editlabel.caption
 msgctxt "TFRMTRANSACTION.LEMEMO2.EDITLABEL.CAPTION"
 msgid "Line Item Memo"
-msgstr ""
+msgstr "項目備考"
 
 #: tfrmtransaction.lememo3.editlabel.caption
 msgctxt "TFRMTRANSACTION.LEMEMO3.EDITLABEL.CAPTION"
 msgid "Line Item Memo"
-msgstr ""
+msgstr "項目備考"
 
 #: tfrmtransaction.lememo4.editlabel.caption
 msgctxt "TFRMTRANSACTION.LEMEMO4.EDITLABEL.CAPTION"
 msgid "Line Item Memo"
-msgstr ""
+msgstr "項目備考"
 
 #: tfrmtransaction.letrnno.editlabel.caption
 msgid "Trans. No."

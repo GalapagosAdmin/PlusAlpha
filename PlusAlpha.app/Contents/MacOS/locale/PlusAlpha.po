@@ -1,6 +1,30 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: frmtransactionunit.errtransnotbal
+msgid "Transaction is not balanced."
+msgstr ""
+
+#: frmtransactionunit.errtransnotinsert
+msgid "Error Inserting Transaction."
+msgstr ""
+
+#: frmtransactionunit.errtransnotvalid
+msgid "Transaction is not valid."
+msgstr ""
+
+#: frmtransactionunit.msgtransinserted
+msgid "Transaction Inserted"
+msgstr ""
+
+#: padatabase.errdbnotfound
+msgid "Database not found at: "
+msgstr ""
+
+#: patext.errcantreadtext
+msgid "Error: Unable to load requested text item."
+msgstr ""
+
 #: tformplusalphamain.bbdebug.caption
 msgid "Debug Options"
 msgstr ""

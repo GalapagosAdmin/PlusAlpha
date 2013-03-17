@@ -4,10 +4,32 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleLocalizations</key>
-	<string>ja</string>
 	<key>CFBundleExecutable</key>
 	<string>PlusAlpha</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>de</string>
+		<string>es</string>
+		<string>af_ZA</string>
+		<string>ar</string>
+		<string>ca</string>
+		<string>fi</string>
+		<string>he</string>
+		<string>ja</string>
+		<string>fr</string>
+		<string>id</string>
+		<string>lt</string>
+		<string>it</string>
+		<string>pl</string>
+		<string>nl</string>
+		<string>pb</string>
+		<string>ru</string>
+		<string>sk</string>
+		<string>tr</string>
+		<string>ua</string>
+		<string>zh_CN</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>PlusAlpha</string>
 	<key>CFBundleIdentifier</key>
