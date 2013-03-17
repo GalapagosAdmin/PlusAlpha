@@ -37,6 +37,11 @@ msgstr ""
 msgid "New Transaction"
 msgstr ""
 
+#: tformplusalphamain.bbtransactionsearch.caption
+msgctxt "TFORMPLUSALPHAMAIN.BBTRANSACTIONSEARCH.CAPTION"
+msgid "Transaction List"
+msgstr ""
+
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
 msgstr ""
@@ -227,5 +232,10 @@ msgstr ""
 
 #: tfrmtransaction.stdetail1.caption
 msgid " Transaction Header"
+msgstr ""
+
+#: tfrmtransactionlist.caption
+msgctxt "tfrmtransactionlist.caption"
+msgid "Transaction List"
 msgstr ""
 

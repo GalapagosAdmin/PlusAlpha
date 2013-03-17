@@ -16,10 +16,12 @@ type
     bbNewTran: TBitBtn;
     bbDebug: TBitBtn;
     bbLedger: TBitBtn;
+    bbTransactionSearch: TBitBtn;
     procedure bbDebugClick(Sender: TObject);
     procedure bbHdrUpdateClick(Sender: TObject);
     procedure bbNewTranClick(Sender: TObject);
     procedure bbLedgerClick(Sender: TObject);
+    procedure bbTransactionSearchClick(Sender: TObject);
   //  procedure bbSaveClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -35,7 +37,7 @@ var
 implementation
 
 uses
-  frmTransactionUnit, frmledgerunit, frmDebugUnit, defaulttranslator;
+  frmTransactionUnit, frmledgerunit, frmDebugUnit, frmTransactionListUnit, defaulttranslator;
 
 {$R *.lfm}
 
@@ -58,6 +60,11 @@ end;
 procedure TFormPlusAlphaMain.bbLedgerClick(Sender: TObject);
 begin
   frmLedger.Show;
+end;
+
+procedure TFormPlusAlphaMain.bbTransactionSearchClick(Sender: TObject);
+begin
+  frmTransactionList.Show;
 end;
 
 

@@ -46,6 +46,11 @@ msgstr "口座一覧"
 msgid "New Transaction"
 msgstr "新規取引"
 
+#: tformplusalphamain.bbtransactionsearch.caption
+msgctxt "tformplusalphamain.bbtransactionsearch.caption"
+msgid "Transaction List"
+msgstr "取引検索"
+
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
 msgstr "プラスα"
@@ -237,3 +242,8 @@ msgstr "取引明細"
 #: tfrmtransaction.stdetail1.caption
 msgid " Transaction Header"
 msgstr "取引ヘッダー"
+
+#: tfrmtransactionlist.caption
+msgctxt "tfrmtransactionlist.caption"
+msgid "Transaction List"
+msgstr "取引検索"

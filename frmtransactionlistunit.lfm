@@ -1,0 +1,27 @@
+object frmTransactionList: TfrmTransactionList
+  Left = 292
+  Height = 276
+  Top = 169
+  Width = 591
+  Caption = 'Transaction List'
+  ClientHeight = 276
+  ClientWidth = 591
+  OnShow = FormShow
+  LCLVersion = '1.1'
+  object pnlToolbar: TPanel
+    Left = 0
+    Height = 34
+    Top = 0
+    Width = 591
+    Align = alTop
+    TabOrder = 0
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Height = 242
+    Top = 34
+    Width = 591
+    Align = alClient
+    TabOrder = 1
+  end
+end

@@ -41,7 +41,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="13">
+    <Units Count="15">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -121,6 +121,19 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="paText"/>
       </Unit12>
+      <Unit13>
+        <Filename Value="patransactionlist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paTransactionList"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmTransactionList"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frmTransactionListUnit"/>
+      </Unit14>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
