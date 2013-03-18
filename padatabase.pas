@@ -20,11 +20,16 @@ implementation
 uses
   FileUtil;
 
+ Function GetApplicationName:string;//TGetAppNameEvent;
+   begin
+     Result := 'PlusAlpha';
+   end;
+
 ResourceString
   ERRDBNOTFOUND = 'Database not found at: ';
 
 initialization
-
+  OnGetApplicationName := @GetApplicationName;
   DatabaseName := 'plusalpha.sqlite';
   SQLite3Connection1 := TSQLite3Connection.Create(nil);
   // The following returns ~/.config/PlusAlpha/ on OS X

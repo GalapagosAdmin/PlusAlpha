@@ -5,7 +5,7 @@ unit paLedger;
 interface
 
 uses
-  Classes, SysUtils, libpa, comctrls;
+  Classes, SysUtils, libpa;//, comctrls;
 
 
   type
@@ -57,7 +57,7 @@ uses
       _AccountList : Array of TLedgerAccount;
       _CurrentAccount:integer; // used for enumerating
       _HighWaterMark:Integer;  // Highest numbered account in the database
-      Tree:TTreeNodes;
+   //   Tree:TTreeNodes;
       Procedure UpdateHighWaterMark;
       Procedure Load; // Loads the accuont list / Accounts from the DB
       Procedure Clear;
