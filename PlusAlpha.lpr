@@ -7,9 +7,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, paFrmMainUnit, libpa, padm, sdflaz, frmTransactionUnit, frmDebugUnit,
-  frmLedgerUnit, paLedger, paDatabase, pacalculator, paJournal, paText,
-  paTransactionList, frmTransactionListUnit
+  Forms, paFrmMainUnit, libpa, padm, sdflaz, lazcontrols, frmTransactionUnit,
+  frmDebugUnit, frmLedgerUnit, paLedger, paDatabase, pacalculator, paJournal,
+  paText, paTransactionList, frmTransactionListUnit
   { you can add units after this };
 
 {$R *.res}

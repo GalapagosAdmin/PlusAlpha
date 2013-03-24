@@ -6,6 +6,16 @@ msgctxt "frmtransactionlistunit.hdramt"
 msgid "Amount"
 msgstr ""
 
+#: frmtransactionlistunit.hdrcr
+msgctxt "frmtransactionlistunit.hdrcr"
+msgid "Cr"
+msgstr ""
+
+#: frmtransactionlistunit.hdrdr
+msgctxt "frmtransactionlistunit.hdrdr"
+msgid "Dr"
+msgstr ""
+
 #: frmtransactionlistunit.hdrtext
 msgid "Text"
 msgstr ""
@@ -251,8 +261,16 @@ msgstr ""
 msgid " Transaction Header"
 msgstr ""
 
+#: tfrmtransactionlist.acupdate.caption
+msgid "acUpdate"
+msgstr ""
+
 #: tfrmtransactionlist.caption
 msgctxt "tfrmtransactionlist.caption"
 msgid "Transaction List"
+msgstr ""
+
+#: tfrmtransactionlist.cbaccount.text
+msgid "cbAccount"
 msgstr ""
 

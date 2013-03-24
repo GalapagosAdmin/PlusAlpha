@@ -5,7 +5,7 @@ unit paCalculator;
 interface
 
  uses
-  Classes, SysUtils, libpa;
+  Classes, SysUtils, libpa, paCurrency;
 
  type
    // Single Currency DrCr Calculator

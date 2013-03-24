@@ -11,7 +11,7 @@
         <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="3" Y="12"/>
+        <CursorPos X="52" Y="12"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -24,7 +24,7 @@
         <UnitName Value="paFrmMainUnit"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="29"/>
+        <TopLine Value="55"/>
         <CursorPos X="34" Y="43"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
@@ -37,7 +37,7 @@
         <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="4" Y="29"/>
+        <CursorPos X="3" Y="12"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -75,8 +75,8 @@
         <UnitName Value="frmTransactionUnit"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="10"/>
-        <CursorPos X="51" Y="79"/>
+        <TopLine Value="122"/>
+        <CursorPos X="39" Y="130"/>
         <UsageCount Value="301"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -104,7 +104,7 @@
         <UnitName Value="frmLedgerUnit"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="13"/>
+        <TopLine Value="110"/>
         <CursorPos X="6" Y="17"/>
         <UsageCount Value="251"/>
         <Loaded Value="True"/>
@@ -114,10 +114,9 @@
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="431"/>
+        <TopLine Value="433"/>
         <CursorPos X="4" Y="322"/>
         <UsageCount Value="221"/>
         <Loaded Value="True"/>
@@ -139,8 +138,8 @@
         <UnitName Value="paCalculator"/>
         <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="38"/>
-        <CursorPos X="105" Y="19"/>
+        <TopLine Value="33"/>
+        <CursorPos X="87" Y="40"/>
         <UsageCount Value="220"/>
         <Loaded Value="True"/>
       </Unit10>
@@ -150,8 +149,8 @@
         <UnitName Value="paJournal"/>
         <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="154"/>
-        <CursorPos X="27" Y="176"/>
+        <TopLine Value="522"/>
+        <CursorPos X="14" Y="45"/>
         <UsageCount Value="365"/>
         <Loaded Value="True"/>
       </Unit11>
@@ -163,7 +162,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="17" Y="93"/>
-        <UsageCount Value="113"/>
+        <UsageCount Value="116"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -174,130 +173,132 @@
         <WindowIndex Value="0"/>
         <TopLine Value="50"/>
         <CursorPos X="19" Y="64"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="93"/>
         <Loaded Value="True"/>
       </Unit13>
       <Unit14>
-        <Filename Value="ftmtransactionlistunit.pas"/>
-        <ComponentName Value="frmTransactionList"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="frmTransactionListUnit"/>
-        <UsageCount Value="14"/>
-      </Unit14>
-      <Unit15>
-        <Filename Value="/Developer/lazarus/lcl/include/customcheckbox.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="63"/>
-        <CursorPos X="1" Y="74"/>
-        <UsageCount Value="126"/>
-      </Unit15>
-      <Unit16>
-        <Filename Value="/Developer/lazarus/packager/registration/lazaruspackageintf.pas"/>
-        <UnitName Value="LazarusPackageIntf"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="82"/>
-        <CursorPos X="1" Y="103"/>
-        <UsageCount Value="80"/>
-      </Unit16>
-      <Unit17>
-        <Filename Value="/Developer/lazarus/components/sdf/registersdf.pas"/>
-        <UnitName Value="RegisterSDF"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="41"/>
-        <UsageCount Value="80"/>
-      </Unit17>
-      <Unit18>
-        <Filename Value="/Developer/lazarus/components/sdf/registersdf.lrs"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="16"/>
-        <CursorPos X="1" Y="31"/>
-        <UsageCount Value="80"/>
-      </Unit18>
-      <Unit19>
-        <Filename Value="/Developer/lazarus/lcl/include/treeview.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1276"/>
-        <CursorPos X="1" Y="1603"/>
-        <UsageCount Value="26"/>
-      </Unit19>
-      <Unit20>
-        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.pas"/>
-        <UnitName Value="FileUtil"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="244"/>
-        <CursorPos X="90" Y="115"/>
-        <UsageCount Value="1"/>
-      </Unit20>
-      <Unit21>
-        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="311"/>
-        <CursorPos X="35" Y="152"/>
-        <UsageCount Value="1"/>
-      </Unit21>
-      <Unit22>
-        <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/sysutils/osutilsh.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="43"/>
-        <CursorPos X="18" Y="43"/>
-        <UsageCount Value="1"/>
-      </Unit22>
-      <Unit23>
-        <Filename Value="/usr/local/share/fpcsrc/rtl/unix/sysutils.pp"/>
-        <UnitName Value="sysutils"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1375"/>
-        <CursorPos X="10" Y="1294"/>
-        <UsageCount Value="1"/>
-      </Unit23>
-      <Unit24>
-        <Filename Value="/usr/local/share/fpcsrc/packages/univint/src/MacOSAll.pas"/>
-        <UnitName Value="MacOSAll"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="2017"/>
-        <CursorPos X="1" Y="1"/>
-        <UsageCount Value="1"/>
-      </Unit24>
-      <Unit25>
-        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
-        <UnitName Value="DefaultTranslator"/>
-        <EditorIndex Value="5"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="429"/>
-        <UsageCount Value="55"/>
-        <Loaded Value="True"/>
-      </Unit25>
-      <Unit26>
-        <Filename Value="/Developer/lazarus/lcl/lclproc.pas"/>
-        <UnitName Value="LCLProc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="3135"/>
-        <CursorPos X="1" Y="2937"/>
-        <UsageCount Value="12"/>
-      </Unit26>
-      <Unit27>
-        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
-        <UnitName Value="LazUTF8"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="2845"/>
-        <CursorPos X="63" Y="2860"/>
-        <UsageCount Value="12"/>
-      </Unit27>
-      <Unit28>
         <Filename Value="frmtransactionlistunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTransactionList"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmTransactionListUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="8" Y="43"/>
-        <UsageCount Value="83"/>
+        <TopLine Value="47"/>
+        <CursorPos X="41" Y="60"/>
+        <UsageCount Value="86"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="ftmtransactionlistunit.pas"/>
+        <ComponentName Value="frmTransactionList"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frmTransactionListUnit"/>
+        <UsageCount Value="14"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="/Developer/lazarus/lcl/include/customcheckbox.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="63"/>
+        <CursorPos X="1" Y="74"/>
+        <UsageCount Value="126"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="/Developer/lazarus/packager/registration/lazaruspackageintf.pas"/>
+        <UnitName Value="LazarusPackageIntf"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="82"/>
+        <CursorPos X="1" Y="103"/>
+        <UsageCount Value="80"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="/Developer/lazarus/components/sdf/registersdf.pas"/>
+        <UnitName Value="RegisterSDF"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="41"/>
+        <UsageCount Value="80"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="/Developer/lazarus/components/sdf/registersdf.lrs"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="16"/>
+        <CursorPos X="1" Y="31"/>
+        <UsageCount Value="80"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="/Developer/lazarus/lcl/include/treeview.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1276"/>
+        <CursorPos X="1" Y="1603"/>
+        <UsageCount Value="26"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.pas"/>
+        <UnitName Value="FileUtil"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="244"/>
+        <CursorPos X="90" Y="115"/>
+        <UsageCount Value="1"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="311"/>
+        <CursorPos X="35" Y="152"/>
+        <UsageCount Value="1"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/sysutils/osutilsh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="43"/>
+        <CursorPos X="18" Y="43"/>
+        <UsageCount Value="1"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/unix/sysutils.pp"/>
+        <UnitName Value="sysutils"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1375"/>
+        <CursorPos X="10" Y="1294"/>
+        <UsageCount Value="1"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="/usr/local/share/fpcsrc/packages/univint/src/MacOSAll.pas"/>
+        <UnitName Value="MacOSAll"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2017"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="1"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
+        <UnitName Value="DefaultTranslator"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="429"/>
+        <UsageCount Value="57"/>
+        <Loaded Value="True"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="/Developer/lazarus/lcl/lclproc.pas"/>
+        <UnitName Value="LCLProc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="3135"/>
+        <CursorPos X="1" Y="2937"/>
+        <UsageCount Value="12"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="/Developer/lazarus/components/lazutils/lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2845"/>
+        <CursorPos X="63" Y="2860"/>
+        <UsageCount Value="12"/>
       </Unit28>
       <Unit29>
         <Filename Value="/Developer/lazarus/lcl/include/customform.inc"/>
@@ -313,7 +314,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="9709"/>
         <CursorPos X="1" Y="9723"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit30>
     </Units>
@@ -322,124 +323,124 @@
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="49" Column="1" TopLine="31"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="50" Column="1" TopLine="29"/>
       </Position1>
       <Position2>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="50" Column="1" TopLine="31"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="51" Column="1" TopLine="29"/>
       </Position2>
       <Position3>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="51" Column="1" TopLine="32"/>
+        <Filename Value="/Developer/lazarus/lcl/grids.pas"/>
+        <Caret Line="9722" Column="1" TopLine="9709"/>
       </Position3>
       <Position4>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="53" Column="1" TopLine="34"/>
+        <Filename Value="/Developer/lazarus/lcl/grids.pas"/>
+        <Caret Line="9723" Column="1" TopLine="9709"/>
       </Position4>
       <Position5>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="54" Column="1" TopLine="50"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="46" Column="1" TopLine="29"/>
       </Position5>
       <Position6>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="60" Column="1" TopLine="50"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="47" Column="1" TopLine="29"/>
       </Position6>
       <Position7>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="61" Column="1" TopLine="50"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="48" Column="1" TopLine="29"/>
       </Position7>
       <Position8>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="63" Column="1" TopLine="50"/>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="176" Column="27" TopLine="154"/>
       </Position8>
       <Position9>
-        <Filename Value="patransactionlist.pas"/>
-        <Caret Line="69" Column="1" TopLine="50"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="49" Column="44" TopLine="37"/>
       </Position9>
       <Position10>
-        <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="42" Column="1" TopLine="25"/>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="176" Column="27" TopLine="154"/>
       </Position10>
       <Position11>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="174" Column="14" TopLine="156"/>
+        <Filename Value="pacalculator.pas"/>
+        <Caret Line="19" Column="105" TopLine="38"/>
       </Position11>
       <Position12>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="70" Column="45" TopLine="49"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="65" Column="31" TopLine="42"/>
       </Position12>
       <Position13>
         <Filename Value="pajournal.pas"/>
-        <Caret Line="132" Column="1" TopLine="119"/>
+        <Caret Line="45" Column="14" TopLine="33"/>
       </Position13>
       <Position14>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="146" Column="26" TopLine="133"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="65" Column="2" TopLine="54"/>
       </Position14>
       <Position15>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="160" Column="30" TopLine="146"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="71" Column="43" TopLine="54"/>
       </Position15>
       <Position16>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="166" Column="25" TopLine="153"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="16" Column="101" TopLine="50"/>
       </Position16>
       <Position17>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="51" Column="28" TopLine="25"/>
+        <Caret Line="72" Column="43" TopLine="55"/>
       </Position17>
       <Position18>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="9" Column="49" TopLine="1"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="49" Column="25" TopLine="36"/>
       </Position18>
       <Position19>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="49" Column="6" TopLine="29"/>
+        <Caret Line="48" Column="25" TopLine="35"/>
       </Position19>
       <Position20>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="50" Column="1" TopLine="29"/>
+        <Caret Line="49" Column="34" TopLine="36"/>
       </Position20>
       <Position21>
-        <Filename Value="/Developer/lazarus/lcl/grids.pas"/>
-        <Caret Line="9722" Column="1" TopLine="9709"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="9" Column="63" TopLine="1"/>
       </Position21>
       <Position22>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="50" Column="1" TopLine="29"/>
+        <Caret Line="31" Column="6" TopLine="18"/>
       </Position22>
       <Position23>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="51" Column="1" TopLine="29"/>
+        <Caret Line="49" Column="34" TopLine="36"/>
       </Position23>
       <Position24>
-        <Filename Value="/Developer/lazarus/lcl/grids.pas"/>
-        <Caret Line="9722" Column="1" TopLine="9709"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="32" Column="9" TopLine="29"/>
       </Position24>
       <Position25>
-        <Filename Value="/Developer/lazarus/lcl/grids.pas"/>
-        <Caret Line="9723" Column="1" TopLine="9709"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="33" Column="9" TopLine="30"/>
       </Position25>
       <Position26>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="46" Column="1" TopLine="29"/>
+        <Caret Line="35" Column="9" TopLine="32"/>
       </Position26>
       <Position27>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="47" Column="1" TopLine="29"/>
+        <Caret Line="61" Column="4" TopLine="52"/>
       </Position27>
       <Position28>
-        <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="48" Column="1" TopLine="29"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="85" Column="58" TopLine="83"/>
       </Position28>
       <Position29>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="176" Column="27" TopLine="154"/>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="62" Column="31" TopLine="54"/>
       </Position29>
       <Position30>
         <Filename Value="frmtransactionlistunit.pas"/>
-        <Caret Line="49" Column="44" TopLine="37"/>
+        <Caret Line="60" Column="49" TopLine="54"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

@@ -9,7 +9,6 @@ uses
 
 Type
   TLangCode=String[2];
-  TCurrCode=String[3];
   TDrCr = (Dr, Cr);
   TAcctType = (atAsset:=0, atLiability:=1, atEquity:=2, atExpense:=3,
                atIncome:=4, atRevenue:=5, atPlaceholder:=6, atOther:=7);

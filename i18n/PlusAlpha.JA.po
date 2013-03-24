@@ -15,6 +15,16 @@ msgctxt "frmtransactionlistunit.hdramt"
 msgid "Amount"
 msgstr "金額"
 
+#: frmtransactionlistunit.hdrcr
+msgctxt "frmtransactionlistunit.hdrcr"
+msgid "Cr"
+msgstr "貸方"
+
+#: frmtransactionlistunit.hdrdr
+msgctxt "frmtransactionlistunit.hdrdr"
+msgid "Dr"
+msgstr "借方"
+
 #: frmtransactionlistunit.hdrtext
 msgid "Text"
 msgstr ""
@@ -260,8 +270,16 @@ msgstr "取引明細"
 msgid " Transaction Header"
 msgstr "取引ヘッダー"
 
+#: tfrmtransactionlist.acupdate.caption
+msgid "acUpdate"
+msgstr ""
+
 #: tfrmtransactionlist.caption
 msgctxt "tfrmtransactionlist.caption"
 msgid "Transaction List"
 msgstr "取引検索"
+
+#: tfrmtransactionlist.cbaccount.text
+msgid "cbAccount"
+msgstr ""
 

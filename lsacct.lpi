@@ -39,12 +39,17 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="1">
+    <Units Count="2">
       <Unit0>
         <Filename Value="lsacct.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="lsacct"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="pacurrency.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paCurrency"/>
+      </Unit1>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

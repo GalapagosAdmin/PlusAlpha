@@ -5,13 +5,14 @@ unit paLedger;
 interface
 
 uses
-  Classes, SysUtils, libpa;//, comctrls;
+  Classes, SysUtils, libpa, paCurrency;//, comctrls;
 
 
   type
   TLedgerAccount = Class(TObject)   // Ledger Account
   protected
       _bal:Integer; // Ledger balance
+      _scale:Integer; // Decimals for currency scale
       _drcr:Tdrcr; // debit/credit indicator for current balance
       _dirty:boolean; // Indicates if synch to db is required
       _new:boolean;    // specifies that this entry has not yet been written to the database
@@ -137,6 +138,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
        begin
          self._AcctNo := StrToInt(FieldByName('AcctNo').AsString);
          self._currency := FieldByName('CurrKey').AsString;
+         self._scale := GetScale(_Currency);
          self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
          self._AccStDB := FieldByName('AccSTCd').AsString[1];
          // Pascal representation

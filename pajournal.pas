@@ -6,7 +6,7 @@ unit paJournal;
 interface
 
 uses
-  Classes, SysUtils, libpa, sqldb;
+  Classes, SysUtils, libpa, sqldb, paCurrency;
 
 type
  TJournalHeader = class(TObject)

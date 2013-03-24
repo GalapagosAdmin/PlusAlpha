@@ -14,7 +14,19 @@ object frmTransactionList: TfrmTransactionList
     Top = 0
     Width = 591
     Align = alTop
+    ClientHeight = 34
+    ClientWidth = 591
     TabOrder = 0
+    object cbAccount: TComboBox
+      Left = 8
+      Height = 21
+      Top = 8
+      Width = 184
+      ItemHeight = 0
+      OnChange = cbAccountChange
+      TabOrder = 0
+      Text = 'cbAccount'
+    end
   end
   object StringGrid1: TStringGrid
     Left = 0
@@ -22,6 +34,15 @@ object frmTransactionList: TfrmTransactionList
     Top = 34
     Width = 591
     Align = alClient
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
     TabOrder = 1
+  end
+  object ActionList1: TActionList
+    left = 536
+    top = 8
+    object acUpdate: TAction
+      Caption = 'acUpdate'
+      OnExecute = acUpdateExecute
+    end
   end
 end
