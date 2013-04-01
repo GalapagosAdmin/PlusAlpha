@@ -61,26 +61,44 @@ msgstr "データベースは読み込めない："
 msgid "Error: Unable to load requested text item."
 msgstr "エラー：テキストは読み込めない。"
 
+#: tfmewelcome.label1.caption
+msgid "Welcome!"
+msgstr ""
+
+#: tformplusalphamain.acaccountshow.caption
+msgid "acAccountShow"
+msgstr ""
+
 #: tformplusalphamain.bbdebug.caption
 msgid "Debug Options"
 msgstr "ディバッグ機能"
 
 #: tformplusalphamain.bbledger.caption
-msgid "Account Ledger"
+#, fuzzy
+#| msgid "Account Ledger"
+msgctxt "tformplusalphamain.bbledger.caption"
+msgid "Transaction List"
 msgstr "口座一覧"
 
 #: tformplusalphamain.bbnewtran.caption
 msgid "New Transaction"
 msgstr "新規取引"
 
-#: tformplusalphamain.bbtransactionsearch.caption
-msgctxt "tformplusalphamain.bbtransactionsearch.caption"
-msgid "Transaction List"
-msgstr "取引検索"
-
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
 msgstr "プラスα"
+
+#: tformplusalphamain.toolbar1.caption
+msgid "ToolBar1"
+msgstr ""
+
+#: tformplusalphamain.toolbutton1.caption
+msgid "mmToolButton1"
+msgstr ""
+
+#: tformplusalphamain.toolbutton2.caption
+msgid "ToolButton2"
+msgstr ""
 
 #: tfrmdebug.bbtextcode.caption
 msgid "bbTextCode"
@@ -109,10 +127,6 @@ msgstr "ツリー更新"
 #: tfrmledger.bbsynch.caption
 msgid "Apply"
 msgstr "使用"
-
-#: tfrmledger.caption
-msgid "Plus Alpha - Ledger"
-msgstr "プラスα-総勘定元帳"
 
 #: tfrmledger.groupbox1.caption
 msgid "Account Details"

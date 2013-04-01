@@ -7,9 +7,10 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, paFrmMainUnit, libpa, padm, sdflaz, lazcontrols, frmTransactionUnit,
-  frmDebugUnit, frmLedgerUnit, paLedger, paDatabase, pacalculator, paJournal,
-  paText, paTransactionList, frmTransactionListUnit
+  Forms, paFrmMainUnit, libpa, padm, sdflaz, lazcontrols, anchordockpkg,
+  frmTransactionUnit, frmDebugUnit, frmLedgerUnit, paLedger, paDatabase,
+  pacalculator, paJournal, paText, paTransactionList, frmTransactionListUnit,
+  fmeWelcomeUnit
   { you can add units after this };
 
 {$R *.res}
@@ -21,7 +22,6 @@ begin
   Application.CreateForm(TfrmTransaction, frmTransaction);
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TfrmDebug, frmDebug);
-  Application.CreateForm(TfrmLedger, frmLedger);
   Application.CreateForm(TfrmTransactionList, frmTransactionList);
   Application.Run;
 end.

@@ -52,25 +52,41 @@ msgstr ""
 msgid "Error: Unable to load requested text item."
 msgstr ""
 
+#: tfmewelcome.label1.caption
+msgid "Welcome!"
+msgstr ""
+
+#: tformplusalphamain.acaccountshow.caption
+msgid "acAccountShow"
+msgstr ""
+
 #: tformplusalphamain.bbdebug.caption
 msgid "Debug Options"
 msgstr ""
 
 #: tformplusalphamain.bbledger.caption
-msgid "Account Ledger"
+msgctxt "tformplusalphamain.bbledger.caption"
+msgid "Transaction List"
 msgstr ""
 
 #: tformplusalphamain.bbnewtran.caption
 msgid "New Transaction"
 msgstr ""
 
-#: tformplusalphamain.bbtransactionsearch.caption
-msgctxt "TFORMPLUSALPHAMAIN.BBTRANSACTIONSEARCH.CAPTION"
-msgid "Transaction List"
-msgstr ""
-
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
+msgstr ""
+
+#: tformplusalphamain.toolbar1.caption
+msgid "ToolBar1"
+msgstr ""
+
+#: tformplusalphamain.toolbutton1.caption
+msgid "mmToolButton1"
+msgstr ""
+
+#: tformplusalphamain.toolbutton2.caption
+msgid "ToolButton2"
 msgstr ""
 
 #: tfrmdebug.bbtextcode.caption
@@ -99,10 +115,6 @@ msgstr ""
 
 #: tfrmledger.bbsynch.caption
 msgid "Apply"
-msgstr ""
-
-#: tfrmledger.caption
-msgid "Plus Alpha - Ledger"
 msgstr ""
 
 #: tfrmledger.groupbox1.caption

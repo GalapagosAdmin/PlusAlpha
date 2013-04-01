@@ -61,6 +61,7 @@ var
    JournalDetailEntry := TJournalDetailEntry.Create;
    StringGrid1.Clear;
    StringGrid1.RowCount:=Length(TransactionList.TransNos)+1;
+
    StringGrid1.cols[0].Append(HdrTransNo);
    StringGrid1.cols[1].Append(HdrTransRow);
    StringGrid1.cols[2].Append(HdrText);

@@ -12,7 +12,7 @@ type
 
   { TfrmLedger }
 
-  TfrmLedger = class(TForm)
+  TfrmLedger = class(Tframe)
     acTreeRefresh: TAction;
     alFrmLedger: TActionList;
     bbSynch: TBitBtn;
@@ -21,6 +21,7 @@ type
     cbAccSubType: TComboBox;
     ebAccountTitle: TEdit;
     GroupBox1: TGroupBox;
+    ImageList1: TImageList;
     leExtAcctNo: TLabeledEdit;
     lblAccType: TLabel;
     lblAccType1: TLabel;

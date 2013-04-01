@@ -1,29 +1,39 @@
 object frmLedger: TfrmLedger
-  Left = 209
-  Height = 317
-  Top = 289
-  Width = 541
+  Left = 0
+  Height = 350
+  Top = 0
+  Width = 728
   Align = alLeft
-  Caption = 'Plus Alpha - Ledger'
-  ClientHeight = 317
-  ClientWidth = 541
-  OnShow = acTreeRefreshExecute
-  LCLVersion = '1.1'
+  ClientHeight = 350
+  ClientWidth = 728
+  TabOrder = 0
+  DesignLeft = 314
+  DesignTop = 79
   object tvAccountList: TTreeView
     Left = 0
-    Height = 317
+    Height = 350
     Top = 0
     Width = 177
     Align = alLeft
+    AutoExpand = True
+    BackgroundColor = 13748419
+    Color = 13748419
     DefaultItemHeight = 22
+    ReadOnly = True
+    RowSelect = True
+    ScrollBars = ssVertical
+    SelectionColor = 6710886
+    ShowLines = False
+    ShowRoot = False
     TabOrder = 0
     OnClick = tvAccountListClick
     OnSelectionChanged = tvAccountListClick
+    Options = [tvoAutoExpand, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoToolTips, tvoThemedDraw]
     Items.Data = {
       F9FFFFFF020001000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF020000000000
       000001080000004163636F756E7473FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF01
-      00000000000000010D00000042616E6B204163636F756E7473FFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFF000000000000000000100000004D697473756269736869
+      00000000000000010D00000042616E6B204163636F756E747300000000000000
+      00FFFFFFFFFFFFFFFF000000000000000000100000004D697473756269736869
       2047696E6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000010F
       000000437265646974204163636F756E7473FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFF000000000000000000050000004D61727569
@@ -31,15 +41,15 @@ object frmLedger: TfrmLedger
   end
   object Splitter1: TSplitter
     Left = 177
-    Height = 317
+    Height = 350
     Top = 0
     Width = 5
   end
   object Notebook1: TNotebook
     Left = 182
-    Height = 317
+    Height = 350
     Top = 0
-    Width = 359
+    Width = 546
     PageIndex = 0
     Align = alClient
     TabOrder = 2
@@ -48,9 +58,9 @@ object frmLedger: TfrmLedger
       OnBeforeShow = Page1BeforeShow
       object mmWelcomeText: TMemo
         Left = 0
-        Height = 317
+        Height = 350
         Top = 0
-        Width = 359
+        Width = 546
         Align = alClient
         Lines.Strings = (
           'Welcome to the Plus Alpha Ledger Account Overview'
@@ -227,5 +237,9 @@ object frmLedger: TfrmLedger
       Caption = 'acTreeRefresh'
       OnExecute = acTreeRefreshExecute
     end
+  end
+  object ImageList1: TImageList
+    left = 107
+    top = 224
   end
 end

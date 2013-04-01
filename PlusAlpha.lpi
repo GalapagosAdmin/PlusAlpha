@@ -30,21 +30,24 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="4">
+    <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="LazControls"/>
+        <PackageName Value="anchordocking"/>
       </Item1>
       <Item2>
-        <PackageName Value="SQLDBLaz"/>
+        <PackageName Value="LazControls"/>
       </Item2>
       <Item3>
-        <PackageName Value="SDFLaz"/>
+        <PackageName Value="SQLDBLaz"/>
       </Item3>
       <Item4>
-        <PackageName Value="LCL"/>
+        <PackageName Value="SDFLaz"/>
       </Item4>
+      <Item5>
+        <PackageName Value="LCL"/>
+      </Item5>
     </RequiredPackages>
-    <Units Count="15">
+    <Units Count="16">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -96,7 +99,7 @@
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmLedger"/>
         <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
+        <ResourceBaseClass Value="Frame"/>
         <UnitName Value="frmLedgerUnit"/>
       </Unit7>
       <Unit8>
@@ -137,6 +140,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmTransactionListUnit"/>
       </Unit14>
+      <Unit15>
+        <Filename Value="fmewelcomeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fmeWelcome"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fmeWelcomeUnit"/>
+      </Unit15>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
