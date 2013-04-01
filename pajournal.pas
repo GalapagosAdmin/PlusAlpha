@@ -9,6 +9,9 @@ uses
   Classes, SysUtils, libpa, sqldb, paCurrency;
 
 type
+  TDBDateStr=String[8];
+
+
  TJournalHeader = class(TObject)
    private
      //var
@@ -35,6 +38,7 @@ type
        Function Validate:Boolean;
  end;  // of TJournalHeader
 
+
  TJournalDetailEntry = class(TObject)
    private
    //var
@@ -48,6 +52,7 @@ type
      _dirty:boolean;       // Needs Database synch
      _new:boolean;    // specifies that this entry has not yet been written to the database
      _Text:TUTF8String;
+     _EffDateDB:TDBDateStr; //
      Procedure SetAcctNo(AcctNo:Integer);
       // performs a database update if the record already existed.
      Procedure Select;
@@ -65,6 +70,7 @@ type
     Property Currency:TCurrCode read _currency;// write _currency;
     Property TransRow:Integer read _TransRow write _TransRow;
     Property Text:TUTF8String read _Text write _Text;
+    Property DisplayDate:TDBDateStr read _EffDateDB;
     Function Validate:Boolean;
     Function Synch:boolean;
     Procedure Load(const TN:Integer; const TR:Integer);
@@ -136,7 +142,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       With SQLQuery1 do
         begin
           Transaction := SQLTransaction1;
-          SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD FROM JOURNAL '
+          SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD, EFF_DATE FROM JOURNAL '
             + 'WHERE TRANSNO = :TransNo '
             + 'AND TRANSROW = :TransRow';
           ParamByName('TransNo').AsInteger := self._TransNo;
@@ -160,6 +166,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
   //           self._acctno := FieldByName('DrAcctCd').AsInteger;
             self._acctno := StrToInt(FieldByName('DrAcctCd').AsString);
              self._currency :=FieldByName('DrCurrKey').AsString;
+             self._EffDateDB :=FieldByName('EFF_DATE').AsString;
             end
           else
            Raise Exception.Create ('!');
