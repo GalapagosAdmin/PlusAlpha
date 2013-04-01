@@ -8,9 +8,10 @@
         <Filename Value="lsacct.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="lsacct"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="31"/>
+        <TopLine Value="29"/>
         <CursorPos X="36" Y="43"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
@@ -19,7 +20,6 @@
         <Filename Value="pacurrency.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paCurrency"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="2"/>
@@ -32,8 +32,8 @@
         <UnitName Value="paLedger"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="39" Y="8"/>
+        <TopLine Value="37"/>
+        <CursorPos X="40" Y="118"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -108,7 +108,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="19" HistoryIndex="18">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="paledger.pas"/>
         <Caret Line="8" Column="30" TopLine="1"/>
@@ -185,6 +185,10 @@
         <Filename Value="pacurrency.pas"/>
         <Caret Line="13" Column="1" TopLine="3"/>
       </Position19>
+      <Position20>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="51" Column="19" TopLine="29"/>
+      </Position20>
     </JumpHistory>
   </ProjectSession>
   <EditorMacros Count="0"/>

@@ -113,9 +113,10 @@
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="433"/>
+        <TopLine Value="29"/>
         <CursorPos X="4" Y="322"/>
         <UsageCount Value="221"/>
         <Loaded Value="True"/>
@@ -148,7 +149,7 @@
         <UnitName Value="paJournal"/>
         <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="522"/>
+        <TopLine Value="470"/>
         <CursorPos X="14" Y="45"/>
         <UsageCount Value="365"/>
         <Loaded Value="True"/>
@@ -182,7 +183,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmTransactionListUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="54"/>

@@ -31,18 +31,21 @@ uses
       Procedure SetDrCr(NewDrCr:TDrCr);
       Procedure SetTransNo(NewTransNo:TInteger);
       Procedure SetText(NewText:TUTF8String);
+      Procedure SetCurrency(NewCurrency:TCurrCode);
+      Procedure SetAcctType(NewAcctType:TAcctType);
+      Procedure SetAcctNo(NewAcctNo:Integer);
       Function Insert:Boolean;
       Function Update:Boolean;
       Function _DrBal:Integer;   // converts to the db format for now
       Function _CrBal:Integer;   // converts to the db format for now
     Public
       Constructor create;
-      Property AcctNo:TInteger read _AcctNo;
+      Property AcctNo:TInteger read _AcctNo write SetAcctNo;
       Property Text:TUTF8String read _Text write SetText;
       Property Balance:TInteger read _bal write SetBal;
-      Property Currency:TCurrCode read _Currency;
+      Property Currency:TCurrCode read _Currency write SetCurrency;
       Property DrCr:Tdrcr read _drcr write SetDrCr;
-      Property AccountType:TAcctType read _AcctType;
+      Property AccountType:TAcctType read _AcctType write SetAcctType;
       Property AccountSubType:Char read _AccSTDB;
       Property TransNo:TInteger read _TransNo write SetTransNo;
       Function Load(AccountNo:TInteger):boolean;
@@ -72,6 +75,7 @@ uses
      Function GetNextAccount:TLedgerAccount;
      Function GetAccountNo(AccountNo:TInteger):TLedgerAccount;
      Function EOF:Boolean;
+     Function GetNextFreeAccountNo:Integer;
   end;
 
 
@@ -85,7 +89,7 @@ implementation
 
 uses
   //db,
-  sqldb, paDatabase;
+  sqldb, paDatabase, LazLogger;
 
 Constructor TLedgerAccount.Create;
   begin
@@ -119,6 +123,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
     rows:integer;
     test:boolean;
   begin
+//  DebugLn(IntToStr(AccountNo));
   SQLQuery1 := TSQLQuery.Create(nil);
   SQLQuery1.Transaction := SQLTransaction1;
   SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
@@ -193,6 +198,27 @@ Procedure TLedgerAccount.SetDrCr(NewDrCr:TDrCr);
 Procedure TLedgerAccount.SetTransNo(NewTransNo:TInteger);
   begin
     _TransNo := NewTransNo;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
+
+Procedure TLedgerAccount.SetCurrency(NewCurrency:TCurrCode);
+  begin
+    _Currency := NewCurrency;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
+
+Procedure TLedgerAccount.SetAcctType(NewAcctType:TAcctType);
+  begin
+    _AcctType := NewAcctType;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
+
+Procedure TLedgerAccount.SetAcctNo(NewAcctNo:Integer);
+  begin
+    _AcctNo := NewAcctNo;
     // We need up update the DB now, so set _dirty to true;
     _Dirty := True;
   end;
@@ -433,8 +459,6 @@ Procedure TAccountList.UpdateHighWaterMark;
     SQLQuery1 := TSQLQuery.Create(nil);
     SQLQuery1.Transaction := SQLTransaction1;
 
-  //Journal Header should always be inserted first, so it's safer to take that
-  // number
   SQLQuery1.SQL.Text := 'select max(acctno) as hwm from ledger';
   SQLQuery1.open;
   If not SQLQuery1.EOF then
@@ -444,6 +468,14 @@ Procedure TAccountList.UpdateHighWaterMark;
 
   end;
 
+Function TAccountList.GetNextFreeAccountNo:Integer;
+  begin
+    // Get the latest high water mark from the database
+    UpdateHighWaterMark;
+    Result := _HighWaterMark + 1;
+    // This is in case we get called multiple times by different clients
+    Inc(_HighWaterMark);
+  end;
 
 Constructor TAccountList.Create();
   begin
