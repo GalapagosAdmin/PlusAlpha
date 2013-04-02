@@ -55,14 +55,20 @@ begin
     Exit;
   end;
 
+  NormVideo;
   write('Account Title:');
+  HighVideo;
   readln(AccountTitle);
-  if Length(AccountTitle) = 0 then exit;
+  if AccountTitle = '' then begin terminate; exit end;
 
+  NormVideo;
   Write('Currency:');
+  HighVideo;
   Readln(Currency);
-  if Length(AccountTitle) = 0 then exit;
+  NormVideo;
+  if Currency = '' then begin terminate; exit end;
   writeln('Possible Account Types:');
+  TextColor(Yellow);
   Writeln('1. Asset');
   Writeln('2. Liability');
   Writeln('3. Equity');
@@ -71,21 +77,25 @@ begin
   Writeln('6. Placeholder only');
   Writeln('7. Other');
   Writeln('or 0 to cancel.');
+  NormVideo;
   Write('Account Type: ');
+  HighVideo;
   Readln(AcctTypeInt);
+  NormVideo;
 //  Write('External Account Number:');
   { add your program here }
-  If AcctTypeInt = 0 then exit;
+  If AcctTypeInt = 0 then begin terminate; exit end;
   Write('Creating Acount...');
   LedgerAccount := TLedgerAccount.Create;
   LedgerAccount.Text := AccountTitle;
   LedgerAccount.Currency := Currency;
   LedgerAccount.AccountType := TAcctType(AcctTypeInt);
-  LedgerAccount.AcctNo := AccountLIst.GetNextFreeAccountNo;
+  LedgerAccount.AcctNo := AccountList.GetNextFreeAccountNo;
   if LedgerAccount.Synch then
     begin
         Writeln('Done');
         LedgerAccount.Commit;
+        Writeln('Account No:' + IntToStr(LedgerAccount.AcctNo));
     end
   else
    WritelnErr('Error');

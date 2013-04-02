@@ -8,3 +8,6 @@ lib/i386-darwin/pafrmmainunit.lfm
 lib/i386-darwin/frmtransactionunit.lfm
 ppas.sh
 *.exe
+lsacct
+mkacct
+lstran

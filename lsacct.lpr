@@ -34,6 +34,12 @@ var
     begin
       TextColor(Green);
       Write(IntToStr(account.AcctNo):4);
+      TextColor(White);
+      Write('  ', 
+        Abap_Translate(
+          IntToStr(Ord(account.AccountType)), 
+          AcctTransMap)
+           );
       Case Account.DrCr of Cr:TextColor(Red) end;
       Write(
          Chr(9), abap_translate(IntToStr(Ord(account.DrCr)), '0D1C'),
@@ -76,7 +82,7 @@ begin
     end;
 
 
-
+  NormVideo;
   // stop program loop
   Terminate;
 end;

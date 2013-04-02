@@ -1,4 +1,4 @@
-unit paLedger;
+Unit paLedger;
 
 {$mode objfpc}{$H+}
 
@@ -11,12 +11,13 @@ uses
   type
   TLedgerAccount = Class(TObject)   // Ledger Account
   protected
-      _bal:Integer; // Ledger balance
+      _bal:LongInt; // Ledger balance
       _scale:Integer; // Decimals for currency scale
       _drcr:Tdrcr; // debit/credit indicator for current balance
       _dirty:boolean; // Indicates if synch to db is required
       _new:boolean;    // specifies that this entry has not yet been written to the database
       _AccTypeDB:Char; // Account Type Code for the database (Char1)
+      _AccStCdDB:Char; // Account sub-type
   private
       _AcctNo:TInteger; // Internal Account No.
       _Text:TUTF8String; // Account Description
@@ -27,7 +28,7 @@ uses
       _TransNo:TInteger; // Latest Transaction number posted to this ledger account
       _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
       _Guid:TGuid;  // Globally Unique Identifier for this account.  Used for DB merges.
-      Procedure SetBal(NewBalance:TInteger);
+      Procedure SetBal(NewBalance:LongInt);
       Procedure SetDrCr(NewDrCr:TDrCr);
       Procedure SetTransNo(NewTransNo:TInteger);
       Procedure SetText(NewText:TUTF8String);
@@ -36,13 +37,13 @@ uses
       Procedure SetAcctNo(NewAcctNo:Integer);
       Function Insert:Boolean;
       Function Update:Boolean;
-      Function _DrBal:Integer;   // converts to the db format for now
-      Function _CrBal:Integer;   // converts to the db format for now
+      Function _DrBal:LongInt;   // converts to the db format for now
+      Function _CrBal:LongInt;   // converts to the db format for now
     Public
       Constructor create;
       Property AcctNo:TInteger read _AcctNo write SetAcctNo;
       Property Text:TUTF8String read _Text write SetText;
-      Property Balance:TInteger read _bal write SetBal;
+      Property Balance:LongInt read _bal write SetBal;
       Property Currency:TCurrCode read _Currency write SetCurrency;
       Property DrCr:Tdrcr read _drcr write SetDrCr;
       Property AccountType:TAcctType read _AcctType write SetAcctType;
@@ -96,10 +97,11 @@ Constructor TLedgerAccount.Create;
     _dirty := true;
     _new := true;
     _bal := 0;
+    _AccStCdDB := 'X';
     _TransNo := -1;
   end;
 
-Function TLedgerAccount._DrBal:Integer;
+Function TLedgerAccount._DrBal:LongInt;
   begin
     Case DrCr of
       Dr: Result := _bal;
@@ -107,7 +109,7 @@ Function TLedgerAccount._DrBal:Integer;
     end;
   end;
 
-Function TLedgerAccount._CrBal:Integer;
+Function TLedgerAccount._CrBal:LongInt;
    begin
      Case DrCr of
        Cr: Result := _bal;
@@ -117,7 +119,7 @@ Function TLedgerAccount._CrBal:Integer;
 
 Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
   var
-    i:TInteger;
+  //  i:TInteger;
     SQLQuery1:TSQLQuery;
     DrBal, CrBal:TInteger;
     rows:integer;
@@ -134,23 +136,49 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
 
   SQLQuery1.Open;
   rows := SQLQuery1.RowsAffected;
-
+// The following doesn't work for SELECT statements
+//  Result := Rows = 1;
   // Not working for some reason, rows always = 0, EOF = True.
 //   While not SQLQuery1.EOF do
+  Result := Not SQLQuery1.EOF;
   If not SQLQuery1.EOF then
    begin
      With SQLQuery1 do
        begin
-         self._AcctNo := StrToInt(FieldByName('AcctNo').AsString);
-         self._currency := FieldByName('CurrKey').AsString;
-         self._scale := GetScale(_Currency);
-         self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
-         self._AccStDB := FieldByName('AccSTCd').AsString[1];
+         try
+           self._AcctNo := StrToInt(FieldByName('AcctNo').AsString);
+         except
+          DebugLn('TLedgerAccount.Load:Error while reading acctno'); 
+         end;
+         try
+          self._currency := FieldByName('CurrKey').AsString;
+          self._scale := GetScale(_Currency);
+         except
+          DebugLn('TLedgerAccount.Load:Error while reading currency'); 
+         end;
+         try
+          self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
+          self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
+         except
+          DebugLn('TLedgerAccount.Load:Error while reading AcctType'); 
          // Pascal representation
-         self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
-         self._Text := FieldByName('Text').AsString;
-         DrBal :=  FieldByName('DrBal').AsInteger;
-         CrBal :=  FieldByName('CrBal').AsInteger;
+         end;
+         try
+           self._AccStDB := FieldByName('AccSTCd').AsString[1];
+         except
+          DebugLn('TLedgerAccount.Load:Error while reading AcctSt field, record='+IntToStr(AccountNo)); 
+         end;
+         try
+          self._Text := FieldByName('Text').AsString;
+         except
+          DebugLn('TLedgerAccount.Load:Error while reading text field'); 
+         end;
+         try
+          DrBal :=  FieldByName('DrBal').AsLongInt;
+          CrBal :=  FieldByName('CrBal').AsLongInt;
+         except
+          DebugLn('TLedgerAccount.Load:Error while reading DrBal/CrBal'); 
+         end;
 //     SQLQuery1.Next;
 
        end; // of WITH
@@ -180,7 +208,7 @@ Procedure TLedgerAccount.SetText(NewText:TUTF8String);
     _Dirty := True;
   end;
 
-Procedure TLedgerAccount.SetBal(NewBalance:Integer);
+Procedure TLedgerAccount.SetBal(NewBalance:LongInt);
   begin
     _bal := NewBalance;
     // We need up update the DB now, so set _dirty to true;
@@ -210,9 +238,17 @@ Procedure TLedgerAccount.SetCurrency(NewCurrency:TCurrCode);
   end;
 
 Procedure TLedgerAccount.SetAcctType(NewAcctType:TAcctType);
+ var
+//  c:Char;
+  tmpStr:String;
   begin
     _AcctType := NewAcctType;
-    // We need up update the DB now, so set _dirty to true;
+    // update the DB account type
+//    c := IntToStr(Ord(Self._AcctType));
+      tmpStr :=    ABAP_Translate(IntToStr(Ord(AccountType)), AcctTransMapRev);   
+      _AccTypeDB := tmpStr[1]; 
+
+	   // We need up update the DB now, so set _dirty to true;
     _Dirty := True;
   end;
 
@@ -238,11 +274,11 @@ Function TLedgerAccount.Insert:boolean;
         + '"AcctNo", "DrBal", "CrBal", '
         + ' "CurrKey", "Text", "AccTypeCd", '
         + ' PACCTNO, TRANSNO, PayeeCd, '
-        + ' DrBal2, CrBal2 ) '
+        + ' DrBal2, CrBal2, "AccStCd" ) '
         + 'values ( :AcctNo, :DrBal, :CrBal, '
         +         ' :CurrKey, :Text, :AccTypeCd, '
         +         ' :PAcctNo, :TransNo, :PayeeCd, '
-        +         ' :DrBal2, :CrBal2 )';
+        +         ' :DrBal2, :CrBal2, :AccStCd)';
 
     SqlQuery1.ParamByName('AcctNo').AsInteger := self._AcctNo;
     SqlQuery1.ParamByName('DrBal').AsInteger := self._DrBal;
@@ -258,6 +294,7 @@ Function TLedgerAccount.Insert:boolean;
 
     SqlQuery1.ParamByName('DrBal2').AsInteger := self._DrBal;
     SqlQuery1.ParamByName('CrBal2').AsInteger := self._CrBal;
+    SqlQuery1.ParamByName('AccStCd').AsString := self._AccStCdDB;
 
 //    SqlQuery1.ParamByName('updatedate').AsString := DateTimetoYYYYMMDD(now);
 //    SqlQuery1.ParamByName('effdate').AsString := DateTimetoYYYYMMDD(_EffDate);

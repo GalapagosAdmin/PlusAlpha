@@ -76,6 +76,7 @@ begin
    begin
      WriteHelp;
      terminate;
+     exit;
    end;
 
   JDE := TJournalDetailEntry.Create;
@@ -84,18 +85,18 @@ begin
   Write('Transaction Listing for Account: '+ IntToStr(AcctNo));
   
   Account := TLedgerAccount.Create;
-  //if 
-  Account.Load(AcctNo); //then
-   Writeln(': '+Account.Text);
-//  else
-//    begin
-//      Writeln(': No Such Account!'); 
-//      terminate;
-//    end;
+  if 
+  Account.Load(AcctNo) then
+   Writeln(': '+Account.Text)
+  else
+    begin
+      Writeln(': No Such Account!'); 
+      terminate;
+    end;
 
   For ResultIndex := low(TransactionList.TransNos) to high(TransactionList.TransNos) do
     PrintTransaction(TransactionList.TransNos[ResultIndex]);
-  Writeln(IntToStr(High(TransactionList.TransNos) - Low(TransactionList.TransNos)) 
+  Writeln(IntToStr(High(TransactionList.TransNos) - Low(TransactionList.TransNos)+1) 
     + ' Entrie(s).');
 (*
 
@@ -112,6 +113,7 @@ begin
 
 *)
 
+  NormVideo;
   // stop program loop
   Terminate;
 end;
