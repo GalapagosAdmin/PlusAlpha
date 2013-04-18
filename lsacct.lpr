@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  paLedger, libpa, crt, paCurrency;
+  paLedger, libpa, crt, paCurrency, pacliutil;
 
 type
 
@@ -32,18 +32,13 @@ var
 
   Procedure PrintAccount(Account:TLedgerAccount);
     begin
-      TextColor(Green);
-      Write(IntToStr(account.AcctNo):4);
-      TextColor(White);
-      Write('  ', 
-        Abap_Translate(
-          IntToStr(Ord(account.AccountType)), 
-          AcctTransMap)
-           );
+      PrintAcctNo(account.AcctNo);
+      Write('  '); 
+      PrintAcctType(Account.AccountType);
       Case Account.DrCr of Cr:TextColor(Red) end;
-      Write(
-         Chr(9), abap_translate(IntToStr(Ord(account.DrCr)), '0D1C'),
-         chr(9), IntToStr(Account.Balance):8);
+      Write(Chr(9));
+      PrintDrCr(account.DrCr);
+      Write(Chr(9), IntToStr(Account.Balance):8);
       TextColor (Yellow);
       Write(
          chr(9), account.Currency);

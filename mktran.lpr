@@ -9,7 +9,7 @@ uses
   Classes, SysUtils, CustApp,
   { you can add units after this }
   paTransactionList, paJournal, paLedger, 
-  libpa, crt, paCurrency;
+  libpa, crt, paCurrency, paCLIUtil;
 
 type
 
@@ -35,13 +35,6 @@ ResourceString
 
 { Tmktran }
 
-Procedure WriteErr(const Err:UTF8String);
-  begin
-    TextColor(Red);
-    Writeln(Err);
-    NormVideo;
-  end;
-
 procedure Tmktran.DoRun;
 var
   ErrorMsg: String;
@@ -65,18 +58,15 @@ var
   Procedure GetInput;
     Begin
 // Transaction Header
-      Write('Transaction Header Text:');
-      Readln(HdrMemoText);      
+      HdrMemoText := GetText('Transaction Header Text:');      
       Write('Total Transaction Amount:');
       Readln(TotalAmt);
 // Detail Record 1
-      Write('Account No 1 (Debit):');
-      Readln(AcctNo1);
+      AcctNo1 := GetAccount('Account No. 1 (Debit):');
       Amt1 := TotalAmt;
       DtlMemo1 := HdrMemoText;
 // Detail Record 2
-      Write('Account No 2 (Credit):');
-      Readln(AcctNo2);
+      AcctNo2 := GetAccount('Account No. 2 (Credit):');
       Amt2 := TotalAmt;
       DtlMemo2 := HdrMemoText;
 
@@ -122,17 +112,25 @@ var
 
   Writeln('Performing final checks....');
 
+try
   If not IsBalanced then
      begin
        WriteErr(ERRTRANSNOTBAL);
        exit;
      end;
+except
+ WriteErr('Error during balance check!');
+end;
 
+try
    If not Validate then
      begin
        WriteErr(ERRTRANSNOTVALID);
        exit;
      end;
+except
+ WriteErr('Error during validation check!');
+end;
 
    If Insert then
      begin
