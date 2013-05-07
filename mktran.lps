@@ -12,7 +12,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="11" Y="11"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -22,7 +22,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="26"/>
         <CursorPos X="1" Y="45"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -32,28 +32,28 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="paledger.pas"/>
         <UnitName Value="paLedger"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="566"/>
-        <CursorPos X="1" Y="580"/>
-        <UsageCount Value="10"/>
+        <CursorPos X="1" Y="579"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="pacliutil.pas"/>
         <UnitName Value="pacliutil"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="33"/>
         <CursorPos X="45" Y="35"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -63,7 +63,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="15"/>
         <CursorPos X="8" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -73,7 +73,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="35" Y="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit6>
     </Units>
@@ -83,128 +83,128 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="paledger.pas"/>
-        <Caret Line="580" Column="1" TopLine="566"/>
+        <Caret Line="511" Column="28" TopLine="503"/>
       </Position1>
       <Position2>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="511" Column="28" TopLine="503"/>
-      </Position2>
-      <Position3>
         <Filename Value="pacliutil.pas"/>
         <Caret Line="73" Column="50" TopLine="63"/>
+      </Position2>
+      <Position3>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="579" Column="1" TopLine="566"/>
       </Position3>
       <Position4>
         <Filename Value="paledger.pas"/>
-        <Caret Line="579" Column="1" TopLine="566"/>
+        <Caret Line="580" Column="1" TopLine="566"/>
       </Position4>
       <Position5>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="580" Column="1" TopLine="566"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="71" Column="1" TopLine="63"/>
       </Position5>
       <Position6>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="71" Column="1" TopLine="63"/>
+        <Caret Line="72" Column="1" TopLine="63"/>
       </Position6>
       <Position7>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="72" Column="1" TopLine="63"/>
+        <Caret Line="73" Column="1" TopLine="63"/>
       </Position7>
       <Position8>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="73" Column="1" TopLine="63"/>
+        <Caret Line="87" Column="1" TopLine="75"/>
       </Position8>
       <Position9>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="87" Column="1" TopLine="75"/>
+        <Caret Line="91" Column="1" TopLine="75"/>
       </Position9>
       <Position10>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="91" Column="1" TopLine="75"/>
+        <Caret Line="45" Column="1" TopLine="33"/>
       </Position10>
       <Position11>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="45" Column="1" TopLine="33"/>
+        <Caret Line="46" Column="1" TopLine="33"/>
       </Position11>
       <Position12>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="46" Column="1" TopLine="33"/>
+        <Caret Line="49" Column="1" TopLine="33"/>
       </Position12>
       <Position13>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="49" Column="1" TopLine="33"/>
+        <Caret Line="50" Column="1" TopLine="33"/>
       </Position13>
       <Position14>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="50" Column="1" TopLine="33"/>
+        <Caret Line="51" Column="1" TopLine="33"/>
       </Position14>
       <Position15>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="51" Column="1" TopLine="33"/>
+        <Caret Line="52" Column="1" TopLine="33"/>
       </Position15>
       <Position16>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="52" Column="1" TopLine="33"/>
+        <Caret Line="53" Column="1" TopLine="33"/>
       </Position16>
       <Position17>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="53" Column="1" TopLine="33"/>
+        <Caret Line="69" Column="1" TopLine="57"/>
       </Position17>
       <Position18>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="69" Column="1" TopLine="57"/>
+        <Caret Line="70" Column="1" TopLine="57"/>
       </Position18>
       <Position19>
-        <Filename Value="pacliutil.pas"/>
-        <Caret Line="70" Column="1" TopLine="57"/>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="579" Column="1" TopLine="566"/>
       </Position19>
       <Position20>
         <Filename Value="paledger.pas"/>
-        <Caret Line="579" Column="1" TopLine="566"/>
+        <Caret Line="580" Column="1" TopLine="566"/>
       </Position20>
       <Position21>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="580" Column="1" TopLine="566"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="71" Column="1" TopLine="57"/>
       </Position21>
       <Position22>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="71" Column="1" TopLine="57"/>
+        <Caret Line="72" Column="1" TopLine="57"/>
       </Position22>
       <Position23>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="72" Column="1" TopLine="57"/>
+        <Caret Line="73" Column="1" TopLine="57"/>
       </Position23>
       <Position24>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="73" Column="1" TopLine="57"/>
+        <Caret Line="87" Column="1" TopLine="75"/>
       </Position24>
       <Position25>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="87" Column="1" TopLine="75"/>
+        <Caret Line="91" Column="1" TopLine="75"/>
       </Position25>
       <Position26>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="91" Column="1" TopLine="75"/>
+        <Caret Line="45" Column="1" TopLine="33"/>
       </Position26>
       <Position27>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="45" Column="1" TopLine="33"/>
+        <Caret Line="46" Column="1" TopLine="33"/>
       </Position27>
       <Position28>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="46" Column="1" TopLine="33"/>
+        <Caret Line="49" Column="1" TopLine="33"/>
       </Position28>
       <Position29>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="49" Column="1" TopLine="33"/>
+        <Caret Line="50" Column="1" TopLine="33"/>
       </Position29>
       <Position30>
         <Filename Value="pacliutil.pas"/>
-        <Caret Line="50" Column="1" TopLine="33"/>
+        <Caret Line="35" Column="45" TopLine="33"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="4">
+    <BreakPoints Count="3">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -216,23 +216,16 @@
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
-        <Source Value="paledger.pas"/>
-        <Line Value="579"/>
+        <Source Value="pacliutil.pas"/>
+        <Line Value="74"/>
       </Item2>
       <Item3>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="pacliutil.pas"/>
-        <Line Value="74"/>
-      </Item3>
-      <Item4>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="pacliutil.pas"/>
         <Line Value="75"/>
-      </Item4>
+      </Item3>
     </BreakPoints>
   </Debugging>
 </CONFIG>
