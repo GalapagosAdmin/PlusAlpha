@@ -11,8 +11,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="29"/>
-        <CursorPos X="36" Y="43"/>
+        <TopLine Value="30"/>
+        <CursorPos X="30" Y="50"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -50,57 +50,47 @@
       <Unit4>
         <Filename Value="/Developer/lazarus/components/lazutils/fileutil.pas"/>
         <UnitName Value="FileUtil"/>
-        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="223"/>
         <CursorPos X="28" Y="236"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="/Developer/lazarus/components/lazutils/fileutil.inc"/>
-        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="150"/>
         <CursorPos X="35" Y="152"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/sysutils/osutilsh.inc"/>
-        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="23" Y="61"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="/usr/local/share/fpcsrc/rtl/unix/sysutils.pp"/>
         <UnitName Value="sysutils"/>
-        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1286"/>
         <CursorPos X="51" Y="1312"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/sysutils/osutil.inc"/>
-        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="87"/>
         <CursorPos X="22" Y="93"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="libpa.pas"/>
         <UnitName Value="libpa"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
-        <CursorPos X="23" Y="11"/>
+        <TopLine Value="1"/>
+        <CursorPos X="11" Y="8"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -108,7 +98,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="20" HistoryIndex="19">
+    <JumpHistory Count="16" HistoryIndex="15">
       <Position1>
         <Filename Value="paledger.pas"/>
         <Caret Line="8" Column="30" TopLine="1"/>
@@ -134,62 +124,45 @@
         <Caret Line="32" Column="28" TopLine="18"/>
       </Position6>
       <Position7>
-        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.pas"/>
-        <Caret Line="236" Column="27" TopLine="223"/>
-      </Position7>
-      <Position8>
-        <Filename Value="/Developer/lazarus/components/lazutils/fileutil.inc"/>
-        <Caret Line="152" Column="35" TopLine="150"/>
-      </Position8>
-      <Position9>
-        <Filename Value="/usr/local/share/fpcsrc/rtl/unix/sysutils.pp"/>
-        <Caret Line="1309" Column="46" TopLine="1303"/>
-      </Position9>
-      <Position10>
-        <Filename Value="/usr/local/share/fpcsrc/rtl/unix/sysutils.pp"/>
-        <Caret Line="1312" Column="51" TopLine="1286"/>
-      </Position10>
-      <Position11>
-        <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/sysutils/osutil.inc"/>
-        <Caret Line="93" Column="22" TopLine="87"/>
-      </Position11>
-      <Position12>
         <Filename Value="padatabase.pas"/>
         <Caret Line="25" Column="26" TopLine="18"/>
-      </Position12>
-      <Position13>
+      </Position7>
+      <Position8>
         <Filename Value="lsacct.lpr"/>
         <Caret Line="35" Column="54" TopLine="25"/>
-      </Position13>
-      <Position14>
+      </Position8>
+      <Position9>
         <Filename Value="paledger.pas"/>
         <Caret Line="60" Column="6" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="143" Column="57" TopLine="121"/>
+      </Position10>
+      <Position11>
+        <Filename Value="lsacct.lpr"/>
+        <Caret Line="36" Column="67" TopLine="22"/>
+      </Position11>
+      <Position12>
+        <Filename Value="lsacct.lpr"/>
+        <Caret Line="44" Column="27" TopLine="19"/>
+      </Position12>
+      <Position13>
+        <Filename Value="paledger.pas"/>
+        <Caret Line="48" Column="18" TopLine="29"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pacurrency.pas"/>
+        <Caret Line="13" Column="1" TopLine="3"/>
       </Position14>
       <Position15>
         <Filename Value="paledger.pas"/>
-        <Caret Line="143" Column="57" TopLine="121"/>
+        <Caret Line="51" Column="19" TopLine="29"/>
       </Position15>
       <Position16>
         <Filename Value="lsacct.lpr"/>
-        <Caret Line="36" Column="67" TopLine="22"/>
+        <Caret Line="19" Column="43" TopLine="1"/>
       </Position16>
-      <Position17>
-        <Filename Value="lsacct.lpr"/>
-        <Caret Line="44" Column="27" TopLine="19"/>
-      </Position17>
-      <Position18>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="48" Column="18" TopLine="29"/>
-      </Position18>
-      <Position19>
-        <Filename Value="pacurrency.pas"/>
-        <Caret Line="13" Column="1" TopLine="3"/>
-      </Position19>
-      <Position20>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="51" Column="19" TopLine="29"/>
-      </Position20>
     </JumpHistory>
   </ProjectSession>
-  <EditorMacros Count="0"/>
 </CONFIG>

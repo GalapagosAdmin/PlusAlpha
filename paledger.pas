@@ -59,15 +59,19 @@ uses
   // Entire general ledger
   TAccountList = Class(TObject)
     private
+      _Loaded:Boolean;
       _AccountList : Array of TLedgerAccount;
       _CurrentAccount:integer; // used for enumerating
       _HighWaterMark:Integer;  // Highest numbered account in the database
    //   Tree:TTreeNodes;
       Procedure UpdateHighWaterMark;
-      Procedure Load; // Loads the accuont list / Accounts from the DB
+      Procedure Load; // Loads the account list / Accounts from the DB (All)
+      // Loads the account list / Accounts from the DB, after filtering by name.
+      Procedure LoadNameFilter(const AccountName:UTF8String);
       Procedure Clear;
     public
      Constructor Create; //overload;
+     Constructor Create(const AccountName:UTF8String); //overload;
      Procedure ReLoad;
      // loads an existing ledger account from the database into a new object
      Procedure AddAccount(const AcctNo:Integer);
@@ -390,21 +394,25 @@ Procedure TAccountList.AddAccount(const AcctNo:Integer);
     _AccountList[High(_AccountList)] := TmpAcct;
   end;
 
-Function TAccountLIst.GetFirstAccount:TLedgerAccount;
+Function TAccountList.GetFirstAccount:TLedgerAccount;
   begin
+    if self.eof then exit;
      _CurrentAccount := Low(_AccountList);
      Result := _AccountList[_CurrentAccount];
   end;
 
-Function TAccountLIst.GetNextAccount:TLedgerAccount;
+Function TAccountList.GetNextAccount:TLedgerAccount;
   begin
-     Inc(_CurrentAccount);
-     Result := _AccountList[_CurrentAccount];
+    if self.eof then exit;
+    Inc(_CurrentAccount);
+    Result := _AccountList[_CurrentAccount];
   end;
 
 Function TAccountLIst.EOF:Boolean;
   begin
      Result := (_CurrentAccount = High(_AccountList));
+     // Catch case of zero results
+     If Length(_AccountList) = 0 then Result := True;
   end;
 
 // clears the accounts without saving any changes to the database
@@ -458,10 +466,12 @@ Procedure TAccountList.Load; // Loads the account listing from the database
   // This should really be moved to a separate refresh procedure to allow
   // updates after loading.
   try
+    if _Loaded then Clear;
     SQLQuery1 := TSQLQuery.Create(nil);
     SQLQuery1.Transaction := SQLTransaction1;
     SQLQuery1.SQL.Text := 'select AcctNo from ledger';
     SQLQuery1.open;
+    _Loaded := True;
     While not SQLQuery1.EOF do
      begin
        With SQLQuery1 do
@@ -476,6 +486,46 @@ Procedure TAccountList.Load; // Loads the account listing from the database
 //   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
 //   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
+
+Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
+// Loads the account listing from the database, filtering by name.
+  var
+//     FDataset: TSdfDataset;
+    i:integer;
+    SQLQuery1:TSQLQuery;
+    TmpStr : TUTF8String;
+//    tmpAccount:TLedgerAccount;
+  begin
+   if _Loaded then Clear;
+//    Tree := TTreeNodes.Create(nil); // create account tree
+//  for i := 0 to 24 do
+
+  // Update the account list.
+  // This should really be moved to a separate refresh procedure to allow
+  // updates after loading.
+  try
+    SQLQuery1 := TSQLQuery.Create(nil);
+    SQLQuery1.Transaction := SQLTransaction1;
+{ TODO 2 -oshiruba -cHardening : Convert LIKE to parameter, if possible }
+{ TODO 2 -oshiruba -cI18N : Convert LIKE to parameter to use text table + language }
+    SQLQuery1.SQL.Text := 'select AcctNo from ledger where text like "%' + AccountName + '%"';
+    SQLQuery1.open;
+    _Loaded := True;
+    While not SQLQuery1.EOF do
+     begin
+       With SQLQuery1 do
+         AddAccount(FieldByName('AcctNo').AsInteger);
+       SQLQuery1.Next;
+     end;
+  finally
+    SQLQuery1.Close;
+    SQLQuery1.Destroy;
+  end; // of TRY..FINALLY
+// update the tree
+//   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
+//   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
+  end;
+
 
 Function TAccountList.AccountStringList:TStringList;
   var
@@ -514,10 +564,21 @@ Function TAccountList.GetNextFreeAccountNo:Integer;
     Inc(_HighWaterMark);
   end;
 
+
+// Regular Constructor - Load All Accounts
 Constructor TAccountList.Create();
   begin
+    _Loaded := False;
     Load;
   end;
+
+// Modified Constructor - Load only accounts Matching Account Name Pattern
+Constructor TAccountList.Create(const AccountName:UTF8String); //overload;
+  begin
+    _Loaded := False;
+    LoadNameFilter(AccountName);
+  end;
+
 
 initialization
   AccountList := TAccountList.Create;

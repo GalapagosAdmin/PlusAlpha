@@ -8,6 +8,9 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
+  {$IFDEF WINDOWS}
+  Windows, {for setconsoleoutputcp}
+  {$ENDIF}
   paLedger, libpa, crt, paCurrency, pacliutil;
 
 type
@@ -102,6 +105,11 @@ end;
 var
   Application: Tlsacct;
 begin
+  {$IFDEF WINDOWS}
+  // Set output code page to UTF8 - Seems not to work in Windows 7 64bit
+  //SetConsoleOutputCP(CP_UTF8);
+  {$ENDIF}
+
   Application:=Tlsacct.Create(nil);
   Application.Title:='account listing';
   Application.Run;

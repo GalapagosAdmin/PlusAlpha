@@ -7,8 +7,8 @@ uses  sysutils, LibPa;
 
 Procedure WriteErr(const Err:UTF8String);
 //Function GetAccount:Longint;
-Function GetAccount(const Prompt:UTF8String):Longint;
-Function GetText(const Prompt:UTF8String):UTF8String;
+Function  GetAccount(const Prompt:UTF8String):Longint;
+Function  GetText(const Prompt:UTF8String):UTF8String;
 Procedure PrintAcctNo(AcctNo:Integer);
 Procedure PrintAcctType(AccountType:TAcctType);
 Procedure PrintDrCr(Const DrCr:TDrCr);
@@ -16,7 +16,7 @@ Procedure PrintDrCr(Const DrCr:TDrCr);
 implementation
 
 uses
-  StrUtils, Crt;
+  StrUtils, Crt, paLedger;
 
 Procedure WriteErr(const Err:UTF8String);
   begin
@@ -38,6 +38,8 @@ Function GetAccount(const Prompt:UTF8String):Longint;
   var
    tmpstr:utf8string;
    done:boolean=false;
+   TestAccount:TLedgerAccount;
+   SearchAL:TAccountList;
   begin
    repeat
     NormVideo;
@@ -49,8 +51,42 @@ Function GetAccount(const Prompt:UTF8String):Longint;
     Readln(tmpstr);
     NormVideo;
     case TryStrToInt(tmpstr, result) of
-      true:done := true;
-      false: WriteErr(tmpstr + ' is not a valid account integer');
+      true:begin
+        TestAccount := TLedgerAccount.Create;
+        Try
+          Done := TestAccount.Load(result);
+          If Not Done then
+            begin
+              WriteErr('Account #' + IntToStr(Result) + ' does not exist.');
+              Result := -1;
+            end;
+        finally
+          TestAccount.free;
+        end;
+
+      end; // of True
+      false: begin
+        WriteErr(tmpstr + ' is not a valid account number');
+        SearchAL := TAccountList.Create(tmpstr);
+        try
+          Case SearchAL.EOF  of
+            True:WriteErr('No Matching Account(s).');
+            False:Begin
+              TestAccount := SearchAL.GetFirstAccount;
+              If not Assigned (TestAccount) then // no match
+                 begin
+                   WriteErr('No matching accounts found. (Error)');
+                 end
+              else // We found a matching account
+                begin
+                  Writeln(testAccount.AcctNo, TestAccount.Text);
+                end;
+            End; // of CASE false
+          end; // of CASE
+        finally
+          SearchAL.Free;
+        end;
+      end; // of FALSE
     end; // of case
    until done;
   end; // of FUNCTION
