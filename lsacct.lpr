@@ -9,7 +9,7 @@ uses
   Classes, SysUtils, CustApp,
   { you can add units after this }
   {$IFDEF WINDOWS}
-  Windows, {for setconsoleoutputcp}
+  //Windows, {for setconsoleoutputcp}
   {$ENDIF}
   paLedger, libpa, crt, paCurrency, pacliutil;
 
@@ -30,30 +30,15 @@ type
 
 procedure Tlsacct.DoRun;
 var
-  ErrorMsg: String;
+  ErrorMsg: UTF8String;
   Account:TLedgerAccount;
+  SearchString:UTF8String;
 
-  Procedure PrintAccount(Account:TLedgerAccount);
-    begin
-      PrintAcctNo(account.AcctNo);
-      Write('  '); 
-      PrintAcctType(Account.AccountType);
-      Case Account.DrCr of Cr:TextColor(Red) end;
-      Write(Chr(9));
-      PrintDrCr(account.DrCr);
-      Write(Chr(9), IntToStr(Account.Balance):8);
-      TextColor (Yellow);
-      Write(
-         chr(9), account.Currency);
-         TextColor(white);
-         Write(
-         chr(9), Account.Text);
-      Writeln;
-    end;
+
 
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('h','help');
+  ErrorMsg:=CheckOptions('ha','help account:');
   if ErrorMsg<>'' then begin
     ShowException(Exception.Create(ErrorMsg));
     Terminate;
@@ -68,6 +53,13 @@ begin
   end;
 
   { add your program here }
+  SearchString := GetOptionValue('a', 'account');
+  If SearchString <> '' then
+      begin
+       Writeln('Searching for:' + SearchString);
+       AccountList.Free;
+       AccountList := TAccountList.Create(SearchString);
+      end;
   if not AccountList.EOF then
     begin
       Account := AccountList.GetFirstAccount;
@@ -75,8 +67,8 @@ begin
     end;
   while not accountlist.EOF do
     begin
-    Account := AccountList.GetNextAccount;
-    PrintAccount(Account);
+     Account := AccountList.GetNextAccount;
+     PrintAccount(Account);
     end;
 
 

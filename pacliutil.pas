@@ -3,7 +3,7 @@ unit pacliutil; // PlusAlpha Command Line Interface Utilities
 
 interface
 
-uses  sysutils, LibPa;
+uses  sysutils, LibPa, paLedger;
 
 Procedure WriteErr(const Err:UTF8String);
 //Function GetAccount:Longint;
@@ -12,11 +12,30 @@ Function  GetText(const Prompt:UTF8String):UTF8String;
 Procedure PrintAcctNo(AcctNo:Integer);
 Procedure PrintAcctType(AccountType:TAcctType);
 Procedure PrintDrCr(Const DrCr:TDrCr);
+Procedure PrintAccount(Const Account:TLedgerAccount);
 
 implementation
 
 uses
-  StrUtils, Crt, paLedger;
+  StrUtils, Crt;
+
+Procedure PrintAccount(Const Account:TLedgerAccount);
+  begin
+    PrintAcctNo(account.AcctNo);
+    Write('  ');
+    PrintAcctType(Account.AccountType);
+    Case Account.DrCr of Cr:TextColor(Red) end;
+    Write(Chr(9));
+    PrintDrCr(account.DrCr);
+    Write(Chr(9), IntToStr(Account.Balance):8);
+    TextColor (Yellow);
+    Write(
+       chr(9), account.Currency);
+       TextColor(white);
+       Write(
+       chr(9), Account.Text);
+    Writeln;
+  end;
 
 Procedure WriteErr(const Err:UTF8String);
   begin
