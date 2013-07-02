@@ -8,7 +8,7 @@
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PlusAlpha"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="17" Y="13"/>
@@ -34,7 +34,7 @@
         <Filename Value="libpa.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="3" Y="12"/>
@@ -48,7 +48,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="padm"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="5"/>
         <CursorPos X="10" Y="26"/>
@@ -58,7 +58,7 @@
       <Unit4>
         <Filename Value="ledger.sdf"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="54" Y="1"/>
@@ -79,6 +79,7 @@
         <CursorPos X="39" Y="130"/>
         <UsageCount Value="301"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="frmdebugunit.pas"/>
@@ -101,7 +102,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="frmLedgerUnit"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="67"/>
         <CursorPos X="67" Y="79"/>
@@ -113,8 +114,7 @@
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="29"/>
         <CursorPos X="4" Y="322"/>
@@ -125,7 +125,7 @@
         <Filename Value="padatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paDatabase"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="18"/>
         <CursorPos X="19" Y="24"/>
@@ -136,7 +136,7 @@
         <Filename Value="pacalculator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paCalculator"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="33"/>
         <CursorPos X="87" Y="40"/>
@@ -147,7 +147,7 @@
         <Filename Value="pajournal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paJournal"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="470"/>
         <CursorPos X="14" Y="45"/>
@@ -169,7 +169,7 @@
         <Filename Value="patransactionlist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paTransactionList"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="50"/>
         <CursorPos X="19" Y="64"/>
@@ -183,10 +183,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmTransactionListUnit"/>
-        <EditorIndex Value="7"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="54"/>
-        <CursorPos X="26" Y="58"/>
+        <TopLine Value="85"/>
+        <CursorPos X="3" Y="108"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -252,12 +253,10 @@
       <Unit22>
         <Filename Value="/Developer/lazarus/lcl/defaulttranslator.pas"/>
         <UnitName Value="DefaultTranslator"/>
-        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="429"/>
         <UsageCount Value="121"/>
-        <Loaded Value="True"/>
       </Unit22>
       <Unit23>
         <Filename Value="/Developer/lazarus/lcl/grids.pas"/>
@@ -271,7 +270,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="28" HistoryIndex="27">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pafrmmainunit.pas"/>
         <Caret Line="78" Column="62" TopLine="64"/>
@@ -384,23 +383,21 @@
         <Filename Value="frmtransactionlistunit.pas"/>
         <Caret Line="60" Column="41" TopLine="47"/>
       </Position28>
+      <Position29>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="58" Column="26" TopLine="54"/>
+      </Position29>
+      <Position30>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="61" Column="35" TopLine="54"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="1">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="frmtransactionlistunit.pas"/>
-        <Line Value="63"/>
-      </Item1>
-    </BreakPoints>
     <Watches Count="1">
       <Item1>
         <Expression Value="Lang"/>
       </Item1>
     </Watches>
   </Debugging>
-  <EditorMacros Count="0"/>
 </CONFIG>

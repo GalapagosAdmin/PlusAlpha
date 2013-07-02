@@ -8,11 +8,12 @@
       <Unit0>
         <Filename Value="mktran.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="11" Y="11"/>
-        <UsageCount Value="25"/>
+        <TopLine Value="66"/>
+        <CursorPos X="30" Y="89"/>
+        <UsageCount Value="126"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -22,7 +23,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="26"/>
         <CursorPos X="1" Y="45"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -31,19 +32,18 @@
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
-        <UsageCount Value="12"/>
+        <CursorPos X="50" Y="11"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="paledger.pas"/>
         <UnitName Value="paLedger"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="566"/>
         <CursorPos X="1" Y="579"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -53,7 +53,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="33"/>
         <CursorPos X="45" Y="35"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -63,7 +63,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="15"/>
         <CursorPos X="8" Y="27"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -73,7 +73,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="35" Y="1"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit6>
     </Units>

@@ -7,8 +7,8 @@ object frmLedger: TfrmLedger
   ClientHeight = 350
   ClientWidth = 728
   TabOrder = 0
-  DesignLeft = 314
-  DesignTop = 79
+  DesignLeft = 272
+  DesignTop = 188
   object tvAccountList: TTreeView
     Left = 0
     Height = 350
@@ -18,7 +18,7 @@ object frmLedger: TfrmLedger
     AutoExpand = True
     BackgroundColor = 13748419
     Color = 13748419
-    DefaultItemHeight = 22
+    DefaultItemHeight = 14
     ReadOnly = True
     RowSelect = True
     ScrollBars = ssVertical

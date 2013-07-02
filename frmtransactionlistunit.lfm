@@ -19,10 +19,10 @@ object frmTransactionList: TfrmTransactionList
     TabOrder = 0
     object cbAccount: TComboBox
       Left = 8
-      Height = 21
+      Height = 26
       Top = 8
       Width = 184
-      ItemHeight = 0
+      ItemHeight = 18
       OnChange = cbAccountChange
       TabOrder = 0
       Text = 'cbAccount'
