@@ -164,7 +164,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
                end;
                // work around some SQLite bugginess
   //           self._acctno := FieldByName('DrAcctCd').AsInteger;
-            self._acctno := StrToInt(FieldByName('DrAcctCd').AsString);
+             self._acctno := StrToInt(FieldByName('DrAcctCd').AsString);
              self._currency :=FieldByName('DrCurrKey').AsString;
              self._EffDateDB :=FieldByName('EFF_DATE').AsString;
             end

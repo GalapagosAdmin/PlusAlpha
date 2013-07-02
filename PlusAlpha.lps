@@ -147,10 +147,11 @@
         <Filename Value="pajournal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paJournal"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="470"/>
-        <CursorPos X="14" Y="45"/>
+        <TopLine Value="149"/>
+        <CursorPos X="12" Y="170"/>
         <UsageCount Value="365"/>
         <Loaded Value="True"/>
       </Unit11>
@@ -183,11 +184,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmTransactionListUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="85"/>
-        <CursorPos X="3" Y="108"/>
+        <TopLine Value="78"/>
+        <CursorPos X="74" Y="98"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -203,7 +203,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="3"/>
         <CursorPos X="33" Y="16"/>
-        <UsageCount Value="146"/>
+        <UsageCount Value="149"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
@@ -270,127 +270,123 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="78" Column="62" TopLine="64"/>
+        <Caret Line="73" Column="3" TopLine="62"/>
       </Position1>
       <Position2>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="77" Column="3" TopLine="64"/>
+        <Caret Line="72" Column="3" TopLine="61"/>
       </Position2>
       <Position3>
-        <Filename Value="frmledgerunit.pas"/>
-        <Caret Line="9" Column="37" TopLine="1"/>
+        <Filename Value="pafrmmainunit.pas"/>
+        <Caret Line="73" Column="3" TopLine="62"/>
       </Position3>
       <Position4>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="75" Column="3" TopLine="64"/>
+        <Caret Line="76" Column="13" TopLine="72"/>
       </Position4>
       <Position5>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="74" Column="3" TopLine="63"/>
+        <Caret Line="69" Column="3" TopLine="67"/>
       </Position5>
       <Position6>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="73" Column="3" TopLine="62"/>
+        <Caret Line="112" Column="1" TopLine="69"/>
       </Position6>
       <Position7>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="72" Column="3" TopLine="61"/>
+        <Caret Line="75" Column="20" TopLine="69"/>
       </Position7>
       <Position8>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="73" Column="3" TopLine="62"/>
+        <Caret Line="76" Column="1" TopLine="69"/>
       </Position8>
       <Position9>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="76" Column="13" TopLine="72"/>
+        <Caret Line="80" Column="33" TopLine="71"/>
       </Position9>
       <Position10>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="69" Column="3" TopLine="67"/>
+        <Caret Line="79" Column="4" TopLine="66"/>
       </Position10>
       <Position11>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="112" Column="1" TopLine="69"/>
+        <Caret Line="74" Column="7" TopLine="61"/>
       </Position11>
       <Position12>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="75" Column="20" TopLine="69"/>
+        <Caret Line="83" Column="27" TopLine="72"/>
       </Position12>
       <Position13>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="76" Column="1" TopLine="69"/>
+        <Caret Line="91" Column="37" TopLine="88"/>
       </Position13>
       <Position14>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="80" Column="33" TopLine="71"/>
+        <Caret Line="76" Column="1" TopLine="72"/>
       </Position14>
       <Position15>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="79" Column="4" TopLine="66"/>
+        <Caret Line="77" Column="1" TopLine="73"/>
       </Position15>
       <Position16>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="74" Column="7" TopLine="61"/>
+        <Caret Line="84" Column="1" TopLine="80"/>
       </Position16>
       <Position17>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="83" Column="27" TopLine="72"/>
+        <Caret Line="94" Column="18" TopLine="70"/>
       </Position17>
       <Position18>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="91" Column="37" TopLine="88"/>
+        <Caret Line="96" Column="1" TopLine="92"/>
       </Position18>
       <Position19>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="76" Column="1" TopLine="72"/>
+        <Caret Line="140" Column="15" TopLine="118"/>
       </Position19>
       <Position20>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="77" Column="1" TopLine="73"/>
+        <Caret Line="142" Column="24" TopLine="121"/>
       </Position20>
       <Position21>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="84" Column="1" TopLine="80"/>
+        <Caret Line="141" Column="24" TopLine="120"/>
       </Position21>
       <Position22>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="94" Column="18" TopLine="70"/>
+        <Caret Line="59" Column="19" TopLine="49"/>
       </Position22>
       <Position23>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="96" Column="1" TopLine="92"/>
-      </Position23>
-      <Position24>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="140" Column="15" TopLine="118"/>
-      </Position24>
-      <Position25>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="142" Column="24" TopLine="121"/>
-      </Position25>
-      <Position26>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="141" Column="24" TopLine="120"/>
-      </Position26>
-      <Position27>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="59" Column="19" TopLine="49"/>
-      </Position27>
-      <Position28>
         <Filename Value="frmtransactionlistunit.pas"/>
         <Caret Line="60" Column="41" TopLine="47"/>
-      </Position28>
-      <Position29>
+      </Position23>
+      <Position24>
         <Filename Value="frmtransactionlistunit.pas"/>
         <Caret Line="58" Column="26" TopLine="54"/>
-      </Position29>
-      <Position30>
+      </Position24>
+      <Position25>
         <Filename Value="frmtransactionlistunit.pas"/>
         <Caret Line="61" Column="35" TopLine="54"/>
-      </Position30>
+      </Position25>
+      <Position26>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="72" Column="1" TopLine="55"/>
+      </Position26>
+      <Position27>
+        <Filename Value="frmtransactionlistunit.pas"/>
+        <Caret Line="98" Column="74" TopLine="78"/>
+      </Position27>
+      <Position28>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="55" Column="16" TopLine="10"/>
+      </Position28>
+      <Position29>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="73" Column="52" TopLine="53"/>
+      </Position29>
     </JumpHistory>
   </ProjectSession>
   <Debugging>

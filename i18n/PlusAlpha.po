@@ -11,6 +11,10 @@ msgctxt "frmtransactionlistunit.hdrcr"
 msgid "Cr"
 msgstr ""
 
+#: frmtransactionlistunit.hdrdate
+msgid "Date"
+msgstr ""
+
 #: frmtransactionlistunit.hdrdr
 msgctxt "frmtransactionlistunit.hdrdr"
 msgid "Dr"
