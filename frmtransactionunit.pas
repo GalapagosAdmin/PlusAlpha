@@ -113,6 +113,7 @@ begin
 
   with _JournalDetailEntries[0] do
     begin
+    // where can we grab the GUID from?
       TransNo := StrToInt(LeTrnNo.Text);
       AcctNo :=  ActToInt(ebAcctNo1.Text);
       TransRow := 0;

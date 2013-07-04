@@ -14,6 +14,7 @@ Type
     TransactionNo:Integer;
     TransactionGUID:TGUID;
     TransactionRow:Integer;
+    HasGUID:Boolean;
   end;
 
   TResultArray=Array of TResultEntry;
@@ -68,7 +69,12 @@ var
            SetLength(_Array, Length(_Array)+1);
            _Array[High(_Array)].TransactionNo := FieldByName('TRANSNO').AsInteger;
            _Array[High(_Array)].TransactionRow := FieldByName('TRANSROW').AsInteger;
-           _Array[High(_Array)].TransactionGUID := StringToGuid(FieldByName('TRANSGUID').AsString);
+           try
+             _Array[High(_Array)].TransactionGUID := StringToGuid(FieldByName('TRANSGUID').AsString);
+             _Array[High(_Array)].HasGuid := True;
+           EXCEPT
+             _Array[High(_Array)].HasGUID := False;
+           end;
            next;
         end;
       Close;

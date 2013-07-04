@@ -245,7 +245,7 @@ If not SQLQuery1.EOF then
        try
          self._AcctGUID := StringToGUID(FieldByName('AcctGuid').AsString);
        except
-        DebugLn('TLedgerAccount.Load:Error while reading acctno');
+        DebugLn('TLedgerAccount.Load:Error while reading acctguid');
        end;
        try
         self._currency := FieldByName('CurrKey').AsString;
