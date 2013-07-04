@@ -20,21 +20,25 @@ uses
       _AccStCdDB:Char; // Account sub-type
   private
       _AcctNo:TInteger; // Internal Account No.
+      _AcctGUID:TGUID; // Internal Account GUID.
       _Text:TUTF8String; // Account Description
       _AcctType:TAcctType; // Account Type (Pascal Enumerated)
       _currency:TCurrCode;  // Currency Code
       _AccStDB:Char; // Account Subtype Code for the database (Char1)
       _TextKey:TInteger; // Text key used for i18n of text
       _TransNo:TInteger; // Latest Transaction number posted to this ledger account
+      _TransGUID:TGUID; // Latest Transaction GUID posted to this ledger account
       _ExtRefNo:TInteger; // External account number (i.e. account number at the bank)
-      _Guid:TGuid;  // Globally Unique Identifier for this account.  Used for DB merges.
+//      _Guid:TGuid;  // Globally Unique Identifier for this account.  Used for DB merges.
       Procedure SetBal(NewBalance:LongInt);
       Procedure SetDrCr(NewDrCr:TDrCr);
       Procedure SetTransNo(NewTransNo:TInteger);
+      Procedure SetTransGUID(NewTransGUID:TGUID);
       Procedure SetText(NewText:TUTF8String);
       Procedure SetCurrency(NewCurrency:TCurrCode);
       Procedure SetAcctType(NewAcctType:TAcctType);
       Procedure SetAcctNo(NewAcctNo:Integer);
+      Procedure SetAcctGUID(NewAcctGUID:TGUID);
       Function Insert:Boolean;
       Function Update:Boolean;
       Function _DrBal:LongInt;   // converts to the db format for now
@@ -42,14 +46,17 @@ uses
     Public
       Constructor create;
       Property AcctNo:TInteger read _AcctNo write SetAcctNo;
+      Property AcctGUID:TGUID read _AcctGUID write SetAcctGUID;
       Property Text:TUTF8String read _Text write SetText;
       Property Balance:LongInt read _bal write SetBal;
       Property Currency:TCurrCode read _Currency write SetCurrency;
       Property DrCr:Tdrcr read _drcr write SetDrCr;
       Property AccountType:TAcctType read _AcctType write SetAcctType;
       Property AccountSubType:Char read _AccSTDB;
-      Property TransNo:TInteger read _TransNo write SetTransNo;
+      Property TransNo:TInteger read _TransNo write SetTransNo; deprecated;
+      Property TransGUID:TGUID read _TransGUID write SetTransGUID;
       Function Load(AccountNo:TInteger):boolean;
+      Function Load(AccountGUID:TGUID):boolean; overload;
       Property ExtAcctNo:TInteger read _ExtRefNo;
       Function Synch:boolean;
       Procedure Commit;
@@ -75,10 +82,12 @@ uses
      Procedure ReLoad;
      // loads an existing ledger account from the database into a new object
      Procedure AddAccount(const AcctNo:Integer);
+     Procedure AddAccount(const AcctGUID:TGUID); overload;
      Function AccountStringList:TStringList;
      Function GetFirstAccount:TLedgerAccount;
      Function GetNextAccount:TLedgerAccount;
      Function GetAccountNo(AccountNo:TInteger):TLedgerAccount;
+     Function GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
      Function EOF:Boolean;
      Function GetNextFreeAccountNo:Integer;
   end;
@@ -205,6 +214,92 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
     _New := False;
   end;
 
+Function TLedgerAccount.Load(AccountGUID:TGUID):Boolean;
+var
+//  i:TInteger;
+  SQLQuery1:TSQLQuery;
+  DrBal, CrBal:TInteger;
+  rows:integer;
+  test:boolean;
+begin
+//  DebugLn(IntToStr(AccountNo));
+SQLQuery1 := TSQLQuery.Create(nil);
+SQLQuery1.Transaction := SQLTransaction1;
+SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
++ ' from ledger where AcctGUID = :acctGUID';
+//   + ' from ledger where rowid = :rowid';
+test := assigned(SQLTransaction1);
+SqlQuery1.ParamByName('acctguid').AsString := GuidToString(AccountGUID);
+
+SQLQuery1.Open;
+rows := SQLQuery1.RowsAffected;
+// The following doesn't work for SELECT statements
+//  Result := Rows = 1;
+// Not working for some reason, rows always = 0, EOF = True.
+//   While not SQLQuery1.EOF do
+Result := Not SQLQuery1.EOF;
+If not SQLQuery1.EOF then
+ begin
+   With SQLQuery1 do
+     begin
+       try
+         self._AcctGUID := StringToGUID(FieldByName('AcctGuid').AsString);
+       except
+        DebugLn('TLedgerAccount.Load:Error while reading acctno');
+       end;
+       try
+        self._currency := FieldByName('CurrKey').AsString;
+        self._scale := GetScale(_Currency);
+       except
+        DebugLn('TLedgerAccount.Load:Error while reading currency');
+       end;
+       try
+        self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
+        self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
+       except
+        DebugLn('TLedgerAccount.Load:Error while reading AcctType');
+       // Pascal representation
+       end;
+       try
+         self._AccStDB := FieldByName('AccSTCd').AsString[1];
+       except
+        DebugLn('TLedgerAccount.Load:Error while reading AcctSt field, record='+GUIDToString(AccountGUID));
+       end;
+       try
+        self._Text := FieldByName('Text').AsString;
+       except
+        DebugLn('TLedgerAccount.Load:Error while reading text field');
+       end;
+       try
+        DrBal :=  FieldByName('DrBal').AsLongInt;
+        CrBal :=  FieldByName('CrBal').AsLongInt;
+       except
+        DebugLn('TLedgerAccount.Load:Error while reading DrBal/CrBal');
+       end;
+//     SQLQuery1.Next;
+
+     end; // of WITH
+ end; // of IF
+SQLQuery1.Close;
+SQLQuery1.Destroy;
+
+  If DrBal > 0 then
+    begin
+     self._bal := DrBal;
+     self._DRCR := Dr;
+    end
+  else
+   begin
+     self._bal := CrBal;
+     self._DRCR := Cr;
+   end;
+   // We just loaded the data, so it's clean.
+  _Dirty := False;
+  _New := False;
+    // Duplicate AccNo version of Load, but refactor code first to avoid too
+    // much duplicate code.
+  end;
+
 Procedure TLedgerAccount.SetText(NewText:TUTF8String);
   begin
     _Text := NewText;
@@ -234,6 +329,15 @@ Procedure TLedgerAccount.SetTransNo(NewTransNo:TInteger);
     _Dirty := True;
   end;
 
+Procedure TLedgerAccount.SetTransGUID(NewTransGUID:TGUID);
+  begin
+    _TransGUID := NewTransGUID;
+    _TransNo := -1;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
+
+
 Procedure TLedgerAccount.SetCurrency(NewCurrency:TCurrCode);
   begin
     _Currency := NewCurrency;
@@ -262,6 +366,15 @@ Procedure TLedgerAccount.SetAcctNo(NewAcctNo:Integer);
     // We need up update the DB now, so set _dirty to true;
     _Dirty := True;
   end;
+
+Procedure TLedgerAccount.SetAcctGUID(NewAcctGUID:TGUID);
+  begin
+    _AcctGUID := NewAcctGUID;
+    _AcctNo := -1;
+    // We need up update the DB now, so set _dirty to true;
+    _Dirty := True;
+  end;
+
 
 Function TLedgerAccount.Insert:boolean;
   var
@@ -394,6 +507,19 @@ Procedure TAccountList.AddAccount(const AcctNo:Integer);
     _AccountList[High(_AccountList)] := TmpAcct;
   end;
 
+Procedure TAccountList.AddAccount(const AcctGUID:TGUID); overload;
+  var
+    TmpAcct:TLedgerAccount;
+  begin
+    TmpAcct := TLedgerAccount.Create;
+    // Add entry to the in-memory array
+    SetLength(_AccountLIst, Length(_AccountList)+1);
+    // Changed to delegate loading to the Ledger class itself
+    TmpAcct.Load(AcctGuid);
+    _AccountList[High(_AccountList)] := TmpAcct;
+  end;
+
+
 Function TAccountList.GetFirstAccount:TLedgerAccount;
   begin
     if self.eof then exit;
@@ -450,6 +576,25 @@ Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
           end;
 
   end;
+
+Function TAccountLIst.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+  var
+//    i:TInteger;
+    ThisAccount:TLedgerAccount;
+  begin
+    Result := nil;
+    // Not very efficient, but then we shouldn't really have more than 100 or
+    // so accounts
+//    for i := Low(_AccountList) to high(_AccountList) do
+      for ThisAccount in _AccountLIst do
+        if IsEqualGUID(ThisAccount.AcctGUID, AccountGUID) then
+          begin
+            Result := ThisAccount;
+            exit;
+          end;
+
+  end;
+
 
 Procedure TAccountList.Load; // Loads the account listing from the database
   var

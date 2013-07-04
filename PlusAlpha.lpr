@@ -10,8 +10,7 @@ uses
   Forms, paFrmMainUnit, libpa, padm, sdflaz, lazcontrols, anchordockpkg,
   frmTransactionUnit, frmDebugUnit, frmLedgerUnit, paLedger, paDatabase,
   pacalculator, paJournal, paText, paTransactionList, frmTransactionListUnit,
-  fmeWelcomeUnit
-  { you can add units after this };
+  fmeWelcomeUnit;
 
 {$R *.res}
 

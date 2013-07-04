@@ -16,6 +16,7 @@ type
    private
      //var
        _TransNo:Integer;     // Transaction number - Matches with journal detail
+       _TransGUID:TGUID;     // Transaction number - Matches with journal detail
        _Memo:TUTF8String;    // Memo in entry language
        _EffDate:TDate;       // Effective Date  GMT
        _EffTime:TTime;       // Effective time  GMT
@@ -30,6 +31,7 @@ type
 //     Procedure Revert;
        Property HdrMemo:TUTF8String read _memo write _memo;
        Property HdrTransNo:Integer read _TransNo write _TransNo;
+       Property HdrTransGUID:Integer read _TransNo write _TransNo;
        Property HdrPosted:Boolean read _Posted write _Posted;
        Property CurrCode:TCurrCode read _CurrCode write _CurrCode;
        Property EffDate:TDate read _EffDate write _EffDate;
@@ -43,17 +45,20 @@ type
    private
    //var
      _TransNo:Integer;     // Transaction number - Matches with header
+     _TransGUID:TGUID;     // Transaction GUID - Matches with header
      _TransRow:Integer;    // Entry number for this Transaction number (line item)
      _amount:Integer;      // Amount, without decimal point
      _currency:TCurrCode;  // Currency Code - Should match account being used
      _drcr:Tdrcr;          // Debit/Credit Indicator
      _acctno:Integer;      // Account no. (Internal)
+     _acctGUID:TGUID;      // Account no. (Internal)
 //     _bal:Integer;         // Ledger Balance
      _dirty:boolean;       // Needs Database synch
      _new:boolean;    // specifies that this entry has not yet been written to the database
      _Text:TUTF8String;
      _EffDateDB:TDBDateStr; //
      Procedure SetAcctNo(AcctNo:Integer);
+     Procedure SetAcctGUID(AcctGUID:TGUID);
       // performs a database update if the record already existed.
      Procedure Select;
      Function Update:Boolean;
@@ -64,7 +69,9 @@ type
 //     Procedure Commit;
 //     Procedure Revert;
     Property TransNo:Integer read _TransNo write _TransNo;
+    Property TransGUID:TGUID read _TransGUID write _TransGUID;
     Property AcctNo:Integer read _acctno write SetAcctNo;
+    Property AcctGUID:TGUID read _acctGUID write SetAcctGUID;
     Property Amount:Integer read _amount write _amount;
     Property DrCr:Tdrcr read _drcr write _drcr;
     Property Currency:TCurrCode read _currency;// write _currency;
@@ -74,12 +81,14 @@ type
     Function Validate:Boolean;
     Function Synch:boolean;
     Procedure Load(const TN:Integer; const TR:Integer);
+    Procedure Load(const TG:TGUID; const TR:Integer); overload;
  end;
 
 // Class for holding the complete transaction, header and detail.
  TCompleteJournalEntry=Class(TObject)
    private
      _TransNo:Integer;     // Transaction number - Matches with header
+     _TransGUID:TGUID;     // Transaction GUID - Matches with header
      _Rows:Integer; // Number of Line Items
      // Two entries for testing
   //   _JournalDetailEntry1 : TJournalDetailEntry;
@@ -88,10 +97,11 @@ type
 //     _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
      _TotalDr:Integer;
      _TotalCr:Integer;
-     _TransHighWaterMark:Integer;
+     _TransHighWaterMark:Integer;  // not needed when using GUID
      Procedure UpdateHighWaterMark;
      Procedure UpdateDrCr;
      Procedure TransNoSet(TransNo:Integer);
+     Procedure TransGUIDSet(TransGUID:TGUID);
      Function GetHighWaterMark:Integer;
    Public
      _JournalHeader : TJournalHeader;
@@ -99,6 +109,7 @@ type
      Constructor Create; //overload;
      Property Rows:Integer Read _Rows;
      Property TransNo:Integer read _TransNo write TransNoSet;
+     Property TransGUID:TGUID read _TransGUID write TransGUIDSet;
      Function IsBalanced:Boolean;
      Function Insert:Boolean;
      Property HighWaterMark:Integer read GetHighWaterMark;
@@ -142,12 +153,22 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       With SQLQuery1 do
         begin
           Transaction := SQLTransaction1;
-          SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD, EFF_DATE FROM JOURNAL '
-            + 'WHERE TRANSNO = :TransNo '
-            + 'AND TRANSROW = :TransRow';
-          ParamByName('TransNo').AsInteger := self._TransNo;
-          ParamByName('TransRow').AsInteger := self._TransRow;
-
+          if self._TransNo = -1 then
+            begin // read by GUID
+              SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD, EFF_DATE, ACCTGUID FROM JOURNAL '
+                + 'WHERE TRANSGUID = :TransGUID '
+                + 'AND TRANSROW = :TransRow';
+              ParamByName('TransGUID').AsString := GuidToString(self._TransGUID);
+              ParamByName('TransRow').AsInteger := self._TransRow;
+            end   // read by GUID
+          else
+            begin // read by acctno
+              SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD, EFF_DATE, ACCTGUID FROM JOURNAL '
+                + 'WHERE TRANSNO = :TransNo '
+                + 'AND TRANSROW = :TransRow';
+              ParamByName('TransNo').AsInteger := self._TransNo;
+              ParamByName('TransRow').AsInteger := self._TransRow;
+            end; // read by acctno
           Open;
           If not EOF then
             begin
@@ -165,6 +186,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
                // work around some SQLite bugginess
   //           self._acctno := FieldByName('DrAcctCd').AsInteger;
              self._acctno := StrToInt(FieldByName('DrAcctCd').AsString);
+             self._acctGUID := StringtoGUID(FieldByName('AcctGUID').AsString);
              self._currency :=FieldByName('DrCurrKey').AsString;
              self._EffDateDB :=FieldByName('EFF_DATE').AsString;
             end
@@ -184,10 +206,19 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       Select;
     end;
 
+Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
+    begin
+      self._TransGUID := TG;
+      self._TransNo := -1;
+      self._TransRow := TR;
+      Select;
+    end;
+
+
   Function TJournalHeader.Insert:boolean;
    var
      SQLQuery1:TSQLQuery;
-     TmpStr : TUTF8String;
+   //  TmpStr : TUTF8String;
    begin
      // validations
      If self._TransNo < 0 then exit(false);
@@ -196,14 +227,16 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
      SQLQuery1 := TSQLQuery.Create(nil);
      SQLQuery1.Transaction := SQLTransaction1;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNALHDR" ('
-         + '"TRANSNO", "MEMO", "EFF_DATE", "ENT_DATE", POSTED) '
-         + 'values ( :TransNo, :Memo, :effdate, :entdate, :posted )';
+         + '"TRANSNO", "MEMO", "EFF_DATE", "ENT_DATE", POSTED, TRANSGUID) '
+         + 'values ( :TransNo, :Memo, :effdate, :entdate, :posted, :TRANSGUID )';
 
      SqlQuery1.ParamByName('TransNo').AsInteger := _TransNo;
      SqlQuery1.ParamByName('Memo').AsString := _Memo;
      SqlQuery1.ParamByName('entdate').AsString := DateTimetoYYYYMMDD(now);
      SqlQuery1.ParamByName('effdate').AsString := DateTimetoYYYYMMDD(_EffDate);
      SqlQuery1.ParamByName('posted').AsInteger := Ord(_Posted);
+     CreateGUID(_TransGUID); // Issue a new GUID if we have to insert a record
+     SqlQuery1.ParamByName('TRANSGUID').AsString := GuidToString(_TransGUID);
 
      SQLQuery1.ExecSQL;
      SQLQuery1.Close;
@@ -222,6 +255,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
   Constructor TJournalDetailEntry.Create;
     begin
       _Currency := 'XXX';
+      // Don't create GUID here, we will do it during insert
       self._AcctNo := -1;
 // New should be set to false when after loading a record from the database so
 // that the existing record can be updated inserting a new record.
@@ -247,6 +281,23 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       else
         _Currency := 'XXX';
       _AcctNo := AcctNo;
+      _Dirty := True;
+    end;
+
+   Procedure TJournalDetailEntry.SetAcctGUID(AcctGUID:TGUID);
+    var
+      tmpAcct:TLedgerAccount;
+    begin
+      // Make sure we set the line item currency to the currency of the account
+      // used.
+      if AcctNo < 0 then exit;
+      tmpAcct := AccountList.GetAccountGuid(AcctGUID);
+      if Assigned(tmpAcct) then
+        _Currency := tmpAcct.Currency
+      else
+        _Currency := 'XXX';
+      _AcctGUID := AcctGUID;
+      _AcctNo := -1;
       _Dirty := True;
     end;
 
@@ -285,11 +336,21 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
           + '"DRTRNSTSCD"=:DrTrnStsCd, '
           + '"DRACCTCD"=:DrAcctCd,'
           + '"CRACCTCD"=:CrAcctCd, '
-          + 'ENT_DATE=:Ent_Date '
-          + 'WHERE transno = :transno'
-          + 'AND "TRANSROW"= :TransRow';
+          + '"ACCTGUID"=:AcctGUID, '
+          + 'ENT_DATE=:Ent_Date ';
+     If _TransNo = -1 then // no Transaction Number, so use GUID
+       begin
+         SQL.Text := SQL.Text + 'WHERE TransGUID = :transGUID'
+                              + 'AND "TRANSROW"= :TransRow';
+         ParamByName('TransGUID').AsString:=GUIDToString(_TransGUID);
+       end
+     else    // Transaction number present
+       begin
+         SQL.Text := SQL.Text +  'WHERE transno = :transno'
+                              + 'AND "TRANSROW"= :TransRow';
 
-      ParamByName('TransNo').AsInteger:=_TransNo;
+         ParamByName('TransNo').AsInteger:=_TransNo;
+       end;
       ParamByName('CrTrnStsCd').AsString:='X';
       ParamByName('CrCurrKey').AsString:=_Currency;
       ParamByName('DrAmt').AsInteger:=DrAmt;
@@ -308,6 +369,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       // the account number in both the CR and CR fields.
       ParamByName('DrAcctCd').AsInteger:=self.AcctNo;
       ParamByName('CrAcctCd').AsInteger:=self.AcctNo;
+      ParamByName('AcctGUID').AsString:=GuidToString(self.AcctGUID);
 
       ParamByName('Ent_Date').AsString:=DateTimeToYYYYMMDD(now);
 
@@ -342,12 +404,14 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNAL" ('
          + '"TRANSNO", "CRTRNSTSCD", "CRCURRKEY", "DRAMT", "KATASA", "TRANSROW",'
          + '"TRNSKBNCD", "TEXT", "TEXTKEY", "CRAMT", "DRCURRKEY", "DRTRNSTSCD", '
-         + ' "DRACCTCD", "CRACCTCD", ENT_DATE) '
+         + ' "DRACCTCD", "CRACCTCD", ENT_DATE, TRANSGUID) '
          + 'values ( :TransNo, :CrTrnStsCd, :CrCurrKey, :DrAmt, :Katasa, :TransRow, '
          + ':TrnsKbnCd, :Text, :TextKey, :CrAmt, :DrCurrKey, :DrTrnStsCd, :DrAcctCd, '
-         + ' :CrAcctCd, :Ent_Date)';
+         + ' :CrAcctCd, :Ent_Date, :TransGUID)';
 
      SqlQuery1.ParamByName('TransNo').AsInteger:=_TransNo;
+     CreateGUID(_TransGUID);
+     SqlQuery1.ParamByName('TransGUID').AsString := GUIDToString(_TransGUID);
      SqlQuery1.ParamByName('CrTrnStsCd').AsString:='X';
      SqlQuery1.ParamByName('CrCurrKey').AsString:=_Currency;
      SqlQuery1.ParamByName('DrAmt').AsInteger:=DrAmt;
@@ -521,6 +585,26 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
 //        _JournalDetailEntries[i]._TransNo := _TransNo;
 
    end;
+
+  Procedure TCompleteJournalEntry.TransGUIDSet(TransGUID:TGUID);
+   var
+   //  i:integer;
+     je:TJournalDetailEntry;
+   begin
+     // Update our own internal status
+   _TransGUID := TransGUID;
+   _TransNo := -1;
+     // Update our children to be in synch
+     _JournalHeader._TransGUID:=_TransGUID;
+     _JournalHeader._TransNo:=-1;
+       for je in _JournalDetailEntries do
+         begin
+          je._TransNo := self._TransNo;
+          je._TransGUID := Self._TransGUID;
+         end;
+
+   end;
+
 
  Function TCompleteJournalEntry.IsBalanced:boolean;
    begin
