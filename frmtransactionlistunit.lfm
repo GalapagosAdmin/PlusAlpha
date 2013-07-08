@@ -1,7 +1,7 @@
 object frmTransactionList: TfrmTransactionList
-  Left = 292
+  Left = 495
   Height = 276
-  Top = 169
+  Top = 242
   Width = 591
   Caption = 'Transaction List'
   ClientHeight = 276

@@ -18,6 +18,8 @@ interface
  Type TText=Class(TObject)
    Private
      _TextCD : Integer;
+     _TextGUID : TGUID;
+     _HasGUID:Boolean;
      _LangCD : TLangCode;
      _LangCode_Fallback:TLangCode;
      _Text : UTF8String;
@@ -29,6 +31,7 @@ interface
      Property Language : TLangCode read _LangCd;
      Property Text : UTF8String Read _Text;
      Function GetText(TextCd:Integer):UTF8String;
+     Function GetText(TextGUID:TGUID):UTF8String;
  end;
 
 
@@ -54,7 +57,8 @@ implementation
      _LangCode_Fallback := 'EN';
 //     _LangCd := GetEnvironmentVariable('LANG');
      _LangCD := GetShortLanguageID;
-     _TextCd := 0;
+     _TextCD := 0;
+     CreateGUID(_TextGUID);
      inherited create;
    end;
 
@@ -69,8 +73,16 @@ implementation
   With SQLQuery1 do
     begin
       Transaction := SQLTransaction1;
-      SQL.Text := 'SELECT Text from Text Where TextCD = :TextCD and LangCD = :LangCd';
-      ParamByName('TextCD').AsInteger := _TextCD;
+      IF _HasGUID then
+        begin  // Use Text GUID
+          SQL.Text := 'SELECT Text from Text Where TextGUID = :TextGUID and LangCD = :LangCd';
+          ParamByName('TextGUID').AsString := GuidToString(_TextGUID);
+        end
+      else     // Use Text Code
+        begin
+          SQL.Text := 'SELECT Text from Text Where TextCD = :TextCD and LangCD = :LangCd';
+          ParamByName('TextCD').AsInteger := _TextCD;
+        end;
       ParamByName('LangCD').AsString := _LangCD;
 
       Open;
@@ -105,10 +117,20 @@ implementation
    begin
      _Text := '';
      _TextCd := TextCd;
+     _HasGUID := False;
      select;
      Result := _Text
    end;
 
+ Function TText.GetText(TextGUID:TGUID):UTF8String;
+   begin
+     _Text := '';
+     _TextCd := -1;
+     _TextGUID := TextGUID;
+     _HasGUID := True;
+     select;
+     Result := _Text
+   end;
 
 
 initialization

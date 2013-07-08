@@ -13,7 +13,7 @@ Type
   TAcctType = (atAsset:=0, atLiability:=1, atEquity:=2, atExpense:=3,
                atIncome:=4, atRevenue:=5, atPlaceholder:=6, atOther:=7);
   TUTF8String=UTF8String;
-  Tstr8=String[8];
+  TStr8=String[8];
   TInteger=integer;
 
 

@@ -15,6 +15,7 @@ type
 
   TFormPlusAlphaMain = class(TForm)
     acAccountShow: TAction;
+    acTransactionListShow: TAction;
     ActionList1: TActionList;
     bbNewTran: TBitBtn;
     bbDebug: TBitBtn;
@@ -27,6 +28,7 @@ type
     ToolButton2: TToolButton;
     tvMainMenu: TTreeView;
     procedure acAccountShowExecute(Sender: TObject);
+    procedure acTransactionListShowExecute(Sender: TObject);
     procedure bbDebugClick(Sender: TObject);
     procedure bbHdrUpdateClick(Sender: TObject);
     procedure bbNewTranClick(Sender: TObject);
@@ -57,6 +59,7 @@ uses
 {$R *.lfm}
 var
  F1 :TfrmLedger;
+ F2 :TfrmTransactionList;
 
 { TFormPlusAlphaMain }
 
@@ -83,6 +86,18 @@ begin
    f1.acTreeRefresh.Execute;
 
   // frmLedger.Show;
+end;
+
+procedure TFormPlusAlphaMain.acTransactionListShowExecute(Sender: TObject);
+begin
+   fmeWelcome1.Free;
+   if assigned(f2) then exit;
+   F2 := TFrmTransactionList.Create(self);
+   f2.Parent := FormPlusAlphaMain;
+
+   f2.Align := alClient;
+ //  f2.acTreeRefresh.Execute;
+
 end;
 
 procedure TFormPlusAlphaMain.bbNewTranClick(Sender: TObject);
@@ -140,7 +155,7 @@ procedure TFormPlusAlphaMain.tvMainMenuSelectionChanged(Sender: TObject);
 begin
   case tvMainMenu.Selected.AbsoluteIndex of
     0: acAccountShow.Execute; //accounts
-    1:; // Transactions
+    1: acTransactionListShow.Execute; // Transactions
   end;
 end;
 

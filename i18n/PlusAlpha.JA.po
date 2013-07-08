@@ -73,6 +73,10 @@ msgstr ""
 msgid "acAccountShow"
 msgstr ""
 
+#: tformplusalphamain.actransactionlistshow.caption
+msgid "acTransactionListShow"
+msgstr ""
+
 #: tformplusalphamain.bbdebug.caption
 msgid "Debug Options"
 msgstr "ディバッグ機能"

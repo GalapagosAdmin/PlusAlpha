@@ -1,4 +1,5 @@
 unit padm;
+// Data module, not Desktop Manager or Dock Manager
 
 {$mode objfpc}{$H+}
 

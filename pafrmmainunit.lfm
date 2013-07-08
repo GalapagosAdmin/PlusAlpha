@@ -1,7 +1,7 @@
 object FormPlusAlphaMain: TFormPlusAlphaMain
-  Left = 171
+  Left = 104
   Height = 365
-  Top = 223
+  Top = 274
   Width = 795
   Caption = 'PlusAlpha'
   ClientHeight = 365
@@ -14,10 +14,10 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
     Left = 0
     Height = 333
     Top = 32
-    Width = 136
+    Width = 144
     Align = alLeft
     ClientHeight = 333
-    ClientWidth = 136
+    ClientWidth = 144
     Color = 13748419
     ParentColor = False
     TabOrder = 0
@@ -237,7 +237,7 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
       Left = 1
       Height = 223
       Top = 1
-      Width = 134
+      Width = 142
       Align = alTop
       Anchors = [akTop, akLeft, akRight, akBottom]
       AutoExpand = True
@@ -258,9 +258,11 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
       OnSelectionChanged = tvMainMenuSelectionChanged
       Options = [tvoAutoExpand, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoToolTips, tvoThemedDraw]
       Items.Data = {
-        F9FFFFFF0200020000000300000003000000FFFFFFFFFFFFFFFF000000000000
+        F9FFFFFF0200040000000300000003000000FFFFFFFFFFFFFFFF000000000000
         000000080000004163636F756E74730400000004000000FFFFFFFFFFFFFFFF00
-        00000000000000000C0000005472616E73616374696F6E73
+        00000000000000000C0000005472616E73616374696F6E730900000009000000
+        FFFFFFFFFFFFFFFF0000000000000000000700000056656E646F727308000000
+        08000000FFFFFFFFFFFFFFFF000000000000000000070000005265706F727473
       }
     end
   end
@@ -290,17 +292,17 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
     end
   end
   inline fmeWelcome1: TfmeWelcome
-    Left = 136
+    Left = 144
     Height = 333
     Top = 32
-    Width = 659
+    Width = 651
     Align = alClient
     ClientHeight = 333
-    ClientWidth = 659
+    ClientWidth = 651
     TabOrder = 2
     inherited Label1: TLabel
       Height = 333
-      Width = 659
+      Width = 651
       OnClick = nil
     end
   end
@@ -1983,6 +1985,10 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
     object acAccountShow: TAction
       Caption = 'acAccountShow'
       OnExecute = acAccountShowExecute
+    end
+    object acTransactionListShow: TAction
+      Caption = 'acTransactionListShow'
+      OnExecute = acTransactionListShowExecute
     end
   end
 end
