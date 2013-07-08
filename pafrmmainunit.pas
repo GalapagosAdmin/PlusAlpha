@@ -94,8 +94,9 @@ begin
    if assigned(f2) then exit;
    F2 := TFrmTransactionList.Create(self);
    f2.Parent := FormPlusAlphaMain;
-
    f2.Align := alClient;
+   f2.FormShow(self);
+//   DockMaster.MakeDockable(F2,true,true);
  //  f2.acTreeRefresh.Execute;
 
 end;

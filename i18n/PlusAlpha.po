@@ -285,11 +285,6 @@ msgstr ""
 msgid "acUpdate"
 msgstr ""
 
-#: tfrmtransactionlist.caption
-msgctxt "tfrmtransactionlist.caption"
-msgid "Transaction List"
-msgstr ""
-
 #: tfrmtransactionlist.cbaccount.text
 msgid "cbAccount"
 msgstr ""

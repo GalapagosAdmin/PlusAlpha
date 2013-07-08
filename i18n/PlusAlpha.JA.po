@@ -296,11 +296,6 @@ msgstr "取引ヘッダー"
 msgid "acUpdate"
 msgstr ""
 
-#: tfrmtransactionlist.caption
-msgctxt "tfrmtransactionlist.caption"
-msgid "Transaction List"
-msgstr "取引検索"
-
 #: tfrmtransactionlist.cbaccount.text
 msgid "cbAccount"
 msgstr ""

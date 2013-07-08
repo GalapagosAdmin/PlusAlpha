@@ -12,7 +12,7 @@ type
 
   { TfrmTransactionList }
 
-  TfrmTransactionList = class(TForm)
+  TfrmTransactionList = class(TFrame)
     acUpdate: TAction;
     ActionList1: TActionList;
     cbAccount: TComboBox;
