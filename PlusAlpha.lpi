@@ -137,7 +137,7 @@
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTransactionList"/>
         <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
+        <ResourceBaseClass Value="Frame"/>
         <UnitName Value="frmTransactionListUnit"/>
       </Unit14>
       <Unit15>

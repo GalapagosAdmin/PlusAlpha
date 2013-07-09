@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="8">
+      <Unit0>
+        <Filename Value="imp_amex.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="imp_amex"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="47"/>
+        <CursorPos X="30" Y="63"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="libpa.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="libpa"/>
+        <UsageCount Value="36"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="padatabase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paDatabase"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="26"/>
+        <CursorPos X="114" Y="44"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="patext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="patext"/>
+        <UsageCount Value="36"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="pacliutil.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pacliutil"/>
+        <UsageCount Value="36"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="csvdocument\csvdocument.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="csvdocument"/>
+        <UsageCount Value="36"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="paimport.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paImport"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="53"/>
+        <CursorPos X="28" Y="68"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="csvdocument\demo\mainfrm.pas"/>
+        <UnitName Value="mainfrm"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="18"/>
+        <Loaded Value="True"/>
+      </Unit7>
+    </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <JumpHistory Count="20" HistoryIndex="19">
+      <Position1>
+        <Filename Value="padatabase.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="43" Column="24" TopLine="29"/>
+      </Position2>
+      <Position3>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="17" Column="38" TopLine="5"/>
+      </Position3>
+      <Position4>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="52" Column="1" TopLine="29"/>
+      </Position4>
+      <Position5>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="30" Column="30" TopLine="18"/>
+      </Position5>
+      <Position6>
+        <Filename Value="csvdocument\demo\mainfrm.pas"/>
+        <Caret Line="15" Column="29" TopLine="11"/>
+      </Position6>
+      <Position7>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="30" Column="25" TopLine="18"/>
+      </Position7>
+      <Position8>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="41" Column="38" TopLine="29"/>
+      </Position8>
+      <Position9>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="27" Column="13" TopLine="27"/>
+      </Position9>
+      <Position10>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="44" Column="33" TopLine="32"/>
+      </Position10>
+      <Position11>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="64" Column="1" TopLine="49"/>
+      </Position11>
+      <Position12>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="12" Column="3" TopLine="1"/>
+      </Position12>
+      <Position13>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="30" Column="22" TopLine="21"/>
+      </Position13>
+      <Position14>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="41" Column="21" TopLine="31"/>
+      </Position14>
+      <Position15>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="46" Column="21" TopLine="36"/>
+      </Position15>
+      <Position16>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="53" Column="24" TopLine="41"/>
+      </Position16>
+      <Position17>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="61" Column="19" TopLine="45"/>
+      </Position17>
+      <Position18>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="72" Column="22" TopLine="51"/>
+      </Position18>
+      <Position19>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="25" Column="25" TopLine="13"/>
+      </Position19>
+      <Position20>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="58" Column="14" TopLine="46"/>
+      </Position20>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

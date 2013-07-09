@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <MainUnitHasCreateFormStatements Value="False"/>
+      </Flags>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="PlusAlpha American Express Japan Importer"/>
+      <UseAppBundle Value="False"/>
+      <ResourceType Value="res"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LazUtils"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="7">
+      <Unit0>
+        <Filename Value="imp_amex.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="imp_amex"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="libpa.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="libpa"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="padatabase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paDatabase"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="patext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="patext"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="pacliutil.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pacliutil"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="csvdocument\csvdocument.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="csvdocument"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="paimport.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paImport"/>
+      </Unit6>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="imp_amex"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="csvdocument"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Other>
+      <CompilerMessages>
+        <MsgFileName Value=""/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

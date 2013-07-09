@@ -1,5 +1,5 @@
 object frmTransaction: TfrmTransaction
-  Left = 493
+  Left = 472
   Height = 444
   Top = 171
   Width = 634
