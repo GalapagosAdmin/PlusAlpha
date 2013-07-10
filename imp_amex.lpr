@@ -15,6 +15,8 @@ type
   { TAmexJPImporter }
 
   TAmexJPImporter = class(TCustomApplication)
+    private
+    AmexJPCSVImport:TAmexJPCSVImport;
   protected
     procedure DoRun; override;
   public
@@ -55,12 +57,21 @@ begin
 
   { add your program here }
 
-  CSVImporter.SetFileName(ParamStr(1));
-  for r := 0 to CSVImporter.GetRowCount do
+  AmexJPCSVImport.SetFileName(ParamStr(1));
+  while not AmexJPCSVImport.eof do
     begin
-      Write(r,': ');
-      for c := 0 to CSVImporter.ColCount do
-        Write('['+CSVImporter.GetValue(c,r)+']');
+      AmexJPCSVImport.GetNext;
+//      Write(r,': ');
+//        Write('['+AmexJPCSVImport.GetValue(c,r)+']');
+      Write(DatetoStr(AmexJPCSVImport.data.TransactionDate));
+      Write('  ');
+      Write(FloatToStr(AmexJPCSVImport.data.LocalCurrencyAmount));
+      Write('  ');
+      Write(AmexJPCSVImport.data.memo);
+      Write('  ');
+      Write(AmexJPCSVImport.data.ForeignCurrencyCode);
+      Write(' ');
+      Write(FloatToStr(AmexJPCSVImport.data.ForeignCurrencyAmount));
       writeln;
     end;
 
@@ -72,12 +83,14 @@ end;
 constructor TAmexJPImporter.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
+  AmexJPCSVImport := TAmexJPCSVImport.Create;
   StopOnException:=True;
 end;
 
 destructor TAmexJPImporter.Destroy;
 begin
   inherited Destroy;
+  AmexJPCSVImport.free;
 end;
 
 procedure TAmexJPImporter.WriteHelp;

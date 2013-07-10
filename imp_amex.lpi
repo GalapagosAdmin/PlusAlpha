@@ -30,6 +30,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
+        <CommandLineParams Value="ofx.csv"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">
@@ -66,7 +67,7 @@
       <Unit5>
         <Filename Value="csvdocument\csvdocument.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="csvdocument"/>
+        <UnitName Value="CsvDocument"/>
       </Unit5>
       <Unit6>
         <Filename Value="paimport.pas"/>
