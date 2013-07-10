@@ -5,7 +5,7 @@ Unit paLedger;
 interface
 
 uses
-  Classes, SysUtils, libpa, paCurrency;//, comctrls;
+  Classes, SysUtils, libpa, paCurrency, paJournal;//, comctrls;
 
 
   type
@@ -22,6 +22,7 @@ uses
       _AcctNo:TInteger; // Internal Account No.
       _AcctGUID:TGUID; // Internal Account GUID.
       _Text:TUTF8String; // Account Description
+      _HasAcctGUID:Boolean; // Internal Account GUID.
       _AcctType:TAcctType; // Account Type (Pascal Enumerated)
       _currency:TCurrCode;  // Currency Code
       _AccStDB:Char; // Account Subtype Code for the database (Char1)
@@ -39,6 +40,7 @@ uses
       Procedure SetAcctType(NewAcctType:TAcctType);
       Procedure SetAcctNo(NewAcctNo:Integer);
       Procedure SetAcctGUID(NewAcctGUID:TGUID);
+      Property HasAcctGUID:Boolean read _HasAcctGUID;
       Function Insert:Boolean;
       Function Update:Boolean;
       Function _DrBal:LongInt;   // converts to the db format for now
@@ -83,11 +85,14 @@ uses
      // loads an existing ledger account from the database into a new object
      Procedure AddAccount(const AcctNo:Integer);
      Procedure AddAccount(const AcctGUID:TGUID); overload;
+     Procedure AddAccount(const AcctNo:Integer; Const AcctGUID:TGUID); overload;
      Function AccountStringList:TStringList;
      Function GetFirstAccount:TLedgerAccount;
      Function GetNextAccount:TLedgerAccount;
      Function GetAccountNo(AccountNo:TInteger):TLedgerAccount;
      Function GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+     // Finds and returns an object for the account used by a journal detail entry
+     Function GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
      Function EOF:Boolean;
      Function GetNextFreeAccountNo:Integer;
   end;
@@ -104,6 +109,9 @@ implementation
 uses
   //db,
   sqldb, paDatabase, LazLogger;
+
+ResourceString
+  ERRTALGJAINVACCTNO = 'TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided.';
 
 Constructor TLedgerAccount.Create;
   begin
@@ -141,7 +149,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
 //  DebugLn(IntToStr(AccountNo));
   SQLQuery1 := TSQLQuery.Create(nil);
   SQLQuery1.Transaction := SQLTransaction1;
-  SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
+  SQLQuery1.SQL.Text := 'select AcctNo, AcctGUID, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
   + ' from ledger where AcctNo = :acctno';
 //   + ' from ledger where rowid = :rowid';
   test := assigned(SQLTransaction1);
@@ -192,8 +200,15 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
          except
           DebugLn('TLedgerAccount.Load:Error while reading DrBal/CrBal'); 
          end;
-//     SQLQuery1.Next;
+         try
+          AcctGUID :=  StringToGUID(FieldByName('AcctGUID').AsString);
+          _HasAcctGUID := True;
+         except
+          _HasAcctGUID := False;
+          DebugLn('TLedgerAccount.Load:Error while reading AcctGUID');
+         end;
 
+//     SQLQuery1.Next;
        end; // of WITH
    end; // of IF
   SQLQuery1.Close;
@@ -277,7 +292,7 @@ If not SQLQuery1.EOF then
         DebugLn('TLedgerAccount.Load:Error while reading DrBal/CrBal');
        end;
 //     SQLQuery1.Next;
-
+       // No need to set AcctGUID since that's what we are using to search with.
      end; // of WITH
  end; // of IF
 SQLQuery1.Close;
@@ -370,7 +385,8 @@ Procedure TLedgerAccount.SetAcctNo(NewAcctNo:Integer);
 Procedure TLedgerAccount.SetAcctGUID(NewAcctGUID:TGUID);
   begin
     _AcctGUID := NewAcctGUID;
-    _AcctNo := -1;
+    _HasAcctGUID := True;
+//    _AcctNo := -1;
     // We need up update the DB now, so set _dirty to true;
     _Dirty := True;
   end;
@@ -519,6 +535,13 @@ Procedure TAccountList.AddAccount(const AcctGUID:TGUID); overload;
     _AccountList[High(_AccountList)] := TmpAcct;
   end;
 
+Procedure TAccountList.AddAccount(Const AcctNo:Integer; Const AcctGUID:TGUID); overload;
+  begin
+    If AcctNo <> -1 then
+      AddAccount(AcctNo)
+    else
+      AddAccount(AcctGUID);
+  end;
 
 Function TAccountList.GetFirstAccount:TLedgerAccount;
   begin
@@ -559,7 +582,7 @@ Procedure TAccountList.ReLoad;
   end;
 
 // Gets the account you want from the array based on account number
-Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
+Function TAccountList.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
   var
 //    i:TInteger;
     ThisAccount:TLedgerAccount;
@@ -567,6 +590,8 @@ Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
     Result := nil;
     // Not very efficient, but then we shouldn't really have more than 100 or
     // so accounts
+    If AccountNo = -1 then
+      Raise Exception.Create('TAccountList.GetAccountNo called with -1!');
 //    for i := Low(_AccountList) to high(_AccountList) do
       for ThisAccount in _AccountLIst do
         if ThisAccount.AcctNo = AccountNo then
@@ -577,7 +602,7 @@ Function TAccountLIst.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
 
   end;
 
-Function TAccountLIst.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+Function TAccountList.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
   var
 //    i:TInteger;
     ThisAccount:TLedgerAccount;
@@ -586,7 +611,7 @@ Function TAccountLIst.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
     // Not very efficient, but then we shouldn't really have more than 100 or
     // so accounts
 //    for i := Low(_AccountList) to high(_AccountList) do
-      for ThisAccount in _AccountLIst do
+      for ThisAccount in _AccountList do
         if IsEqualGUID(ThisAccount.AcctGUID, AccountGUID) then
           begin
             Result := ThisAccount;
@@ -595,6 +620,18 @@ Function TAccountLIst.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
 
   end;
 
+Function TAccountList.GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
+  begin
+    case je.HasAcctGUID of
+      true:Result := self.GetAccountGUID(je.AcctGUID);
+      false:begin
+              If je.AcctNo = -1 then
+                Raise Exception.Create(ERRTALGJAINVACCTNO)
+              else
+                Result := self.GetAccountNo(je.AcctNo);
+            end;
+      end;
+  end;
 
 Procedure TAccountList.Load; // Loads the account listing from the database
   var
@@ -614,13 +651,13 @@ Procedure TAccountList.Load; // Loads the account listing from the database
     if _Loaded then Clear;
     SQLQuery1 := TSQLQuery.Create(nil);
     SQLQuery1.Transaction := SQLTransaction1;
-    SQLQuery1.SQL.Text := 'select AcctNo from ledger';
+    SQLQuery1.SQL.Text := 'select AcctNo, AcctGUID from ledger';
     SQLQuery1.open;
     _Loaded := True;
     While not SQLQuery1.EOF do
      begin
        With SQLQuery1 do
-         AddAccount(FieldByName('AcctNo').AsInteger);
+         AddAccount(FieldByName('AcctNo').AsInteger, StringToGUID(FieldByName('AcctGUID').AsString));
        SQLQuery1.Next;
      end;
   finally

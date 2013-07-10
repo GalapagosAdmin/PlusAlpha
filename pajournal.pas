@@ -23,7 +23,7 @@ type
        _EffTime:TTime;       // Effective time  GMT
        _EntDate:TDate;       // Entry Date      GMT
        _EntTime:TTime;       // Entry Time      GMT
-       _Posted:Boolean;      // Posted Flag
+       _Posted:Boolean;      // Posted Flag     GMT
        _CurrCode:TCurrCode;  // Currency Code
        Procedure SetTransGUID(TransGUID:TGUID);
      public
@@ -46,7 +46,8 @@ type
  TJournalDetailEntry = class(TObject)
    private
    //var
-     _HasGUID:Boolean;
+     _HasTransGUID:Boolean;
+     _HasAcctGUID:Boolean; // We have the Account Number GUID set.
      _TransNo:Integer;     // Transaction number - Matches with header
      _TransGUID:TGUID;     // Transaction GUID - Matches with header
      _TransRow:Integer;    // Entry number for this Transaction number (line item)
@@ -82,6 +83,7 @@ type
     Property TransRow:Integer read _TransRow write _TransRow;
     Property Text:TUTF8String read _Text write _Text;
     Property DisplayDate:TDBDateStr read _EffDateDB;
+    Property HasAcctGUID:Boolean read _HasAcctGUID;
     Function Validate:Boolean;
     Function Synch:boolean;
     Procedure Load(const TN:Integer; const TR:Integer);
@@ -91,7 +93,7 @@ type
 // Class for holding the complete transaction, header and detail.
  TCompleteJournalEntry=Class(TObject)
    private
-     _HasGUID:Boolean;
+     _HasTransGUID:Boolean;
      _TransNo:Integer;     // Transaction number - Matches with header
      _TransGUID:TGUID;     // Transaction GUID - Matches with header
      _Rows:Integer; // Number of Line Items
@@ -102,7 +104,7 @@ type
 //     _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
      _TotalDr:Integer;
      _TotalCr:Integer;
-     _TransHighWaterMark:Integer;  // not needed when using GUID
+     _TransHighWaterMark:Integer;  // will not be needed when using (only) GUID
      Procedure UpdateHighWaterMark;
      Procedure UpdateDrCr;
      Procedure TransNoSet(TransNo:Integer);
@@ -159,7 +161,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
       With SQLQuery1 do
         begin
           Transaction := SQLTransaction1;
-          if self._HasGUID then
+          if self._HasTransGUID then
             begin // read by GUID
               SQL.Text := 'SELECT DRAMT, CRAMT, DRCURRKEY, TEXTKEY, TEXT, DRACCTCD, EFF_DATE, ACCTGUID FROM JOURNAL '
                 + 'WHERE TRANSGUID = :TransGUID '
@@ -195,7 +197,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
              try
                self._acctGUID := StringtoGUID(FieldByName('AcctGUID').AsString);
              except
-               self._HasGuid := False;
+               self._HasAcctGuid := False;
              end;
              self._currency :=FieldByName('DrCurrKey').AsString;
              self._EffDateDB :=FieldByName('EFF_DATE').AsString;
@@ -213,7 +215,7 @@ uses sdfdata, db, paLedger, paDatabase, paCalculator;
     begin
       self._TransNo := TN;
       self._TransRow := TR;
-      self._HasGUID := False;
+      self._HasTransGUID := False;
       Select;
     end;
 
@@ -222,7 +224,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       self._TransGUID := TG;
       self._TransNo := -1;
       self._TransRow := TR;
-      self._HasGuid := True;
+      self._HasTransGuid := True;
       Select;
     end;
 
@@ -278,7 +280,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       _Currency := 'XXX';
       // Don't create GUID here, we will do it during insert
       self._AcctNo := -1;
-      self._HasGUID := False;
+      self._HasTransGUID := False;
 // New should be set to false when after loading a record from the database so
 // that the existing record can be updated inserting a new record.
       _new := True;
@@ -303,7 +305,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       else
         _Currency := 'XXX';
       _AcctNo := AcctNo;
-      _HasGuid := False;
+      _HasTransGuid := False;
       _Dirty := True;
     end;
 
@@ -319,9 +321,10 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
         _Currency := tmpAcct.Currency
       else
         _Currency := 'XXX';
-      _AcctGUID := AcctGUID;
-//      _HasGUID := True;  // oops, this isn't the key for a Journal Detail Entry!
-      _AcctNo := -1;      // Is this correct?
+      _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
+      _AcctGUID := AcctGUID;  // Overkill
+      _HasAcctGUID := True;
+//      _AcctNo := -1;  // We should look up the account number here if we will need it.
       _Dirty := True;
     end;
 
@@ -330,7 +333,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       tmpAcct:TLedgerAccount;
     begin
       _TransGUID := TransGUID;
-      _HasGUID := True;
+      _HasTransGUID := True;
       _Dirty := True;
     end;
 
@@ -372,7 +375,7 @@ Function TJournalDetailEntry.Update:boolean;
           + '"CRACCTCD"=:CrAcctCd, '
           + '"ACCTGUID"=:AcctGUID, '
           + 'ENT_DATE=:Ent_Date ';
-     If _HasGuid then // no Transaction Number, so use GUID
+     If _HasTransGuid then // no Transaction Number, so use GUID
        begin
          SQL.Text := SQL.Text + 'WHERE TransGUID = :transGUID'
                               + 'AND "TRANSROW"= :TransRow';
@@ -402,7 +405,7 @@ Function TJournalDetailEntry.Update:boolean;
       // the account number in both the CR and CR fields.
       ParamByName('DrAcctCd').AsInteger:=self.AcctNo;
       ParamByName('CrAcctCd').AsInteger:=self.AcctNo;
-      If _HasGUID then
+      If _HasTransGUID then
         ParamByName('AcctGUID').AsString:=GuidToString(self.AcctGUID);
 
       ParamByName('Ent_Date').AsString:=DateTimeToYYYYMMDD(now);
@@ -438,16 +441,16 @@ Function TJournalDetailEntry.Update:boolean;
      SQLQuery1.SQL.Text := 'insert into "main"."JOURNAL" ('
          + '"TRANSNO", "CRTRNSTSCD", "CRCURRKEY", "DRAMT", "KATASA", "TRANSROW",'
          + '"TRNSKBNCD", "TEXT", "TEXTKEY", "CRAMT", "DRCURRKEY", "DRTRNSTSCD", '
-         + ' "DRACCTCD", "CRACCTCD", ENT_DATE, TRANSGUID) '
+         + ' "DRACCTCD", "CRACCTCD", ENT_DATE, TRANSGUID, ACCTGUID) '
          + 'values ( :TransNo, :CrTrnStsCd, :CrCurrKey, :DrAmt, :Katasa, :TransRow, '
          + ':TrnsKbnCd, :Text, :TextKey, :CrAmt, :DrCurrKey, :DrTrnStsCd, :DrAcctCd, '
-         + ' :CrAcctCd, :Ent_Date, :TransGUID)';
+         + ' :CrAcctCd, :Ent_Date, :TransGUID, :AcctGUID)';
 
      SqlQuery1.ParamByName('TransNo').AsInteger:=_TransNo;
-     If not _HasGUID then
+     If not _HasTransGUID then
        begin
          CreateGUID(_TransGUID);
-         _HasGUID := True;
+         _HasTransGUID := True;
        end;
      SqlQuery1.ParamByName('TransGUID').AsString := GUIDToString(_TransGUID);
      SqlQuery1.ParamByName('CrTrnStsCd').AsString:='X';
@@ -462,7 +465,10 @@ Function TJournalDetailEntry.Update:boolean;
      SqlQuery1.ParamByName('CrAmt').AsInteger:=CrAmt;
      SqlQuery1.ParamByName('DrCurrKey').AsString:=Currency;
      SqlQuery1.ParamByName('DrTrnStsCd').AsString:='X';
-
+     If _HasAcctGUID then
+       SqlQuery1.ParamByName('AcctGUID').AsString := GUIDToString(self.AcctGUID)
+     else
+       SqlQuery1.ParamByName('AcctGUID').AsString := '';
      // We only store one line item per row in the journal detail table,
      // which means we actually need only one field.  For now, we will store
      // the account number in both the CR and CR fields.
@@ -490,7 +496,7 @@ Function TJournalDetailEntry.Update:boolean;
 
   Function TJournalDetailEntry.validate:boolean;
     begin
-      Result := (Self.AcctNo <> -1);
+      Result := (Self.AcctNo <> -1) or (self._HasAcctGUID);
     end;
 
  Constructor TCompleteJournalEntry.Create;
@@ -566,7 +572,10 @@ Function TJournalDetailEntry.Update:boolean;
              Begin
                je.insert;
                // Update Ledger
-               tmpAcct := AccountList.GetAccountNo(je.AcctNo);
+               If je.HasAcctGUID then
+                 tmpAcct := AccountList.GetAccountGUID(je.AcctGUID)
+               else
+                 tmpAcct := AccountList.GetAccountNo(je.AcctNo);
                if assigned(tmpAcct) then
                  begin
                    // Create the calculator if this is our first time through.
@@ -636,7 +645,7 @@ Function TJournalDetailEntry.Update:boolean;
    begin
      // Update our own internal status
    _TransGUID := TransGUID;
-   _HasGUID := True;
+   _HasTransGUID := True;
      // Update our children to be in synch
      _JournalHeader.HdrTransNo := _TransNo;
      _JournalHeader.HdrTransGUID := _TransGUID;

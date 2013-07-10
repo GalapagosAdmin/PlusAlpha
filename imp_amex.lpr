@@ -64,15 +64,16 @@ begin
 //      Write(r,': ');
 //        Write('['+AmexJPCSVImport.GetValue(c,r)+']');
       Write(DatetoStr(AmexJPCSVImport.data.TransactionDate));
-      Write('  ');
+      Write(chr(9));
       Write(FloatToStr(AmexJPCSVImport.data.LocalCurrencyAmount));
-      Write('  ');
-      Write(AmexJPCSVImport.data.memo);
-      Write('  ');
+      Write(chr(9));
+      Write(UTF8ToANSI(AmexJPCSVImport.data.memo));
+      Write(chr(9));
       Write(AmexJPCSVImport.data.ForeignCurrencyCode);
       Write(' ');
       Write(FloatToStr(AmexJPCSVImport.data.ForeignCurrencyAmount));
       writeln;
+      AmexJPCSVImport.CreateTransaction;
     end;
 
 

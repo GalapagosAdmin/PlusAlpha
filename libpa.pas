@@ -10,11 +10,11 @@ uses
 Type
   TLangCode=String[2];
   TDrCr = (Dr, Cr);
-  TAcctType = (atAsset:=0, atLiability:=1, atEquity:=2, atExpense:=3,
-               atIncome:=4, atRevenue:=5, atPlaceholder:=6, atOther:=7);
-  TUTF8String=UTF8String;
-  TStr8=String[8];
-  TInteger=integer;
+  TAcctType = (atAsset:=0,  atLiability:=1, atEquity:=2,      atExpense:=3,
+               atIncome:=4, atRevenue:=5,   atPlaceholder:=6, atOther:=7);
+  TUTF8String = UTF8String;
+  TStr8 = String[8];
+  TInteger = integer;
 
 
 

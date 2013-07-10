@@ -1,13 +1,13 @@
-unit paDatabase;
+Unit paDatabase;
 
 {$mode objfpc}{$H+}
 
-interface
+Interface
 
-uses
+Uses
   Classes, SysUtils,  sqldb, sqlite3conn;
 
-var
+Var
         DatabaseDir:UTF8String;
         DatabaseName:UTF8String;
         CompleteDBPath:UTF8String;
@@ -15,9 +15,9 @@ var
         SQLite3Connection1:TSQLite3Connection;
         SQLTransaction1:TSQLTransaction;
 
-implementation
+Implementation
 
-uses
+Uses
   FileUtil;
 
  Function GetApplicationName:string;//TGetAppNameEvent;

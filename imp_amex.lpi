@@ -30,7 +30,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="ofx.csv"/>
+        <CommandLineParams Value="ofx-sjis.txt"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">
