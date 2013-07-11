@@ -12,14 +12,14 @@ Function  GetText(const Prompt:UTF8String):UTF8String;
 Procedure PrintAcctNo(AcctNo:Integer);
 Procedure PrintAcctType(AccountType:TAcctType);
 Procedure PrintDrCr(Const DrCr:TDrCr);
-Procedure PrintAccount(Const Account:TLedgerAccount);
+Procedure PrintAccount(Const Account:TLedgerAccount; Const ShowGUID:Boolean);
 
 implementation
 
 uses
   StrUtils, Crt;
 
-Procedure PrintAccount(Const Account:TLedgerAccount);
+Procedure PrintAccount(Const Account:TLedgerAccount; Const ShowGUID:Boolean);
   begin
     PrintAcctNo(account.AcctNo);
     Write('  ');
@@ -32,8 +32,9 @@ Procedure PrintAccount(Const Account:TLedgerAccount);
     Write(
        chr(9), account.Currency);
        TextColor(white);
-       Write(
-       chr(9), Account.Text);
+       If ShowGUID then
+         Write(Chr(9), GUIDToString(Account.AcctGUID));
+       Write(Chr(9), UTF8ToANSI(Account.Text));
     Writeln;
   end;
 

@@ -33,12 +33,12 @@ var
   ErrorMsg: UTF8String;
   Account:TLedgerAccount;
   SearchString:UTF8String;
-
+  ShowGUID:Boolean;
 
 
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('ha','help account:');
+  ErrorMsg:=CheckOptions('hag','help account guid:');
   if ErrorMsg<>'' then begin
     ShowException(Exception.Create(ErrorMsg));
     Terminate;
@@ -52,6 +52,9 @@ begin
     Exit;
   end;
 
+  ShowGUID := HasOption('g','guid');
+
+
   { add your program here }
   SearchString := GetOptionValue('a', 'account');
   If SearchString <> '' then
@@ -63,12 +66,12 @@ begin
   if not AccountList.EOF then
     begin
       Account := AccountList.GetFirstAccount;
-      PrintAccount(Account);
+      PrintAccount(Account, ShowGUID);
     end;
   while not accountlist.EOF do
     begin
      Account := AccountList.GetNextAccount;
-     PrintAccount(Account);
+     PrintAccount(Account, ShowGUID);
     end;
 
 
