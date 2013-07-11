@@ -11,7 +11,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="33"/>
         <CursorPos X="69" Y="36"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="26"/>
       </Unit0>
       <Unit1>
         <Filename Value="pacurrency.pas"/>
@@ -21,7 +21,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="2"/>
         <CursorPos X="22" Y="12"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -108,7 +108,7 @@
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="56"/>
-        <CursorPos X="14" Y="62"/>
+        <CursorPos X="14" Y="59"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit11>

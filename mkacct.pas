@@ -91,11 +91,13 @@ begin
   LedgerAccount.Currency := Currency;
   LedgerAccount.AccountType := TAcctType(AcctTypeInt);
   LedgerAccount.AcctNo := AccountList.GetNextFreeAccountNo;
+  LedgerAccount.CreateAcctGUID;
   if LedgerAccount.Synch then
     begin
         Writeln('Done');
         LedgerAccount.Commit;
         Writeln('Account No:' + IntToStr(LedgerAccount.AcctNo));
+        Writeln('Account GUID:' + GUIDToString(LedgerAccount.AcctGUID));
     end
   else
    WritelnErr('Error');

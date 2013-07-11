@@ -47,7 +47,7 @@ uses
       Function _CrBal:LongInt;   // converts to the db format for now
     Public
       Constructor create;
-      Property AcctNo:TInteger read _AcctNo write SetAcctNo;
+      Property AcctNo:TInteger read _AcctNo write SetAcctNo; deprecated;
       Property AcctGUID:TGUID read _AcctGUID write SetAcctGUID;
       Property Text:TUTF8String read _Text write SetText;
       Property Balance:LongInt read _bal write SetBal;
@@ -57,10 +57,11 @@ uses
       Property AccountSubType:Char read _AccSTDB;
       Property TransNo:TInteger read _TransNo write SetTransNo; deprecated;
       Property TransGUID:TGUID read _TransGUID write SetTransGUID;
-      Function Load(AccountNo:TInteger):boolean;
+      Function Load(AccountNo:TInteger):boolean; deprecated;
       Function Load(AccountGUID:TGUID):boolean; overload;
       Property ExtAcctNo:TInteger read _ExtRefNo;
       Function Synch:boolean;
+      Procedure CreateAcctGuid;
       Procedure Commit;
   end;
 
@@ -83,13 +84,13 @@ uses
      Constructor Create(const AccountName:UTF8String); //overload;
      Procedure ReLoad;
      // loads an existing ledger account from the database into a new object
-     Procedure AddAccount(const AcctNo:Integer);
+     Procedure AddAccount(const AcctNo:Integer); deprecated;
      Procedure AddAccount(const AcctGUID:TGUID); overload;
      Procedure AddAccount(const AcctNo:Integer; Const AcctGUID:TGUID); overload;
      Function AccountStringList:TStringList;
      Function GetFirstAccount:TLedgerAccount;
      Function GetNextAccount:TLedgerAccount;
-     Function GetAccountNo(AccountNo:TInteger):TLedgerAccount;
+     Function GetAccountNo(AccountNo:TInteger):TLedgerAccount; deprecated;
      Function GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
      // Finds and returns an object for the account used by a journal detail entry
      Function GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
@@ -407,11 +408,11 @@ Function TLedgerAccount.Insert:boolean;
         + '"AcctNo", "DrBal", "CrBal", '
         + ' "CurrKey", "Text", "AccTypeCd", '
         + ' PACCTNO, TRANSNO, PayeeCd, '
-        + ' DrBal2, CrBal2, "AccStCd" ) '
+        + ' DrBal2, CrBal2, "AccStCd", AcctGUID ) '
         + 'values ( :AcctNo, :DrBal, :CrBal, '
         +         ' :CurrKey, :Text, :AccTypeCd, '
         +         ' :PAcctNo, :TransNo, :PayeeCd, '
-        +         ' :DrBal2, :CrBal2, :AccStCd)';
+        +         ' :DrBal2, :CrBal2, :AccStCd, :AcctGUID )';
 
     SqlQuery1.ParamByName('AcctNo').AsInteger := self._AcctNo;
     SqlQuery1.ParamByName('DrBal').AsInteger := self._DrBal;
@@ -429,6 +430,10 @@ Function TLedgerAccount.Insert:boolean;
     SqlQuery1.ParamByName('CrBal2').AsInteger := self._CrBal;
     SqlQuery1.ParamByName('AccStCd').AsString := self._AccStCdDB;
 
+    if not self.HasAcctGUID then self.CreateAcctGuid;
+    SqlQuery1.ParamByName('AcctGUID').AsString := GUIDToString(self._AcctGUID);
+
+
 //    SqlQuery1.ParamByName('updatedate').AsString := DateTimetoYYYYMMDD(now);
 //    SqlQuery1.ParamByName('effdate').AsString := DateTimetoYYYYMMDD(_EffDate);
 
@@ -438,6 +443,16 @@ Function TLedgerAccount.Insert:boolean;
     SQLQuery1.Destroy;
 
  end;
+
+Procedure TLedgerAccount.CreateAcctGuid;
+  var
+    tmpGUID:TGUID;
+  begin
+    CreateGUID(tmpGUID); //then
+    //  Raise Exception.Create('Could Not Create GUID');
+    self._AcctGUID := tmpGUID;
+    self._HasAcctGUID := True;
+  end;
 
 Procedure TLedgerAccount.commit;
   begin
