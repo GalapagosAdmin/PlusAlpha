@@ -4,55 +4,55 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="13">
+    <Units Count="18">
       <Unit0>
         <Filename Value="imp_amex.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="imp_amex"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="65"/>
-        <CursorPos X="50" Y="87"/>
-        <UsageCount Value="58"/>
+        <TopLine Value="59"/>
+        <CursorPos X="43" Y="73"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="libpa.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="71"/>
-        <CursorPos X="1" Y="85"/>
-        <UsageCount Value="58"/>
+        <TopLine Value="15"/>
+        <CursorPos X="26" Y="31"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="padatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paDatabase"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="2" Y="22"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="patext.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="patext"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="71"/>
       </Unit3>
       <Unit4>
         <Filename Value="pacliutil.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pacliutil"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="13"/>
         <CursorPos X="76" Y="31"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -62,38 +62,37 @@
         <WindowIndex Value="0"/>
         <TopLine Value="785"/>
         <CursorPos X="50" Y="808"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="71"/>
       </Unit5>
       <Unit6>
         <Filename Value="paimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paImport"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="187"/>
-        <CursorPos X="14" Y="194"/>
-        <UsageCount Value="58"/>
+        <TopLine Value="293"/>
+        <CursorPos X="1" Y="304"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="csvdocument\demo\mainfrm.pas"/>
         <UnitName Value="mainfrm"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="2"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="pacurrency.pas"/>
         <UnitName Value="paCurrency"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="43"/>
         <CursorPos X="9" Y="47"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -101,9 +100,9 @@
         <UnitName Value="paJournal"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="519"/>
-        <CursorPos X="1" Y="532"/>
-        <UsageCount Value="17"/>
+        <TopLine Value="311"/>
+        <CursorPos X="1" Y="320"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -111,9 +110,9 @@
         <UnitName Value="paLedger"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="749"/>
-        <CursorPos X="1" Y="767"/>
-        <UsageCount Value="14"/>
+        <TopLine Value="98"/>
+        <CursorPos X="37" Y="111"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -121,7 +120,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="17"/>
         <CursorPos X="11" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit11>
       <Unit12>
         <Filename Value="C:\lazarus\fpc\2.6.1\source\rtl\objpas\math.pp"/>
@@ -129,137 +128,181 @@
         <WindowIndex Value="0"/>
         <TopLine Value="314"/>
         <CursorPos X="24" Y="337"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit12>
+      <Unit13>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\packages\hash\src\md5.pp"/>
+        <UnitName Value="md5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="527"/>
+        <CursorPos X="67" Y="542"/>
+        <UsageCount Value="15"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="paimportmap.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paImportMap"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="89"/>
+        <CursorPos X="1" Y="89"/>
+        <UsageCount Value="29"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\packages\fcl-db\src\sqldb\sqldb.pp"/>
+        <UnitName Value="sqldb"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="198"/>
+        <CursorPos X="16" Y="201"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\lazarus\components\lazutils\LazLoggerIntf.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="11" Y="13"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\rtl\inc\objpash.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="180"/>
+        <CursorPos X="23" Y="192"/>
+        <UsageCount Value="10"/>
+      </Unit17>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="336" Column="16" TopLine="324"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="101" Column="16" TopLine="89"/>
       </Position1>
       <Position2>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="378" Column="18" TopLine="366"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="105" Column="14" TopLine="93"/>
       </Position2>
       <Position3>
-        <Filename Value="pajournal.pas"/>
-        <Caret Line="408" Column="19" TopLine="396"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="44" Column="33" TopLine="29"/>
       </Position3>
       <Position4>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="89" Column="14" TopLine="73"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="135" Column="3" TopLine="117"/>
       </Position4>
       <Position5>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="651" Column="1" TopLine="639"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="119" Column="97" TopLine="107"/>
       </Position5>
       <Position6>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="755" Column="1" TopLine="743"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="138" Column="6" TopLine="126"/>
       </Position6>
       <Position7>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="767" Column="1" TopLine="749"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="24" Column="3" TopLine="12"/>
       </Position7>
       <Position8>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="95" Column="1" TopLine="75"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="33" Column="46" TopLine="21"/>
       </Position8>
       <Position9>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="96" Column="1" TopLine="76"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="29" Column="1" TopLine="17"/>
       </Position9>
       <Position10>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="147" Column="1" TopLine="135"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="105" Column="19" TopLine="97"/>
       </Position10>
       <Position11>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="149" Column="1" TopLine="135"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="58" Column="46" TopLine="46"/>
       </Position11>
       <Position12>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="95" Column="1" TopLine="83"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="61" Column="26" TopLine="49"/>
       </Position12>
       <Position13>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="96" Column="1" TopLine="83"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="86" Column="57" TopLine="74"/>
       </Position13>
       <Position14>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="150" Column="1" TopLine="138"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="105" Column="102" TopLine="93"/>
       </Position14>
       <Position15>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="153" Column="1" TopLine="138"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="33" Column="50" TopLine="16"/>
       </Position15>
       <Position16>
         <Filename Value="paimport.pas"/>
-        <Caret Line="95" Column="1" TopLine="81"/>
+        <Caret Line="52" Column="19" TopLine="37"/>
       </Position16>
       <Position17>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="194" Column="1" TopLine="182"/>
+        <Filename Value="paimportmap.pas"/>
+        <Caret Line="1" Column="34" TopLine="1"/>
       </Position17>
       <Position18>
         <Filename Value="paimport.pas"/>
-        <Caret Line="152" Column="1" TopLine="140"/>
+        <Caret Line="139" Column="14" TopLine="127"/>
       </Position18>
       <Position19>
         <Filename Value="paimport.pas"/>
-        <Caret Line="94" Column="1" TopLine="82"/>
+        <Caret Line="48" Column="5" TopLine="36"/>
       </Position19>
       <Position20>
         <Filename Value="paimport.pas"/>
-        <Caret Line="95" Column="1" TopLine="82"/>
+        <Caret Line="307" Column="11" TopLine="295"/>
       </Position20>
       <Position21>
         <Filename Value="paimport.pas"/>
-        <Caret Line="155" Column="1" TopLine="143"/>
+        <Caret Line="297" Column="15" TopLine="297"/>
       </Position21>
       <Position22>
         <Filename Value="paimport.pas"/>
-        <Caret Line="131" Column="1" TopLine="119"/>
+        <Caret Line="306" Column="20" TopLine="294"/>
       </Position22>
       <Position23>
         <Filename Value="paimport.pas"/>
-        <Caret Line="194" Column="1" TopLine="182"/>
+        <Caret Line="139" Column="76" TopLine="127"/>
       </Position23>
       <Position24>
         <Filename Value="paimport.pas"/>
-        <Caret Line="207" Column="1" TopLine="195"/>
+        <Caret Line="305" Column="22" TopLine="286"/>
       </Position24>
       <Position25>
         <Filename Value="paimport.pas"/>
-        <Caret Line="221" Column="1" TopLine="209"/>
+        <Caret Line="304" Column="1" TopLine="293"/>
       </Position25>
       <Position26>
         <Filename Value="pajournal.pas"/>
-        <Caret Line="531" Column="1" TopLine="519"/>
+        <Caret Line="326" Column="83" TopLine="312"/>
       </Position26>
       <Position27>
-        <Filename Value="pacurrency.pas"/>
-        <Caret Line="66" Column="45" TopLine="44"/>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="322" Column="39" TopLine="311"/>
       </Position27>
       <Position28>
-        <Filename Value="pacurrency.pas"/>
-        <Caret Line="22" Column="2" TopLine="9"/>
+        <Filename Value="paimport.pas"/>
+        <Caret Line="304" Column="1" TopLine="293"/>
       </Position28>
       <Position29>
-        <Filename Value="pacurrency.pas"/>
-        <Caret Line="40" Column="18" TopLine="31"/>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="319" Column="1" TopLine="311"/>
       </Position29>
       <Position30>
-        <Filename Value="pacurrency.pas"/>
-        <Caret Line="44" Column="18" TopLine="28"/>
+        <Filename Value="pajournal.pas"/>
+        <Caret Line="320" Column="1" TopLine="311"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="1">
+    <BreakPoints Count="2">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -267,6 +310,13 @@
         <Source Value="paledger.pas"/>
         <Line Value="585"/>
       </Item1>
+      <Item2>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="paimport.pas"/>
+        <Line Value="304"/>
+      </Item2>
     </BreakPoints>
   </Debugging>
 </CONFIG>

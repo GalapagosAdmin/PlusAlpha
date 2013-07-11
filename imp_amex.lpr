@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, libpa, padatabase, patext, pacliutil,  CustApp,
-  paImport
+  paImport, md5, paImportMap
   { you can add units after this };
 
 type
@@ -30,7 +30,6 @@ type
 procedure TAmexJPImporter.DoRun;
 var
   ErrorMsg: String;
-  r, c:Integer;
 begin
 
   If ParamCount = 0 then
@@ -68,6 +67,8 @@ begin
       Write(FloatToStr(AmexJPCSVImport.data.LocalCurrencyAmount));
       Write(chr(9));
       Write(UTF8ToANSI(AmexJPCSVImport.data.memo));
+      Write(chr(9));
+      Write(MD5Print(AmexJPCSVImport.data.MD5Hash));
       Write(chr(9));
       Write(AmexJPCSVImport.data.ForeignCurrencyCode);
       Write(' ');

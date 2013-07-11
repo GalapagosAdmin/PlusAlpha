@@ -318,10 +318,12 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
 //      if AcctNo < 0 then exit;
       tmpAcct := AccountList.GetAccountGuid(AcctGUID);
       if Assigned(tmpAcct) then
-        _Currency := tmpAcct.Currency
+        begin
+        _Currency := tmpAcct.Currency;
+        _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
+        end
       else
         _Currency := 'XXX';
-      _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
       _AcctGUID := AcctGUID;  // Overkill
       _HasAcctGUID := True;
 //      _AcctNo := -1;  // We should look up the account number here if we will need it.

@@ -38,7 +38,7 @@
         <PackageName Value="LazUtils"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="imp_amex.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -74,6 +74,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="paImport"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="paimportmap.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paImportMap"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

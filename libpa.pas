@@ -9,7 +9,7 @@ uses
 
 Type
   TLangCode=String[2];
-  TDrCr = (Dr, Cr);
+  TDrCr = (Dr:=0, Cr:=1);
   TAcctType = (atAsset:=0,  atLiability:=1, atEquity:=2,      atExpense:=3,
                atIncome:=4, atRevenue:=5,   atPlaceholder:=6, atOther:=7);
   TUTF8String = UTF8String;
@@ -27,6 +27,8 @@ Type
        AcctTransMap='A0L1C2Q2E3X3I4R5P7O77';
        // Map from TAcctType to DB Codes
        AcctTransMapRev='0A1L2C3E4I5R6P7OO';
+       // map for DB account type codes to TAcctType
+       DrCrTransMap='D0C1';
 
 
   // Converts the "pretty" form of an account text (which includes the number
