@@ -68,7 +68,7 @@ begin
       Write(chr(9));
       Write(UTF8ToANSI(AmexJPCSVImport.data.memo));
       Write(chr(9));
-      Write(MD5Print(AmexJPCSVImport.data.MD5Hash));
+      Write(MD5Print(AmexJPCSVImport.data.MemoHash));
       Write(chr(9));
       Write(AmexJPCSVImport.data.ForeignCurrencyCode);
       Write(' ');

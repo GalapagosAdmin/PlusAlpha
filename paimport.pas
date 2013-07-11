@@ -34,7 +34,7 @@ type
     Memo:UTF8String;
     ForeignCurrencyAmount:Real;
     ForeignCurrencyCode:TCurrCode;
-    MD5Hash:TMD5Digest;
+    MemoHash:TMD5Digest;
   end;
 
   TAmexJPCSVImport = class(TObject)
@@ -176,7 +176,7 @@ Procedure TAmexJPCSVImport.DecodeRow;
     _CurrentEntry.LocalCurrencyAmount := StrToFloat(tmpAmt);
     // Remove Quotation Chars, Convert Encoding to UTF8 if required
     _CurrentEntry.Memo := ANSIToUTF8(_CSVImport.GetValue(MemoCol, _CurrentRow));
-    With _CurrentEntry do MD5Hash := MD5String(Memo);
+    With _CurrentEntry do MemoHash := MD5String(Memo);
     // Remove Quotation Marks
     // Split last field into Currency Amount and Currency Code
     tmpFC := _CSVImport.GetValue(ForeignCurrencyCol, _CurrentRow);
@@ -302,7 +302,6 @@ Procedure TAmexJPCSVImport.CreateTransaction;
           If ImportMapEntry.Load(self.InterfaceGUID, self.data.Memo) then
             begin
               AcctGuid := ImportMapEntry.AcctGUID;   // Actual Mapped Account
-              writeln('*');
             end
           else
             AcctGuid := StringToGUID(GUID_UNCAT_EXP);// Uncategorized Expense

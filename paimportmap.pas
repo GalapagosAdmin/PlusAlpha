@@ -84,11 +84,14 @@ SQLQuery1.SQL.Text := 'select AcctGUID, DrCr, Ignore '
 + ' from ACCOUNTMAP where IntGUID = :IntGUID '
 + ' and MemoHash = :MemoHash ';
 //   + ' from ledger where rowid = :rowid';
-test := assigned(SQLTransaction1);
+//test := assigned(SQLTransaction1);
 SqlQuery1.ParamByName('IntGUID').AsString := GuidToString(_IntGUID);
 SqlQuery1.ParamByName('MemoHash').AsString := MD5Print(_MemoHash);
 
 SQLQuery1.Open;
+writeln(SQLQuery1.SQL.Text);
+writeln( GuidToString(_IntGUID));
+writeln(MD5Print(_MemoHash));
 rows := SQLQuery1.RowsAffected;
 // The following doesn't work for SELECT statements
 //  Result := Rows = 1;
