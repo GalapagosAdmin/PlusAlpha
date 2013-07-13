@@ -106,6 +106,9 @@ begin
     begin
       HdrMemo := leHdrMemo.Text;
       HdrTransNo:= StrToInt(leTrnNo.Text);
+      // The GUID will be created automatically if we don't make it here
+      CreateGUID(tmpGUID);
+      HDRTransGUID := tmpGUID;
       EffDate := deHeaderEffDate.Date;
       _JournalHeader.HdrPosted := cbPosted.Checked;
   // Retrieve Updates back
