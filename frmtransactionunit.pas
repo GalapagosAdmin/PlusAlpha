@@ -98,6 +98,8 @@ procedure TfrmTransaction.Panel1Click(Sender: TObject);
   end;
 
 procedure TfrmTransaction.bbSaveClick(Sender: TObject);
+var
+  tmpGUID:TGUID;
 begin
   With CompleteJournalEntry do
   begin
@@ -107,7 +109,7 @@ begin
       HdrMemo := leHdrMemo.Text;
       HdrTransNo:= StrToInt(leTrnNo.Text);
       // The GUID will be created automatically if we don't make it here
-      CreateGUID(tmpGUID);
+      Assert(CreateGUID(tmpGUID)=0);  // Even if we checked this for error...
       HDRTransGUID := tmpGUID;
       EffDate := deHeaderEffDate.Date;
       _JournalHeader.HdrPosted := cbPosted.Checked;
@@ -116,8 +118,10 @@ begin
 
   with _JournalDetailEntries[0] do
     begin
-    // where can we grab the GUID from?
+    // Transaction GUID should be automatically carried from the header.
       TransNo := StrToInt(LeTrnNo.Text);
+      // where can we grab the Account GUID from?
+      // (Not currently tracked in the GUI but TAccountList has it).
       AcctNo :=  ActToInt(ebAcctNo1.Text);
       TransRow := 0;
       Text := lememo1.Text;

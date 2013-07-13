@@ -76,11 +76,6 @@ msgstr ""
 msgid "Debug Options"
 msgstr ""
 
-#: tformplusalphamain.bbledger.caption
-msgctxt "tformplusalphamain.bbledger.caption"
-msgid "Transaction List"
-msgstr ""
-
 #: tformplusalphamain.bbnewtran.caption
 msgid "New Transaction"
 msgstr ""

@@ -3,6 +3,7 @@ object fmeWelcome: TfmeWelcome
   Height = 240
   Top = 0
   Width = 320
+  Align = alClient
   ClientHeight = 240
   ClientWidth = 320
   TabOrder = 0

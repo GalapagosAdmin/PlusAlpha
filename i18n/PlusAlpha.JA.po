@@ -85,13 +85,6 @@ msgstr ""
 msgid "Debug Options"
 msgstr "ディバッグ機能"
 
-#: tformplusalphamain.bbledger.caption
-#, fuzzy
-#| msgid "Account Ledger"
-msgctxt "tformplusalphamain.bbledger.caption"
-msgid "Transaction List"
-msgstr "口座一覧"
-
 #: tformplusalphamain.bbnewtran.caption
 msgid "New Transaction"
 msgstr "新規取引"

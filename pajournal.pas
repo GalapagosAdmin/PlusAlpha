@@ -574,6 +574,7 @@ Function TJournalDetailEntry.Update:boolean;
              Begin
                je.insert;
                // Update Ledger
+
                If je.HasAcctGUID then
                  tmpAcct := AccountList.GetAccountGUID(je.AcctGUID)
                else

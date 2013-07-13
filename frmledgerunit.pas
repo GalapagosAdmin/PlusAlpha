@@ -28,19 +28,20 @@ type
     leAcctNo: TLabeledEdit;
     leAcctBal: TLabeledEdit;
     mmWelcomeText: TMemo;
-    Notebook1: TNotebook;
-    Page1: TPage;
-    Page2: TPage;
+    nbLedgerContent: TNotebook;
+    pgWelcome: TPage;
+    pgAccountInfo: TPage;
     rbAcctBalDr: TRadioButton;
     rbAcctBalCr: TRadioButton;
     Splitter1: TSplitter;
     tvAccountList: TTreeView;
     procedure acTreeRefreshExecute(Sender: TObject);
     procedure bbSynchClick(Sender: TObject);
+    procedure FrameClick(Sender: TObject);
     procedure lblAccType1Click(Sender: TObject);
  //   procedure FormShow(Sender: TObject);
     procedure leAcctNoChange(Sender: TObject);
-    procedure Page1BeforeShow(ASender: TObject; ANewPage: TPage;
+    procedure pgWelcomeBeforeShow(ASender: TObject; ANewPage: TPage;
       ANewIndex: Integer);
     procedure tvAccountListClick(Sender: TObject);
 //    procedure tvAccountListSelectionChanged(Sender: TObject);
@@ -81,6 +82,7 @@ var
  ExpenseRoot:TTreeNode;
  EquityRoot:TTreeNode;
 
+
  procedure update_Lookup(Acct:TTreeNode);
    begin
      With TObject(Acct.Data) as TLedgerAccount do
@@ -94,6 +96,8 @@ var
 
  procedure AddToTree(tmpAcct:TLedgerAccount);
    begin
+      if not Assigned(tmpAcct) then
+         Raise Exception.Create('frmLedgerUnit.TFrmLedger.acTreeRefreshExecute.AddToTree: tmpAccount not assigned!');
       With tmpAcct do
       case AccountType of
          atAsset: tvAccountList.Items.AddChildObject(AssetRoot, text, tmpAcct) ;
@@ -108,12 +112,17 @@ var
    end;
 
 begin
+
+
+
  // Populate the account tree
  try
-
+ if not assigned(tvAccountList) then
+  Raise Exception.Create('frmLedgerUnit: tvAccountList not assigned!');
  tvAccountList.BeginUpdate;
  tvAccountList.Items.Clear;
- with tvAccountLIst do
+ try
+ with tvAccountList do
    begin
 //     AssetRoot := items.Add(nil, 'Assets');
      AssetRoot := items.Add(nil, DBText.GetText(3));
@@ -126,12 +135,25 @@ begin
      //     EquityRoot := items.Add(nil, 'Equity');
      EquityRoot := items.Add(nil, DBText.GetText(5));
    end;
+ except
+   raise exception.Create('frmLedgerUnit:Error Adding Tree Roots.');
+ end;
 
+ // This should NOT be required!
+ //AccountList.Reload;
+
+ If not assigned(AccountList) then
+    Raise Exception.Create('frmLedgerUnit:AccountList not assigned!');
+
+ try
  // technically, if there were no accounts, this could fail...
  // but then I suppose it should fail if we have no accounts.
  AddToTree(AccountList.GetFirstAccount);
  While not AccountList.EOF do
        AddToTree(AccountList.GetNextAccount);
+ except
+   raise exception.Create('frmLedgerUnit: Error updating Account Tree!');
+ end;
 
  finally
    tvAccountList.EndUpdate;
@@ -157,6 +179,11 @@ begin
    acTreeRefresh.Execute;
 end;
 
+procedure TfrmLedger.FrameClick(Sender: TObject);
+begin
+
+end;
+
 procedure TfrmLedger.lblAccType1Click(Sender: TObject);
 begin
 
@@ -167,7 +194,7 @@ begin
 
 end;
 
-procedure TfrmLedger.Page1BeforeShow(ASender: TObject; ANewPage: TPage;
+procedure TfrmLedger.pgWelcomeBeforeShow(ASender: TObject; ANewPage: TPage;
   ANewIndex: Integer);
 begin
 
@@ -175,7 +202,7 @@ end;
 
 procedure TfrmLedger.tvAccountListClick(Sender: TObject);
 begin
-  Notebook1.PageIndex:=0;
+  nbLedgerContent.PageIndex:=0;
   // make sure something is actually selected
   if not assigned(tvAccountList.Selected) then exit;
   // if this is a placeholder text only item, don't try to access it
@@ -201,7 +228,7 @@ begin
         cbAccSubType.AddItem(AccountSubType,nil);
       // Set subtype dropdown text
       self.cbAccSubType.Text:=AccountSubType;
-      Notebook1.PageIndex:=1;
+      nbLedgerContent.PageIndex:=1;
 
     end;
 end;  // of Procedure

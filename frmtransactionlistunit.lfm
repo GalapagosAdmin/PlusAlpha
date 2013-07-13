@@ -3,11 +3,12 @@ object frmTransactionList: TfrmTransactionList
   Height = 276
   Top = 0
   Width = 591
+  Align = alClient
   ClientHeight = 276
   ClientWidth = 591
   TabOrder = 0
-  DesignLeft = 101
-  DesignTop = 90
+  DesignLeft = 248
+  DesignTop = 162
   object pnlToolbar: TPanel
     Left = 0
     Height = 34
@@ -19,10 +20,10 @@ object frmTransactionList: TfrmTransactionList
     TabOrder = 0
     object cbAccount: TComboBox
       Left = 8
-      Height = 26
+      Height = 21
       Top = 8
       Width = 184
-      ItemHeight = 18
+      ItemHeight = 0
       OnChange = cbAccountChange
       TabOrder = 0
       Text = 'cbAccount'

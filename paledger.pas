@@ -560,19 +560,27 @@ Procedure TAccountList.AddAccount(Const AcctNo:Integer; Const AcctGUID:TGUID); o
 
 Function TAccountList.GetFirstAccount:TLedgerAccount;
   begin
-    if self.eof then exit;
      _CurrentAccount := Low(_AccountList);
+     if self.eof then
+       // exit // <-- THIS! was a big bug!!
+       Raise Exception.Create('paLedger.TAccountList.GetFirstAccount: Attempt to read past EOF!');
      Result := _AccountList[_CurrentAccount];
+    If not assigned(Result) then
+      Raise Exception.Create('paLedger.TAccountList.GetFirstAccount: Result Not Assigned!');
   end;
 
 Function TAccountList.GetNextAccount:TLedgerAccount;
   begin
-    if self.eof then exit;
+    if self.eof then
+      // exit // <-- THIS! was a big bug!!  Would return a nil object!
+      Raise Exception.Create('paLedger.TAccountList.GetNextAccount: Attempt to read past EOF!');
     Inc(_CurrentAccount);
     Result := _AccountList[_CurrentAccount];
+    If not assigned(Result) then
+      Raise Exception.Create('paLedger.TAccountList.GetNextAccount: Result Not Assigned!');
   end;
 
-Function TAccountLIst.EOF:Boolean;
+Function TAccountList.EOF:Boolean;
   begin
      Result := (_CurrentAccount = High(_AccountList));
      // Catch case of zero results
@@ -584,7 +592,9 @@ Procedure TAccountList.Clear;
   var
     ThisAccount:TLedgerAccount;
   begin
+    // We own the objects, we have to free them.
     for ThisAccount in _AccountList do
+      if Assigned(ThisAccount) then
         ThisAccount.Free;
     SetLength(_AccountList, 0);
   end;
@@ -781,6 +791,8 @@ Constructor TAccountList.Create(const AccountName:UTF8String); //overload;
 initialization
   AccountList := TAccountList.Create;
 
+finalization
+  AccountList.Free;
 
 
 end.

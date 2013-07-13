@@ -3,12 +3,13 @@ object frmLedger: TfrmLedger
   Height = 350
   Top = 0
   Width = 728
-  Align = alLeft
+  Align = alClient
   ClientHeight = 350
   ClientWidth = 728
+  OnClick = FrameClick
   TabOrder = 0
-  DesignLeft = 607
-  DesignTop = 123
+  DesignLeft = 259
+  DesignTop = 184
   object tvAccountList: TTreeView
     Left = 0
     Height = 350
@@ -18,7 +19,7 @@ object frmLedger: TfrmLedger
     AutoExpand = True
     BackgroundColor = 13748419
     Color = 13748419
-    DefaultItemHeight = 14
+    DefaultItemHeight = 22
     ReadOnly = True
     RowSelect = True
     ScrollBars = ssVertical
@@ -45,7 +46,7 @@ object frmLedger: TfrmLedger
     Top = 0
     Width = 5
   end
-  object Notebook1: TNotebook
+  object nbLedgerContent: TNotebook
     Left = 182
     Height = 350
     Top = 0
@@ -54,8 +55,8 @@ object frmLedger: TfrmLedger
     Align = alClient
     TabOrder = 2
     TabStop = True
-    object Page1: TPage
-      OnBeforeShow = Page1BeforeShow
+    object pgWelcome: TPage
+      OnBeforeShow = pgWelcomeBeforeShow
       object mmWelcomeText: TMemo
         Left = 0
         Height = 350
@@ -72,7 +73,7 @@ object frmLedger: TfrmLedger
         TabOrder = 0
       end
     end
-    object Page2: TPage
+    object pgAccountInfo: TPage
       object GroupBox1: TGroupBox
         Left = 0
         Height = 317

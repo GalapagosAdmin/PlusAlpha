@@ -66,6 +66,7 @@ implementation
  var
    SQLQuery1:TSQLQuery;
   begin
+    try
     SQLQuery1 := TSQLQuery.Create(nil);
 
   //Journal Header should always be inserted first, so it's safer to take that
@@ -87,7 +88,10 @@ implementation
 
       Open;
       If not EOF then
-        _Text := FieldByName('text').AsString
+        begin
+          _Text := FieldByName('text').AsString;
+          Result := True;
+        end
       else
         begin
           // backup plan - Try with Fallback language
@@ -95,12 +99,18 @@ implementation
          if SQLQuery1.Active then SQLQuery1.close;
          Open;
          If not EOF then
-           _Text := FieldByName('text').AsString
+           begin
+             _Text := FieldByName('text').AsString;
+             Result := True;
+           end
          else
            raise exception.Create(ErrCantReadText);
         end;
       Close;
       Destroy;
+    end;
+    except
+      raise exception.Create('Error in paText.TText.select');
     end;
   end;
 
@@ -118,8 +128,10 @@ implementation
      _Text := '';
      _TextCd := TextCd;
      _HasGUID := False;
-     select;
-     Result := _Text
+     if select then
+       Result := _Text
+     else
+       result := '';
    end;
 
  Function TText.GetText(TextGUID:TGUID):UTF8String;
@@ -128,14 +140,18 @@ implementation
      _TextCd := -1;
      _TextGUID := TextGUID;
      _HasGUID := True;
-     select;
-     Result := _Text
+     if select then
+       Result := _Text
+     else
+       result := '';
    end;
 
 
 initialization
   DBText := TText.create();
 
+finalization
+  DBText.Free;
 
 end.
 
