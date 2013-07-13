@@ -77,8 +77,8 @@ procedure TFormPlusAlphaMain.acAccountShowExecute(Sender: TObject);
 begin
   // fmeWelcome1.Destroy;
    fmeWelcome1.Free;
-   if assigned(f1) then exit;
-   F1 := TFrmLedger.Create(self);
+   if not assigned(f1) then
+     F1 := TFrmLedger.Create(self);
   // F1.Create();
    f1.Parent := FormPlusAlphaMain;
 
@@ -91,8 +91,8 @@ end;
 procedure TFormPlusAlphaMain.acTransactionListShowExecute(Sender: TObject);
 begin
    fmeWelcome1.Free;
-   if assigned(f2) then exit;
-   F2 := TFrmTransactionList.Create(self);
+   if not assigned(f2) then
+     F2 := TFrmTransactionList.Create(self);
    f2.Parent := FormPlusAlphaMain;
    f2.Align := alClient;
    f2.FormShow(self);

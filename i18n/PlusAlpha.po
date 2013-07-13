@@ -52,6 +52,10 @@ msgstr ""
 msgid "Database not found at: "
 msgstr ""
 
+#: paledger.errtalgjainvacctno
+msgid "TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided."
+msgstr ""
+
 #: patext.errcantreadtext
 msgid "Error: Unable to load requested text item."
 msgstr ""

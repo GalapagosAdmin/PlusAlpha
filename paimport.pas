@@ -83,7 +83,6 @@ ResourceString
 
 Procedure TCSVImport.SetFileName(Const FileName:UTF8String);
   begin
-
     FDoc.LoadFromFile(FileName);
     RowCount := FDoc.RowCount;
     ColCount := FDoc.MaxColCount;
@@ -169,7 +168,8 @@ Procedure TAmexJPCSVImport.DecodeRow;
   begin
     // Convert Date from string to TDate
     // Date should be converted from Japan to GMT, but since we don't know the time...
-    _CurrentEntry.TransactionDate:= StrToDate(_CSVImport.GetValue(DateCol,_CurrentRow));
+    _CurrentEntry.TransactionDate:=
+        StrToDate(_CSVImport.GetValue(DateCol,_CurrentRow), '/');
     // Remove Quotation Marks, Commas if needed, convert to Integer
     tmpAmt := _CSVImport.GetValue(LocalCurrencyAmtCol, _CurrentRow);
     tmpAmt := StringReplace(tmpAmt,',','',[rfReplaceAll]);
@@ -196,13 +196,14 @@ Procedure TAmexJPCSVImport.DecodeRow;
     end; // of PROCEDURE
 
 Procedure TAmexJPCSVImport.CreateTransaction;
+// These constant values will be stored in the INTERFACELIST table
   CONST
     // Default Use Account GUIDs (Should be in config file or table)
-    // American Express Japan Account (Liability)
+    // American Express Japan Account (Liability) Default Cr
     GUID_AMEX_JAPAN='{4D1ABE22-2073-4779-A46B-A92DC6C46D23}';
-    // Uncategorized Expenses Account (Expense)
+    // Uncategorized Expenses Account (Expense)  Default Dr
     GUID_UNCAT_EXP ='{22EF5AE8-FD0D-49E5-945E-C88C8B5AA599}';
-    // Payment Bank Account (Asset)
+    // Payment Bank Account (Asset) / Payment Account
     GUID_PAYMENT_BANK='{80377524-79F5-40AC-A328-22DD4C73AF6A}';
     // Memo text used to detect a payment
     // This should really be an hash to save space and avoid mojibake.

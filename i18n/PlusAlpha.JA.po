@@ -61,6 +61,10 @@ msgstr "取引保存しました。"
 msgid "Database not found at: "
 msgstr "データベースは読み込めない："
 
+#: paledger.errtalgjainvacctno
+msgid "TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided."
+msgstr ""
+
 #: patext.errcantreadtext
 msgid "Error: Unable to load requested text item."
 msgstr "エラー：テキストは読み込めない。"
@@ -299,4 +303,4 @@ msgstr ""
 #: tfrmtransactionlist.cbaccount.text
 msgid "cbAccount"
 msgstr ""
-
+

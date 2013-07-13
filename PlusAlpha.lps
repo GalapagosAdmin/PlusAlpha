@@ -8,7 +8,7 @@
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PlusAlpha"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="4"/>
         <CursorPos X="70" Y="7"/>
@@ -22,10 +22,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="paFrmMainUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="83"/>
-        <CursorPos X="20" Y="98"/>
+        <TopLine Value="75"/>
+        <CursorPos X="5" Y="95"/>
         <UsageCount Value="323"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -34,7 +35,7 @@
         <Filename Value="libpa.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="5" Y="16"/>
@@ -48,7 +49,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="padm"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="52" Y="2"/>
@@ -58,7 +59,7 @@
       <Unit4>
         <Filename Value="ledger.sdf"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="54" Y="3"/>
@@ -73,10 +74,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmTransactionUnit"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="170"/>
+        <TopLine Value="167"/>
         <CursorPos X="1" Y="193"/>
         <UsageCount Value="301"/>
         <Loaded Value="True"/>
@@ -89,7 +89,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frmDebugUnit"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="21" Y="48"/>
@@ -103,7 +103,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="frmLedgerUnit"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="76" Y="7"/>
@@ -115,7 +115,7 @@
         <Filename Value="paledger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paLedger"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="35" Y="54"/>
@@ -126,7 +126,7 @@
         <Filename Value="padatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paDatabase"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="26"/>
         <CursorPos X="1" Y="38"/>
@@ -137,7 +137,7 @@
         <Filename Value="pacalculator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paCalculator"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="81" Y="1"/>
@@ -148,7 +148,7 @@
         <Filename Value="pajournal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paJournal"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="19"/>
         <CursorPos X="40" Y="42"/>
@@ -159,7 +159,7 @@
         <Filename Value="patext.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paText"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="16" Y="1"/>
@@ -170,7 +170,7 @@
         <Filename Value="patransactionlist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paTransactionList"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="54"/>
         <CursorPos X="54" Y="73"/>
@@ -184,7 +184,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="frmTransactionListUnit"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="43"/>
         <CursorPos X="11" Y="49"/>
@@ -198,7 +198,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fmeWelcomeUnit"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="33" Y="16"/>
@@ -244,35 +244,33 @@
         <UsageCount Value="93"/>
       </Unit20>
       <Unit21>
-        <Filename Value="../../../../../lazarus/lcl/include/control.inc"/>
+        <Filename Value="/lazarus/lcl/include/control.inc"/>
         <WindowIndex Value="0"/>
         <TopLine Value="2724"/>
         <CursorPos X="1" Y="2736"/>
         <UsageCount Value="103"/>
       </Unit21>
       <Unit22>
-        <Filename Value="../../../../../lazarus/lcl/include/customaction.inc"/>
+        <Filename Value="/lazarus/lcl/include/customaction.inc"/>
         <WindowIndex Value="0"/>
         <TopLine Value="235"/>
         <CursorPos X="1" Y="253"/>
         <UsageCount Value="6"/>
       </Unit22>
       <Unit23>
-        <Filename Value="../../../../../lazarus/lcl/include/containedaction.inc"/>
+        <Filename Value="/lazarus/lcl/include/containedaction.inc"/>
         <WindowIndex Value="0"/>
         <TopLine Value="89"/>
         <CursorPos X="1" Y="106"/>
         <UsageCount Value="6"/>
       </Unit23>
       <Unit24>
-        <Filename Value="../../../../../lazarus/components/anchordocking/anchordocking.pas"/>
+        <Filename Value="/lazarus/components/anchordocking/anchordocking.pas"/>
         <UnitName Value="AnchorDocking"/>
-        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="2296"/>
         <CursorPos X="1" Y="2308"/>
         <UsageCount Value="27"/>
-        <Loaded Value="True"/>
       </Unit24>
     </Units>
     <General>
@@ -281,123 +279,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="88" Column="1" TopLine="74"/>
+        <Caret Line="93" Column="29" TopLine="90"/>
       </Position1>
       <Position2>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="93" Column="29" TopLine="90"/>
+        <Caret Line="95" Column="4" TopLine="83"/>
       </Position2>
       <Position3>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="95" Column="4" TopLine="83"/>
+        <Caret Line="62" Column="25" TopLine="49"/>
       </Position3>
       <Position4>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="62" Column="25" TopLine="49"/>
+        <Caret Line="101" Column="6" TopLine="84"/>
       </Position4>
       <Position5>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="101" Column="6" TopLine="84"/>
+        <Caret Line="158" Column="3" TopLine="143"/>
       </Position5>
       <Position6>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="158" Column="3" TopLine="143"/>
+        <Caret Line="161" Column="1" TopLine="143"/>
       </Position6>
       <Position7>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="161" Column="1" TopLine="143"/>
+        <Caret Line="162" Column="15" TopLine="143"/>
       </Position7>
       <Position8>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="162" Column="15" TopLine="143"/>
+        <Caret Line="100" Column="1" TopLine="79"/>
       </Position8>
       <Position9>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="100" Column="1" TopLine="79"/>
+        <Caret Line="158" Column="1" TopLine="140"/>
       </Position9>
       <Position10>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="158" Column="1" TopLine="140"/>
+        <Caret Line="94" Column="1" TopLine="82"/>
       </Position10>
       <Position11>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="94" Column="1" TopLine="82"/>
+        <Caret Line="158" Column="1" TopLine="140"/>
       </Position11>
       <Position12>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="158" Column="1" TopLine="140"/>
+        <Caret Line="93" Column="1" TopLine="81"/>
       </Position12>
       <Position13>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="93" Column="1" TopLine="81"/>
+        <Caret Line="94" Column="1" TopLine="81"/>
       </Position13>
       <Position14>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="94" Column="1" TopLine="81"/>
+        <Filename Value="patext.pas"/>
+        <Caret Line="35" Column="1" TopLine="23"/>
       </Position14>
       <Position15>
         <Filename Value="patext.pas"/>
-        <Caret Line="35" Column="1" TopLine="23"/>
+        <Caret Line="128" Column="19" TopLine="110"/>
       </Position15>
       <Position16>
         <Filename Value="patext.pas"/>
-        <Caret Line="128" Column="19" TopLine="110"/>
+        <Caret Line="141" Column="16" TopLine="118"/>
       </Position16>
       <Position17>
-        <Filename Value="patext.pas"/>
-        <Caret Line="141" Column="16" TopLine="118"/>
+        <Filename Value="pafrmmainunit.pas"/>
+        <Caret Line="93" Column="1" TopLine="78"/>
       </Position17>
       <Position18>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="93" Column="1" TopLine="78"/>
+        <Caret Line="94" Column="1" TopLine="78"/>
       </Position18>
       <Position19>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="94" Column="1" TopLine="78"/>
+        <Caret Line="95" Column="1" TopLine="78"/>
       </Position19>
       <Position20>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="95" Column="1" TopLine="78"/>
+        <Caret Line="96" Column="1" TopLine="78"/>
       </Position20>
       <Position21>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="96" Column="1" TopLine="78"/>
+        <Caret Line="98" Column="1" TopLine="78"/>
       </Position21>
       <Position22>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="98" Column="1" TopLine="78"/>
+        <Caret Line="101" Column="1" TopLine="81"/>
       </Position22>
       <Position23>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="101" Column="1" TopLine="81"/>
+        <Caret Line="1" Column="27" TopLine="1"/>
       </Position23>
       <Position24>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="1" Column="27" TopLine="1"/>
+        <Caret Line="8" Column="52" TopLine="1"/>
       </Position24>
       <Position25>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="8" Column="52" TopLine="1"/>
+        <Caret Line="127" Column="23" TopLine="107"/>
       </Position25>
       <Position26>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="127" Column="23" TopLine="107"/>
+        <Caret Line="99" Column="1" TopLine="76"/>
       </Position26>
       <Position27>
         <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="99" Column="1" TopLine="76"/>
+        <Caret Line="98" Column="3" TopLine="76"/>
       </Position27>
       <Position28>
-        <Filename Value="pafrmmainunit.pas"/>
-        <Caret Line="98" Column="3" TopLine="76"/>
+        <Filename Value="frmtransactionunit.pas"/>
+        <Caret Line="1" Column="41" TopLine="1"/>
       </Position28>
       <Position29>
         <Filename Value="frmtransactionunit.pas"/>
-        <Caret Line="1" Column="41" TopLine="1"/>
+        <Caret Line="101" Column="1" TopLine="100"/>
       </Position29>
       <Position30>
-        <Filename Value="frmtransactionunit.pas"/>
-        <Caret Line="101" Column="1" TopLine="100"/>
+        <Filename Value="pafrmmainunit.pas"/>
+        <Caret Line="98" Column="20" TopLine="83"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
@@ -408,4 +406,5 @@
       </Item1>
     </Watches>
   </Debugging>
+  <EditorMacros Count="0"/>
 </CONFIG>
