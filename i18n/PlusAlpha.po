@@ -52,12 +52,56 @@ msgstr ""
 msgid "Database not found at: "
 msgstr ""
 
+#: paledger.erracctguidread
+msgid "TLedgerAccount.Load:Error while reading AcctGUID"
+msgstr ""
+
+#: paledger.erracctnoread
+msgid "TLedgerAccount.Load:Error while reading acctno"
+msgstr ""
+
+#: paledger.erracctsubtyperead
+msgid "TLedgerAccount.Load:Error while reading AcctSt field, record="
+msgstr ""
+
+#: paledger.erraccttyperead
+msgid "TLedgerAccount.Load:Error while reading AcctType"
+msgstr ""
+
+#: paledger.errcurrcoderead
+msgid "TLedgerAccount.Load:Error while reading currency"
+msgstr ""
+
+#: paledger.errinvalidaccountno
+msgid "TAccountList.GetAccountNo called with -1!"
+msgstr ""
+
+#: paledger.errreadpasteof
+msgid "paLedger.TAccountList.Get*Account: Attempt to read past EOF!"
+msgstr ""
+
+#: paledger.errresultnotassigned
+msgid "paLedger.TAccountList.Get*Account: Result Not Assigned!"
+msgstr ""
+
 #: paledger.errtalgjainvacctno
 msgid "TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided."
 msgstr ""
 
+#: paledger.errtextread
+msgid "TLedgerAccount.Load:Error while reading text field"
+msgstr ""
+
+#: paledger.errxxbalread
+msgid "TLedgerAccount.Load:Error while reading DrBal/CrBal"
+msgstr ""
+
 #: patext.errcantreadtext
 msgid "Error: Unable to load requested text item."
+msgstr ""
+
+#: patext.errgenericselect
+msgid "Unhandled Exception"
 msgstr ""
 
 #: tfmewelcome.label1.caption
@@ -82,6 +126,51 @@ msgstr ""
 
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.bbsynch.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.BBSYNCH.CAPTION"
+msgid "Apply"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.CAPTION"
+msgid "Account Details"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LBLACCTYPE.CAPTION"
+msgid "Account Type"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype1.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LBLACCTYPE1.CAPTION"
+msgid "Account SubType"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctbal.editlabel.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LEACCTBAL.EDITLABEL.CAPTION"
+msgid "Balance:"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctno.editlabel.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LEACCTNO.EDITLABEL.CAPTION"
+msgid "Account No.:"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leextacctno.editlabel.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LEEXTACCTNO.EDITLABEL.CAPTION"
+msgid "External Account No."
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbalcr.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.RBACCTBALCR.CAPTION"
+msgid "Credit"
+msgstr ""
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbaldr.caption
+msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.RBACCTBALDR.CAPTION"
+msgid "Debit"
 msgstr ""
 
 #: tformplusalphamain.toolbar1.caption
@@ -121,38 +210,51 @@ msgid "acTreeRefresh"
 msgstr ""
 
 #: tfrmledger.bbsynch.caption
+msgctxt "tfrmledger.bbsynch.caption"
 msgid "Apply"
 msgstr ""
 
-#: tfrmledger.groupbox1.caption
+#: tfrmledger.gbacctinfo.caption
+msgctxt "TFRMLEDGER.GBACCTINFO.CAPTION"
 msgid "Account Details"
 msgstr ""
 
 #: tfrmledger.lblacctype.caption
+msgctxt "tfrmledger.lblacctype.caption"
 msgid "Account Type"
 msgstr ""
 
 #: tfrmledger.lblacctype1.caption
+msgctxt "tfrmledger.lblacctype1.caption"
 msgid "Account SubType"
 msgstr ""
 
 #: tfrmledger.leacctbal.editlabel.caption
+msgctxt "tfrmledger.leacctbal.editlabel.caption"
 msgid "Balance:"
 msgstr ""
 
+#: tfrmledger.leacctguid.editlabel.caption
+msgid "Account GUID:"
+msgstr ""
+
 #: tfrmledger.leacctno.editlabel.caption
+msgctxt "tfrmledger.leacctno.editlabel.caption"
 msgid "Account No.:"
 msgstr ""
 
 #: tfrmledger.leextacctno.editlabel.caption
+msgctxt "tfrmledger.leextacctno.editlabel.caption"
 msgid "External Account No."
 msgstr ""
 
 #: tfrmledger.rbacctbalcr.caption
+msgctxt "tfrmledger.rbacctbalcr.caption"
 msgid "Credit"
 msgstr ""
 
 #: tfrmledger.rbacctbaldr.caption
+msgctxt "tfrmledger.rbacctbaldr.caption"
 msgid "Debit"
 msgstr ""
 

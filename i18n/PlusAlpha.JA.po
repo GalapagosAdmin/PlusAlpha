@@ -61,13 +61,57 @@ msgstr "取引保存しました。"
 msgid "Database not found at: "
 msgstr "データベースは読み込めない："
 
+#: paledger.erracctguidread
+msgid "TLedgerAccount.Load:Error while reading AcctGUID"
+msgstr ""
+
+#: paledger.erracctnoread
+msgid "TLedgerAccount.Load:Error while reading acctno"
+msgstr ""
+
+#: paledger.erracctsubtyperead
+msgid "TLedgerAccount.Load:Error while reading AcctSt field, record="
+msgstr ""
+
+#: paledger.erraccttyperead
+msgid "TLedgerAccount.Load:Error while reading AcctType"
+msgstr ""
+
+#: paledger.errcurrcoderead
+msgid "TLedgerAccount.Load:Error while reading currency"
+msgstr ""
+
+#: paledger.errinvalidaccountno
+msgid "TAccountList.GetAccountNo called with -1!"
+msgstr ""
+
+#: paledger.errreadpasteof
+msgid "paLedger.TAccountList.Get*Account: Attempt to read past EOF!"
+msgstr ""
+
+#: paledger.errresultnotassigned
+msgid "paLedger.TAccountList.Get*Account: Result Not Assigned!"
+msgstr ""
+
 #: paledger.errtalgjainvacctno
 msgid "TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided."
+msgstr ""
+
+#: paledger.errtextread
+msgid "TLedgerAccount.Load:Error while reading text field"
+msgstr ""
+
+#: paledger.errxxbalread
+msgid "TLedgerAccount.Load:Error while reading DrBal/CrBal"
 msgstr ""
 
 #: patext.errcantreadtext
 msgid "Error: Unable to load requested text item."
 msgstr "エラー：テキストは読み込めない。"
+
+#: patext.errgenericselect
+msgid "Unhandled Exception"
+msgstr ""
 
 #: tfmewelcome.label1.caption
 msgid "Welcome!"
@@ -92,6 +136,51 @@ msgstr "新規取引"
 #: tformplusalphamain.caption
 msgid "PlusAlpha"
 msgstr "プラスα"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.bbsynch.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.bbsynch.caption"
+msgid "Apply"
+msgstr "使用"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.caption"
+msgid "Account Details"
+msgstr "口座明細"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype.caption"
+msgid "Account Type"
+msgstr "口座種類"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype1.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype1.caption"
+msgid "Account SubType"
+msgstr "口座種類：小"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctbal.editlabel.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctbal.editlabel.caption"
+msgid "Balance:"
+msgstr "残高："
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctno.editlabel.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctno.editlabel.caption"
+msgid "Account No.:"
+msgstr "口座番号："
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leextacctno.editlabel.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leextacctno.editlabel.caption"
+msgid "External Account No."
+msgstr "外部口座番号"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbalcr.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbalcr.caption"
+msgid "Credit"
+msgstr "貸方"
+
+#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbaldr.caption
+msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbaldr.caption"
+msgid "Debit"
+msgstr "借方"
 
 #: tformplusalphamain.toolbar1.caption
 msgid "ToolBar1"
@@ -130,38 +219,51 @@ msgid "acTreeRefresh"
 msgstr "ツリー更新"
 
 #: tfrmledger.bbsynch.caption
+msgctxt "tfrmledger.bbsynch.caption"
 msgid "Apply"
 msgstr "使用"
 
-#: tfrmledger.groupbox1.caption
+#: tfrmledger.gbacctinfo.caption
+msgctxt "tfrmledger.gbacctinfo.caption"
 msgid "Account Details"
 msgstr "口座明細"
 
 #: tfrmledger.lblacctype.caption
+msgctxt "tfrmledger.lblacctype.caption"
 msgid "Account Type"
 msgstr "口座種類"
 
 #: tfrmledger.lblacctype1.caption
+msgctxt "tfrmledger.lblacctype1.caption"
 msgid "Account SubType"
 msgstr "口座種類：小"
 
 #: tfrmledger.leacctbal.editlabel.caption
+msgctxt "tfrmledger.leacctbal.editlabel.caption"
 msgid "Balance:"
 msgstr "残高："
 
+#: tfrmledger.leacctguid.editlabel.caption
+msgid "Account GUID:"
+msgstr ""
+
 #: tfrmledger.leacctno.editlabel.caption
+msgctxt "tfrmledger.leacctno.editlabel.caption"
 msgid "Account No.:"
 msgstr "口座番号："
 
 #: tfrmledger.leextacctno.editlabel.caption
+msgctxt "tfrmledger.leextacctno.editlabel.caption"
 msgid "External Account No."
 msgstr "外部口座番号"
 
 #: tfrmledger.rbacctbalcr.caption
+msgctxt "tfrmledger.rbacctbalcr.caption"
 msgid "Credit"
 msgstr "貸方"
 
 #: tfrmledger.rbacctbaldr.caption
+msgctxt "tfrmledger.rbacctbaldr.caption"
 msgid "Debit"
 msgstr "借方"
 

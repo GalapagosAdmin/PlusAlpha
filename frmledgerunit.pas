@@ -20,8 +20,9 @@ type
     cbAccType: TComboBox;
     cbAccSubType: TComboBox;
     ebAccountTitle: TEdit;
-    GroupBox1: TGroupBox;
+    gbAcctInfo: TGroupBox;
     ImageList1: TImageList;
+    leAcctGUID: TLabeledEdit;
     leExtAcctNo: TLabeledEdit;
     lblAccType: TLabel;
     lblAccType1: TLabel;
@@ -33,7 +34,7 @@ type
     pgAccountInfo: TPage;
     rbAcctBalDr: TRadioButton;
     rbAcctBalCr: TRadioButton;
-    Splitter1: TSplitter;
+    splLedger: TSplitter;
     tvAccountList: TTreeView;
     procedure acTreeRefreshExecute(Sender: TObject);
     procedure bbSynchClick(Sender: TObject);
@@ -67,14 +68,17 @@ var
   CurrentAccount:TLedgerAccount;
 
 procedure TfrmLedger.acTreeRefreshExecute(Sender: TObject);
+
+// Map account number to Tree Node
 Type
   TStruct=record
 //       AcctNo:Integer;
     AccountObject:TTreeNode;
   end;
+
 var
- i:integer;
- tmpAcct:TLedgerAccount;
+ //i:integer;
+ //tmpAcct:TLedgerAccount;
  lookup:array of TStruct; // index for quick lookups.
  AssetRoot:TTreeNode;
  LiabilityRoot:TTreeNode;
@@ -87,6 +91,8 @@ var
    begin
      With TObject(Acct.Data) as TLedgerAccount do
        begin
+         // This assumes that the account numbers are contiguous.
+         // Perhaps we could use CaseGUID here
          if length(lookup) < AcctNo then
           SetLength(lookup, AcctNo); // -1
          with lookup[acctno] do
@@ -212,6 +218,7 @@ begin
   with CurrentAccount do
     begin
       leAcctNo.Text := IntToStr(AcctNo);
+      leAcctGUID.Text := GUIDToString(AcctGUID);
       leAcctBal.Text := IntToStr(Balance);
  //     cbAcctCurr.Items.Add(Currency);
       cbAcctCurr.Text := Currency;
@@ -233,7 +240,9 @@ begin
     end;
 end;  // of Procedure
 
+Initialization
 
+Finalization
 
-end.
+end.   // of Unit
 

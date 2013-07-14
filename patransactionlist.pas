@@ -27,7 +27,7 @@ Type
     Procedure SetAccount(const NewAccount:Integer);
     Procedure SetAccount(const NewAccount:TGUID); overload;
   Public
-    Property Account:Integer read _SearchAccount write SetAccount; deprecated;
+    Property AccountNo:Integer read _SearchAccount write SetAccount; deprecated;
     Property AccountGUID:TGUID read _SearchAccountGUID write SetAccount;
     Property TransNos:TResultArray read _Array;
   end;
@@ -98,7 +98,10 @@ Procedure TTransactionList.SetAccount(const NewAccount:TGUID);
   end;
 
 initialization
- TransactionList := TTransactionList.Create;
+  TransactionList := TTransactionList.Create;
+
+Finalization
+  TransactionList.Free;
 
 end.
 

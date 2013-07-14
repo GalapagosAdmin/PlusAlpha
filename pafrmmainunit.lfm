@@ -1,7 +1,7 @@
 object FormPlusAlphaMain: TFormPlusAlphaMain
-  Left = 334
+  Left = 242
   Height = 388
-  Top = 378
+  Top = 174
   Width = 824
   Caption = 'PlusAlpha'
   ClientHeight = 388
@@ -266,8 +266,11 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
         inherited tvAccountList: TTreeView
           Height = 341
         end
-        inherited Splitter1: TSplitter
+        object Splitter1: TSplitter[1]
+          Left = 177
           Height = 341
+          Top = 0
+          Width = 5
         end
         inherited nbLedgerContent: TNotebook
           Height = 341
@@ -276,6 +279,163 @@ object FormPlusAlphaMain: TFormPlusAlphaMain
             inherited mmWelcomeText: TMemo
               Height = 341
               Width = 493
+            end
+          end
+          inherited pgAccountInfo: TPage
+            object GroupBox1: TGroupBox[0]
+              Left = 0
+              Height = 317
+              Top = 0
+              Width = 359
+              Align = alClient
+              Caption = 'Account Details'
+              ClientHeight = 296
+              ClientWidth = 351
+              TabOrder = 0
+              object leAcctNo: TLabeledEdit
+                Left = 94
+                Height = 24
+                Top = 6
+                Width = 56
+                EditLabel.AnchorSideTop.Control = frmLedger1.leAcctNo
+                EditLabel.AnchorSideTop.Side = asrCenter
+                EditLabel.AnchorSideRight.Control = frmLedger1.leAcctNo
+                EditLabel.AnchorSideBottom.Control = frmLedger1.leAcctNo
+                EditLabel.AnchorSideBottom.Side = asrBottom
+                EditLabel.Left = 8
+                EditLabel.Height = 20
+                EditLabel.Top = 8
+                EditLabel.Width = 83
+                EditLabel.Caption = 'Account No.:'
+                EditLabel.ParentColor = False
+                EditLabel.Layout = tlBottom
+                LabelPosition = lpLeft
+                ReadOnly = True
+                TabOrder = 0
+                OnChange = leAcctNoChange
+              end
+              object leAcctBal: TLabeledEdit
+                Left = 94
+                Height = 24
+                Top = 34
+                Width = 56
+                EditLabel.AnchorSideTop.Control = frmLedger1.leAcctBal
+                EditLabel.AnchorSideTop.Side = asrCenter
+                EditLabel.AnchorSideRight.Control = frmLedger1.leAcctBal
+                EditLabel.AnchorSideBottom.Control = frmLedger1.leAcctBal
+                EditLabel.AnchorSideBottom.Side = asrBottom
+                EditLabel.Left = 37
+                EditLabel.Height = 20
+                EditLabel.Top = 36
+                EditLabel.Width = 54
+                EditLabel.Caption = 'Balance:'
+                EditLabel.ParentColor = False
+                EditLabel.Layout = tlBottom
+                LabelPosition = lpLeft
+                ReadOnly = True
+                TabOrder = 1
+              end
+              object cbAcctCurr: TComboBox
+                Left = 158
+                Height = 23
+                Top = 34
+                Width = 64
+                ItemHeight = 0
+                Items.Strings = (
+                  'JPY'
+                  'USD'
+                  'EUR'
+                  'CNY'
+                )
+                Style = csDropDownList
+                TabOrder = 2
+              end
+              object rbAcctBalDr: TRadioButton
+                Left = 102
+                Height = 18
+                Top = 67
+                Width = 55
+                Caption = 'Debit'
+                TabOrder = 3
+              end
+              object rbAcctBalCr: TRadioButton
+                Left = 163
+                Height = 18
+                Top = 67
+                Width = 60
+                Caption = 'Credit'
+                TabOrder = 4
+              end
+              object cbAccType: TComboBox
+                Left = 142
+                Height = 23
+                Top = 101
+                Width = 116
+                ItemHeight = 0
+                Style = csDropDownList
+                TabOrder = 5
+              end
+              object lblAccType: TLabel
+                Left = 14
+                Height = 20
+                Top = 104
+                Width = 89
+                Caption = 'Account Type'
+                ParentColor = False
+              end
+              object bbSynch: TBitBtn
+                Left = 6
+                Height = 30
+                Top = 262
+                Width = 75
+                Caption = 'Apply'
+                OnClick = bbSynchClick
+                TabOrder = 6
+              end
+              object ebAccountTitle: TEdit
+                Left = 158
+                Height = 24
+                Top = 6
+                Width = 184
+                TabOrder = 7
+              end
+              object lblAccType1: TLabel
+                Left = 14
+                Height = 20
+                Top = 132
+                Width = 114
+                Caption = 'Account SubType'
+                ParentColor = False
+                OnClick = lblAccType1Click
+              end
+              object cbAccSubType: TComboBox
+                Left = 142
+                Height = 23
+                Top = 129
+                Width = 116
+                ItemHeight = 0
+                Style = csDropDownList
+                TabOrder = 8
+              end
+              object leExtAcctNo: TLabeledEdit
+                Left = 142
+                Height = 24
+                Top = 158
+                Width = 200
+                EditLabel.AnchorSideTop.Control = frmLedger1.leExtAcctNo
+                EditLabel.AnchorSideTop.Side = asrCenter
+                EditLabel.AnchorSideRight.Control = frmLedger1.leExtAcctNo
+                EditLabel.AnchorSideBottom.Control = frmLedger1.leExtAcctNo
+                EditLabel.AnchorSideBottom.Side = asrBottom
+                EditLabel.Left = 3
+                EditLabel.Height = 20
+                EditLabel.Top = 160
+                EditLabel.Width = 136
+                EditLabel.Caption = 'External Account No.'
+                EditLabel.ParentColor = False
+                LabelPosition = lpLeft
+                TabOrder = 9
+              end
             end
           end
         end

@@ -113,6 +113,16 @@ uses
 
 ResourceString
   ERRTALGJAINVACCTNO = 'TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided.';
+  ErrInvalidAccountNo = 'TAccountList.GetAccountNo called with -1!';
+  ErrAcctNoRead = 'TLedgerAccount.Load:Error while reading acctno';
+  ErrCurrCodeRead = 'TLedgerAccount.Load:Error while reading currency';
+  ErrAcctTypeRead = 'TLedgerAccount.Load:Error while reading AcctType';
+  ErrAcctSubTypeRead = 'TLedgerAccount.Load:Error while reading AcctSt field, record=';
+  ErrTextRead = 'TLedgerAccount.Load:Error while reading text field';
+  ErrXXBalRead = 'TLedgerAccount.Load:Error while reading DrBal/CrBal';
+  ErrAcctGUIDRead = 'TLedgerAccount.Load:Error while reading AcctGUID';
+  ErrReadPastEOF = 'paLedger.TAccountList.Get*Account: Attempt to read past EOF!';
+  ErrResultNotAssigned = 'paLedger.TAccountList.Get*Account: Result Not Assigned!';
 
 Constructor TLedgerAccount.Create;
   begin
@@ -145,7 +155,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
     SQLQuery1:TSQLQuery;
     DrBal, CrBal:TInteger;
     rows:integer;
-    test:boolean;
+  //  test:boolean;
   begin
 //  DebugLn(IntToStr(AccountNo));
   SQLQuery1 := TSQLQuery.Create(nil);
@@ -153,7 +163,7 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
   SQLQuery1.SQL.Text := 'select AcctNo, AcctGUID, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
   + ' from ledger where AcctNo = :acctno';
 //   + ' from ledger where rowid = :rowid';
-  test := assigned(SQLTransaction1);
+  //test := assigned(SQLTransaction1);
   SqlQuery1.ParamByName('acctno').AsInteger := AccountNo;
 
   SQLQuery1.Open;
@@ -170,43 +180,43 @@ Function TLedgerAccount.Load(AccountNo:Integer):Boolean;
          try
            self._AcctNo := StrToInt(FieldByName('AcctNo').AsString);
          except
-          DebugLn('TLedgerAccount.Load:Error while reading acctno'); 
+          DebugLn(ErrAcctNoRead);
          end;
          try
           self._currency := FieldByName('CurrKey').AsString;
           self._scale := GetScale(_Currency);
          except
-          DebugLn('TLedgerAccount.Load:Error while reading currency'); 
+          DebugLn(ErrCurrCodeRead);
          end;
          try
           self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
           self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
          except
-          DebugLn('TLedgerAccount.Load:Error while reading AcctType'); 
+          DebugLn(ErrAcctTypeRead);
          // Pascal representation
          end;
          try
            self._AccStDB := FieldByName('AccSTCd').AsString[1];
          except
-          DebugLn('TLedgerAccount.Load:Error while reading AcctSt field, record='+IntToStr(AccountNo)); 
+          DebugLn(ErrAcctSubTypeRead+IntToStr(AccountNo));
          end;
          try
           self._Text := FieldByName('Text').AsString;
          except
-          DebugLn('TLedgerAccount.Load:Error while reading text field'); 
+          DebugLn(ErrTextRead);
          end;
          try
           DrBal :=  FieldByName('DrBal').AsLongInt;
           CrBal :=  FieldByName('CrBal').AsLongInt;
          except
-          DebugLn('TLedgerAccount.Load:Error while reading DrBal/CrBal'); 
+          DebugLn(ErrXXBalRead);
          end;
          try
           AcctGUID :=  StringToGUID(FieldByName('AcctGUID').AsString);
           _HasAcctGUID := True;
          except
           _HasAcctGUID := False;
-          DebugLn('TLedgerAccount.Load:Error while reading AcctGUID');
+          DebugLn(ErrAcctGUIDRead);
          end;
 
 //     SQLQuery1.Next;
@@ -236,68 +246,68 @@ var
   SQLQuery1:TSQLQuery;
   DrBal, CrBal:TInteger;
   rows:integer;
-  test:boolean;
+//  test:boolean;
 begin
 //  DebugLn(IntToStr(AccountNo));
-SQLQuery1 := TSQLQuery.Create(nil);
-SQLQuery1.Transaction := SQLTransaction1;
-SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
-+ ' from ledger where AcctGUID = :acctGUID';
+  SQLQuery1 := TSQLQuery.Create(nil);
+  SQLQuery1.Transaction := SQLTransaction1;
+  SQLQuery1.SQL.Text := 'select AcctNo, DrBal, CrBal, CurrKey, Text, AccTypeCd, AccSTCd '
+     + ' from ledger where AcctGUID = :acctGUID';
 //   + ' from ledger where rowid = :rowid';
-test := assigned(SQLTransaction1);
-SqlQuery1.ParamByName('acctguid').AsString := GuidToString(AccountGUID);
+//  test := assigned(SQLTransaction1);
+  SqlQuery1.ParamByName('acctguid').AsString := GuidToString(AccountGUID);
 
-SQLQuery1.Open;
-rows := SQLQuery1.RowsAffected;
+  SQLQuery1.Open;
+  rows := SQLQuery1.RowsAffected;
 // The following doesn't work for SELECT statements
 //  Result := Rows = 1;
 // Not working for some reason, rows always = 0, EOF = True.
 //   While not SQLQuery1.EOF do
-Result := Not SQLQuery1.EOF;
-If not SQLQuery1.EOF then
- begin
-   With SQLQuery1 do
-     begin
-       try
-         self._AcctGUID := StringToGUID(FieldByName('AcctGuid').AsString);
-       except
-        DebugLn('TLedgerAccount.Load:Error while reading acctguid');
-       end;
-       try
-        self._currency := FieldByName('CurrKey').AsString;
-        self._scale := GetScale(_Currency);
-       except
-        DebugLn('TLedgerAccount.Load:Error while reading currency');
-       end;
-       try
-        self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
-        self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
-       except
-        DebugLn('TLedgerAccount.Load:Error while reading AcctType');
-       // Pascal representation
-       end;
-       try
-         self._AccStDB := FieldByName('AccSTCd').AsString[1];
-       except
-        DebugLn('TLedgerAccount.Load:Error while reading AcctSt field, record='+GUIDToString(AccountGUID));
-       end;
-       try
-        self._Text := FieldByName('Text').AsString;
-       except
-        DebugLn('TLedgerAccount.Load:Error while reading text field');
-       end;
-       try
-        DrBal :=  FieldByName('DrBal').AsLongInt;
-        CrBal :=  FieldByName('CrBal').AsLongInt;
-       except
-        DebugLn('TLedgerAccount.Load:Error while reading DrBal/CrBal');
-       end;
+  Result := Not SQLQuery1.EOF;
+  If not SQLQuery1.EOF then
+    begin
+      With SQLQuery1 do
+        begin
+          try
+            self._AcctGUID := StringToGUID(FieldByName('AcctGuid').AsString);
+          except
+            DebugLn(ErrAcctGUIDRead);
+          end;
+         try
+           self._currency := FieldByName('CurrKey').AsString;
+           self._scale := GetScale(_Currency);
+         except
+           DebugLn(ErrCurrCodeRead);
+         end;
+         try
+           self._AccTypeDB := FieldByName('AccTypeCd').AsString[1];
+           // Convert to Pascal representation
+           self._AcctType := TAcctType(StrtoInt(abap_translate(self._AccTypeDB, AcctTransMap)));
+         except
+           DebugLn(ErrAcctTypeRead);
+         end;
+         try
+           self._AccStDB := FieldByName('AccSTCd').AsString[1];
+         except
+           DebugLn(ErrAcctSubTypeRead+GUIDToString(AccountGUID));
+         end;
+         try
+           self._Text := FieldByName('Text').AsString;
+         except
+           DebugLn(ErrTextRead);
+         end;
+         try
+           DrBal :=  FieldByName('DrBal').AsLongInt;
+           CrBal :=  FieldByName('CrBal').AsLongInt;
+         except
+           DebugLn(ErrXXBalRead);
+         end;
 //     SQLQuery1.Next;
        // No need to set AcctGUID since that's what we are using to search with.
      end; // of WITH
  end; // of IF
-SQLQuery1.Close;
-SQLQuery1.Destroy;
+  SQLQuery1.Close;
+  SQLQuery1.Destroy;
 
   If DrBal > 0 then
     begin
@@ -396,7 +406,7 @@ Procedure TLedgerAccount.SetAcctGUID(NewAcctGUID:TGUID);
 Function TLedgerAccount.Insert:boolean;
   var
     SQLQuery1:TSQLQuery;
-    TmpStr : TUTF8String;
+  //  TmpStr : TUTF8String;
   begin
     // validations
     If self._TransNo = 0 then exit(false);
@@ -463,7 +473,7 @@ Procedure TLedgerAccount.commit;
 Function TLedgerAccount.update:boolean;
   var
     SQLQuery1:TSQLQuery;
-    TmpStr : TUTF8String;
+ //   TmpStr : TUTF8String;
   begin
     // validations
     If self._TransNo = 0 then exit(false);
@@ -526,7 +536,7 @@ Function TLedgerAccount.Synch:Boolean;
 
 
 // Adds an account existing in the database to the in-memory list
-Procedure TAccountList.AddAccount(const AcctNo:Integer);
+Procedure TAccountList.AddAccount(const AcctNo:Integer);  deprecated;
   var
     TmpAcct:TLedgerAccount;
   begin
@@ -563,21 +573,21 @@ Function TAccountList.GetFirstAccount:TLedgerAccount;
      _CurrentAccount := Low(_AccountList);
      if self.eof then
        // exit // <-- THIS! was a big bug!!
-       Raise Exception.Create('paLedger.TAccountList.GetFirstAccount: Attempt to read past EOF!');
+       Raise Exception.Create(ErrReadPastEOF);
      Result := _AccountList[_CurrentAccount];
     If not assigned(Result) then
-      Raise Exception.Create('paLedger.TAccountList.GetFirstAccount: Result Not Assigned!');
+      Raise Exception.Create(ErrResultNotAssigned);
   end;
 
 Function TAccountList.GetNextAccount:TLedgerAccount;
   begin
     if self.eof then
       // exit // <-- THIS! was a big bug!!  Would return a nil object!
-      Raise Exception.Create('paLedger.TAccountList.GetNextAccount: Attempt to read past EOF!');
+      Raise Exception.Create(ErrReadPastEOF);
     Inc(_CurrentAccount);
     Result := _AccountList[_CurrentAccount];
     If not assigned(Result) then
-      Raise Exception.Create('paLedger.TAccountList.GetNextAccount: Result Not Assigned!');
+      Raise Exception.Create(ErrResultNotAssigned);
   end;
 
 Function TAccountList.EOF:Boolean;
@@ -616,7 +626,7 @@ Function TAccountList.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
     // Not very efficient, but then we shouldn't really have more than 100 or
     // so accounts
     If AccountNo = -1 then
-      Raise Exception.Create('TAccountList.GetAccountNo called with -1!');
+      Raise Exception.Create(ErrInvalidAccountNo);
 //    for i := Low(_AccountList) to high(_AccountList) do
       for ThisAccount in _AccountLIst do
         if ThisAccount.AcctNo = AccountNo then
@@ -661,9 +671,9 @@ Function TAccountList.GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
 Procedure TAccountList.Load; // Loads the account listing from the database
   var
 //     FDataset: TSdfDataset;
-    i:integer;
+//    i:integer;
     SQLQuery1:TSQLQuery;
-    TmpStr : TUTF8String;
+  //  TmpStr : TUTF8String;
 //    tmpAccount:TLedgerAccount;
   begin
 //    Tree := TTreeNodes.Create(nil); // create account tree
@@ -698,9 +708,9 @@ Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
 // Loads the account listing from the database, filtering by name.
   var
 //     FDataset: TSdfDataset;
-    i:integer;
+//    i:integer;
     SQLQuery1:TSQLQuery;
-    TmpStr : TUTF8String;
+ //   TmpStr : TUTF8String;
 //    tmpAccount:TLedgerAccount;
   begin
    if _Loaded then Clear;
@@ -737,7 +747,7 @@ Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
 
 Function TAccountList.AccountStringList:TStringList;
   var
-    i:Integer;
+  //  i:Integer;
     Acct:TLedgerAccount;
   begin
     Result := TStringList.Create;

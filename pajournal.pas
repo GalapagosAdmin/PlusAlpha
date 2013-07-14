@@ -131,7 +131,10 @@ type
 
 implementation
 
-uses sdfdata, db, paLedger, paDatabase, paCalculator;
+uses
+  //sdfdata,
+  //db,
+  paLedger, paDatabase, paCalculator;
 
 
   Constructor TJournalHeader.Create;
@@ -331,8 +334,8 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
     end;
 
    Procedure TJournalDetailEntry.SetTransGUID(TransGUID:TGUID);
-    var
-      tmpAcct:TLedgerAccount;
+  //  var
+  //    tmpAcct:TLedgerAccount;
     begin
       _TransGUID := TransGUID;
       _HasTransGUID := True;
@@ -343,10 +346,10 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
 Function TJournalDetailEntry.Update:boolean;
   var
       SQLQuery1:TSQLQuery;
-      TmpStr : TUTF8String;
+    //  TmpStr : TUTF8String;
       DrAmt, CrAmt:Integer;
     begin
-
+      Result := False; // Assume the worst
       Case self.DrCr of
        Dr:begin
             DrAmt := self.Amount;
@@ -414,6 +417,7 @@ Function TJournalDetailEntry.Update:boolean;
 
       ExecSQL;
       Close;
+      result := True;
       finally
         Destroy; // or else memory leak
       end; // of TRY..FINALLY
@@ -422,10 +426,10 @@ Function TJournalDetailEntry.Update:boolean;
   Function TJournalDetailEntry.insert:boolean;
    var
      SQLQuery1:TSQLQuery;
-     TmpStr : TUTF8String;
+     //TmpStr : TUTF8String;
      DrAmt, CrAmt:Integer;
    begin
-
+     Result := False;
      Case self.DrCr of
       Dr:begin
            DrAmt := self.Amount;
@@ -481,6 +485,7 @@ Function TJournalDetailEntry.Update:boolean;
 
      SQLQuery1.ExecSQL;
      SQLQuery1.Close;
+     Result := True;
      finally
      SQLQuery1.Destroy; // or else memory leak
      end; // of TRY..FINALLY
@@ -550,7 +555,7 @@ Function TJournalDetailEntry.Update:boolean;
  // an insert or update at the database level).
  Function TCompleteJournalEntry.Insert:boolean;
    var
-     i:integer;
+   //  i:integer;
      tmpAcct:TLedgerAccount;
      Calc:TDrCrCalculator;
      JE:TJournalDetailEntry;
@@ -609,7 +614,7 @@ Function TJournalDetailEntry.Update:boolean;
 
  Procedure TCompleteJournalEntry.UpdateDrCr;
    var
-     i:integer;
+   //  i:integer;
      je:TJournalDetailEntry;
    begin
      _TotalDr := 0;

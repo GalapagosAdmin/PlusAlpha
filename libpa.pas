@@ -86,11 +86,10 @@ implementation
        DateTimeToString(Result, 'yyyymmdd', Date)
      end;
 
-initialization
+Initialization
+
+Finalization
 
 
-
-
-
-end.
+end.   // of Unit
 

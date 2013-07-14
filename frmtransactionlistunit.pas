@@ -5,7 +5,9 @@ unit frmTransactionListUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, ListFilterEdit, Forms, Controls, Graphics,
+  Classes, SysUtils, FileUtil,
+  //ListFilterEdit,
+  Forms, Controls, Graphics,
   Dialogs, ExtCtrls, Grids, StdCtrls, ActnList, libpa, paTransactionList;
 
 type
@@ -68,7 +70,6 @@ procedure TfrmTransactionList.acUpdateExecute(Sender: TObject);
     JournalDetailEntry:TJournalDetailEntry;
     GridRow:integer;
   begin
-   TransactionList.Account := ActToInt(cbAccount.Text);
    JournalDetailEntry := TJournalDetailEntry.Create;
    StringGrid1.Clear;
    StringGrid1.Row := HeaderRow;

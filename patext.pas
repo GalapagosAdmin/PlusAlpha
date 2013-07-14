@@ -43,12 +43,15 @@ implementation
   uses paDatabase, sqldb, LazUTF8;
   ResourceString
     ErrCantReadText='Error: Unable to load requested text item.';
+    ErrGenericSelect='Unhandled Exception';
 
  Constructor TText.create;
   Function GetShortLanguageID:TLangCode;
     var
       tmp:String;
     begin
+      tmp := '';  // Initialize to get rid of compiler warning
+      // LazGetShortLanguageID should use Out paramater instead of Var :(
       LazGetShortLanguageID(tmp);
       Result := UpperCase(copy(tmp,1,2));
     end;
@@ -104,23 +107,25 @@ implementation
              Result := True;
            end
          else
-           raise exception.Create(ErrCantReadText);
+           raise exception.Create(self.ClassName + ErrCantReadText);
         end;
       Close;
       Destroy;
     end;
     except
-      raise exception.Create('Error in paText.TText.select');
+      raise exception.Create(Self.ClassName + ErrGenericSelect);
     end;
   end;
 
 
  Function TText.Insert:boolean;
    begin
+     Result := False;
    end;
 
  Function TText.Update:boolean;
    begin
+     Result := False
    end;
 
  Function TText.GetText(TextCd:Integer):UTF8String;

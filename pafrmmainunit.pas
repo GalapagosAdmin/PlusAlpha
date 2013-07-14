@@ -5,9 +5,16 @@ unit paFrmMainUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, ExtendedNotebook, Forms, Controls, Graphics,
-  Dialogs, ExtCtrls, Buttons, StdCtrls, Grids, EditBtn, ComCtrls, ButtonPanel,
-  ActnList, libpa, fmeWelcomeUnit, anchordocking, frmLedgerUnit, frmTransactionListUnit;
+  Classes, SysUtils, FileUtil,
+  //ExtendedNotebook,
+  Forms, Controls, Graphics,
+  Dialogs, ExtCtrls, Buttons,
+  //StdCtrls,
+  Grids, EditBtn, ComCtrls,
+  //ButtonPanel,
+  ActnList,
+  //libpa,
+  fmeWelcomeUnit, anchordocking, frmLedgerUnit, frmTransactionListUnit;
 
 type
 
