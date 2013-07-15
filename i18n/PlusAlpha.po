@@ -1,6 +1,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: frmledgerunit.msgacctupdated
+msgid "Account information updated."
+msgstr ""
+
+#: frmtransactionlistunit.defaccountdropdowntext
+msgid " --- Select Account ---"
+msgstr ""
+
 #: frmtransactionlistunit.hdramt
 msgctxt "frmtransactionlistunit.hdramt"
 msgid "Amount"
@@ -128,51 +136,6 @@ msgstr ""
 msgid "PlusAlpha"
 msgstr ""
 
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.bbsynch.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.BBSYNCH.CAPTION"
-msgid "Apply"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.CAPTION"
-msgid "Account Details"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LBLACCTYPE.CAPTION"
-msgid "Account Type"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype1.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LBLACCTYPE1.CAPTION"
-msgid "Account SubType"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctbal.editlabel.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LEACCTBAL.EDITLABEL.CAPTION"
-msgid "Balance:"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctno.editlabel.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LEACCTNO.EDITLABEL.CAPTION"
-msgid "Account No.:"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leextacctno.editlabel.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.LEEXTACCTNO.EDITLABEL.CAPTION"
-msgid "External Account No."
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbalcr.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.RBACCTBALCR.CAPTION"
-msgid "Credit"
-msgstr ""
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbaldr.caption
-msgctxt "TFORMPLUSALPHAMAIN.FRMLEDGER1.NBLEDGERCONTENT.PGACCOUNTINFO.GROUPBOX1.RBACCTBALDR.CAPTION"
-msgid "Debit"
-msgstr ""
-
 #: tformplusalphamain.toolbar1.caption
 msgid "ToolBar1"
 msgstr ""
@@ -256,6 +219,10 @@ msgstr ""
 #: tfrmledger.rbacctbaldr.caption
 msgctxt "tfrmledger.rbacctbaldr.caption"
 msgid "Debit"
+msgstr ""
+
+#: tfrmtransaction.acinit.caption
+msgid "acInit"
 msgstr ""
 
 #: tfrmtransaction.bbsave.caption

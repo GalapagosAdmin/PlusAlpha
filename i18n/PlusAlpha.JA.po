@@ -10,6 +10,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
 
+#: frmledgerunit.msgacctupdated
+msgid "Account information updated."
+msgstr ""
+
+#: frmtransactionlistunit.defaccountdropdowntext
+msgid " --- Select Account ---"
+msgstr ""
+
 #: frmtransactionlistunit.hdramt
 msgctxt "frmtransactionlistunit.hdramt"
 msgid "Amount"
@@ -137,51 +145,6 @@ msgstr "新規取引"
 msgid "PlusAlpha"
 msgstr "プラスα"
 
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.bbsynch.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.bbsynch.caption"
-msgid "Apply"
-msgstr "使用"
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.caption"
-msgid "Account Details"
-msgstr "口座明細"
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype.caption"
-msgid "Account Type"
-msgstr "口座種類"
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype1.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.lblacctype1.caption"
-msgid "Account SubType"
-msgstr "口座種類：小"
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctbal.editlabel.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctbal.editlabel.caption"
-msgid "Balance:"
-msgstr "残高："
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctno.editlabel.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leacctno.editlabel.caption"
-msgid "Account No.:"
-msgstr "口座番号："
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leextacctno.editlabel.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.leextacctno.editlabel.caption"
-msgid "External Account No."
-msgstr "外部口座番号"
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbalcr.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbalcr.caption"
-msgid "Credit"
-msgstr "貸方"
-
-#: tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbaldr.caption
-msgctxt "tformplusalphamain.frmledger1.nbledgercontent.pgaccountinfo.groupbox1.rbacctbaldr.caption"
-msgid "Debit"
-msgstr "借方"
-
 #: tformplusalphamain.toolbar1.caption
 msgid "ToolBar1"
 msgstr ""
@@ -266,6 +229,10 @@ msgstr "貸方"
 msgctxt "tfrmledger.rbacctbaldr.caption"
 msgid "Debit"
 msgstr "借方"
+
+#: tfrmtransaction.acinit.caption
+msgid "acInit"
+msgstr ""
 
 #: tfrmtransaction.bbsave.caption
 msgid "Save"

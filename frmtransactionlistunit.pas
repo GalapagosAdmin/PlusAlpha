@@ -44,6 +44,7 @@ ResourceString
  HdrAmt='Amount';
  HdrDr='Dr';
  HdrCr='Cr';
+ DefAccountDropdownText = ' --- Select Account ---';
 {$R *.lfm}
 
 { TfrmTransactionList }
@@ -52,6 +53,7 @@ procedure TfrmTransactionList.FormShow(Sender: TObject);
 
  begin
   cbAccount.Items  := AccountList.AccountStringList;
+  cbAccount.Text :=  DefAccountDropdownText
  end;
 
 procedure TfrmTransactionList.acUpdateExecute(Sender: TObject);

@@ -112,7 +112,7 @@ type
      Function GetHighWaterMark:Integer;
    Public
      _JournalHeader : TJournalHeader;
-     _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
+     _JournalDetailEntries : Array of TJournalDetailEntry;
      Constructor Create; //overload;
      Property Rows:Integer Read _Rows;
      Property TransNo:Integer read _TransNo write TransNoSet;
@@ -121,6 +121,8 @@ type
      Function Insert:Boolean;
      Property HighWaterMark:Integer read GetHighWaterMark;
      Function Validate:Boolean;
+     Function AddDetailEntry:integer;
+     Procedure Reset;
 
  end;
 
@@ -501,10 +503,37 @@ Function TJournalDetailEntry.Update:boolean;
      if _new then result := self.insert else result := self.update;
    end;
 
-  Function TJournalDetailEntry.validate:boolean;
+  Function TJournalDetailEntry.Validate:boolean;
     begin
       Result := (Self.AcctNo <> -1) or (self._HasAcctGUID);
     end;
+
+
+ Function TCompleteJournalEntry.AddDetailEntry:integer;
+   var
+     CurrLen:Integer;
+   begin
+     Result := -1;
+     CurrLen := Length(self._JournalDetailEntries);
+     SetLength(self._JournalDetailEntries,CurrLen+1);
+     _JournalDetailEntries[high(_JournalDetailEntries)] := TJournalDetailEntry.Create;
+
+     _Rows := length(_JournalDetailEntries); // Static for now
+     Result := High(self._JournalDetailEntries);
+   end;
+
+ Procedure TCompleteJournalEntry.Reset;
+  var
+    i:integer;
+  begin
+     self._HasTransGUID:=False;
+     self._TransNo:=-1;
+     // Free and delete all transaction detail rows
+     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+        _JournalDetailEntries[i].free;
+     SetLength(self._JournalDetailEntries, 0);
+     self._Rows:=0;
+   end;
 
  Constructor TCompleteJournalEntry.Create;
    var
@@ -512,8 +541,8 @@ Function TJournalDetailEntry.Update:boolean;
    begin
       _JournalHeader := TJournalHeader.Create;
       _Rows := length(_JournalDetailEntries); // Static for now
-      for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
-         _JournalDetailEntries[i] := TJournalDetailEntry.Create
+//      for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+//         _JournalDetailEntries[i] := TJournalDetailEntry.Create
     (*  // This can be made dynamic to support more than 2 entries
       _JournalDetailEntry1 := TJournalDetailEntry.Create;
       _JournalDetailEntry2 := TJournalDetailEntry.Create;
@@ -561,7 +590,7 @@ Function TJournalDetailEntry.Update:boolean;
      JE:TJournalDetailEntry;
      tmpGUID:TGUID;
    begin
-     assert(not assigned(calc));
+//     assert(not assigned(calc));
      calc := nil; // don't trust this
      // Assume Failure
       Result := False;
@@ -574,12 +603,10 @@ Function TJournalDetailEntry.Update:boolean;
       If _JournalHeader.Insert then
          begin
           // Insert the journal Entry Rows
-//           for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
            for je in _JournalDetailEntries do
              Begin
                je.insert;
                // Update Ledger
-
                If je.HasAcctGUID then
                  tmpAcct := AccountList.GetAccountGUID(je.AcctGUID)
                else

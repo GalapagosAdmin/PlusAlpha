@@ -1,7 +1,7 @@
 object frmTransaction: TfrmTransaction
-  Left = 472
+  Left = 369
   Height = 444
-  Top = 171
+  Top = 153
   Width = 634
   Caption = 'Plus Alpha - New Transaction'
   ClientHeight = 444
@@ -145,7 +145,7 @@ object frmTransaction: TfrmTransaction
     Caption = 'Effective Date:'
     ParentColor = False
   end
-  object Panel1: TPanel
+  object pnlDetail1: TPanel
     Left = 5
     Height = 60
     Top = 152
@@ -153,7 +153,7 @@ object frmTransaction: TfrmTransaction
     ClientHeight = 60
     ClientWidth = 616
     TabOrder = 6
-    OnClick = Panel1Click
+    OnClick = pnlDetail1Click
     object ebAcctNo1: TComboBox
       Left = 8
       Height = 20
@@ -230,7 +230,7 @@ object frmTransaction: TfrmTransaction
       ParentColor = False
     end
   end
-  object Panel2: TPanel
+  object pnlDetail2: TPanel
     Left = 5
     Height = 58
     Top = 216
@@ -314,7 +314,7 @@ object frmTransaction: TfrmTransaction
       ParentColor = False
     end
   end
-  object Panel3: TPanel
+  object pnlDetail3: TPanel
     Left = 5
     Height = 58
     Top = 280
@@ -398,7 +398,7 @@ object frmTransaction: TfrmTransaction
       ParentColor = False
     end
   end
-  object Panel4: TPanel
+  object pnlDetail4: TPanel
     Left = 5
     Height = 58
     Top = 344
@@ -490,5 +490,13 @@ object frmTransaction: TfrmTransaction
     Align = alCustom
     Caption = ' Transaction Header'
     TabOrder = 10
+  end
+  object alNewTransaction: TActionList
+    left = 573
+    top = 45
+    object acInit: TAction
+      Caption = 'acInit'
+      OnExecute = acInitExecute
+    end
   end
 end
