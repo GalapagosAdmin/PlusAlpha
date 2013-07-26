@@ -46,6 +46,7 @@ type
     _EOF:Boolean;
     _CurrentEntry:TAmexJPEntry;
     InterfaceGUID:TGUID;
+    _TestMode:Boolean;
   Private
     Procedure DecodeRow;
   public
@@ -55,6 +56,7 @@ type
     Procedure SetFileName(Const FileName:UTF8String);
     Property Data:TAmexJPEntry read _CurrentEntry;
     Procedure GetNext;
+    Property TestMode:Boolean read _TestMode write _TestMode;
     property EOF:Boolean Read _EOF;
 //    Function GetValue(const aCol:Integer; aRow:Integer):UTF8String;
 //    Function GetRowCount:Integer;
@@ -136,7 +138,8 @@ Destructor TCSVImport.Destroy();
 Constructor TAmexJPCSVImport.Create();
   begin
     InterfaceGUID := StringToGUID('{3CA61E92-916C-4A0E-B94A-E7F973B4DB79}');
-
+    TestMode := True;
+    _EOF := True;
     _CSVImport := TCSVImport.create();
   end;
 
@@ -187,11 +190,14 @@ Procedure TAmexJPCSVImport.DecodeRow;
       end
     else
       begin
-        _CurrentEntry.ForeignCurrencyCode:= Copy(tmpFC,1,3);
+        // Extract the foreign currency code
+        _CurrentEntry.ForeignCurrencyCode := Copy(tmpFC,1,3);
+        // Remove foreign currency code so we can get at the actual numeric amount
         tmpFCAmt := StringReplace(tmpFC,_CurrentEntry.ForeignCurrencyCode,'',[rfReplaceAll]);
-        tmpFCAmt := StringReplace(tmpFCAmt,',','',[rfReplaceAll]);
+        // Remove Commas
+//        tmpFCAmt := StringReplace(tmpFCAmt,',','',[rfReplaceAll]);
+        tmpFCAmt := Strip_Comma(tmpFCAmt);
         _CurrentEntry.ForeignCurrencyAmount:= StrToFloat(tmpFCAmt);
-
       end;
     end; // of PROCEDURE
 
@@ -211,16 +217,21 @@ Procedure TAmexJPCSVImport.CreateTransaction;
 
   var
     TN:Integer;
+    NewEntry:Integer; // Line item number of new journal detail entries
 
   Procedure Process_Refund;
     begin
       With CompleteJournalEntry do
         begin
-        with _JournalDetailEntries[0] do
+        NewEntry := AddDetailEntry;
+        with _JournalDetailEntries[NewEntry] do
          begin
            TransNo := TN;
  //          AcctNo :=
-           AcctGuid := StringToGUID(GUID_UNCAT_EXP);// Uncategorized Expense
+           If ImportMapEntry.Load(self.InterfaceGUID, self.data.Memo) then
+              AcctGuid := ImportMapEntry.AcctGUID   // Actual Mapped Account
+            else
+              AcctGuid := StringToGUID(GUID_UNCAT_EXP);// Uncategorized Expense
            TransRow := 0;
            Text := self.data.Memo;
            // This should really multiply the amount depending on the currency
@@ -229,10 +240,10 @@ Procedure TAmexJPCSVImport.CreateTransaction;
            DrCr:=Cr;
          end;
  // Credit Card
-       with _JournalDetailEntries[1] do
+       NewEntry := AddDetailEntry;
+       with _JournalDetailEntries[NewEntry] do
          begin
                      TransNo := TN;
-           //          AcctNo :=
                      AcctGuid := StringToGUID(GUID_AMEX_JAPAN); // Amex Japan
                      TransRow := 1;
                      Text := self.data.Memo;
@@ -250,7 +261,8 @@ Procedure TAmexJPCSVImport.CreateTransaction;
       //  Credit bank account
       With CompleteJournalEntry do
         begin
-        with _JournalDetailEntries[0] do
+        NewEntry := AddDetailEntry;
+        with _JournalDetailEntries[NewEntry] do
          begin
            TransNo := TN;
            AcctGuid := StringToGUID(GUID_PAYMENT_BANK);// Payment Bank
@@ -262,14 +274,14 @@ Procedure TAmexJPCSVImport.CreateTransaction;
            DrCr:=Cr;
          end;
  //  Debit Card Liability Account
-       with _JournalDetailEntries[1] do
+       NewEntry := AddDetailEntry;
+       with _JournalDetailEntries[NewEntry] do
          begin
                      TransNo := TN;
-           //          AcctNo :=
                      AcctGuid := StringToGUID(GUID_AMEX_JAPAN); // Amex Japan
                      TransRow := 1;
                      Text := self.data.Memo;
-                     // This should really multiply the amount depending on the currency
+                     // This Multiplies the amount depending on the currency
                      // f.e. Amount := AMT * 100 for USD
                      Amount := Abs(FloatToDBAmount('JPY',
                                                self.Data.LocalCurrencyAmount));
@@ -297,31 +309,31 @@ Procedure TAmexJPCSVImport.CreateTransaction;
   // Debit Expense
      With CompleteJournalEntry do
        begin
-       with _JournalDetailEntries[0] do
+       NewEntry := AddDetailEntry;
+       with _JournalDetailEntries[NewEntry] do
         begin
           TransNo := TN;
           If ImportMapEntry.Load(self.InterfaceGUID, self.data.Memo) then
-            begin
-              AcctGuid := ImportMapEntry.AcctGUID;   // Actual Mapped Account
-            end
+            AcctGuid := ImportMapEntry.AcctGUID   // Actual Mapped Account
           else
             AcctGuid := StringToGUID(GUID_UNCAT_EXP);// Uncategorized Expense
           TransRow := 0;
           Text := self.data.Memo;
-          // This should really multiply the amount depending on the currency
+          // This multiplies the amount depending on the currency
           // f.e. Amount := AMT * 100 for USD
           Amount :=  FloatToDBAmount('JPY',  self.Data.LocalCurrencyAmount);
           DrCr:=Dr;
         end;
 // Credit Card
-      with _JournalDetailEntries[1] do
+      NewEntry := AddDetailEntry;
+      with _JournalDetailEntries[NewEntry] do
         begin
                     TransNo := TN;
           //          AcctNo :=
                     AcctGuid := StringToGUID(GUID_AMEX_JAPAN); // Amex Japan
                     TransRow := 1;
                     Text := self.data.Memo;
-                    // This should really multiply the amount depending on the currency
+                    // This multiplies the amount depending on the currency
                     // f.e. Amount := AMT * 100 for USD
                     Amount := FloatToDBAmount('JPY',
                                               self.Data.LocalCurrencyAmount);
@@ -330,10 +342,12 @@ Procedure TAmexJPCSVImport.CreateTransaction;
        end;
     end; // of [sub]PROCEDURE
 
+  // Actual Method Body
   begin
     With CompleteJournalEntry do
     begin
-      TN := HighWaterMark + 1;
+     CompleteJournalEntry.Reset;
+     TN := HighWaterMark + 1;
       With _JournalHeader do
         begin
           HdrTransNo := TN;
@@ -341,10 +355,7 @@ Procedure TAmexJPCSVImport.CreateTransaction;
           EffDate   := self.Data.TransactionDate;
           HdrMemo   := self.Data.Memo;
           HdrPosted := True;
-//          Commit;
         end;  // of with _JournalHeader
-
-
       // Add Exception here for negative amounts.
       if self.Data.LocalCurrencyAmount < 0 then
         Process_Negative
@@ -356,20 +367,26 @@ Procedure TAmexJPCSVImport.CreateTransaction;
        Raise Exception.Create(ERRTRANSNOTBAL);
        exit;
      end;
+
    If not Validate then
      begin
        Raise Exception.Create(ERRTRANSNOTVALID);
        exit;
      end;
 
-  If Insert then
-      Writeln(MSGTRANSINSSUCC) //'Transaction Inserted.')
-  else
-     Raise Exception.Create(MSGTRANSINSERR);//'Error Inserting Transaction!');
+     Case TestMode of
+       False:begin
+         If Insert then
+           Writeln(MSGTRANSINSSUCC) //'Transaction Inserted.')
+         else
+           Raise Exception.Create(MSGTRANSINSERR);//'Error Inserting Transaction!');
+       end; // of TestMode False
+       True:;//CompleteJournalEntry.Reset;
+      end; // of CASE TestMode of
 
     end; // of with CompleteJournalEntry
 
-  end;
+  end; // of TAmexJPCSVImport.CreateTransaction;
 
 Destructor TAmexJPCSVImport.Destroy();
   begin
@@ -377,7 +394,7 @@ Destructor TAmexJPCSVImport.Destroy();
   end;
 
 Initialization
-  ShortDateFormat := 'YYYY/MM/DD';
+  ShortDateFormat := 'YYYY/MM/DD'; // Doesn't seem to take effect on all systems
   CSVImporter := TCSVImport.Create();
 
 finalization

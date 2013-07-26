@@ -89,9 +89,9 @@ SqlQuery1.ParamByName('IntGUID').AsString := GuidToString(_IntGUID);
 SqlQuery1.ParamByName('MemoHash').AsString := MD5Print(_MemoHash);
 
 SQLQuery1.Open;
-writeln(SQLQuery1.SQL.Text);
-writeln( GuidToString(_IntGUID));
-writeln(MD5Print(_MemoHash));
+//writeln(SQLQuery1.SQL.Text);
+//writeln( GuidToString(_IntGUID));
+//writeln(MD5Print(_MemoHash));
 rows := SQLQuery1.RowsAffected;
 // The following doesn't work for SELECT statements
 //  Result := Rows = 1;

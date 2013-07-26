@@ -39,7 +39,8 @@ Type
   Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
   // Converts input string into an output string using mask
   Function abap_translate(const instring, Mask:UTF8String):UTF8String;
-
+  // Return the input string, minus any embedded commas
+  Function Strip_Comma(Const Instring:UTF8String):UTF8String;
 
 implementation
 
@@ -84,6 +85,11 @@ implementation
    Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
      begin
        DateTimeToString(Result, 'yyyymmdd', Date)
+     end;
+
+   Function Strip_Comma(Const Instring:UTF8String):UTF8String;
+     begin
+       Result := StringReplace(instring,',','',[rfReplaceAll]);
      end;
 
 Initialization

@@ -13,6 +13,8 @@ Procedure PrintAcctNo(AcctNo:Integer);
 Procedure PrintAcctType(AccountType:TAcctType);
 Procedure PrintDrCr(Const DrCr:TDrCr);
 Procedure PrintAccount(Const Account:TLedgerAccount; Const ShowGUID:Boolean);
+Procedure PrintTransRow(Const Row:Integer);
+Procedure PrintAMount(Const Amount:Integer);
 
 implementation
 
@@ -119,6 +121,7 @@ Procedure PrintAcctNo(AcctNo:Integer);
    Write(AddChar('0', IntToStr(AcctNo), W));
   end;
 
+
 Procedure PrintAcctType(AccountType:TAcctType);
   begin
     TextColor(White);
@@ -136,6 +139,19 @@ Procedure PrintDrCr(Const DrCr:TDrCr);
       end;
       Write(abap_translate(IntToStr(Ord(DrCr)), '0D1C'));
   end;
+
+Procedure PrintTransRow(Const Row:Integer);
+  begin
+   TextColor(White);
+   Write(Row);
+  end;
+
+Procedure PrintAmount(Const Amount:Integer);
+  begin
+   TextColor(White);
+   Write(Amount);
+  end;
+
 
 initialization
   // Startup code goes here

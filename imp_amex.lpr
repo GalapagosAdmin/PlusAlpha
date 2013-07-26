@@ -7,8 +7,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, libpa, padatabase, patext, pacliutil,  CustApp,
-  paImport, md5, paImportMap
-  { you can add units after this };
+  paImport, md5, paImportMap,
+  { you can add units after this }
+  paJournal;  // needed for testing
 
 type
 
@@ -29,7 +30,8 @@ type
 
 procedure TAmexJPImporter.DoRun;
 var
-  ErrorMsg: String;
+  ErrorMsg: UTF8String;
+  LineItem:Integer;
 begin
 
   If ParamCount = 0 then
@@ -40,7 +42,7 @@ begin
     end;
 
   // quick check parameters
-  ErrorMsg:=CheckOptions('h','help');
+  ErrorMsg:=CheckOptions('ht','help test');
   if ErrorMsg<>'' then begin
     ShowException(Exception.Create(ErrorMsg));
     Terminate;
@@ -57,6 +59,8 @@ begin
   { add your program here }
 
   AmexJPCSVImport.SetFileName(ParamStr(1));
+  AmexJPCSVImport.TestMode := HasOption('t','test') ;
+
   while not AmexJPCSVImport.eof do
     begin
       AmexJPCSVImport.GetNext;
@@ -75,6 +79,21 @@ begin
       Write(FloatToStr(AmexJPCSVImport.data.ForeignCurrencyAmount));
       writeln;
       AmexJPCSVImport.CreateTransaction;
+      if HasOption('t','test') then
+        begin
+          Writeln('--- Test Mode ---');
+          Writeln(CompleteJournalEntry._JournalHeader.HdrMemo);
+          for LineItem := 0 to CompleteJournalEntry.Rows - 1 do
+            begin
+              PrintTransRow(CompleteJournalEntry._JournalDetailEntries[LineItem].TransRow);
+              Write(CompleteJournalEntry._JournalDetailEntries[LineItem].DisplayDate);
+              Write(GuidToString(CompleteJournalEntry._JournalDetailEntries[LineItem].AcctGUID));
+              PrintDrCr(CompleteJournalEntry._JournalDetailEntries[LineItem].DrCr);
+              PrintAmount(CompleteJournalEntry._JournalDetailEntries[LineItem].Amount);
+              Write(CompleteJournalEntry._JournalDetailEntries[LineItem].Currency);
+              Writeln(CompleteJournalEntry._JournalDetailEntries[LineItem].Text);
+            end;
+        end;  // text mode
     end;
 
 
