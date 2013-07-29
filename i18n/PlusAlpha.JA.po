@@ -8,15 +8,15 @@ msgstr ""
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.7\n"
 
 #: frmledgerunit.msgacctupdated
 msgid "Account information updated."
-msgstr ""
+msgstr "勘定情報を更新されました。"
 
 #: frmtransactionlistunit.defaccountdropdowntext
 msgid " --- Select Account ---"
-msgstr ""
+msgstr "---- 勘定を選択してください ----"
 
 #: frmtransactionlistunit.hdramt
 msgctxt "frmtransactionlistunit.hdramt"
@@ -30,7 +30,7 @@ msgstr "貸方"
 
 #: frmtransactionlistunit.hdrdate
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 #: frmtransactionlistunit.hdrdr
 msgctxt "frmtransactionlistunit.hdrdr"
@@ -39,15 +39,15 @@ msgstr "借方"
 
 #: frmtransactionlistunit.hdrtext
 msgid "Text"
-msgstr ""
+msgstr "名称"
 
 #: frmtransactionlistunit.hdrtransno
 msgid "TransNo"
-msgstr ""
+msgstr "トランザクション番号"
 
 #: frmtransactionlistunit.hdrtransrow
 msgid "TransRow"
-msgstr ""
+msgstr "トランザクション行"
 
 #: frmtransactionunit.errtransnotbal
 msgid "Transaction is not balanced."
@@ -71,47 +71,51 @@ msgstr "データベースは読み込めない："
 
 #: paledger.erracctguidread
 msgid "TLedgerAccount.Load:Error while reading AcctGUID"
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：AcctGUID"
 
 #: paledger.erracctnoread
 msgid "TLedgerAccount.Load:Error while reading acctno"
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：acctno"
 
 #: paledger.erracctsubtyperead
 msgid "TLedgerAccount.Load:Error while reading AcctSt field, record="
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：項目=AcctSt、レコード="
 
 #: paledger.erraccttyperead
 msgid "TLedgerAccount.Load:Error while reading AcctType"
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：AcctType"
 
 #: paledger.errcurrcoderead
 msgid "TLedgerAccount.Load:Error while reading currency"
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：currency"
 
 #: paledger.errinvalidaccountno
 msgid "TAccountList.GetAccountNo called with -1!"
-msgstr ""
+msgstr "TAccountList.GetAccountNo：-1で呼ばれました!"
 
 #: paledger.errreadpasteof
 msgid "paLedger.TAccountList.Get*Account: Attempt to read past EOF!"
-msgstr ""
+msgstr "paLedger.TAccountList.Get*Account:EOF以上読もうとしました!"
 
 #: paledger.errresultnotassigned
 msgid "paLedger.TAccountList.Get*Account: Result Not Assigned!"
-msgstr ""
+msgstr "paLedger.TAccountList.Get*Account: 関数結果は無効です!"
 
 #: paledger.errtalgjainvacctno
-msgid "TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided."
+msgid ""
+"TAccountList.GetJournalAccount: Error: No Account number or Account GUID "
+"provided."
 msgstr ""
+"TAccountList.GetJournalAccount:エラー: 勘定番号又は勘定GUIDと指定していませ"
+"ん。"
 
 #: paledger.errtextread
 msgid "TLedgerAccount.Load:Error while reading text field"
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：勘定科目"
 
 #: paledger.errxxbalread
 msgid "TLedgerAccount.Load:Error while reading DrBal/CrBal"
-msgstr ""
+msgstr "TLedgerAccount.Load:読み込みエラー：DrBal/CrBal"
 
 #: patext.errcantreadtext
 msgid "Error: Unable to load requested text item."
@@ -119,11 +123,11 @@ msgstr "エラー：テキストは読み込めない。"
 
 #: patext.errgenericselect
 msgid "Unhandled Exception"
-msgstr ""
+msgstr "未処理例外"
 
 #: tfmewelcome.label1.caption
 msgid "Welcome!"
-msgstr ""
+msgstr "ようこそ！"
 
 #: tformplusalphamain.acaccountshow.caption
 msgid "acAccountShow"
@@ -365,4 +369,3 @@ msgstr ""
 #: tfrmtransactionlist.cbaccount.text
 msgid "cbAccount"
 msgstr ""
-
