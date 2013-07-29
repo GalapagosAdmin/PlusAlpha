@@ -10,7 +10,7 @@ uses
   paImport, md5, paImportMap,
   { you can add units after this }
   paJournal,  // needed for testing
-  lcltype;    // Used for VK_*
+  lcltype, paimport_amexjp;    // Used for VK_*
 
 type
 

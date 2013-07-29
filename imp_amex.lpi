@@ -14,7 +14,8 @@
       <ResourceType Value="res"/>
     </General>
     <i18n>
-      <EnableI18N LFM="False"/>
+      <EnableI18N Value="True" LFM="False"/>
+      <OutDir Value="i18n"/>
     </i18n>
     <VersionInfo>
       <StringTable ProductVersion=""/>
@@ -41,7 +42,7 @@
         <PackageName Value="LazUtils"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="imp_amex.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -82,6 +83,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="paImportMap"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="paimport_amexjp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paimport_amexjp"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
