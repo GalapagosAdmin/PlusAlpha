@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Galapagos Administrator <shiruba@galapagossoftware.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: padatabase.errdbnotfound
+msgid "Database not found at: "
+msgstr "データベースは見つかりませんでした："
+
+#: paimport.errnosuchrow
+msgid "Invalid Row Reference reading CSV file."
+msgstr "CSVファイルを読みながら無効な行を参照しました。"
+
+#: paimport_amexjp.errtransnotbal
+msgid "Transaction is not balanced."
+msgstr "勘定は不平衡"
+
+#: paimport_amexjp.errtransnotinsert
+msgid "Error Inserting Transaction."
+msgstr "勘定を挿入できませんでした。"
+
+#: paimport_amexjp.errtransnotvalid
+msgid "Transaction is not valid."
+msgstr "勘定は無効です。"
+
+#: paimport_amexjp.msgtransinserr
+msgid "Error Inserting Transaction!"
+msgstr "勘定を挿入できませんでした！"
+
+#: paimport_amexjp.msgtransinserted
+msgid "Transaction Inserted"
+msgstr "勘定を挿入しました"
+
+#: paimport_amexjp.msgtransinssucc
+msgid "Transaction Inserted."
+msgstr "勘定を挿入しました。"
+
+#: patext.errcantreadtext
+msgid "Error: Unable to load requested text item."
+msgstr "エラー：依頼したテキストをロードできませんでした。"
+
+#: patext.errgenericselect
+msgid "Unhandled Exception"
+msgstr "未処理例外"

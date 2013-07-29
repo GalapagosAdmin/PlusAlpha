@@ -1,0 +1,43 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: padatabase.errdbnotfound
+msgid "Database not found at: "
+msgstr ""
+
+#: paimport.errnosuchrow
+msgid "Invalid Row Reference reading CSV file."
+msgstr ""
+
+#: paimport_amexjp.errtransnotbal
+msgid "Transaction is not balanced."
+msgstr ""
+
+#: paimport_amexjp.errtransnotinsert
+msgid "Error Inserting Transaction."
+msgstr ""
+
+#: paimport_amexjp.errtransnotvalid
+msgid "Transaction is not valid."
+msgstr ""
+
+#: paimport_amexjp.msgtransinserr
+msgid "Error Inserting Transaction!"
+msgstr ""
+
+#: paimport_amexjp.msgtransinserted
+msgid "Transaction Inserted"
+msgstr ""
+
+#: paimport_amexjp.msgtransinssucc
+msgid "Transaction Inserted."
+msgstr ""
+
+#: patext.errcantreadtext
+msgid "Error: Unable to load requested text item."
+msgstr ""
+
+#: patext.errgenericselect
+msgid "Unhandled Exception"
+msgstr ""
+
