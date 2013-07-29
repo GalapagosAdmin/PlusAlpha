@@ -9,7 +9,8 @@ uses
   Classes, SysUtils, libpa, padatabase, patext, pacliutil,  CustApp,
   paImport, md5, paImportMap,
   { you can add units after this }
-  paJournal;  // needed for testing
+  paJournal,  // needed for testing
+  lcltype;    // Used for VK_*
 
 type
 
@@ -67,13 +68,13 @@ begin
 //      Write(r,': ');
 //        Write('['+AmexJPCSVImport.GetValue(c,r)+']');
       Write(DatetoStr(AmexJPCSVImport.data.TransactionDate));
-      Write(chr(9));
+      Write(VK_TAB);
       Write(FloatToStr(AmexJPCSVImport.data.LocalCurrencyAmount));
-      Write(chr(9));
+      Write(vk_tab);
       Write(UTF8ToANSI(AmexJPCSVImport.data.memo));
-      Write(chr(9));
+      Write(vk_tab);
       Write(MD5Print(AmexJPCSVImport.data.MemoHash));
-      Write(chr(9));
+      Write(vk_tab);
       Write(AmexJPCSVImport.data.ForeignCurrencyCode);
       Write(' ');
       Write(FloatToStr(AmexJPCSVImport.data.ForeignCurrencyAmount));
