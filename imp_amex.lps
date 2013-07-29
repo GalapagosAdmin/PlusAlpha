@@ -4,55 +4,56 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="21">
+    <Units Count="26">
       <Unit0>
         <Filename Value="imp_amex.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="imp_amex"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="60"/>
-        <CursorPos X="4" Y="66"/>
-        <UsageCount Value="113"/>
+        <TopLine Value="86"/>
+        <CursorPos X="24" Y="103"/>
+        <UsageCount Value="117"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="libpa.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="libpa"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="90"/>
-        <CursorPos X="62" Y="103"/>
-        <UsageCount Value="113"/>
+        <TopLine Value="92"/>
+        <CursorPos X="20" Y="98"/>
+        <UsageCount Value="117"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="padatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paDatabase"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="2" Y="12"/>
-        <UsageCount Value="113"/>
+        <UsageCount Value="117"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="patext.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="patext"/>
-        <UsageCount Value="113"/>
+        <UsageCount Value="117"/>
       </Unit3>
       <Unit4>
         <Filename Value="pacliutil.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pacliutil"/>
-        <EditorIndex Value="6"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="16" Y="1"/>
-        <UsageCount Value="113"/>
+        <TopLine Value="12"/>
+        <CursorPos X="27" Y="21"/>
+        <UsageCount Value="117"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -62,69 +63,68 @@
         <WindowIndex Value="0"/>
         <TopLine Value="785"/>
         <CursorPos X="50" Y="808"/>
-        <UsageCount Value="113"/>
+        <UsageCount Value="117"/>
       </Unit5>
       <Unit6>
         <Filename Value="paimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paImport"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="24" Y="1"/>
-        <UsageCount Value="113"/>
+        <UsageCount Value="117"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="paimportmap.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paImportMap"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="3" Y="1"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="csvdocument\demo\mainfrm.pas"/>
         <UnitName Value="mainfrm"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="57"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="pacurrency.pas"/>
         <UnitName Value="paCurrency"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="9" Y="1"/>
-        <UsageCount Value="48"/>
+        <CursorPos X="14" Y="9"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="pajournal.pas"/>
         <UnitName Value="paJournal"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="382"/>
-        <CursorPos X="17" Y="388"/>
-        <UsageCount Value="45"/>
+        <CursorPos X="15" Y="396"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="paledger.pas"/>
         <UnitName Value="paLedger"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="729"/>
         <CursorPos X="5" Y="749"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="44"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
@@ -191,137 +191,180 @@
         <Filename Value="paimport_amexjp.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="paimport_amexjp"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit20>
+      <Unit21>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\rtl\win\syswin.inc"/>
+        <EditorIndex Value="10"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="201"/>
+        <CursorPos X="15" Y="218"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\rtl\inc\system.inc"/>
+        <EditorIndex Value="11"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="859"/>
+        <CursorPos X="10" Y="876"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\rtl\inc\generic.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="241"/>
+        <CursorPos X="33" Y="251"/>
+        <UsageCount Value="10"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="C:\lazarus\fpc\2.6.1\source\rtl\win64\system.pp"/>
+        <UnitName Value="System"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="380"/>
+        <CursorPos X="14" Y="397"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="C:\lazarus\components\lazutils\fileutil.pas"/>
+        <UnitName Value="FileUtil"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="195"/>
+        <CursorPos X="10" Y="205"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit25>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="355" Column="1" TopLine="337"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="34" Column="14" TopLine="16"/>
       </Position1>
       <Position2>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="356" Column="1" TopLine="337"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="18" Column="29" TopLine="11"/>
       </Position2>
       <Position3>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="357" Column="1" TopLine="337"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="67" Column="54" TopLine="51"/>
       </Position3>
       <Position4>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="360" Column="1" TopLine="340"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="68" Column="4" TopLine="57"/>
       </Position4>
       <Position5>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="363" Column="1" TopLine="343"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="50" Column="8" TopLine="34"/>
       </Position5>
       <Position6>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="312" Column="1" TopLine="300"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="94" Column="10" TopLine="74"/>
       </Position6>
       <Position7>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="313" Column="1" TopLine="300"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="79" Column="23" TopLine="69"/>
       </Position7>
       <Position8>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="315" Column="1" TopLine="300"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="21" Column="1" TopLine="13"/>
       </Position8>
       <Position9>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="316" Column="1" TopLine="300"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="20" Column="43" TopLine="12"/>
       </Position9>
       <Position10>
-        <Filename Value="paimport.pas"/>
-        <Caret Line="317" Column="39" TopLine="300"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="19" Column="45" TopLine="10"/>
       </Position10>
       <Position11>
-        <Filename Value="paimportmap.pas"/>
-        <Caret Line="99" Column="3" TopLine="76"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="79" Column="23" TopLine="69"/>
       </Position11>
       <Position12>
         <Filename Value="imp_amex.lpr"/>
-        <Caret Line="72" Column="19" TopLine="67"/>
+        <Caret Line="97" Column="25" TopLine="88"/>
       </Position12>
       <Position13>
-        <Filename Value="imp_amex.lpr"/>
-        <Caret Line="90" Column="19" TopLine="67"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="16" Column="21" TopLine="6"/>
       </Position13>
       <Position14>
-        <Filename Value="imp_amex.lpr"/>
-        <Caret Line="14" Column="1" TopLine="1"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="92" Column="14" TopLine="82"/>
       </Position14>
       <Position15>
-        <Filename Value="imp_amex.lpr"/>
-        <Caret Line="13" Column="7" TopLine="1"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="90" Column="15" TopLine="80"/>
       </Position15>
       <Position16>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="305" Column="1" TopLine="282"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="96" Column="44" TopLine="80"/>
       </Position16>
       <Position17>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="22" Column="33" TopLine="18"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="87" Column="30" TopLine="87"/>
       </Position17>
       <Position18>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="13" Column="32" TopLine="1"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="94" Column="1" TopLine="87"/>
       </Position18>
       <Position19>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="8" Column="3" TopLine="1"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="36" Column="1" TopLine="26"/>
       </Position19>
       <Position20>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="9" Column="5" TopLine="1"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="38" Column="1" TopLine="26"/>
       </Position20>
       <Position21>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="8" Column="20" TopLine="1"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="39" Column="1" TopLine="26"/>
       </Position21>
       <Position22>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="12" Column="15" TopLine="1"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="43" Column="1" TopLine="26"/>
       </Position22>
       <Position23>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="55" Column="1" TopLine="45"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="94" Column="11" TopLine="87"/>
       </Position23>
       <Position24>
-        <Filename Value="imp_amex.lpr"/>
-        <Caret Line="75" Column="58" TopLine="55"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="94" Column="2" TopLine="74"/>
       </Position24>
       <Position25>
         <Filename Value="imp_amex.lpr"/>
-        <Caret Line="62" Column="9" TopLine="59"/>
+        <Caret Line="103" Column="40" TopLine="87"/>
       </Position25>
       <Position26>
-        <Filename Value="imp_amex.lpr"/>
-        <Caret Line="14" Column="11" TopLine="3"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="6" Column="42" TopLine="1"/>
       </Position26>
       <Position27>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="111" Column="38" TopLine="111"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="39" Column="25" TopLine="30"/>
       </Position27>
       <Position28>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="4" Column="38" TopLine="1"/>
+        <Filename Value="imp_amex.lpr"/>
+        <Caret Line="103" Column="24" TopLine="86"/>
       </Position28>
       <Position29>
-        <Filename Value="paimport_amexjp.pas"/>
-        <Caret Line="308" Column="18" TopLine="291"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="17" Column="22" TopLine="7"/>
       </Position29>
       <Position30>
-        <Filename Value="paledger.pas"/>
-        <Caret Line="729" Column="43" TopLine="713"/>
+        <Filename Value="pacliutil.pas"/>
+        <Caret Line="212" Column="9" TopLine="204"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

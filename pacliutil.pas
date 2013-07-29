@@ -3,7 +3,7 @@ unit pacliutil; // PlusAlpha Command Line Interface Utilities
 
 interface
 
-uses  sysutils, LibPa, paLedger;
+uses  sysutils, LibPa, paLedger, fileutil;
 
 Procedure WriteErr(const Err:UTF8String);
 //Function GetAccount:Longint;
@@ -14,43 +14,103 @@ Procedure PrintAcctType(AccountType:TAcctType);
 Procedure PrintDrCr(Const DrCr:TDrCr);
 Procedure PrintAccount(Const Account:TLedgerAccount; Const ShowGUID:Boolean);
 Procedure PrintTransRow(Const Row:Integer);
-Procedure PrintAMount(Const Amount:Integer);
+Procedure PrintAmount(Const Amount:Integer);
+procedure WriteLnUTF8(s:UTF8String); overload;
+procedure WriteLnUTF8; overload;
+procedure WriteUTF8(s:UTF8String); overload;
+procedure WriteUTF8(i:LongInt); overload;
 
 implementation
 
 uses
+  {$IFDEF WINDOWS}
+  windows,
+  {$ENDIF}
+
   StrUtils, Crt;
+
+
+procedure WriteLnUTF8(s:UTF8String);
+var
+  bw:dword;
+begin
+ {$IFDEF WINDOWS}
+  s := s + #13#10;
+  s := UTF8ToConsole(s);
+  WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE),@s[1],length(s),bw,nil);
+  {$ELSE}
+  writeln(s);
+  {$ENDIF}
+end;
+
+procedure WriteLnUTF8; overload;
+  var
+    s:UTF8String;
+  begin
+   {$IFDEF WINDOWS}
+    s := '';
+    WritelnUTF8(s);
+    {$ELSE}
+    writeln;
+    {$ENDIF}
+  end;
+
+procedure WriteUTF8(s:UTF8String);
+var
+  bw:dword;
+begin
+ {$IFDEF WINDOWS}
+  WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE),@s[1],length(s),bw,nil);
+  {$ELSE}
+  write(s);
+  {$ENDIF}
+end;
+
+procedure WriteUTF8(i:LongInt); overload;
+var
+  bw:dword;
+  s:string;
+begin
+ {$IFDEF WINDOWS}
+  s := IntToStr(i);
+  s := UTF8ToConsole(s);
+  WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE),@s[1],length(s),bw,nil);
+  {$ELSE}
+  write(i);
+  {$ENDIF}
+end;
+
 
 Procedure PrintAccount(Const Account:TLedgerAccount; Const ShowGUID:Boolean);
   begin
     PrintAcctNo(account.AcctNo);
-    Write('  ');
+    WriteUTF8('  ');
     PrintAcctType(Account.AccountType);
     Case Account.DrCr of Cr:TextColor(Red) end;
-    Write(Chr(9));
+    WriteUTF8(chr(VK_TAB));
     PrintDrCr(account.DrCr);
-    Write(Chr(9), IntToStr(Account.Balance):8);
+//    Write(chr(VK_TAB) + IntToStr(Account.Balance):8);
+    WriteUTF8(chr(VK_TAB) + IntToStr(Account.Balance));
     TextColor (Yellow);
-    Write(
-       chr(9), account.Currency);
+    WriteUTF8(chr(VK_TAB) + account.Currency);
        TextColor(white);
        If ShowGUID then
-         Write(Chr(9), GUIDToString(Account.AcctGUID));
-       Write(Chr(9), UTF8ToANSI(Account.Text));
-    Writeln;
+         WriteUTF8(chr(VK_TAB) + GUIDToString(Account.AcctGUID));
+       WriteUTF8(chr(VK_TAB) + Account.Text);
+    WritelnUTF8;
   end;
 
 Procedure WriteErr(const Err:UTF8String);
   begin
     TextColor(Red);
-    Writeln(Err);
+    WritelnUTF8(Err);
     NormVideo;
   end;
 
 Function GetText(const Prompt:UTF8String):UTF8String;
   begin
     NormVideo;
-    Write(Prompt);
+    WriteUTF8(Prompt);
     HighVideo;
     Readln(Result);
     NormVideo;
@@ -137,24 +197,28 @@ Procedure PrintDrCr(Const DrCr:TDrCr);
         Cr:TextColor(Red);
         Dr:TextColor(Green);
       end;
-      Write(abap_translate(IntToStr(Ord(DrCr)), '0D1C'));
+      WriteUTF8(abap_translate(IntToStr(Ord(DrCr)), '0D1C'));
   end;
 
 Procedure PrintTransRow(Const Row:Integer);
   begin
    TextColor(White);
-   Write(Row);
+   WriteUTF8(Row);
   end;
 
 Procedure PrintAmount(Const Amount:Integer);
   begin
    TextColor(White);
-   Write(Amount);
+   WriteUTF8(Amount);
   end;
 
 
 initialization
   // Startup code goes here
+{$IFDEF WINDOWS}
+ //SetConsoleOutputCP(CP_UTF8);
+{$ENDIF}
+
 finalization
   NormVideo
 end.
