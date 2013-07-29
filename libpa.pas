@@ -41,9 +41,12 @@ Type
   Function abap_translate(const instring, Mask:UTF8String):UTF8String;
   // Return the input string, minus any embedded commas
   Function Strip_Comma(Const Instring:UTF8String):UTF8String;
+  // Write output to console, only on Unix or for CLI apps
+  Procedure DebugLn(Const Instring:UTF8String);
 
 implementation
 
+uses dbugintf;
 
 // Converts input string into an output string using mask
 // similar to ABAP function of the same name
@@ -91,6 +94,14 @@ implementation
      begin
        Result := StringReplace(instring,',','',[rfReplaceAll]);
      end;
+
+Procedure DebugLn(Const Instring:UTF8String);
+  begin
+   if IsConsole then  // Prevent exception on Windows GUI apps.
+     Writeln(stderr, Instring)
+   else
+     SendDebug(InString);   // Use debug server for GUI apps.
+  end;
 
 Initialization
 

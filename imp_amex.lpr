@@ -10,6 +10,9 @@ uses
   paImport, md5, paImportMap,
   { you can add units after this }
   paJournal,  // needed for testing
+  {$IFDEF WINDOWS}
+  windows,
+  {$ENDIF}
   lcltype, paimport_amexjp;    // Used for VK_*
 
 type
@@ -59,6 +62,11 @@ begin
 
   { add your program here }
 
+  {$IFDEF WINDOWS}
+ //  writeln(GetConsoleOutputCP);
+ // writeln(getACP);
+  READLN;
+  {$ENDIF}
   AmexJPCSVImport.SetFileName(ParamStr(1));
   AmexJPCSVImport.TestMode := HasOption('t','test') ;
 
@@ -92,7 +100,7 @@ begin
               PrintDrCr(CompleteJournalEntry._JournalDetailEntries[LineItem].DrCr);
               PrintAmount(CompleteJournalEntry._JournalDetailEntries[LineItem].Amount);
               Write(CompleteJournalEntry._JournalDetailEntries[LineItem].Currency);
-              Writeln(CompleteJournalEntry._JournalDetailEntries[LineItem].Text);
+              Writeln(UTF8ToANSI(CompleteJournalEntry._JournalDetailEntries[LineItem].Text));
             end;
         end;  // text mode
     end;

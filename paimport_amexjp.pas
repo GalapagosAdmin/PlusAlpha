@@ -305,7 +305,7 @@ Procedure TAmexJPCSVImport.CreateTransaction;
      Case TestMode of
        False:begin
          If Insert then
-           Writeln(MSGTRANSINSSUCC) //'Transaction Inserted.')
+           DebugLn(MSGTRANSINSSUCC) //'Transaction Inserted.')
          else
            Raise Exception.Create(MSGTRANSINSERR);//'Error Inserting Transaction!');
        end; // of TestMode False

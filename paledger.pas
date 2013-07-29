@@ -726,7 +726,7 @@ Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
 { TODO 2 -oshiruba -cHardening : Convert LIKE to parameter, if possible }
 { TODO 2 -oshiruba -cI18N : Convert LIKE to parameter to use text table + language }
     SQLQuery1.SQL.Text := 'select AcctNo from ledger where text like ''%' + AccountName + '%''';
-    Writeln(SQLQuery1.SQL.Text);
+    DebugLn(SQLQuery1.SQL.Text);
     SQLQuery1.open;
     _Loaded := True;
     While not SQLQuery1.EOF do
