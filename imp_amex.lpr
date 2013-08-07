@@ -12,7 +12,8 @@ uses
   { you can add units after this }
   paJournal,  // needed for testing
   lcltype, paimport_amexjp,
-  fileutil;    // Used for cross-platform VK_*
+  fileutil,   // Used for cross-platform VK_*
+  CompileInfo;
 
 ResourceString
   APPTITLE = 'PlusAlpha American Express Japan Importer';
@@ -22,6 +23,7 @@ ResourceString
   HDRRAWDATA = 'Raw Data:';
   HDRTXNHDR = 'Transaction Header';
   HDRTXNDTL = 'Transaction Detail';
+
 
 type
 
@@ -46,7 +48,7 @@ var
   ErrorMsg: UTF8String;
   LineItem:Integer;
   VerboseMode:Boolean;
-  TextMode:Boolean;
+  TestMode:Boolean;
 
 Procedure WriteRawTransactionData;
   begin
@@ -107,7 +109,7 @@ begin
   end;
 
   VerboseMode := HasOption('v','verbose');
-  TestMode : = HasOption('t','test') ;
+  TestMode := HasOption('t','test') ;
   { add your program here }
  // {.$DEFINE SYSTEMDEBUG}
   {$IFDEF WINDOWS}
@@ -129,12 +131,12 @@ begin
       If VerboseMode then
          WriteRawTransactionData;
       AmexJPCSVImport.CreateTransaction;
-      if TextMode then
+      if TestMode then
         begin
-          writelnUTF8('--- ' + HDRTXNHDR + ' ---');
+          WritelnUTF8('--- ' + HDRTXNHDR + ' ---');
           WritelnUTF8((CompleteJournalEntry._JournalHeader.HdrMemo));
-          writelnUTF8('--- ' + HDRTXNDTL + ' ---');
-          for LineItem := 0 to CompleteJournalEntry.Rows - 1 do
+          WritelnUTF8('--- ' + HDRTXNDTL + ' ---');
+          for LineItem := 0 to (CompleteJournalEntry.Rows - 1) do
               WriteTransactionDetail;
         end;  // text mode
     end;
@@ -161,6 +163,8 @@ end;
 procedure TAmexJPImporter.WriteHelp;
 begin
   { add your help code here }
+  WritelnUTF8(APPTITLE);
+  WritelnUTF8(AllCompileInfo);
   writelnUTF8('Usage: '+ExeName+' -h');
   writelnUTF8('Usage: '+ExeName+' [-t][-v] filename.csv');
   writelnUTF8('h: ' + HLPOPTH);

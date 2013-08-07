@@ -42,7 +42,7 @@
         <PackageName Value="LazUtils"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="9">
+    <Units Count="10">
       <Unit0>
         <Filename Value="imp_amex.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -88,6 +88,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="paimport_amexjp"/>
       </Unit8>
+      <Unit9>
+        <Filename Value="compileinfo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CompileInfo"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

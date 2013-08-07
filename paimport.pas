@@ -1,7 +1,6 @@
 unit paImport;
-
 {$mode objfpc}{$H+}
-
+{$INTERFACES CORBA }
 interface
 
 uses
@@ -13,8 +12,23 @@ uses
 ResourceString
   ERRNOSUCHROW = 'Invalid Row Reference reading CSV file.';
 
+Const
+    SImportInterface = '{F3FBC2C5-089C-438E-8FE7-C80E0E3322CB}';
 
-type
+Type
+   // This is for actual import classes
+   IImportInterface = interface
+    [SImportInterface]
+    Procedure SetFileName(Const FileName:UTF8String);
+    // ProcedureGetFirst; // Rewind to the beginning
+    Procedure GetNext;
+    property EOF:Boolean;
+    Property TestMode:Boolean;
+    Procedure CreateTransaction;
+  end;
+
+  // This one is just a thin wrapper around TCSVDocument
+  // Using it instead of a class helper because we may reimplement this later
   TCSVImport = class(TObject)
     FDoc: TCSVDocument;
     RowCount:Integer;

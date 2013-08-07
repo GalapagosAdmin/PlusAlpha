@@ -2,6 +2,7 @@ unit paimport_amexjp;
 // American Express Japan CSV Import
 
 {$mode objfpc}{$H+}
+{$INTERFACES CORBA }
 
 interface
 
@@ -22,7 +23,7 @@ TAmexJPEntry=Record
   MemoHash:TMD5Digest;
 end;
 
-TAmexJPCSVImport = class(TObject)
+TAmexJPCSVImport = class(TInterfacedObject, IImportInterface)
   FDoc: TCSVDocument;
   RowCount:Integer;
   ColCount:Integer;
