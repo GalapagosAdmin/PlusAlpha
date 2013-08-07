@@ -1,6 +1,34 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: imp_amex.apptitle
+msgid "PlusAlpha American Express Japan Importer"
+msgstr ""
+
+#: imp_amex.hdrrawdata
+msgid "Raw Data:"
+msgstr ""
+
+#: imp_amex.hdrtxndtl
+msgid "Transaction Detail"
+msgstr ""
+
+#: imp_amex.hdrtxnhdr
+msgid "Transaction Header"
+msgstr ""
+
+#: imp_amex.hlpopth
+msgid "Display Help / Program Options"
+msgstr ""
+
+#: imp_amex.hlpoptt
+msgid "Test mode (do not save transactions)"
+msgstr ""
+
+#: imp_amex.hlpoptv
+msgid "Verbose mode - Show parsed input"
+msgstr ""
+
 #: padatabase.errdbnotfound
 msgid "Database not found at: "
 msgstr ""

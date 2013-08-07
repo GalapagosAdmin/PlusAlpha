@@ -2,6 +2,7 @@
 
 {$mode objfpc}{$H+}
 
+
 uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
@@ -10,7 +11,17 @@ uses
   paImport, md5, paImportMap,
   { you can add units after this }
   paJournal,  // needed for testing
-  lcltype, paimport_amexjp, fileutil;    // Used for VK_*
+  lcltype, paimport_amexjp,
+  fileutil;    // Used for cross-platform VK_*
+
+ResourceString
+  APPTITLE = 'PlusAlpha American Express Japan Importer';
+  HLPOPTH = 'Display Help / Program Options';
+  HLPOPTT = 'Test mode (do not save transactions)';
+  HLPOPTV = 'Verbose mode - Show parsed input';
+  HDRRAWDATA = 'Raw Data:';
+  HDRTXNHDR = 'Transaction Header';
+  HDRTXNDTL = 'Transaction Detail';
 
 type
 
@@ -34,8 +45,44 @@ procedure TAmexJPImporter.DoRun;
 var
   ErrorMsg: UTF8String;
   LineItem:Integer;
-begin
+  VerboseMode:Boolean;
+  TextMode:Boolean;
 
+Procedure WriteRawTransactionData;
+  begin
+      WritelnUTF8('--- ' + HDRRAWDATA + ' ---');
+      WriteUTF8(DatetoStr(AmexJPCSVImport.data.TransactionDate));
+      WriteUTF8(VK_TAB);
+      WriteUTF8(FloatToStr(AmexJPCSVImport.data.LocalCurrencyAmount));
+      WriteUTF8(vk_tab);
+      WriteUTF8(UTF8ToANSI(AmexJPCSVImport.data.memo)); // Don't even ask...
+      WriteUTF8(vk_tab);
+      WriteUTF8(MD5Print(AmexJPCSVImport.data.MemoHash));
+      WriteUTF8(vk_tab);
+      WriteUTF8(AmexJPCSVImport.data.ForeignCurrencyCode);
+      WriteUTF8(' ');
+      WriteUTF8(FloatToStr(AmexJPCSVImport.data.ForeignCurrencyAmount));
+      writelnUTF8;
+  end;
+
+Procedure WriteTransactionDetail;
+  begin
+    PrintTransRow(CompleteJournalEntry._JournalDetailEntries[LineItem].TransRow);
+    WriteUTF8(vk_tab);
+    WriteUTF8(CompleteJournalEntry._JournalDetailEntries[LineItem].DisplayDate);
+    WriteUTF8(vk_tab);
+    WriteUTF8(GuidToString(CompleteJournalEntry._JournalDetailEntries[LineItem].AcctGUID));
+    WriteUTF8(vk_tab);
+    PrintDrCr(CompleteJournalEntry._JournalDetailEntries[LineItem].DrCr);
+    WriteUTF8(vk_tab);
+    PrintAmount(CompleteJournalEntry._JournalDetailEntries[LineItem].Amount);
+    WriteUTF8(vk_tab);
+    WriteUTF8(CompleteJournalEntry._JournalDetailEntries[LineItem].Currency);
+    WriteUTF8(vk_tab);
+    WritelnUTF8(CompleteJournalEntry._JournalDetailEntries[LineItem].Text);
+  end;
+
+begin
   If ParamCount = 0 then
     begin
       WriteHelp;
@@ -44,7 +91,8 @@ begin
     end;
 
   // quick check parameters
-  ErrorMsg:=CheckOptions('ht','help test');
+  // Or we could use FindCmdLineSwitch
+  ErrorMsg:=CheckOptions('htv','help test verbose');
   if ErrorMsg<>'' then begin
     ShowException(Exception.Create(ErrorMsg));
     Terminate;
@@ -58,8 +106,10 @@ begin
     Exit;
   end;
 
+  VerboseMode := HasOption('v','verbose');
+  TestMode : = HasOption('t','test') ;
   { add your program here }
-  {$DEFINE SYSTEMDEBUG}
+ // {.$DEFINE SYSTEMDEBUG}
   {$IFDEF WINDOWS}
  //  writeln(GetConsoleOutputCP);
  // writeln(getACP);
@@ -67,49 +117,31 @@ begin
  // WritelnUTF8(('あいうえお秋葉原'));
  // READLN;
   {$ENDIF}
-  AmexJPCSVImport.SetFileName(ParamStr(1));
-  AmexJPCSVImport.TestMode := HasOption('t','test') ;
+  // File shoule be last.
+  AmexJPCSVImport.SetFileName(ParamStr(ParamCount));
+  AmexJPCSVImport.TestMode := TestMode;
 
   while not AmexJPCSVImport.eof do
     begin
       AmexJPCSVImport.GetNext;
 //      Write(r,': ');
 //        Write('['+AmexJPCSVImport.GetValue(c,r)+']');
-      writelnUTF8('--- Raw Data: ---');
-      WriteUTF8(DatetoStr(AmexJPCSVImport.data.TransactionDate));
-      WriteUTF8(VK_TAB);
-      WriteUTF8(FloatToStr(AmexJPCSVImport.data.LocalCurrencyAmount));
-      WriteUTF8(vk_tab);
-      WriteUTF8(UTF8ToANSI(AmexJPCSVImport.data.memo));
-      WriteUTF8(vk_tab);
-      WriteUTF8(MD5Print(AmexJPCSVImport.data.MemoHash));
-      WriteUTF8(vk_tab);
-      WriteUTF8(AmexJPCSVImport.data.ForeignCurrencyCode);
-      WriteUTF8(' ');
-      WriteUTF8(FloatToStr(AmexJPCSVImport.data.ForeignCurrencyAmount));
-      writelnUTF8;
+      If VerboseMode then
+         WriteRawTransactionData;
       AmexJPCSVImport.CreateTransaction;
-      if HasOption('t','test') then
+      if TextMode then
         begin
-          writelnUTF8('--- Transaction Header ---');
-                    WritelnUTF8((CompleteJournalEntry._JournalHeader.HdrMemo));
-          writelnUTF8('--- Transaction Details ---');
+          writelnUTF8('--- ' + HDRTXNHDR + ' ---');
+          WritelnUTF8((CompleteJournalEntry._JournalHeader.HdrMemo));
+          writelnUTF8('--- ' + HDRTXNDTL + ' ---');
           for LineItem := 0 to CompleteJournalEntry.Rows - 1 do
-            begin
-              PrintTransRow(CompleteJournalEntry._JournalDetailEntries[LineItem].TransRow);
-              WriteUTF8(CompleteJournalEntry._JournalDetailEntries[LineItem].DisplayDate);
-              WriteUTF8(GuidToString(CompleteJournalEntry._JournalDetailEntries[LineItem].AcctGUID));
-              PrintDrCr(CompleteJournalEntry._JournalDetailEntries[LineItem].DrCr);
-              PrintAmount(CompleteJournalEntry._JournalDetailEntries[LineItem].Amount);
-              WriteUTF8(CompleteJournalEntry._JournalDetailEntries[LineItem].Currency);
-              WritelnUTF8(CompleteJournalEntry._JournalDetailEntries[LineItem].Text);
-            end;
+              WriteTransactionDetail;
         end;  // text mode
     end;
 
 
   // stop program loop
-  readln;
+//  readln;   // for Running within Lazarus
   Terminate;
 end;
 
@@ -129,8 +161,11 @@ end;
 procedure TAmexJPImporter.WriteHelp;
 begin
   { add your help code here }
-  writeln('Usage: ',ExeName,' -h');
-  writeln('Usage: ',ExeName,' filename.csv');
+  writelnUTF8('Usage: '+ExeName+' -h');
+  writelnUTF8('Usage: '+ExeName+' [-t][-v] filename.csv');
+  writelnUTF8('h: ' + HLPOPTH);
+  writelnUTF8('t: ' + HLPOPTT);
+  writelnUTF8('v: ' + HLPOPTV);
 end;
 
 var
@@ -138,7 +173,7 @@ var
 begin
 
   Application:=TAmexJPImporter.Create(nil);
-  Application.Title:='PlusAlpha American Express Japan Importer';
+  Application.Title := APPTITLE;
   Application.Run;
   Application.Free;
 end.

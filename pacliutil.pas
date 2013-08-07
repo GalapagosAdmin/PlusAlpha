@@ -15,6 +15,14 @@ Procedure PrintDrCr(Const DrCr:TDrCr);
 Procedure PrintAccount(Const Account:TLedgerAccount; Const ShowGUID:Boolean);
 Procedure PrintTransRow(Const Row:Integer);
 Procedure PrintAmount(Const Amount:Integer);
+
+// Accept UTF8 String, manually convert it to Console encoding, and write it
+// to the Console in Windows. (In OS X, the console should be UTF8 anyway...)
+// We could set the console to UTF8 and then just write directly, but that has
+// two problems:
+// 1. Some versions of the FPC runtime apparently reset the console code-page
+// every time we use writeln, etc.
+// 2. Older versions of Windows can't handle UTF8 as a codepage.
 procedure WriteLnUTF8(s:UTF8String); overload;
 procedure WriteLnUTF8; overload;
 procedure WriteUTF8(s:UTF8String); overload;
@@ -28,7 +36,6 @@ uses
   {$ENDIF}
 
   StrUtils, Crt;
-
 
 procedure WriteLnUTF8(s:UTF8String);
 var

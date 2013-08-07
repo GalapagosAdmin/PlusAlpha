@@ -1,6 +1,7 @@
 unit libpa;
 // Contains common items to be used by various parts of PlusAlpha
 {$mode objfpc}{$H+}
+{$DEFINE DEBUGOUTPUT} // Compile time switch to turn on/off all debug output
 
 interface
 
@@ -97,10 +98,12 @@ uses dbugintf;
 
 Procedure DebugLn(Const Instring:UTF8String);
   begin
+   {$IFDEF DEBUGOUTPUT}
    if IsConsole then  // Prevent exception on Windows GUI apps.
      Writeln(stderr, Instring)
    else
      SendDebug(InString);   // Use debug server for GUI apps.
+   {$ENDIF}
   end;
 
 Initialization
