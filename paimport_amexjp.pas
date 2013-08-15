@@ -8,7 +8,7 @@ interface
 
 uses
  Classes, SysUtils,
- CSVDocument, // CSVDocument is separate from PlusAlpha project.
+ //CSVDocument, // CSVDocument is separate from PlusAlpha project.
  paCurrency, md5,
  paImport,
  paImportMap;
@@ -24,7 +24,7 @@ TAmexJPEntry=Record
 end;
 
 TAmexJPCSVImport = class(TInterfacedObject, IImportInterface)
-  FDoc: TCSVDocument;
+//  FDoc: TCSVDocument;
   RowCount:Integer;
   ColCount:Integer;
   _CSVImport:TCSVImport;
@@ -45,7 +45,8 @@ public
   Property TestMode:Boolean read _TestMode write _TestMode;
   property EOF:Boolean Read _EOF;
 //    Function GetValue(const aCol:Integer; aRow:Integer):UTF8String;
-//    Function GetRowCount:Integer;
+  Function GetRowCount:Integer;
+  Function GetCurrentRowValue(Const ColNum:Integer):UTF8string;
 end;
 
 
@@ -86,6 +87,11 @@ Procedure TAmexJPCSVImport.GetNext;
     DecodeRow;
   end;
 
+Function TAmexJPCSVImport.GetCurrentRowValue(Const ColNum:Integer):UTF8string;
+  begin
+    Result := _CSVImport.GetValue(ColNum, _CurrentRow)
+  end;
+
 Procedure TAmexJPCSVImport.DecodeRow;
   Const
     DateCol=0;
@@ -96,22 +102,22 @@ Procedure TAmexJPCSVImport.DecodeRow;
     tmpAmt:UTF8String;
     tmpFC:UTF8String;   // Raw Data with Two fields
     tmpFCAmt:UTF8String;
-    tmpRow:ANSIString;// Temporary row for constructing hash
+//    tmpRow:ANSIString;// Temporary row for constructing hash
   begin
     // Convert Date from string to TDate
     // Date should be converted from Japan to GMT, but since we don't know the time...
-    _CurrentEntry.TransactionDate:=
-        StrToDate(_CSVImport.GetValue(DateCol,_CurrentRow), '/');
+    _CurrentEntry.TransactionDate := StrToDate(GetCurrentRowValue(DateCol), '/');
     // Remove Quotation Marks, Commas if needed, convert to Integer
-    tmpAmt := _CSVImport.GetValue(LocalCurrencyAmtCol, _CurrentRow);
-    tmpAmt := StringReplace(tmpAmt,',','',[rfReplaceAll]);
+    tmpAmt := Strip_Comma(GetCurrentRowValue(LocalCurrencyAmtCol));
+//    tmpAmt := StringReplace(tmpAmt,',','',[rfReplaceAll]);
     _CurrentEntry.LocalCurrencyAmount := StrToFloat(tmpAmt);
     // Remove Quotation Chars, Convert Encoding to UTF8 if required
-    _CurrentEntry.Memo := ANSIToUTF8(_CSVImport.GetValue(MemoCol, _CurrentRow));
+    //    _CurrentEntry.Memo := ANSIToUTF8(_CSVImport.GetValue(MemoCol, _CurrentRow));
+    _CurrentEntry.Memo := GetCurrentRowValue(MemoCol);
     With _CurrentEntry do MemoHash := MD5String(Memo);
     // Remove Quotation Marks
     // Split last field into Currency Amount and Currency Code
-    tmpFC := _CSVImport.GetValue(ForeignCurrencyCol, _CurrentRow);
+    tmpFC := GetCurrentRowValue(ForeignCurrencyCol);
     If tmpFC = '' then
       begin // No data, so we clear the fields
         _CurrentEntry.ForeignCurrencyAmount:= 0;
@@ -219,10 +225,10 @@ Procedure TAmexJPCSVImport.CreateTransaction;
         end;
     end;
 
-  // Process an eentry with a negative amount.
-  // This is currentlt the same as a positive amount except that we make the
+  // Process an entry with a negative amount.
+  // This is currently the same as a positive amount except that we make the
   // amounts positive and then swap the debit and credit to compensate.
-  // (Note: This makes sense for reverals on the card, but not for card payments.)
+  // (Note: This makes sense for reversals on the card, but not for card payments.)
   // Plan to add a cut-off value above which / Memo text where negative
   // transactions are treated as card payments from a default bank account.
   procedure Process_Negative;
@@ -317,9 +323,15 @@ Procedure TAmexJPCSVImport.CreateTransaction;
 
   end; // of TAmexJPCSVImport.CreateTransaction;
 
+Function TAmexJPCSVImport.GetRowCount:Integer;
+  begin
+    Result := _CSVImport.RowCount;
+  end;
+
 Destructor TAmexJPCSVImport.Destroy();
   begin
     _CSVImport.free();
+    inherited;
   end;
 
 

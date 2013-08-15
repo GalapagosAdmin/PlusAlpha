@@ -221,11 +221,13 @@ Procedure PrintAmount(Const Amount:Integer);
 
 
 initialization
+  NormVideo;
   // Startup code goes here
 {$IFDEF WINDOWS}
  //SetConsoleOutputCP(CP_UTF8);
 {$ENDIF}
 
 finalization
-  NormVideo
+  NormVideo;
+
 end.

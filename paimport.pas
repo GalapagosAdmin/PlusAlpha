@@ -33,7 +33,8 @@ Type
     FDoc: TCSVDocument;
     RowCount:Integer;
     ColCount:Integer;
-   public
+    SourceEncodingIsUTF8:Boolean;
+  public
     Constructor Create();
     Destructor Destroy();
     Procedure SetFileName(Const FileName:UTF8String);
@@ -62,7 +63,6 @@ Procedure TCSVImport.SetFileName(Const FileName:UTF8String);
     ColCount := FDoc.MaxColCount;
 //      FDoc.CSVText := FileName;
 
-
   end;
 
 Function TCSVImport.GetRowCount:Integer;
@@ -73,6 +73,7 @@ Function TCSVImport.GetRowCount:Integer;
 Function TCSVImport.GetValue(const aCol:Integer; aRow:Integer):UTF8String;
   begin
     Result := FDoc.Cells[aCol, aRow];  // col and row are zero based
+    if not SourceEncodingIsUTF8 then Result := ANSIToUTF8(Result);
   end;
 
 // This should perhaps be a class helper for the FDoc
@@ -97,6 +98,8 @@ Constructor TCSVImport.Create();
     FDoc.Delimiter := ',';
     RowCount := 0;
     ColCount := 0;
+    ShortDateFormat := 'YYYY/MM/DD'; // Doesn't seem to take effect on all systems
+    SourceEncodingIsUTF8 := False;
   end;
 
 Destructor TCSVImport.Destroy();
@@ -107,7 +110,6 @@ Destructor TCSVImport.Destroy();
 
 
 Initialization
-  ShortDateFormat := 'YYYY/MM/DD'; // Doesn't seem to take effect on all systems
   CSVImporter := TCSVImport.Create();
 
 finalization
