@@ -90,8 +90,9 @@ uses
      Function AccountStringList:TStringList;
      Function GetFirstAccount:TLedgerAccount;
      Function GetNextAccount:TLedgerAccount;
-     Function GetAccountNo(AccountNo:TInteger):TLedgerAccount; deprecated;
-     Function GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+     Function GetAccountByNo(AccountNo:TInteger):TLedgerAccount; deprecated;
+     Function GetAccountByGUID(AccountGUID:TGUID):TLedgerAccount;
+     Function GetAccountByText(Text:UTF8String):TLedgerAccount;
      // Finds and returns an object for the account used by a journal detail entry
      Function GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
      Function EOF:Boolean;
@@ -113,7 +114,7 @@ uses
 
 ResourceString
   ERRTALGJAINVACCTNO = 'TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided.';
-  ErrInvalidAccountNo = 'TAccountList.GetAccountNo called with -1!';
+  ErrInvalidAccountNo = 'TAccountList.GetAccountByNo called with -1!';
   ErrAcctNoRead = 'TLedgerAccount.Load:Error while reading acctno';
   ErrCurrCodeRead = 'TLedgerAccount.Load:Error while reading currency';
   ErrAcctTypeRead = 'TLedgerAccount.Load:Error while reading AcctType';
@@ -617,7 +618,7 @@ Procedure TAccountList.ReLoad;
   end;
 
 // Gets the account you want from the array based on account number
-Function TAccountList.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
+Function TAccountList.GetAccountByNo(AccountNo:TInteger):TLedgerAccount;
   var
 //    i:TInteger;
     ThisAccount:TLedgerAccount;
@@ -637,7 +638,7 @@ Function TAccountList.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
 
   end;
 
-Function TAccountList.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+Function TAccountList.GetAccountByGUID(AccountGUID:TGUID):TLedgerAccount;
   var
 //    i:TInteger;
     ThisAccount:TLedgerAccount;
@@ -655,15 +656,35 @@ Function TAccountList.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
 
   end;
 
+Function TAccountList.GetAccountByText(Text:UTF8String):TLedgerAccount;
+  var
+//    i:TInteger;
+    ThisAccount:TLedgerAccount;
+  begin
+    Result := nil;
+    // Not very efficient, but then we shouldn't really have more than 100 or
+    // so accounts
+//    for i := Low(_AccountList) to high(_AccountList) do
+      for ThisAccount in _AccountList do
+        // Only handles primary text.  This will be login language text later
+        if ThisAccount.Text = Text then
+          begin
+            Result := ThisAccount;
+            exit;
+          end;
+     result := nil;
+  end;
+
+
 Function TAccountList.GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
   begin
     case je.HasAcctGUID of
-      true:Result := self.GetAccountGUID(je.AcctGUID);
+      true:Result := self.GetAccountByGUID(je.AcctGUID);
       false:begin
               If je.AcctNo = -1 then
                 Raise Exception.Create(ERRTALGJAINVACCTNO)
               else
-                Result := self.GetAccountNo(je.AcctNo);
+                Result := self.GetAccountByNo(je.AcctNo);
             end;
       end;
   end;
@@ -700,7 +721,7 @@ Procedure TAccountList.Load; // Loads the account listing from the database
     SQLQuery1.Destroy;
   end; // of TRY..FINALLY
 // update the tree
-//   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
+//   tmpAccount := GetAccountByNo(0);  // 0 is the root, by definition
 //   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
 
@@ -740,7 +761,7 @@ Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
     SQLQuery1.Destroy;
   end; // of TRY..FINALLY
 // update the tree
-//   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
+//   tmpAccount := GetAccountByNo(0);  // 0 is the root, by definition
 //   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
 
@@ -754,7 +775,8 @@ Function TAccountList.AccountStringList:TStringList;
  //   for i := low(_AccountList) to high(_AccountList) do
     for Acct in _AccountList do
       //     Result.Append(IntToStr(_AccountList[i]._AcctNo) + ' - ' + _AccountList[i]._Text);
-       Result.Append(IntToStr(Acct._AcctNo) + ' - ' + Acct._Text);
+  //     Result.Append(IntToStr(Acct._AcctNo) + ' - ' + Acct._Text);
+           Result.Append(Acct._Text);
   end;
 
 Procedure TAccountList.UpdateHighWaterMark;

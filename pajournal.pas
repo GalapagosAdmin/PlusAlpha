@@ -64,6 +64,7 @@ type
      Procedure SetAcctNo(AcctNo:Integer);
      Procedure SetAcctGUID(AcctGUID:TGUID);
      Procedure SetTransGUID(TransGUID:TGUID);
+     Function DisplayDateGet:UTF8String;
       // performs a database update if the record already existed.
      Procedure Select;
      Function Update:Boolean;
@@ -233,6 +234,11 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       Select;
     end;
 
+Function TJournalDetailEntry.DisplayDateGet:UTF8String;
+  begin
+    Result := self._EffDateDB;
+  end;
+
   Procedure TJournalHeader.SetTransGUID(TransGUID:TGUID);
     begin
       _TransGUID := TransGUID;
@@ -304,7 +310,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       // Make sure we set the line item currency to the currency of the account
       // used.
       if AcctNo < 0 then exit;
-      tmpAcct := AccountList.GetAccountNo(AcctNo);
+      tmpAcct := AccountList.GetAccountByNo(AcctNo);
       if Assigned(tmpAcct) then
         _Currency := tmpAcct.Currency
       else
@@ -321,7 +327,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       // Make sure we set the line item currency to the currency of the account
       // used.
 //      if AcctNo < 0 then exit;
-      tmpAcct := AccountList.GetAccountGuid(AcctGUID);
+      tmpAcct := AccountList.GetAccountByGuid(AcctGUID);
       if Assigned(tmpAcct) then
         begin
         _Currency := tmpAcct.Currency;
@@ -608,9 +614,9 @@ Function TJournalDetailEntry.Update:boolean;
                je.insert;
                // Update Ledger
                If je.HasAcctGUID then
-                 tmpAcct := AccountList.GetAccountGUID(je.AcctGUID)
+                 tmpAcct := AccountList.GetAccountByGUID(je.AcctGUID)
                else
-                 tmpAcct := AccountList.GetAccountNo(je.AcctNo);
+                 tmpAcct := AccountList.GetAccountByNo(je.AcctNo);
                if assigned(tmpAcct) then
                  begin
                    // Create the calculator if this is our first time through.

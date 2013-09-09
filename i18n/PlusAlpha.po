@@ -81,7 +81,7 @@ msgid "TLedgerAccount.Load:Error while reading currency"
 msgstr ""
 
 #: paledger.errinvalidaccountno
-msgid "TAccountList.GetAccountNo called with -1!"
+msgid "TAccountList.GetAccountByNo called with -1!"
 msgstr ""
 
 #: paledger.errreadpasteof
@@ -148,24 +148,32 @@ msgstr ""
 msgid "ToolButton2"
 msgstr ""
 
+#: tfrmdebug.acupdatedbpath.caption
+msgid "acUpdateDBPath"
+msgstr ""
+
 #: tfrmdebug.bbtextcode.caption
-msgid "bbTextCode"
+msgid "Lookup Text Code"
 msgstr ""
 
 #: tfrmdebug.bbtransno.caption
-msgid "bbTransNo"
+msgid "Next Transaction Number"
 msgstr ""
 
 #: tfrmdebug.caption
 msgid "Plus Alpha - Debug Options"
 msgstr ""
 
+#: tfrmdebug.ledbpath.editlabel.caption
+msgid "Database Path"
+msgstr ""
+
 #: tfrmdebug.letextcd.editlabel.caption
-msgid "leTextCd"
+msgid "Text Code"
 msgstr ""
 
 #: tfrmdebug.letranno.editlabel.caption
-msgid "leTranNo"
+msgid "Transaction No."
 msgstr ""
 
 #: tfrmledger.actreerefresh.caption

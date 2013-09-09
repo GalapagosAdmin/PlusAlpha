@@ -1,62 +1,91 @@
 object frmDebug: TfrmDebug
-  Left = 258
-  Height = 155
-  Top = 261
-  Width = 263
+  Left = 615
+  Height = 171
+  Top = 238
+  Width = 366
   Caption = 'Plus Alpha - Debug Options'
-  ClientHeight = 155
-  ClientWidth = 263
+  ClientHeight = 171
+  ClientWidth = 366
+  OnShow = FormShow
   LCLVersion = '1.1'
   object leTranNo: TLabeledEdit
-    Left = 133
-    Height = 22
-    Top = 42
+    Left = 168
+    Height = 26
+    Top = 20
     Width = 80
     EditLabel.AnchorSideLeft.Control = leTranNo
     EditLabel.AnchorSideRight.Control = leTranNo
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = leTranNo
-    EditLabel.Left = 133
-    EditLabel.Height = 20
-    EditLabel.Top = 19
+    EditLabel.Left = 168
+    EditLabel.Height = 13
+    EditLabel.Top = 4
     EditLabel.Width = 80
-    EditLabel.Caption = 'leTranNo'
+    EditLabel.Caption = 'Transaction No.'
     EditLabel.ParentColor = False
+    ReadOnly = True
     TabOrder = 0
   end
   object bbTransNo: TBitBtn
-    Left = 40
+    Left = 8
     Height = 30
-    Top = 40
-    Width = 75
-    Caption = 'bbTransNo'
+    Top = 16
+    Width = 155
+    Caption = 'Next Transaction Number'
     OnClick = bbTransNoClick
     TabOrder = 1
   end
   object leTextCd: TLabeledEdit
-    Left = 133
-    Height = 24
-    Top = 96
+    Left = 168
+    Height = 26
+    Top = 68
     Width = 80
     EditLabel.AnchorSideLeft.Control = leTextCd
     EditLabel.AnchorSideRight.Control = leTextCd
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = leTextCd
-    EditLabel.Left = 133
-    EditLabel.Height = 20
-    EditLabel.Top = 73
+    EditLabel.Left = 168
+    EditLabel.Height = 13
+    EditLabel.Top = 52
     EditLabel.Width = 80
-    EditLabel.Caption = 'leTextCd'
+    EditLabel.Caption = 'Text Code'
     EditLabel.ParentColor = False
     TabOrder = 2
   end
   object bbTextCode: TBitBtn
-    Left = 40
+    Left = 8
     Height = 30
-    Top = 98
-    Width = 75
-    Caption = 'bbTextCode'
+    Top = 64
+    Width = 155
+    Caption = 'Lookup Text Code'
     OnClick = bbTextCodeClick
     TabOrder = 3
+  end
+  object leDBPath: TLabeledEdit
+    Left = 8
+    Height = 26
+    Top = 120
+    Width = 344
+    Anchors = [akTop, akLeft, akRight]
+    EditLabel.AnchorSideLeft.Control = leDBPath
+    EditLabel.AnchorSideRight.Control = leDBPath
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = leDBPath
+    EditLabel.Left = 8
+    EditLabel.Height = 13
+    EditLabel.Top = 104
+    EditLabel.Width = 344
+    EditLabel.Caption = 'Database Path'
+    EditLabel.ParentColor = False
+    ReadOnly = True
+    TabOrder = 4
+  end
+  object ActionList1: TActionList
+    left = 264
+    top = 8
+    object acUpdateDBPath: TAction
+      Caption = 'acUpdateDBPath'
+      OnExecute = acUpdateDBPathExecute
+    end
   end
 end

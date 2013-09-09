@@ -71,10 +71,18 @@ procedure TfrmTransactionList.acUpdateExecute(Sender: TObject);
     ResultEntry : TResultEntry;
     JournalDetailEntry:TJournalDetailEntry;
     GridRow:integer;
+    tmpAccount:TLedgerAccount;
   begin
    JournalDetailEntry := TJournalDetailEntry.Create;
    StringGrid1.Clear;
    StringGrid1.Row := HeaderRow;
+   tmpAccount := AccountList.GetAccountByText(cbAccount.Text);
+   if not assigned(tmpAccount) then
+     begin
+       ShowMessage('Internal Error: Account "' + cbAccount.text + '" could not be located.');
+       exit;
+     end;
+   TransactionList.AccountGUID := tmpAccount.AcctGUID;     // Should use GUID here
    StringGrid1.RowCount := Length(TransactionList.TransNos)+1;
    StringGrid1.ColCount := MaxCol+1;
    StringGrid1.Cells[TransNoCol, HeaderRow] := HdrTransNo;

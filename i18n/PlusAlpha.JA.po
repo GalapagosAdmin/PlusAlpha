@@ -90,7 +90,9 @@ msgid "TLedgerAccount.Load:Error while reading currency"
 msgstr "TLedgerAccount.Load:読み込みエラー：currency"
 
 #: paledger.errinvalidaccountno
-msgid "TAccountList.GetAccountNo called with -1!"
+#, fuzzy
+#| msgid "TAccountList.GetAccountNo called with -1!"
+msgid "TAccountList.GetAccountByNo called with -1!"
 msgstr "TAccountList.GetAccountNo：-1で呼ばれました!"
 
 #: paledger.errreadpasteof
@@ -102,12 +104,8 @@ msgid "paLedger.TAccountList.Get*Account: Result Not Assigned!"
 msgstr "paLedger.TAccountList.Get*Account: 関数結果は無効です!"
 
 #: paledger.errtalgjainvacctno
-msgid ""
-"TAccountList.GetJournalAccount: Error: No Account number or Account GUID "
-"provided."
-msgstr ""
-"TAccountList.GetJournalAccount:エラー: 勘定番号又は勘定GUIDと指定していませ"
-"ん。"
+msgid "TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided."
+msgstr "TAccountList.GetJournalAccount:エラー: 勘定番号又は勘定GUIDと指定していません。"
 
 #: paledger.errtextread
 msgid "TLedgerAccount.Load:Error while reading text field"
@@ -161,24 +159,40 @@ msgstr ""
 msgid "ToolButton2"
 msgstr ""
 
+#: tfrmdebug.acupdatedbpath.caption
+msgid "acUpdateDBPath"
+msgstr ""
+
 #: tfrmdebug.bbtextcode.caption
-msgid "bbTextCode"
+#, fuzzy
+#| msgid "bbTextCode"
+msgid "Lookup Text Code"
 msgstr "テキストコード"
 
 #: tfrmdebug.bbtransno.caption
-msgid "bbTransNo"
+#, fuzzy
+#| msgid "bbTransNo"
+msgid "Next Transaction Number"
 msgstr "取引番号"
 
 #: tfrmdebug.caption
 msgid "Plus Alpha - Debug Options"
 msgstr "プラスα-デバッグ昨日"
 
+#: tfrmdebug.ledbpath.editlabel.caption
+msgid "Database Path"
+msgstr ""
+
 #: tfrmdebug.letextcd.editlabel.caption
-msgid "leTextCd"
+#, fuzzy
+#| msgid "leTextCd"
+msgid "Text Code"
 msgstr "テキストコード"
 
 #: tfrmdebug.letranno.editlabel.caption
-msgid "leTranNo"
+#, fuzzy
+#| msgid "leTranNo"
+msgid "Transaction No."
 msgstr "取引番号"
 
 #: tfrmledger.actreerefresh.caption
@@ -369,3 +383,4 @@ msgstr ""
 #: tfrmtransactionlist.cbaccount.text
 msgid "cbAccount"
 msgstr ""
+
