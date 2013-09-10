@@ -1,4 +1,4 @@
-unit paJournal;
+Unit paJournal;
 // Objects related to Journal Entries
 
 {$mode objfpc}{$H+}
@@ -18,28 +18,36 @@ type
        _HasGUID:Boolean;
        _TransNo:Integer;     // Transaction number - Matches with journal detail
        _TransGUID:TGUID;     // Transaction number - Matches with journal detail
-       _Memo:TUTF8String;    // Memo in entry language
+       _Memo:UTF8String;     // Memo in entry language
        _EffDate:TDate;       // Effective Date  GMT
        _EffTime:TTime;       // Effective time  GMT
        _EntDate:TDate;       // Entry Date      GMT
        _EntTime:TTime;       // Entry Time      GMT
        _Posted:Boolean;      // Posted Flag     GMT
-       _CurrCode:TCurrCode;  // Currency Code
-       Procedure SetTransGUID(TransGUID:TGUID);
+       _CurrCode:TCurrCode;  // 3 Character ISO Currency Code
+       _Dirty:Boolean;       // Database needs update
+       _New:Boolean;         // Indicates DB insert required (not update)
+     Procedure SetTransGUID(TransGUID:TGUID);
+     Procedure SetMemo(NewMemo:UTF8String);
+     Procedure SetPosted(NewPosted:Boolean);
+     Procedure SetCurrCode(NewCurrCode:TCurrCode);
+     Procedure SetEffDate(NewEffDate:TDate);
      public
        Constructor Create; //overload;
 //       Destructor Destroy; override;
        Procedure Commit;
 //     Procedure Revert;
-       Property HdrMemo:TUTF8String read _memo write _memo;
+       Property HdrMemo:UTF8String read _memo write SetMemo;
        Property HdrTransNo:Integer read _TransNo write _TransNo;
        Property HdrTransGUID:TGUID read _TransGUID write SetTransGUID;
-       Property HdrPosted:Boolean read _Posted write _Posted;
-       Property CurrCode:TCurrCode read _CurrCode write _CurrCode;
-       Property EffDate:TDate read _EffDate write _EffDate;
-       Property Posted:Boolean read _Posted write _Posted;
-       Function Insert:Boolean;
+       Property HdrPosted:Boolean read _Posted write SetPosted;
+       Property CurrCode:TCurrCode read _CurrCode write SetCurrCode;
+       Property EffDate:TDate read _EffDate write SetEffDate;
+//       Property Posted:Boolean read _Posted write SetPosted;
+       // Deprecated because it will be moved to private
+       Function Insert:Boolean;  deprecated;
        Function Validate:Boolean;
+       Procedure Sync;
  end;  // of TJournalHeader
 
 
@@ -106,7 +114,8 @@ type
      _TotalDr:Integer;
      _TotalCr:Integer;
      _TransHighWaterMark:Integer;  // will not be needed when using (only) GUID
-     Procedure UpdateHighWaterMark;
+     _New:Boolean;
+    Procedure UpdateHighWaterMark;
      Procedure UpdateDrCr;
      Procedure TransNoSet(TransNo:Integer);
      Procedure TransGUIDSet(TransGUID:TGUID);
@@ -119,11 +128,13 @@ type
      Property TransNo:Integer read _TransNo write TransNoSet;
      Property TransGUID:TGUID read _TransGUID write TransGUIDSet;
      Function IsBalanced:Boolean;
-     Function Insert:Boolean;
+     // Deprecated because it will be moved to private
+     Function Insert:Boolean;  Deprecated;
      Property HighWaterMark:Integer read GetHighWaterMark;
      Function Validate:Boolean;
      Function AddDetailEntry:integer;
      Procedure Reset;
+     Procedure Sync;
 
  end;
 
@@ -146,8 +157,34 @@ uses
       _TransNo := -1;
       _HasGUID := False;
       // other stuff goes here.
-
+      _Dirty := True;
+      _New := True;
     end;
+
+  Procedure TJournalHeader.SetMemo(NewMemo:UTF8String);
+    Begin
+      self._Memo := NewMemo;
+      self._Dirty := True;
+    end;
+
+  Procedure TJournalHeader.SetPosted(NewPosted:Boolean);
+    Begin
+      self._Posted := NewPosted;
+      self._Dirty := True;
+    end;
+
+  Procedure TJournalHeader.SetCurrCode(NewCurrCode:TCurrCode);
+    Begin
+      self._CurrCode := CurrCode;
+      self._Dirty := True;
+    end;
+
+  Procedure TJournalHeader.SetEffDate(NewEffDate:TDate);
+    Begin
+      self._EffDate := NewEffDate;
+      self._Dirty := True;
+    end;
+
 
   Function TJournalHeader.Validate:boolean;
     begin
@@ -245,6 +282,13 @@ Function TJournalDetailEntry.DisplayDateGet:UTF8String;
       _HasGUID := True;
     end;
 
+  Procedure TJournalHeader.Sync;
+    begin
+    // Later we will exit directly if clean,
+    // and automatically decide between insert/update
+      Insert;
+    end;
+
   Function TJournalHeader.Insert:boolean;
    var
      SQLQuery1:TSQLQuery;
@@ -293,7 +337,7 @@ Function TJournalDetailEntry.DisplayDateGet:UTF8String;
       self._AcctNo := -1;
       self._HasTransGUID := False;
 // New should be set to false when after loading a record from the database so
-// that the existing record can be updated inserting a new record.
+// that the existing record can be updated instead of inserting a new record.
       _new := True;
 // Dirty should normally be set to false on load or creation, and then
 // set to dirty if anything is changed.  Since the properties are only set to
@@ -330,8 +374,8 @@ Function TJournalDetailEntry.DisplayDateGet:UTF8String;
       tmpAcct := AccountList.GetAccountByGuid(AcctGUID);
       if Assigned(tmpAcct) then
         begin
-        _Currency := tmpAcct.Currency;
-        _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
+          _Currency := tmpAcct.Currency;
+          _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
         end
       else
         _Currency := 'XXX';
@@ -582,8 +626,21 @@ Function TJournalDetailEntry.Update:boolean;
 //             if not _JournalDetailEntries[i].Validate then
             if not je.Validate then
                exit(False);
-
     end;
+
+  Procedure TCompleteJournalEntry.Sync;
+   begin
+// The following will only work if we can be sure we are marked as dirty when
+// our children are.
+//     if not _dirty then
+//       begin
+//          Result := true;
+//          exit;
+//      end;
+//     if _new then result := self.insert else result := self.update;
+     // We only have insert for now, later we will call update if needed.
+     Self.Insert;
+   end;
 
  // This is called directly by the GUI now, but the design will be changed to
  // match the ledger object.  (i.e. the object will decide whether to perform
