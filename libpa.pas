@@ -86,6 +86,11 @@ uses dbugintf;
     Result := StrToInt(Trim(copy(AccountText,1,p)));
    end;
 
+ //Function ActToInt(AccountText:TUTF8String):Integer;
+ //  begin
+ // Use paLedger.TAccountList.GetAccountByText
+ //  end;
+
    Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
      begin
        DateTimeToString(Result, 'yyyymmdd', Date)

@@ -183,6 +183,7 @@ begin
   With CurrentAccount do
     begin
       Text := ebAccountTitle.Text;
+      ExtAcctNo := StrToInt(leExtAcctNo.Text);
       Synch;
       Commit;
     end;

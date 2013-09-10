@@ -19,7 +19,7 @@ object frmLedger: TfrmLedger
     AutoExpand = True
     BackgroundColor = 13748419
     Color = 13748419
-    DefaultItemHeight = 22
+    DefaultItemHeight = 14
     ReadOnly = True
     RowSelect = True
     ScrollBars = ssVertical
@@ -82,12 +82,12 @@ object frmLedger: TfrmLedger
         Width = 546
         Align = alClient
         Caption = 'Account Details'
-        ClientHeight = 328
-        ClientWidth = 538
+        ClientHeight = 330
+        ClientWidth = 542
         TabOrder = 0
         object leAcctNo: TLabeledEdit
           Left = 102
-          Height = 24
+          Height = 26
           Top = 6
           Width = 56
           EditLabel.AnchorSideTop.Control = leAcctNo
@@ -95,10 +95,10 @@ object frmLedger: TfrmLedger
           EditLabel.AnchorSideRight.Control = leAcctNo
           EditLabel.AnchorSideBottom.Control = leAcctNo
           EditLabel.AnchorSideBottom.Side = asrBottom
-          EditLabel.Left = 16
-          EditLabel.Height = 20
-          EditLabel.Top = 8
-          EditLabel.Width = 83
+          EditLabel.Left = 34
+          EditLabel.Height = 13
+          EditLabel.Top = 13
+          EditLabel.Width = 65
           EditLabel.Caption = 'Account No.:'
           EditLabel.ParentColor = False
           EditLabel.Layout = tlBottom
@@ -109,7 +109,7 @@ object frmLedger: TfrmLedger
         end
         object leAcctBal: TLabeledEdit
           Left = 102
-          Height = 24
+          Height = 26
           Top = 34
           Width = 56
           EditLabel.AnchorSideTop.Control = leAcctBal
@@ -117,10 +117,10 @@ object frmLedger: TfrmLedger
           EditLabel.AnchorSideRight.Control = leAcctBal
           EditLabel.AnchorSideBottom.Control = leAcctBal
           EditLabel.AnchorSideBottom.Side = asrBottom
-          EditLabel.Left = 45
-          EditLabel.Height = 20
-          EditLabel.Top = 36
-          EditLabel.Width = 54
+          EditLabel.Left = 55
+          EditLabel.Height = 13
+          EditLabel.Top = 41
+          EditLabel.Width = 44
           EditLabel.Caption = 'Balance:'
           EditLabel.ParentColor = False
           EditLabel.Layout = tlBottom
@@ -130,10 +130,10 @@ object frmLedger: TfrmLedger
         end
         object cbAcctCurr: TComboBox
           Left = 166
-          Height = 20
+          Height = 26
           Top = 34
           Width = 64
-          ItemHeight = 0
+          ItemHeight = 18
           Items.Strings = (
             'JPY'
             'USD'
@@ -145,41 +145,41 @@ object frmLedger: TfrmLedger
         end
         object rbAcctBalDr: TRadioButton
           Left = 102
-          Height = 18
+          Height = 22
           Top = 67
-          Width = 54
+          Width = 53
           Caption = 'Debit'
           TabOrder = 3
         end
         object rbAcctBalCr: TRadioButton
           Left = 163
-          Height = 18
+          Height = 22
           Top = 67
-          Width = 59
+          Width = 57
           Caption = 'Credit'
           TabOrder = 4
         end
         object cbAccType: TComboBox
           Left = 142
-          Height = 20
+          Height = 26
           Top = 101
           Width = 116
-          ItemHeight = 0
+          ItemHeight = 18
           Style = csDropDownList
           TabOrder = 5
         end
         object lblAccType: TLabel
           Left = 14
-          Height = 20
+          Height = 13
           Top = 104
-          Width = 89
+          Width = 72
           Caption = 'Account Type'
           ParentColor = False
         end
         object bbSynch: TBitBtn
           Left = 6
           Height = 30
-          Top = 294
+          Top = 296
           Width = 75
           Anchors = [akLeft, akBottom]
           Caption = 'Apply'
@@ -188,32 +188,32 @@ object frmLedger: TfrmLedger
         end
         object ebAccountTitle: TEdit
           Left = 166
-          Height = 24
+          Height = 26
           Top = 6
           Width = 280
           TabOrder = 7
         end
         object lblAccType1: TLabel
           Left = 14
-          Height = 20
+          Height = 13
           Top = 132
-          Width = 114
+          Width = 91
           Caption = 'Account SubType'
           ParentColor = False
           OnClick = lblAccType1Click
         end
         object cbAccSubType: TComboBox
           Left = 142
-          Height = 20
+          Height = 26
           Top = 129
           Width = 116
-          ItemHeight = 0
+          ItemHeight = 18
           Style = csDropDownList
           TabOrder = 8
         end
         object leExtAcctNo: TLabeledEdit
           Left = 142
-          Height = 24
+          Height = 26
           Top = 158
           Width = 200
           EditLabel.AnchorSideTop.Control = leExtAcctNo
@@ -221,10 +221,10 @@ object frmLedger: TfrmLedger
           EditLabel.AnchorSideRight.Control = leExtAcctNo
           EditLabel.AnchorSideBottom.Control = leExtAcctNo
           EditLabel.AnchorSideBottom.Side = asrBottom
-          EditLabel.Left = 3
-          EditLabel.Height = 20
-          EditLabel.Top = 160
-          EditLabel.Width = 136
+          EditLabel.Left = 30
+          EditLabel.Height = 13
+          EditLabel.Top = 165
+          EditLabel.Width = 109
           EditLabel.Caption = 'External Account No.'
           EditLabel.ParentColor = False
           LabelPosition = lpLeft
@@ -232,7 +232,7 @@ object frmLedger: TfrmLedger
         end
         object leAcctGUID: TLabeledEdit
           Left = 102
-          Height = 24
+          Height = 26
           Top = 214
           Width = 344
           EditLabel.AnchorSideTop.Control = leAcctGUID
@@ -240,10 +240,10 @@ object frmLedger: TfrmLedger
           EditLabel.AnchorSideRight.Control = leAcctGUID
           EditLabel.AnchorSideBottom.Control = leAcctGUID
           EditLabel.AnchorSideBottom.Side = asrBottom
-          EditLabel.Left = 5
-          EditLabel.Height = 20
-          EditLabel.Top = 216
-          EditLabel.Width = 94
+          EditLabel.Left = 23
+          EditLabel.Height = 13
+          EditLabel.Top = 221
+          EditLabel.Width = 76
           EditLabel.Caption = 'Account GUID:'
           EditLabel.ParentColor = False
           EditLabel.Layout = tlBottom

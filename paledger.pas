@@ -40,6 +40,7 @@ uses
       Procedure SetAcctType(NewAcctType:TAcctType);
       Procedure SetAcctNo(NewAcctNo:Integer);
       Procedure SetAcctGUID(NewAcctGUID:TGUID);
+      Procedure SetExtRefNo(NewExtRefNo:TInteger);
       Property HasAcctGUID:Boolean read _HasAcctGUID;
       Function Insert:Boolean;
       Function Update:Boolean;
@@ -59,7 +60,7 @@ uses
       Property TransGUID:TGUID read _TransGUID write SetTransGUID;
       Function Load(AccountNo:TInteger):boolean; deprecated;
       Function Load(AccountGUID:TGUID):boolean; overload;
-      Property ExtAcctNo:TInteger read _ExtRefNo;
+      Property ExtAcctNo:TInteger read _ExtRefNo write SetExtRefNo;
       Function Synch:boolean;
       Procedure CreateAcctGuid;
       Procedure Commit;
@@ -403,6 +404,11 @@ Procedure TLedgerAccount.SetAcctGUID(NewAcctGUID:TGUID);
     _Dirty := True;
   end;
 
+Procedure TLedgerAccount.SetExtRefNo(NewExtRefNo:TInteger);
+  begin
+    _ExtRefNo := NewExtRefNo;
+    _Dirty := True;
+  end;
 
 Function TLedgerAccount.Insert:boolean;
   var
@@ -598,7 +604,7 @@ Function TAccountList.EOF:Boolean;
      If Length(_AccountList) = 0 then Result := True;
   end;
 
-// clears the accounts without saving any changes to the database
+// clear the accounts in memory without saving any changes to the database
 Procedure TAccountList.Clear;
   var
     ThisAccount:TLedgerAccount;
