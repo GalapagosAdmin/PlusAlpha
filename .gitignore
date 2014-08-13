@@ -26,3 +26,7 @@ PlusAlpha.app/Contents/MacOS/locale/PlusAlpha.po
 lib/i386-darwin/PlusAlpha.compiled
 imp_amex
 *.sqlite-journal
+
+lib/i386-darwin/PlusAlpha.compiled
+
+*.compiled
