@@ -42,6 +42,8 @@ type
     procedure lblAccType1Click(Sender: TObject);
  //   procedure FormShow(Sender: TObject);
     procedure leAcctNoChange(Sender: TObject);
+    procedure pgAccountInfoBeforeShow(ASender: TObject; ANewPage: TPage;
+      ANewIndex: Integer);
     procedure pgWelcomeBeforeShow(ASender: TObject; ANewPage: TPage;
       ANewIndex: Integer);
     procedure tvAccountListClick(Sender: TObject);
@@ -52,13 +54,16 @@ type
     { public declarations }
   end;
 
+ResourceString
+  MsgAcctUpdated = 'Account information updated.';
+
 var
   frmLedger: TfrmLedger;
 
 implementation
 
  uses
-   libpa, paLedger, paText;
+   libpa, paLedger, paText, paMessage;
 
 {$R *.lfm}
 
@@ -178,9 +183,11 @@ begin
   With CurrentAccount do
     begin
       Text := ebAccountTitle.Text;
+      ExtAcctNo := StrToInt(leExtAcctNo.Text);
       Synch;
       Commit;
     end;
+   DisplayMessage(MsgAcctUpdated);
    // Update GUI tree
    acTreeRefresh.Execute;
 end;
@@ -196,6 +203,12 @@ begin
 end;
 
 procedure TfrmLedger.leAcctNoChange(Sender: TObject);
+begin
+
+end;
+
+procedure TfrmLedger.pgAccountInfoBeforeShow(ASender: TObject; ANewPage: TPage;
+  ANewIndex: Integer);
 begin
 
 end;

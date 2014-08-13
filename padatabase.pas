@@ -15,10 +15,18 @@ Var
         SQLite3Connection1:TSQLite3Connection;
         SQLTransaction1:TSQLTransaction;
 
+        Function CompleteDBPathGet:UTF8String;
+
+
 Implementation
 
 Uses
   FileUtil;
+
+Function CompleteDBPathGet:UTF8String;
+  begin
+    Result := CompleteDBPath;
+  end;
 
  Function GetApplicationName:string;//TGetAppNameEvent;
    begin

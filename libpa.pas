@@ -1,6 +1,7 @@
 unit libpa;
 // Contains common items to be used by various parts of PlusAlpha
 {$mode objfpc}{$H+}
+{$DEFINE DEBUGOUTPUT} // Compile time switch to turn on/off all debug output
 
 interface
 
@@ -39,10 +40,14 @@ Type
   Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
   // Converts input string into an output string using mask
   Function abap_translate(const instring, Mask:UTF8String):UTF8String;
-
+  // Return the input string, minus any embedded commas
+  Function Strip_Comma(Const Instring:UTF8String):UTF8String;
+  // Write output to console, only on Unix or for CLI apps
+  Procedure DebugLn(Const Instring:UTF8String);
 
 implementation
 
+uses dbugintf;
 
 // Converts input string into an output string using mask
 // similar to ABAP function of the same name
@@ -81,10 +86,30 @@ implementation
     Result := StrToInt(Trim(copy(AccountText,1,p)));
    end;
 
+ //Function ActToInt(AccountText:TUTF8String):Integer;
+ //  begin
+ // Use paLedger.TAccountList.GetAccountByText
+ //  end;
+
    Function DateTimeToYYYYMMDD(Const Date:TDateTime):AnsiString;
      begin
        DateTimeToString(Result, 'yyyymmdd', Date)
      end;
+
+   Function Strip_Comma(Const Instring:UTF8String):UTF8String;
+     begin
+       Result := StringReplace(instring,',','',[rfReplaceAll]);
+     end;
+
+Procedure DebugLn(Const Instring:UTF8String);
+  begin
+   {$IFDEF DEBUGOUTPUT}
+   if IsConsole then  // Prevent exception on Windows GUI apps.
+     Writeln(stderr, Instring)
+   else
+     SendDebug(InString);   // Use debug server for GUI apps.
+   {$ENDIF}
+  end;
 
 Initialization
 

@@ -1,4 +1,4 @@
-unit paJournal;
+Unit paJournal;
 // Objects related to Journal Entries
 
 {$mode objfpc}{$H+}
@@ -18,28 +18,36 @@ type
        _HasGUID:Boolean;
        _TransNo:Integer;     // Transaction number - Matches with journal detail
        _TransGUID:TGUID;     // Transaction number - Matches with journal detail
-       _Memo:TUTF8String;    // Memo in entry language
+       _Memo:UTF8String;     // Memo in entry language
        _EffDate:TDate;       // Effective Date  GMT
        _EffTime:TTime;       // Effective time  GMT
        _EntDate:TDate;       // Entry Date      GMT
        _EntTime:TTime;       // Entry Time      GMT
        _Posted:Boolean;      // Posted Flag     GMT
-       _CurrCode:TCurrCode;  // Currency Code
-       Procedure SetTransGUID(TransGUID:TGUID);
+       _CurrCode:TCurrCode;  // 3 Character ISO Currency Code
+       _Dirty:Boolean;       // Database needs update
+       _New:Boolean;         // Indicates DB insert required (not update)
+     Procedure SetTransGUID(TransGUID:TGUID);
+     Procedure SetMemo(NewMemo:UTF8String);
+     Procedure SetPosted(NewPosted:Boolean);
+     Procedure SetCurrCode(NewCurrCode:TCurrCode);
+     Procedure SetEffDate(NewEffDate:TDate);
      public
        Constructor Create; //overload;
 //       Destructor Destroy; override;
        Procedure Commit;
 //     Procedure Revert;
-       Property HdrMemo:TUTF8String read _memo write _memo;
+       Property HdrMemo:UTF8String read _memo write SetMemo;
        Property HdrTransNo:Integer read _TransNo write _TransNo;
        Property HdrTransGUID:TGUID read _TransGUID write SetTransGUID;
-       Property HdrPosted:Boolean read _Posted write _Posted;
-       Property CurrCode:TCurrCode read _CurrCode write _CurrCode;
-       Property EffDate:TDate read _EffDate write _EffDate;
-       Property Posted:Boolean read _Posted write _Posted;
-       Function Insert:Boolean;
+       Property HdrPosted:Boolean read _Posted write SetPosted;
+       Property CurrCode:TCurrCode read _CurrCode write SetCurrCode;
+       Property EffDate:TDate read _EffDate write SetEffDate;
+//       Property Posted:Boolean read _Posted write SetPosted;
+       // Deprecated because it will be moved to private
+       Function Insert:Boolean;  deprecated;
        Function Validate:Boolean;
+       Procedure Sync;
  end;  // of TJournalHeader
 
 
@@ -64,6 +72,7 @@ type
      Procedure SetAcctNo(AcctNo:Integer);
      Procedure SetAcctGUID(AcctGUID:TGUID);
      Procedure SetTransGUID(TransGUID:TGUID);
+     Function DisplayDateGet:UTF8String;
       // performs a database update if the record already existed.
      Procedure Select;
      Function Update:Boolean;
@@ -105,22 +114,27 @@ type
      _TotalDr:Integer;
      _TotalCr:Integer;
      _TransHighWaterMark:Integer;  // will not be needed when using (only) GUID
-     Procedure UpdateHighWaterMark;
+     _New:Boolean;
+    Procedure UpdateHighWaterMark;
      Procedure UpdateDrCr;
      Procedure TransNoSet(TransNo:Integer);
      Procedure TransGUIDSet(TransGUID:TGUID);
      Function GetHighWaterMark:Integer;
    Public
      _JournalHeader : TJournalHeader;
-     _JournalDetailEntries : Array[0..1] of TJournalDetailEntry;
+     _JournalDetailEntries : Array of TJournalDetailEntry;
      Constructor Create; //overload;
      Property Rows:Integer Read _Rows;
      Property TransNo:Integer read _TransNo write TransNoSet;
      Property TransGUID:TGUID read _TransGUID write TransGUIDSet;
      Function IsBalanced:Boolean;
-     Function Insert:Boolean;
+     // Deprecated because it will be moved to private
+     Function Insert:Boolean;  Deprecated;
      Property HighWaterMark:Integer read GetHighWaterMark;
      Function Validate:Boolean;
+     Function AddDetailEntry:integer;
+     Procedure Reset;
+     Procedure Sync;
 
  end;
 
@@ -143,8 +157,34 @@ uses
       _TransNo := -1;
       _HasGUID := False;
       // other stuff goes here.
-
+      _Dirty := True;
+      _New := True;
     end;
+
+  Procedure TJournalHeader.SetMemo(NewMemo:UTF8String);
+    Begin
+      self._Memo := NewMemo;
+      self._Dirty := True;
+    end;
+
+  Procedure TJournalHeader.SetPosted(NewPosted:Boolean);
+    Begin
+      self._Posted := NewPosted;
+      self._Dirty := True;
+    end;
+
+  Procedure TJournalHeader.SetCurrCode(NewCurrCode:TCurrCode);
+    Begin
+      self._CurrCode := CurrCode;
+      self._Dirty := True;
+    end;
+
+  Procedure TJournalHeader.SetEffDate(NewEffDate:TDate);
+    Begin
+      self._EffDate := NewEffDate;
+      self._Dirty := True;
+    end;
+
 
   Function TJournalHeader.Validate:boolean;
     begin
@@ -231,10 +271,22 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       Select;
     end;
 
+Function TJournalDetailEntry.DisplayDateGet:UTF8String;
+  begin
+    Result := self._EffDateDB;
+  end;
+
   Procedure TJournalHeader.SetTransGUID(TransGUID:TGUID);
     begin
       _TransGUID := TransGUID;
       _HasGUID := True;
+    end;
+
+  Procedure TJournalHeader.Sync;
+    begin
+    // Later we will exit directly if clean,
+    // and automatically decide between insert/update
+      Insert;
     end;
 
   Function TJournalHeader.Insert:boolean;
@@ -285,7 +337,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       self._AcctNo := -1;
       self._HasTransGUID := False;
 // New should be set to false when after loading a record from the database so
-// that the existing record can be updated inserting a new record.
+// that the existing record can be updated instead of inserting a new record.
       _new := True;
 // Dirty should normally be set to false on load or creation, and then
 // set to dirty if anything is changed.  Since the properties are only set to
@@ -302,7 +354,7 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       // Make sure we set the line item currency to the currency of the account
       // used.
       if AcctNo < 0 then exit;
-      tmpAcct := AccountList.GetAccountNo(AcctNo);
+      tmpAcct := AccountList.GetAccountByNo(AcctNo);
       if Assigned(tmpAcct) then
         _Currency := tmpAcct.Currency
       else
@@ -319,11 +371,11 @@ Procedure TJournalDetailEntry.Load(const TG:TGUID; const TR:Integer); overload;
       // Make sure we set the line item currency to the currency of the account
       // used.
 //      if AcctNo < 0 then exit;
-      tmpAcct := AccountList.GetAccountGuid(AcctGUID);
+      tmpAcct := AccountList.GetAccountByGuid(AcctGUID);
       if Assigned(tmpAcct) then
         begin
-        _Currency := tmpAcct.Currency;
-        _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
+          _Currency := tmpAcct.Currency;
+          _AcctNo := tmpAcct.AcctNo; // We can assign this too, in case it's needed.
         end
       else
         _Currency := 'XXX';
@@ -501,10 +553,37 @@ Function TJournalDetailEntry.Update:boolean;
      if _new then result := self.insert else result := self.update;
    end;
 
-  Function TJournalDetailEntry.validate:boolean;
+  Function TJournalDetailEntry.Validate:boolean;
     begin
       Result := (Self.AcctNo <> -1) or (self._HasAcctGUID);
     end;
+
+
+ Function TCompleteJournalEntry.AddDetailEntry:integer;
+   var
+     CurrLen:Integer;
+   begin
+     Result := -1;
+     CurrLen := Length(self._JournalDetailEntries);
+     SetLength(self._JournalDetailEntries,CurrLen+1);
+     _JournalDetailEntries[high(_JournalDetailEntries)] := TJournalDetailEntry.Create;
+
+     _Rows := length(_JournalDetailEntries); // Static for now
+     Result := High(self._JournalDetailEntries);
+   end;
+
+ Procedure TCompleteJournalEntry.Reset;
+  var
+    i:integer;
+  begin
+     self._HasTransGUID:=False;
+     self._TransNo:=-1;
+     // Free and delete all transaction detail rows
+     for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+        _JournalDetailEntries[i].free;
+     SetLength(self._JournalDetailEntries, 0);
+     self._Rows:=0;
+   end;
 
  Constructor TCompleteJournalEntry.Create;
    var
@@ -512,8 +591,8 @@ Function TJournalDetailEntry.Update:boolean;
    begin
       _JournalHeader := TJournalHeader.Create;
       _Rows := length(_JournalDetailEntries); // Static for now
-      for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
-         _JournalDetailEntries[i] := TJournalDetailEntry.Create
+//      for i := low(_JournalDetailEntries) to high(_JournalDetailEntries) do
+//         _JournalDetailEntries[i] := TJournalDetailEntry.Create
     (*  // This can be made dynamic to support more than 2 entries
       _JournalDetailEntry1 := TJournalDetailEntry.Create;
       _JournalDetailEntry2 := TJournalDetailEntry.Create;
@@ -547,8 +626,21 @@ Function TJournalDetailEntry.Update:boolean;
 //             if not _JournalDetailEntries[i].Validate then
             if not je.Validate then
                exit(False);
-
     end;
+
+  Procedure TCompleteJournalEntry.Sync;
+   begin
+// The following will only work if we can be sure we are marked as dirty when
+// our children are.
+//     if not _dirty then
+//       begin
+//          Result := true;
+//          exit;
+//      end;
+//     if _new then result := self.insert else result := self.update;
+     // We only have insert for now, later we will call update if needed.
+     Self.Insert;
+   end;
 
  // This is called directly by the GUI now, but the design will be changed to
  // match the ledger object.  (i.e. the object will decide whether to perform
@@ -561,7 +653,7 @@ Function TJournalDetailEntry.Update:boolean;
      JE:TJournalDetailEntry;
      tmpGUID:TGUID;
    begin
-     assert(not assigned(calc));
+//     assert(not assigned(calc));
      calc := nil; // don't trust this
      // Assume Failure
       Result := False;
@@ -574,16 +666,14 @@ Function TJournalDetailEntry.Update:boolean;
       If _JournalHeader.Insert then
          begin
           // Insert the journal Entry Rows
-//           for i := low(_JournalDetailEntries) to High(_JournalDetailEntries) do
            for je in _JournalDetailEntries do
              Begin
                je.insert;
                // Update Ledger
-
                If je.HasAcctGUID then
-                 tmpAcct := AccountList.GetAccountGUID(je.AcctGUID)
+                 tmpAcct := AccountList.GetAccountByGUID(je.AcctGUID)
                else
-                 tmpAcct := AccountList.GetAccountNo(je.AcctNo);
+                 tmpAcct := AccountList.GetAccountByNo(je.AcctNo);
                if assigned(tmpAcct) then
                  begin
                    // Create the calculator if this is our first time through.

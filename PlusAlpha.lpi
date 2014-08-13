@@ -47,7 +47,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="16">
+    <Units Count="17">
       <Unit0>
         <Filename Value="PlusAlpha.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -148,6 +148,11 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fmeWelcomeUnit"/>
       </Unit15>
+      <Unit16>
+        <Filename Value="pamessage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="paMessage"/>
+      </Unit16>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

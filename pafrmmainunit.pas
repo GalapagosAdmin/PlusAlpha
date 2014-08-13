@@ -35,7 +35,7 @@ type
     pgLedgerAccounts: TPage;
     pgWelcome: TPage;
     pnlMain: TPanel;
-    Splitter1: TSplitter;
+    splMain: TSplitter;
     StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;

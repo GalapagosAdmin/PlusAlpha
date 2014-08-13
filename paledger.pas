@@ -40,6 +40,7 @@ uses
       Procedure SetAcctType(NewAcctType:TAcctType);
       Procedure SetAcctNo(NewAcctNo:Integer);
       Procedure SetAcctGUID(NewAcctGUID:TGUID);
+      Procedure SetExtRefNo(NewExtRefNo:TInteger);
       Property HasAcctGUID:Boolean read _HasAcctGUID;
       Function Insert:Boolean;
       Function Update:Boolean;
@@ -59,7 +60,7 @@ uses
       Property TransGUID:TGUID read _TransGUID write SetTransGUID;
       Function Load(AccountNo:TInteger):boolean; deprecated;
       Function Load(AccountGUID:TGUID):boolean; overload;
-      Property ExtAcctNo:TInteger read _ExtRefNo;
+      Property ExtAcctNo:TInteger read _ExtRefNo write SetExtRefNo;
       Function Synch:boolean;
       Procedure CreateAcctGuid;
       Procedure Commit;
@@ -90,8 +91,9 @@ uses
      Function AccountStringList:TStringList;
      Function GetFirstAccount:TLedgerAccount;
      Function GetNextAccount:TLedgerAccount;
-     Function GetAccountNo(AccountNo:TInteger):TLedgerAccount; deprecated;
-     Function GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+     Function GetAccountByNo(AccountNo:TInteger):TLedgerAccount; deprecated;
+     Function GetAccountByGUID(AccountGUID:TGUID):TLedgerAccount;
+     Function GetAccountByText(Text:UTF8String):TLedgerAccount;
      // Finds and returns an object for the account used by a journal detail entry
      Function GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
      Function EOF:Boolean;
@@ -113,7 +115,7 @@ uses
 
 ResourceString
   ERRTALGJAINVACCTNO = 'TAccountList.GetJournalAccount: Error: No Account number or Account GUID provided.';
-  ErrInvalidAccountNo = 'TAccountList.GetAccountNo called with -1!';
+  ErrInvalidAccountNo = 'TAccountList.GetAccountByNo called with -1!';
   ErrAcctNoRead = 'TLedgerAccount.Load:Error while reading acctno';
   ErrCurrCodeRead = 'TLedgerAccount.Load:Error while reading currency';
   ErrAcctTypeRead = 'TLedgerAccount.Load:Error while reading AcctType';
@@ -402,6 +404,11 @@ Procedure TLedgerAccount.SetAcctGUID(NewAcctGUID:TGUID);
     _Dirty := True;
   end;
 
+Procedure TLedgerAccount.SetExtRefNo(NewExtRefNo:TInteger);
+  begin
+    _ExtRefNo := NewExtRefNo;
+    _Dirty := True;
+  end;
 
 Function TLedgerAccount.Insert:boolean;
   var
@@ -597,7 +604,7 @@ Function TAccountList.EOF:Boolean;
      If Length(_AccountList) = 0 then Result := True;
   end;
 
-// clears the accounts without saving any changes to the database
+// clear the accounts in memory without saving any changes to the database
 Procedure TAccountList.Clear;
   var
     ThisAccount:TLedgerAccount;
@@ -617,7 +624,7 @@ Procedure TAccountList.ReLoad;
   end;
 
 // Gets the account you want from the array based on account number
-Function TAccountList.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
+Function TAccountList.GetAccountByNo(AccountNo:TInteger):TLedgerAccount;
   var
 //    i:TInteger;
     ThisAccount:TLedgerAccount;
@@ -637,7 +644,7 @@ Function TAccountList.GetAccountNo(AccountNo:TInteger):TLedgerAccount;
 
   end;
 
-Function TAccountList.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
+Function TAccountList.GetAccountByGUID(AccountGUID:TGUID):TLedgerAccount;
   var
 //    i:TInteger;
     ThisAccount:TLedgerAccount;
@@ -655,15 +662,35 @@ Function TAccountList.GetAccountGUID(AccountGUID:TGUID):TLedgerAccount;
 
   end;
 
+Function TAccountList.GetAccountByText(Text:UTF8String):TLedgerAccount;
+  var
+//    i:TInteger;
+    ThisAccount:TLedgerAccount;
+  begin
+    Result := nil;
+    // Not very efficient, but then we shouldn't really have more than 100 or
+    // so accounts
+//    for i := Low(_AccountList) to high(_AccountList) do
+      for ThisAccount in _AccountList do
+        // Only handles primary text.  This will be login language text later
+        if ThisAccount.Text = Text then
+          begin
+            Result := ThisAccount;
+            exit;
+          end;
+     result := nil;
+  end;
+
+
 Function TAccountList.GetJournalAccount(je:TJournalDetailEntry):TLedgerAccount;
   begin
     case je.HasAcctGUID of
-      true:Result := self.GetAccountGUID(je.AcctGUID);
+      true:Result := self.GetAccountByGUID(je.AcctGUID);
       false:begin
               If je.AcctNo = -1 then
                 Raise Exception.Create(ERRTALGJAINVACCTNO)
               else
-                Result := self.GetAccountNo(je.AcctNo);
+                Result := self.GetAccountByNo(je.AcctNo);
             end;
       end;
   end;
@@ -700,7 +727,7 @@ Procedure TAccountList.Load; // Loads the account listing from the database
     SQLQuery1.Destroy;
   end; // of TRY..FINALLY
 // update the tree
-//   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
+//   tmpAccount := GetAccountByNo(0);  // 0 is the root, by definition
 //   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
 
@@ -726,7 +753,7 @@ Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
 { TODO 2 -oshiruba -cHardening : Convert LIKE to parameter, if possible }
 { TODO 2 -oshiruba -cI18N : Convert LIKE to parameter to use text table + language }
     SQLQuery1.SQL.Text := 'select AcctNo from ledger where text like ''%' + AccountName + '%''';
-    Writeln(SQLQuery1.SQL.Text);
+    DebugLn(SQLQuery1.SQL.Text);
     SQLQuery1.open;
     _Loaded := True;
     While not SQLQuery1.EOF do
@@ -740,7 +767,7 @@ Procedure TAccountList.LoadNameFilter(Const AccountName:UTF8String);
     SQLQuery1.Destroy;
   end; // of TRY..FINALLY
 // update the tree
-//   tmpAccount := GetAccountNo(0);  // 0 is the root, by definition
+//   tmpAccount := GetAccountByNo(0);  // 0 is the root, by definition
 //   Tree.AddObject(nil, tmpAccount.Text, tmpAccount);
   end;
 
@@ -754,7 +781,8 @@ Function TAccountList.AccountStringList:TStringList;
  //   for i := low(_AccountList) to high(_AccountList) do
     for Acct in _AccountList do
       //     Result.Append(IntToStr(_AccountList[i]._AcctNo) + ' - ' + _AccountList[i]._Text);
-       Result.Append(IntToStr(Acct._AcctNo) + ' - ' + Acct._Text);
+  //     Result.Append(IntToStr(Acct._AcctNo) + ' - ' + Acct._Text);
+           Result.Append(Acct._Text);
   end;
 
 Procedure TAccountList.UpdateHighWaterMark;
